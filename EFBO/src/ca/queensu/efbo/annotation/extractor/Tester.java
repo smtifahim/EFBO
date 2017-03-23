@@ -6,7 +6,7 @@ public class Tester {
 	{
 		// TODO Auto-generated method stub
 		AnnotationExtractor annot = new AnnotationExtractor();
-		System.out.println(annot.getExtractedAnnotations());
+		//System.out.println(annot.getExtractedAnnotations());
 	}
 
 }

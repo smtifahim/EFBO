@@ -4,4 +4,4 @@ This is a simple test.abstract
 This does not do anything.class
 //@EFBO: "welcomeUser" hasNextEvent "Select your Option".
 
-//@EFBO: "tap Login Button" hasNextEvent "welcomeUser".
+@EFBO: "tap Login Button" hasNextEvent "welcomeUser".

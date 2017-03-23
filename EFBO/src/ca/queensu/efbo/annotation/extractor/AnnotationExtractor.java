@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -50,7 +51,15 @@ public class AnnotationExtractor
 		  }
 		  
 		  if (!annotations.isEmpty())
+		  	{
+			  JOptionPane.showMessageDialog(null, "Annotations Extracted Successfully!      \n"
+			  									+ "Press OK to Save Your Annotations.");
 			  this.saveExtractedAnnotations(annotations);
+		  	}
+		  else
+			  JOptionPane.showMessageDialog(null, "No Annotation Found within Your Selected Source(s).    \n"
+						+ "Please Try Again.");
+			  
 		  
 	}
    	
@@ -86,7 +95,7 @@ public class AnnotationExtractor
 				}
 			  	
 			  if (!annotationFound)
-				  System.out.println("No Annotation Found within the Selected File.");
+				  System.out.println("No Annotation Found within your Selected File.");
 			 	
 			    //Close the input stream
 			  dataInputStream.close();
@@ -111,7 +120,7 @@ public class AnnotationExtractor
 		JFrame fileSaveFrame = new JFrame();
 		 
 		JFileChooser fileChooser = new JFileChooser(new File(System.getProperty("user.dir")));
-		fileChooser.setDialogTitle("Specify the File Name to Save");   
+		fileChooser.setDialogTitle("Specify the File Name to Save Your Annotations");   
 		 
 		int userSelection = fileChooser.showSaveDialog(fileSaveFrame);
 		 
@@ -135,6 +144,8 @@ public class AnnotationExtractor
 				
 				this.extractedAnnotationsFile=fileToSave;
 				bufferedWriter.close();
+				JOptionPane.showMessageDialog(fileSaveFrame, "Annotations Saved Successfully!\n"
+														    + fileToSave.getAbsolutePath() + "    \n");
 				System.out.println("Annotations Saved Successfully.");
 			}
 			
