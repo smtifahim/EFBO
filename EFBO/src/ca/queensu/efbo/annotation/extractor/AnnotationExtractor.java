@@ -1,12 +1,15 @@
 package ca.queensu.efbo.annotation.extractor;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 
 
 /**
@@ -17,6 +20,7 @@ public class AnnotationExtractor
 {
 	private JFileChooser fileChooser;
 	private File[] selectedFiles;
+	private File extractedAnnotationsFile;
 	private ArrayList<Annotation> annotations;
 	
 	public AnnotationExtractor()
@@ -27,6 +31,7 @@ public class AnnotationExtractor
 		  fileChooser.showOpenDialog(null);
 		  
 		  selectedFiles = fileChooser.getSelectedFiles();
+		  
 		  
 		  annotations =  new ArrayList<Annotation>();
 		 		  
@@ -45,6 +50,9 @@ public class AnnotationExtractor
 				e.printStackTrace();
 			  }
 		  }
+		  
+		  if (!annotations.isEmpty())
+			  this.saveExtractedAnnotations(annotations);
 		  
 	}
    	
@@ -93,5 +101,51 @@ public class AnnotationExtractor
 	 
 	   		return annotations;
 	 }
+
+	public File getExtractedAnnotationsFile()
+	{
+		return extractedAnnotationsFile;
+	}
+
+	public void saveExtractedAnnotations(ArrayList<Annotation> annotations)
+	{
+		// parent component of the dialog
+		JFrame fileSaveFrame = new JFrame();
+		 
+		JFileChooser fileChooser = new JFileChooser(new File(System.getProperty("user.dir")));
+		fileChooser.setDialogTitle("Specify the File Name to Save");   
+		 
+		int userSelection = fileChooser.showSaveDialog(fileSaveFrame);
+		 
+		if (userSelection == JFileChooser.APPROVE_OPTION) 
+		{
+		    File fileToSave = fileChooser.getSelectedFile();
+		    System.out.println("\nSave Annotations Location> " + fileToSave.getAbsolutePath());
+		    
+		    try 
+			{
+				FileWriter fileWriter = new FileWriter(fileToSave.getAbsolutePath());
+				BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+							
+				for (Annotation annotation : annotations)
+				 {	
+					bufferedWriter.write(annotation.getAnnotatedText());
+					bufferedWriter.write("\tLine:" + annotation.getLineNumber());
+					bufferedWriter.write("\tLocation:" + annotation.getFileLocation());
+					bufferedWriter.write("\n");
+				 }
+				
+				this.extractedAnnotationsFile=fileToSave;
+				bufferedWriter.close();
+				System.out.println("Annotations Saved Successfully.");
+			}
+			
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}//End of catch 
+			
+		}//End of first if.
+	}//End of method.
 
 }//End of class.

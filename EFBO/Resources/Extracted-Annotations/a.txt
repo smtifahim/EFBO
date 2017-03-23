@@ -1,0 +1,3 @@
+//@EFBO: "tap Login Button" hasNextEvent "welcomeUser".	Line:3	Location:C:\Users\Fahim\git\EFBO\EFBO\Resources\testing.java
+//@EFBO: "welcomeUser" hasNextEvent "Select your Option".	Line:5	Location:C:\Users\Fahim\git\EFBO\EFBO\Resources\testing.java
+//@EFBO: "tap Login Button" hasNextEvent "welcomeUser".	Line:7	Location:C:\Users\Fahim\git\EFBO\EFBO\Resources\testing.java
