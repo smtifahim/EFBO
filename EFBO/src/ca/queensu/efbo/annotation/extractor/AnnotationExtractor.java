@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 
 
+/**
+ * @author Fahim Imam.
+ *
+ */
 public class AnnotationExtractor 
 {
 	private JFileChooser fileChooser;
@@ -17,7 +21,7 @@ public class AnnotationExtractor
 	
 	public AnnotationExtractor()
 	{	  
-		  fileChooser = new JFileChooser();
+		  fileChooser = new JFileChooser(new File(System.getProperty("user.dir")));
 		  fileChooser.setDialogTitle("Select Annotated Files");
 		  fileChooser.setMultiSelectionEnabled(true);
 		  fileChooser.showOpenDialog(null);

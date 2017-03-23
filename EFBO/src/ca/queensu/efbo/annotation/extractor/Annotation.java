@@ -1,11 +1,19 @@
 package ca.queensu.efbo.annotation.extractor;
 
+/**
+ * Annotation class definition.
+ * @author Fahim Imam
+ */
+
 public class Annotation 
 {
 	private String annotatedText;
 	private String fileLocation;
 	private int lineNumber;
 
+	/**
+	 * Default Constructor 
+	 */
 	public Annotation()
 	{
 		annotatedText = "";
@@ -13,6 +21,11 @@ public class Annotation
 		lineNumber = 0;
 	}
 	
+	/**
+	 * @param fileLocation
+	 * @param lineNumber
+	 * @param annotatedText
+	 */
 	public Annotation( String fileLocation, int lineNumber, String annotatedText) 
 	{
 		this.setFileLocation(fileLocation);
@@ -20,11 +33,17 @@ public class Annotation
 		this.setLineNumber(lineNumber);
 	}
 
+	/**
+	 * @return
+	 */
 	public String getAnnotatedText() 
 	{
 		return annotatedText;
 	}
 
+	/**
+	 * @param annotatedText
+	 */
 	public void setAnnotatedText(String annotatedText) 
 	{
 		this.annotatedText = annotatedText;
