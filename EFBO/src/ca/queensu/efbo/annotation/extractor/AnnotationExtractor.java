@@ -29,9 +29,7 @@ public class AnnotationExtractor
 		  fileChooser.setDialogTitle("Select Annotated Files");
 		  fileChooser.setMultiSelectionEnabled(true);
 		  fileChooser.showOpenDialog(null);
-		  
 		  selectedFiles = fileChooser.getSelectedFiles();
-		  
 		  
 		  annotations =  new ArrayList<Annotation>();
 		 		  
