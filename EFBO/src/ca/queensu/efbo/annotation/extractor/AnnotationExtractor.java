@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -32,7 +34,7 @@ public class AnnotationExtractor
 		  fileChooser.showOpenDialog(null);
 		  selectedFiles = fileChooser.getSelectedFiles();
 		  
-		  annotations =  new ArrayList<Annotation>();
+		  annotations = new ArrayList<Annotation>();
 		 		  
 		  for (int i = 0; i <selectedFiles.length; i++)
 		  {
@@ -45,23 +47,30 @@ public class AnnotationExtractor
 			  
 			 catch (IOException e) 
 			  {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			  }
 		  }
 		  
 		  if (!annotations.isEmpty())
 		  	{
-			  JOptionPane.showMessageDialog(null, "Annotations Extracted Successfully!      \n"
-			  									+ "Press OK to Save Your Annotations.");
+			  String messageExtractSuccess = "Annotations Extracted Successfully!\n"
+										   + "Press OK to Save Your Annotations.";
+			  
+			  JOptionPane.showMessageDialog(null, messageExtractSuccess, "Success!", JOptionPane.INFORMATION_MESSAGE);
+			  
 			  this.saveExtractedAnnotations(annotations);
 		  	}
-		  else
-			  JOptionPane.showMessageDialog(null, "No Annotation Found within Your Selected Source(s).    \n"
-						+ "Please Try Again.");
-			  
 		  
-	}
+		  else
+		  	{
+			  String messageNoAnnotationFound = "No Annotation Found within the Selected Source(s)."
+											  + "\nPlease Try Again.";
+			  System.out.println(messageNoAnnotationFound);
+			  JOptionPane.showMessageDialog(null, messageNoAnnotationFound, "No Annotation Found", JOptionPane.WARNING_MESSAGE);
+		  		  
+		  	}
+			  
+	} //End of public AnnotationExtractor().
    	
 	public ArrayList<Annotation> getExtractedAnnotations()
 	{
@@ -78,27 +87,47 @@ public class AnnotationExtractor
 			 BufferedReader bufferReader = new BufferedReader(new InputStreamReader(dataInputStream));
 			 
 			 int lineNumber = 0;
+			 String strLine;
 			 boolean annotationFound = false;
 			 
-			 String strLine;
-			  //Read File Line By Line
+			 //Read file. 
 			 while ((strLine = bufferReader.readLine()) != null)
 			  	{
 				  lineNumber += 1;
-				  if (strLine.contains("//@EFBO:"))
+				  if (strLine.contains("@EFBO:"))
 				  {
-					annotationFound = true;
-					System.out.println("Annotation Found @Line#" + lineNumber + ">" + strLine.trim());  
-				  	annotations.add(new Annotation(fileLocation, lineNumber, strLine.trim()));
-				  }
-				  				  
-				}
-			  	
-			  if (!annotationFound)
-				  System.out.println("No Annotation Found within your Selected File.");
+					    annotationFound = true;
+					    String annotatedText = strLine.replaceFirst((".*.@.*:"), "").trim(); //Remove all the characters until @EFBO:
+						annotatedText = annotatedText.replace(".", "").trim();				
+						String[] parsedAnnotations = parseAnnotatedText(annotatedText);
+					  	if (parsedAnnotations != null && parsedAnnotations.length==3)
+					  	{
+					  	 System.out.println("Annotation Found @Line#" + lineNumber + ">" + annotatedText);
+					  	 Annotation  currentAnnotation= new Annotation(fileLocation, lineNumber, annotatedText);	
+					  	 currentAnnotation.setSubject(parsedAnnotations[0]);
+					  	 currentAnnotation.setPredicate(parsedAnnotations[1]);
+					  	 currentAnnotation.setObject(parsedAnnotations[2]);
+					  	 annotations.add(currentAnnotation);					  	 
+					    }
+					  	else
+					  	{
+					  	 String messageParsingFailed = "\nERROR! Parsing Annotation Failed."
+	  	 							+ "\nCheck Your Annoatation @Line#" + lineNumber + " of the Following File."
+	  	 							+ "\nFile Location> " + fileLocation;
+					  						  		
+					  	 System.out.println(messageParsingFailed);
+					  	 JOptionPane.showMessageDialog(null, messageParsingFailed, "ERROR", JOptionPane.ERROR_MESSAGE);
+					  	 System.exit(1);
+					    }
+				   } //End of if (strLine.contains("@EFBO:")).
+			  				
+			  }//End of while loop.
 			 	
-			    //Close the input stream
+			  //Close the input stream
 			  dataInputStream.close();
+			  if (!annotationFound)
+				  System.out.println("No Annotation Found.");
+			
 		 }//end of try.
 		 	
 		 	catch (Exception e)
@@ -108,6 +137,46 @@ public class AnnotationExtractor
 	 
 	   		return annotations;
 	 }
+	
+	private static String[] parseAnnotatedText(String annotatedText)
+	{
+		  annotatedText = annotatedText.replaceAll("\"", " \" ").trim();
+		  String[] fragments = annotatedText.split("\\s+");
+
+		  int current = 0;
+		  boolean matched = fragments[current].matches("[^\"]*");
+		  if (matched) current++;
+
+		  for (int i = 1; i < fragments.length; i++)
+		  {
+		    if (!matched)
+		      fragments[current] = fragments[current] + " " + fragments[i];
+
+		    if (!fragments[current].matches("(\"[^\"]*\"|[^\"]*)"))
+		      matched = false;
+		    
+		    else 
+		    {
+		      matched = true;
+
+		      if (fragments[current].matches("\"[^\"]*\""))
+		        fragments[current] = fragments[current].substring(1, fragments[current].length() - 1).trim();
+
+		      if (fragments[current].length() != 0)
+		        current++;
+
+		      if (i + 1 < fragments.length)
+		        fragments[current] = fragments[i + 1];
+		    }
+		  } //End of for loop.
+
+		  if (matched) 
+		  { 
+		    return Arrays.copyOf(fragments, current);
+		  }
+
+		  return null; // if double-quotes did not match properly.
+		}
 
 	public File getExtractedAnnotationsFile()
 	{
@@ -120,7 +189,7 @@ public class AnnotationExtractor
 		JFrame fileSaveFrame = new JFrame();
 		 
 		JFileChooser fileChooser = new JFileChooser(new File(System.getProperty("user.dir")));
-		fileChooser.setDialogTitle("Specify the File Name to Save Your Annotations");   
+		fileChooser.setDialogTitle("Specify the file name to save your annotations");   
 		 
 		int userSelection = fileChooser.showSaveDialog(fileSaveFrame);
 		 
@@ -144,9 +213,12 @@ public class AnnotationExtractor
 				
 				this.extractedAnnotationsFile=fileToSave;
 				bufferedWriter.close();
-				JOptionPane.showMessageDialog(fileSaveFrame, "Annotations Saved Successfully!\n"
-														    + fileToSave.getAbsolutePath() + "    \n");
-				System.out.println("Annotations Saved Successfully.");
+				
+				String messageSavedSuccess = "Annotations Saved Successfully!\n"
+							    			 + "File Location> " + fileToSave.getAbsolutePath();
+				System.out.println(messageSavedSuccess);				
+				JOptionPane.showMessageDialog(fileSaveFrame, messageSavedSuccess, "Success!", JOptionPane.INFORMATION_MESSAGE);
+				
 			}
 			
 			catch (IOException e)

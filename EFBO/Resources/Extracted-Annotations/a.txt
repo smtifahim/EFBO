@@ -1,5 +1,5 @@
-//@EFBO: "tap Login Button" hasNextEvent "welcomeUser".	Line:3	Location:C:\Users\Fahim\git\EFBO\EFBO\Resources\testing.java
-//@EFBO: "welcomeUser" hasNextEvent "Select your Option".	Line:5	Location:C:\Users\Fahim\git\EFBO\EFBO\Resources\testing.java
-//@EFBO: "tap Login Button" hasNextEvent "welcomeUser".	Line:7	Location:C:\Users\Fahim\git\EFBO\EFBO\Resources\testing.java
-//@EFBO: "tap Login Button" hasNextEvent "welcomeUser".	Line:1	Location:C:\Users\Fahim\git\EFBO\EFBO\Resources\testing2.java
-//@EFBO: "welcomeUser" hasNextEvent "Select your Option".	Line:2	Location:C:\Users\Fahim\git\EFBO\EFBO\Resources\testing2.java
+"tap Login Button" hasNextEvent "welcomeUser"	Line:3	Location:C:\Users\Fahim\git\EFBO\EFBO\Resources\testing.java
+"welcomeUser"   hasNextEvent "gapingSelect your Option"	Line:5	Location:C:\Users\Fahim\git\EFBO\EFBO\Resources\testing.java
+"welcomeUser" hasNextEvent "Select your Apps"	Line:8	Location:C:\Users\Fahim\git\EFBO\EFBO\Resources\testing.java
+"tap Login Button" hasNextEvent "welcomeUser"	Line:11	Location:C:\Users\Fahim\git\EFBO\EFBO\Resources\testing.java
+"tap Login Button" hasNextEvent "welcomeUser"	Line:1	Location:C:\Users\Fahim\git\EFBO\EFBO\Resources\testing2.java

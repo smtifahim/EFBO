@@ -1,5 +1,11 @@
 package ca.queensu.efbo.annotation.extractor;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Annotation class definition.
  * @author Fahim Imam
@@ -9,7 +15,10 @@ public class Annotation
 {
 	private String annotatedText;
 	private String fileLocation;
-	private int lineNumber;
+	private int lineNumber; // The line where the annotation is located.
+	private String subject; // Corresponds to RDF subject.
+	private String predicate; // Corresponds to RDF predicate.
+	private String object; // Corresponds to RDF object.
 
 	/**
 	 * Default Constructor 
@@ -18,6 +27,9 @@ public class Annotation
 	{
 		annotatedText = "";
 		fileLocation = "";
+		subject = "";
+		predicate = "";
+		object = "";
 		lineNumber = 0;
 	}
 	
@@ -26,11 +38,11 @@ public class Annotation
 	 * @param lineNumber
 	 * @param annotatedText
 	 */
-	public Annotation( String fileLocation, int lineNumber, String annotatedText) 
+	public Annotation(String fileLocation, int lineNumber, String annotatedText) 
 	{
 		this.setFileLocation(fileLocation);
-		this.setAnnotatedText(annotatedText);
 		this.setLineNumber(lineNumber);
+		this.setAnnotatedText(annotatedText);
 	}
 
 	/**
@@ -59,11 +71,13 @@ public class Annotation
 		this.lineNumber = lineNumber;
 	}
 
-	public String getFileLocation() {
+	public String getFileLocation()
+	{
 		return fileLocation;
 	}
 
-	public void setFileLocation(String fileLocation) {
+	public void setFileLocation(String fileLocation)
+	{
 		this.fileLocation = fileLocation;
 	}
 	
@@ -76,4 +90,34 @@ public class Annotation
 		
 	}
 
+	public void setSubject(String subject)
+	{
+		this.subject = subject;
+	}
+	
+	public void setPredicate(String predicate)
+	{
+		this.predicate = predicate;
+	}
+	
+	public void setObject(String object)
+	{
+		this.object = object;
+	}
+	
+	public String getSubject() 
+	{
+		return subject;
+	}
+	
+	public String getPredicate()
+	{
+		return predicate;
+	}
+	
+	public String getObject()
+	{
+		return object;
+	}
+	
 }
