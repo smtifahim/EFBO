@@ -28,7 +28,9 @@ public class AnnotationExtractor
 	
 	public AnnotationExtractor()
 	{	  
-		  fileChooser = new JFileChooser(new File(System.getProperty("user.dir")));
+		  final String defaultFilePath = System.getProperty("user.dir") 
+				  				+ "/Resources/Annotated-Sources";
+		  fileChooser = new JFileChooser(new File(defaultFilePath));
 		  fileChooser.setDialogTitle("Select Annotated Files");
 		  fileChooser.setMultiSelectionEnabled(true);
 		  fileChooser.showOpenDialog(null);
@@ -187,8 +189,9 @@ public class AnnotationExtractor
 	{
 		// parent component of the dialog
 		JFrame fileSaveFrame = new JFrame();
-		 
-		JFileChooser fileChooser = new JFileChooser(new File(System.getProperty("user.dir")));
+		final String defaultFilePath = System.getProperty("user.dir") 
+  							  		+ "/Resources/Extracted-Annotations"; 
+		JFileChooser fileChooser = new JFileChooser(new File(defaultFilePath));
 		fileChooser.setDialogTitle("Specify the file name to save your annotations");   
 		 
 		int userSelection = fileChooser.showSaveDialog(fileSaveFrame);
