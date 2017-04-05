@@ -1,10 +1,5 @@
 package ca.queensu.efbo.annotation.extractor;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Annotation class definition.
