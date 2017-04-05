@@ -1,5 +1,2 @@
-This is another file.class
-
-      
- 	@EFBO: "tap Login Button" hasNextEvent "welcomeUserAssd".
-This does not do anything either.package
+//@EFBO: "tap Login Button" hasNextEvent "welcomeUser".
+//@EFBO: "welcomeUser" hasNextEvent "Select your Option".
