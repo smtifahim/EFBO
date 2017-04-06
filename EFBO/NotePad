@@ -1,0 +1,6 @@
+<!-- https://mvnrepository.com/artifact/com.github.ansell.pellet/pellet-owlapiv3 -->
+<dependency>
+    <groupId>com.github.ansell.pellet</groupId>
+    <artifactId>pellet-owlapiv3</artifactId>
+    <version>2.3.6-ansell</version>
+</dependency>

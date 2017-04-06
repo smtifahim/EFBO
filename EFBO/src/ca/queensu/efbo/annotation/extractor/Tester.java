@@ -1,12 +1,18 @@
 package ca.queensu.efbo.annotation.extractor;
-
 import java.util.ArrayList;
 
-public class Tester {
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
+
+import ca.queensu.efbo.Console;
+
+
+public class Tester 
+{
 
 	public static void main(String[] args) 
 	{
-		// TODO Auto-generated method stub
+		//new Console();
 		AnnotationExtractor annot = new AnnotationExtractor();
 		ArrayList <Annotation> annotations = annot.getExtractedAnnotations();
 		
@@ -19,7 +25,7 @@ public class Tester {
 			System.out.println(annotation.getPredicate());
 			System.out.println(annotation.getObject());
 		}
-			
+
 		System.out.println(annot.getExtractedAnnotations());
 	}
 
