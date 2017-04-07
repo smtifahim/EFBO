@@ -4,24 +4,37 @@
 package ca.queensu.efbo.annotation.extractor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 
 import org.semanticweb.owlapi.model.IRI;
-
+import org.semanticweb.owlapi.model.OWLAnnotation;
+import org.semanticweb.owlapi.model.OWLAnnotationValue;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassAxiom;
+import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLIndividualAxiom;
+import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLLogicalAxiom;
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.search.EntitySearcher;
+import org.semanticweb.owlapi.vocab.OWLRDFVocabulary;
+
 
 /**
  * @author Fahim
@@ -32,43 +45,41 @@ public class KnowledgeBaseGenerator
 {
 	private static final String BASE_URL = "http://cs.queensu.ca/~imam/ontologies/efbo.owl" ;
 	private ArrayList<Annotation> annotations;
-	private OWLOntology efbo;
+	private static OWLOntology efbo;
+	static OWLDataFactory owlDataFactory;
 	private OWLOntology knowledgeBase;
+	private OntologyManager ontologyManager;
 	
-	public KnowledgeBaseGenerator() 
+	public KnowledgeBaseGenerator() throws OWLOntologyCreationException
 	{
-		try {
-			this.loadOntology();
-		} catch (OWLOntologyCreationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// TODO Auto-generated constructor stub
+        ontologyManager = new OntologyManager();
+        ontologyManager.loadOntology("EFBO", BASE_URL);
+        efbo = ontologyManager.getLoadedOntology();
+		this.showOntologyInformation();		
 	}
 	
-	private void loadOntology() throws OWLOntologyCreationException
+	private void showOntologyInformation() throws OWLOntologyCreationException
 	{
-        OWLOntologyManager manager = OWLManager.createOWLOntologyManager(); 
-        IRI documentIRI = IRI.create(BASE_URL);
-        efbo = manager.loadOntologyFromOntologyDocument(documentIRI);
+  
         System.out.println("Ontology Loaded...");
-        System.out.println("Document IRI: " + documentIRI);
+        System.out.println("Ontology Name: " + ontologyManager.getOntologyName());
+        System.out.println("Document IRI: " + ontologyManager.getOntologyIRI());
         System.out.println("Ontology ID: " + efbo.getOntologyID());
-        System.out.println("Format: " + manager.getOntologyFormat(efbo));
+        System.out.println("Format: " + efbo.getOWLOntologyManager().getOntologyFormat(efbo));
         
       //Set<OWLAxiom> axioms = efbo.getAxioms(); 
       //printAxioms(axioms); 
         
-        Set<OWLClass> owlClasses = efbo.getClassesInSignature(); 
+        Set<OWLClass> owlClasses = ontologyManager.getAllclasses();        	
         printOWLClasses(owlClasses); 
          
         Set<OWLObjectProperty> owlObjectProperties = efbo.getObjectPropertiesInSignature();
         printOWLObjectProperties(owlObjectProperties);
         
-        printNumberOfLogicalAxioms(efbo.getLogicalAxioms());         
+        printNumberOfLogicalAxioms(efbo.getLogicalAxioms());       
    }
-	
-	private static void printOWLObjectProperties(Set<OWLObjectProperty> owlObjectProperties)
+
+	private void printOWLObjectProperties(Set<OWLObjectProperty> owlObjectProperties)
 	{
 		System.out.println("-----------------------------------");   
 		System.out.println("List of OWL Object Properites (" + owlObjectProperties.size() + ")");
@@ -76,7 +87,7 @@ public class KnowledgeBaseGenerator
 		 
 		for (OWLObjectProperty p : owlObjectProperties) 
 		  { 
-		   System.out.println(p.toString()); 
+		   System.out.println(ontologyManager.getLabel(p)); 
 		  } 
 	}
 	
@@ -87,15 +98,15 @@ public class KnowledgeBaseGenerator
 		System.out.println("-----------------------------------"); 
 	} 
 		 
-	private static void printOWLClasses(Set<OWLClass> classes) 
+	private void printOWLClasses(Set<OWLClass> classes) 
 	{ 
 		System.out.println("-----------------------------------");   
 		System.out.println("List of OWL Classes (" + classes.size() + ")");
 		System.out.println("-----------------------------------"); 
 		  for (OWLClass c : classes) 
 		  { 
-		   System.out.println(c.toString()); 
-		  } 		 
+		   System.out.println(ontologyManager.getLabel(c));		   	
+		  }
 	} 
 		 
    private static void printAxioms(Set<OWLAxiom> axioms) 
