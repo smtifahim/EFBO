@@ -58,39 +58,44 @@ public class KnowledgeBaseGenerator
         
       //Set<OWLAxiom> axioms = efbo.getAxioms(); 
       //printAxioms(axioms); 
+        
         Set<OWLClass> owlClasses = efbo.getClassesInSignature(); 
         printOWLClasses(owlClasses); 
-        
+         
         Set<OWLObjectProperty> owlObjectProperties = efbo.getObjectPropertiesInSignature();
         printOWLObjectProperties(owlObjectProperties);
         
-        printLogicalAxioms(efbo.getLogicalAxioms());
+        printNumberOfLogicalAxioms(efbo.getLogicalAxioms());         
    }
 	
 	private static void printOWLObjectProperties(Set<OWLObjectProperty> owlObjectProperties)
 	{
-		  System.out.println("ALL Object Properites (" + owlObjectProperties.size() + ")"); 
-		  for (OWLObjectProperty p : owlObjectProperties) 
+		System.out.println("-----------------------------------");   
+		System.out.println("List of OWL Object Properites (" + owlObjectProperties.size() + ")");
+		System.out.println("-----------------------------------"); 
+		 
+		for (OWLObjectProperty p : owlObjectProperties) 
 		  { 
 		   System.out.println(p.toString()); 
 		  } 
-		  System.out.println("-----------------------------------"); 
 	}
 	
-	private static void printLogicalAxioms(Set<OWLLogicalAxiom> logicalAxioms) 
+	private static void printNumberOfLogicalAxioms(Set<OWLLogicalAxiom> logicalAxioms) 
 	{ 
-		  System.out.println("ALL LOGICAL AXIOMS (" + logicalAxioms.size() + ")"); 
-		 
+		System.out.println("-----------------------------------");   
+		System.out.println("Number of Logical Axioms (" + logicalAxioms.size() + ")");
+		System.out.println("-----------------------------------"); 
 	} 
 		 
 	private static void printOWLClasses(Set<OWLClass> classes) 
 	{ 
-		  System.out.println("ALL CLASSES (" + classes.size() + ")"); 
+		System.out.println("-----------------------------------");   
+		System.out.println("List of OWL Classes (" + classes.size() + ")");
+		System.out.println("-----------------------------------"); 
 		  for (OWLClass c : classes) 
 		  { 
 		   System.out.println(c.toString()); 
-		  } 
-		  System.out.println("-----------------------------------"); 
+		  } 		 
 	} 
 		 
    private static void printAxioms(Set<OWLAxiom> axioms) 
