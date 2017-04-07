@@ -1,5 +1,1 @@
-"tap Login Button" hasNextEvent "welcomeUser"	Line:3	Location:/Users/fahimimam/git/EFBO/EFBO/Resources/Annotated-Sources/testing.java
-"welcomeUser"   hasNextEvent "gapingSelect your Option"	Line:5	Location:/Users/fahimimam/git/EFBO/EFBO/Resources/Annotated-Sources/testing.java
-"welcomeUser" hasNextEvent "Select your Apps"	Line:8	Location:/Users/fahimimam/git/EFBO/EFBO/Resources/Annotated-Sources/testing.java
-"tap Login Button" hasNextEvent "welcomeUser"	Line:11	Location:/Users/fahimimam/git/EFBO/EFBO/Resources/Annotated-Sources/testing.java
-"tap Login Button" hasNextEvent "welcomeUser"	Line:1	Location:/Users/fahimimam/git/EFBO/EFBO/Resources/Annotated-Sources/testing2.java
+"tap Login Button" hasNextEvent "welcomeUser"	Line:1	Location:C:\Users\Fahim\git\EFBO\EFBO\Resources\Annotated-Sources\testing2.java

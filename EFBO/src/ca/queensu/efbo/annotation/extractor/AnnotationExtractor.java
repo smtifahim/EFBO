@@ -14,7 +14,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-
 /**
  * @author Fahim Imam.
  *
@@ -29,50 +28,25 @@ public class AnnotationExtractor
 	public AnnotationExtractor()
 	{	  
 		  final String defaultFilePath = System.getProperty("user.dir") 
-				  				+ "/Resources/Annotated-Sources";
+				  					   + "/Resources/Annotated-Sources";
 		  fileChooser = new JFileChooser(new File(defaultFilePath));
 		  fileChooser.setDialogTitle("Select Annotated Files");
 		  fileChooser.setMultiSelectionEnabled(true);
 		  fileChooser.showOpenDialog(null);
 		  selectedFiles = fileChooser.getSelectedFiles();
 		  
-		  annotations = new ArrayList<Annotation>();
-		 		  
-		  for (int i = 0; i <selectedFiles.length; i++)
+		  if (selectedFiles.length==0)
 		  {
-			 try 
-			  {
-				System.out.println( "\nSelected File#"+ (i+1));
-				System.out.println ("File Location> " + selectedFiles[i].getCanonicalPath());
-				annotations = extractAnnotations(selectedFiles[i]);
-			  } 
-			  
-			 catch (IOException e) 
-			  {
-				e.printStackTrace();
-			  }
+			  this.showNoFileSelectedMessage();
 		  }
-		  
-		  if (!annotations.isEmpty())
-		  	{
-			  String messageExtractSuccess = "Annotations Extracted Successfully!\n"
-										   + "Press OK to Save Your Annotations.";
-			  
-			  JOptionPane.showMessageDialog(null, messageExtractSuccess, "Success!", JOptionPane.INFORMATION_MESSAGE);
-			  
-			  this.saveExtractedAnnotations(annotations);
-		  	}
-		  
+					  
 		  else
-		  	{
-			  String messageNoAnnotationFound = "No Annotation Found within the Selected Source(s)."
-											  + "\nPlease Try Again.";
-			  System.out.println(messageNoAnnotationFound);
-			  JOptionPane.showMessageDialog(null, messageNoAnnotationFound, "No Annotation Found", JOptionPane.WARNING_MESSAGE);
-		  		  
-		  	}
-			  
-	} //End of public AnnotationExtractor().
+		  {
+			  annotations = new ArrayList<Annotation>();
+			  this.processSelectedFiles(selectedFiles);
+		  } 
+		  
+	} //End of method public AnnotationExtractor().
    	
 	public ArrayList<Annotation> getExtractedAnnotations()
 	{
@@ -99,10 +73,11 @@ public class AnnotationExtractor
 				  if (strLine.contains("@EFBO:"))
 				  {
 					    annotationFound = true;
-					    String annotatedText = strLine.replaceFirst((".*.@.*:"), "").trim(); //Remove all the characters until @EFBO:
+					    String annotatedText = strLine.replaceFirst((".*.@EFBO.*:"), "").trim(); //Remove all the characters until @EFBO:
 						annotatedText = annotatedText.replace(".", "").trim();				
 						String[] parsedAnnotations = parseAnnotatedText(annotatedText);
-					  	if (parsedAnnotations != null && parsedAnnotations.length==3)
+					  	
+						if (parsedAnnotations != null && parsedAnnotations.length==3)
 					  	{
 					  	 System.out.println("Annotation Found @Line#" + lineNumber + ">" + annotatedText);
 					  	 Annotation  currentAnnotation= new Annotation(fileLocation, lineNumber, annotatedText);	
@@ -113,23 +88,17 @@ public class AnnotationExtractor
 					    }
 					  	else
 					  	{
-					  	 String messageParsingFailed = "\nERROR! Parsing Annotation Failed."
-	  	 							+ "\nCheck Your Annoatation @Line#" + lineNumber + " of the Following File."
-	  	 							+ "\nFile Location> " + fileLocation;
-					  						  		
-					  	 System.out.println(messageParsingFailed);
-					  	 JOptionPane.showMessageDialog(null, messageParsingFailed, "ERROR", JOptionPane.ERROR_MESSAGE);
-					  	 System.exit(1);
+					  		showParsingErrorMessage(lineNumber, fileLocation);
 					    }
-				   } //End of if (strLine.contains("@EFBO:")).
+				   } //End of statement if (strLine.contains("@EFBO:")).
 			  				
 			  }//End of while loop.
 			 	
-			  //Close the input stream
-			  dataInputStream.close();
 			  if (!annotationFound)
 				  System.out.println("No Annotation Found.");
-			
+			  
+			  dataInputStream.close();
+						
 		 }//end of try.
 		 	
 		 	catch (Exception e)
@@ -180,6 +149,19 @@ public class AnnotationExtractor
 		  return null; // if double-quotes did not match properly.
 		}
 
+	private void showParsingErrorMessage(int lineNumber, String fileLocation)
+	{
+	  	 String messageParsingFailed = "\nERROR! Parsing Annotation Failed."
+					+ "\nCheck Your Annoatation @Line#" 
+	  			    + lineNumber + " of the Following File."
+					+ "\nFile Location> " + fileLocation;
+	  						  		
+	  	 System.out.println(messageParsingFailed);
+	  	 JOptionPane.showMessageDialog(null, messageParsingFailed, 
+	  			 					   "ERROR", JOptionPane.ERROR_MESSAGE);
+  	 
+	} // End of method showParsingErrorMessage().
+	
 	public File getExtractedAnnotationsFile()
 	{
 		return extractedAnnotationsFile;
@@ -218,9 +200,11 @@ public class AnnotationExtractor
 				bufferedWriter.close();
 				
 				String messageSavedSuccess = "Annotations Saved Successfully!\n"
-							    			 + "File Location> " + fileToSave.getAbsolutePath();
+							    			 + "File Location> " 
+							    			 + fileToSave.getAbsolutePath();
 				System.out.println(messageSavedSuccess);				
-				JOptionPane.showMessageDialog(fileSaveFrame, messageSavedSuccess, "Success!", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(fileSaveFrame, messageSavedSuccess, "Success!", 
+											  JOptionPane.INFORMATION_MESSAGE);
 				
 			}
 			
@@ -229,7 +213,80 @@ public class AnnotationExtractor
 				e.printStackTrace();
 			}//End of catch 
 			
-		}//End of first if.
-	}//End of method.
+		} //End of if (userSelection == JFileChooser.APPROVE_OPTION) 
+	} //End of saveExtractedAnnotations method.
+	
+	private void processSelectedFiles(File[] selectedFiles)
+	{
+		for (int i = 0; i <selectedFiles.length; i++)
+		  {
+			 try 
+			  {
+				System.out.println( "\nSelected File#"+ (i+1));
+				System.out.println ("File Location> " + selectedFiles[i].getCanonicalPath());
+				this.annotations = extractAnnotations(selectedFiles[i]);
+			  } 
+			  
+			 catch (IOException e) 
+			  {
+				e.printStackTrace();
+			  }
+		  }
+		  
+		  if (!annotations.isEmpty())
+		  	{
+			  String messageExtractSuccess = "Annotations Extracted Successfully!\n"
+										   + "Press OK to Save Your Annotations.";
+			  
+			  JOptionPane.showMessageDialog(null, messageExtractSuccess, "Success!",
+					  						JOptionPane.INFORMATION_MESSAGE);
+			  
+			  this.saveExtractedAnnotations(annotations);
+		  	}
+		  
+		  else
+		  	{
+			  this.showNoAnnotationFoundMessage();						  		  
+		  	}
+	}
+	
+	private void showNoAnnotationFoundMessage()
+	{
+		  String messageNoAnnotationFound = "No Annotation Found within Selected Source(s)."
+				  + "\nPlease Try Again.";
+		  System.out.println(messageNoAnnotationFound);
+		  
+		  int OKOption = JOptionPane.showConfirmDialog(null, messageNoAnnotationFound, 
+								"Please Try Again", 
+								JOptionPane.OK_CANCEL_OPTION);
+		  if (OKOption == JOptionPane.OK_OPTION)
+			{
+			  System.out.println("> Try Again Request Accepted.");
+			  new AnnotationExtractor();
+			}
+		  else
+				System.out.println("> Try Again Request Rejected.");
+	} //End of method showNoAnnotationFoundMessage().
+	
+	
+	private void showNoFileSelectedMessage()
+	{
+		 String messageFileNotSelected = "No File(s) Were Selected."
+					+ "\nPlease Try Again.";
+		 System.out.println(messageFileNotSelected);
+		 int OKOption = JOptionPane.showConfirmDialog(null, messageFileNotSelected, 
+					"Please Try Again", 
+					JOptionPane.OK_CANCEL_OPTION);
+			if (OKOption == JOptionPane.OK_OPTION)
+			{
+				System.out.println("> Try Again Request Accepted.");
+				new AnnotationExtractor();
+			}
+			else
+			{
+				System.out.println("> Try Again Request Rejected.");
+				System.exit(1);
+			}
+	} //End of method showNoFileSelectedMessage().
 
 }//End of class.
