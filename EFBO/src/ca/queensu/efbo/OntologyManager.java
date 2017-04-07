@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ca.queensu.efbo.annotation.extractor;
+package ca.queensu.efbo;
 
 
 import java.io.File; 
@@ -13,22 +13,29 @@ import java.util.List;
 import java.util.Map; 
 import java.util.Set; 
  
-import org.semanticweb.owlapi.apibinding.OWLManager; 
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.io.StreamDocumentTarget;
 import org.semanticweb.owlapi.model.AddAxiom; 
 import org.semanticweb.owlapi.model.IRI; 
 import org.semanticweb.owlapi.model.OWLAnnotation; 
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom; 
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLAnnotationValue;
+import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass; 
 import org.semanticweb.owlapi.model.OWLClassExpression; 
 import org.semanticweb.owlapi.model.OWLDataFactory; 
-import org.semanticweb.owlapi.model.OWLEntity; 
-import org.semanticweb.owlapi.model.OWLLiteral; 
-import org.semanticweb.owlapi.model.OWLObjectProperty; 
-import org.semanticweb.owlapi.model.OWLOntology; 
+import org.semanticweb.owlapi.model.OWLEntity;
+import org.semanticweb.owlapi.model.OWLIndividual;
+import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
+import org.semanticweb.owlapi.model.OWLObjectProperty;
+import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyChange;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException; 
-import org.semanticweb.owlapi.model.OWLOntologyManager; 
+import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 import org.semanticweb.owlapi.search.EntitySearcher;
 import org.semanticweb.owlapi.vocab.OWLRDFVocabulary; 
@@ -40,7 +47,8 @@ public class OntologyManager
  private String ontologyName = null; 
  private File ontologyFile = null; 
  private OWLDataFactory factory = null; 
- private OWLOntology ontology = null; 
+ private OWLOntology ontology = null;
+ private OWLOntology newOntology = null;
  private OWLOntologyManager manager = null; 
  private Set<String> synonymsProperties; 
  
@@ -55,7 +63,8 @@ public class OntologyManager
     "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#DEFINITION")); 
  } 
  
- private Map<String, OWLClass> hashToRetrieveClass = new HashMap<String, OWLClass>(); 
+ private Map<String, OWLClass> hashToRetrieveClass = new HashMap<String, OWLClass>();
+ private  Set<OWLNamedIndividual> owlIndividuals = new HashSet<OWLNamedIndividual>(); 
  
  public OntologyManager()
  {
@@ -87,6 +96,13 @@ public class OntologyManager
   this.ontologyURI = ontology.getOntologyID().getOntologyIRI().toString(); 
  } 
  
+ public void createNewOntology(String ontologyURI) throws OWLOntologyCreationException, OWLOntologyStorageException 
+ {
+	// IRI ontologyIRI = IRI.create(ontologyURI);
+	// newOntology = manager.createOntology(ontologyIRI);
+	// manager.saveOntology(ontology, new StreamDocumentTarget(System.out));
+ }
+ 
  public void loadOntology(String ontologyName, String ontologyURI) throws OWLOntologyCreationException 
  { 
   this.ontologyName = ontologyName; 
@@ -103,6 +119,24 @@ public class OntologyManager
    hashToRetrieveClass.put(getLabel(cls).trim().toLowerCase(), cls); 
   } 
  } 
+ 
+ public void addOWLIndividual(String individual1, String individual2)
+ {
+	 IRI ind1 = IRI.create("http://efbo/efbo-kb.owl#"+individual1);
+	 IRI ind2 = IRI.create("http://efbo/efbo-kb.owl#"+individual2);
+	 OWLIndividual newIndividual = factory.getOWLNamedIndividual(ind1);
+	 OWLIndividual newIndividual2 = factory.getOWLNamedIndividual(ind2);
+	 owlIndividuals.add((OWLNamedIndividual) newIndividual);
+	 owlIndividuals.add((OWLNamedIndividual) newIndividual2);
+	    OWLObjectProperty hasNextEvent = factory.getOWLObjectProperty(IRI
+	            .create(ontologyURI + "#hasNextEvent"));
+
+	    OWLObjectPropertyAssertionAxiom axiom1 = factory.getOWLObjectPropertyAssertionAxiom(hasNextEvent, newIndividual, newIndividual2);
+
+	    AddAxiom addAxiom1 = new AddAxiom(ontology, axiom1);
+	    // Now we apply the change using the manager.
+	    manager.applyChange(addAxiom1);
+ }
  
  public OWLOntology getLoadedOntology()
  {
@@ -352,5 +386,11 @@ public String extractOWLClassId(OWLEntity cls)
  public Set<OWLClass> getAllclasses() 
  { 
   return ontology.getClassesInSignature(); 
- } 
+ }
+ 
+ public Set<OWLNamedIndividual> getAllIndividuals()
+ {
+	return ontology.getIndividualsInSignature();
+ }
+ 
 }

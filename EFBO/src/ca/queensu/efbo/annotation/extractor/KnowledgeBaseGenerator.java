@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
-
+import org.semanticweb.owlapi.io.StreamDocumentTarget;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationValue;
@@ -23,6 +23,7 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassAxiom;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLIndividualAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLLogicalAxiom;
@@ -32,8 +33,11 @@ import org.semanticweb.owlapi.model.OWLObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.search.EntitySearcher;
 import org.semanticweb.owlapi.vocab.OWLRDFVocabulary;
+
+import ca.queensu.efbo.OntologyManager;
 
 
 /**
@@ -43,38 +47,45 @@ import org.semanticweb.owlapi.vocab.OWLRDFVocabulary;
 
 public class KnowledgeBaseGenerator
 {
-	private static final String BASE_URL = "http://cs.queensu.ca/~imam/ontologies/efbo.owl" ;
+	private static final String BASE_URL = "http://www.cs.queensu.ca/~imam/ontologies/efbo.owl" ;
 	private ArrayList<Annotation> annotations;
 	private static OWLOntology efbo;
 	static OWLDataFactory owlDataFactory;
 	private OWLOntology knowledgeBase;
 	private OntologyManager ontologyManager;
 	
-	public KnowledgeBaseGenerator() throws OWLOntologyCreationException
+	public KnowledgeBaseGenerator() throws OWLOntologyCreationException, OWLOntologyStorageException 
 	{
         ontologyManager = new OntologyManager();
         ontologyManager.loadOntology("EFBO", BASE_URL);
         efbo = ontologyManager.getLoadedOntology();
-		this.showOntologyInformation();		
+        ontologyManager.addOWLIndividual("tapLoginButton", "showWelcomeMessage");
+       // ontologyManager.createNewOntology(BASE_URL);
+        
+        efbo.getOWLOntologyManager().saveOntology(efbo, new StreamDocumentTarget(System.out));
+        
+       // this.showOntologyInformation();		
 	}
 	
 	private void showOntologyInformation() throws OWLOntologyCreationException
 	{
-  
         System.out.println("Ontology Loaded...");
         System.out.println("Ontology Name: " + ontologyManager.getOntologyName());
         System.out.println("Document IRI: " + ontologyManager.getOntologyIRI());
         System.out.println("Ontology ID: " + efbo.getOntologyID());
         System.out.println("Format: " + efbo.getOWLOntologyManager().getOntologyFormat(efbo));
         
-      //Set<OWLAxiom> axioms = efbo.getAxioms(); 
-      //printAxioms(axioms); 
+      Set<OWLAxiom> axioms = efbo.getAxioms(); 
+      printAxioms(axioms); 
         
         Set<OWLClass> owlClasses = ontologyManager.getAllclasses();        	
         printOWLClasses(owlClasses); 
          
         Set<OWLObjectProperty> owlObjectProperties = efbo.getObjectPropertiesInSignature();
         printOWLObjectProperties(owlObjectProperties);
+        
+        Set<OWLNamedIndividual> owlIndividuals = ontologyManager.getAllIndividuals();
+        printOWLIndividuals(owlIndividuals);
         
         printNumberOfLogicalAxioms(efbo.getLogicalAxioms());       
    }
@@ -107,7 +118,18 @@ public class KnowledgeBaseGenerator
 		  { 
 		   System.out.println(ontologyManager.getLabel(c));		   	
 		  }
-	} 
+	}
+	private void printOWLIndividuals(Set<OWLNamedIndividual> individuals)
+	{
+		System.out.println("-----------------------------------");   
+		System.out.println("List of OWL Individuals (" + individuals.size() + ")");
+		System.out.println("-----------------------------------"); 
+		  for (OWLNamedIndividual i : individuals) 
+		  { 
+		   System.out.println(i);		   	
+		  }
+		
+	}
 		 
    private static void printAxioms(Set<OWLAxiom> axioms) 
 	{ 

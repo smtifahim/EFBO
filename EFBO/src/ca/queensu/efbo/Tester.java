@@ -1,6 +1,9 @@
-package ca.queensu.efbo.annotation.extractor;
+package ca.queensu.efbo;
 import java.util.ArrayList;
-import ca.queensu.efbo.Console;
+
+import ca.queensu.efbo.annotation.extractor.Annotation;
+import ca.queensu.efbo.annotation.extractor.AnnotationExtractor;
+import ca.queensu.efbo.annotation.extractor.KnowledgeBaseGenerator;
 
 
 public class Tester 
@@ -13,7 +16,7 @@ public class Tester
 	 new KnowledgeBaseGenerator();
 	
 
-		
+		/*
 		AnnotationExtractor annot = new AnnotationExtractor();
 		ArrayList <Annotation> annotations = annot.getExtractedAnnotations();
 		
@@ -28,7 +31,7 @@ public class Tester
 			System.out.println(annotation.getObject());
 			}
 
-			System.out.println(annot.getExtractedAnnotations());
+			System.out.println(annot.getExtractedAnnotations());*/
 	
 	}
 }
