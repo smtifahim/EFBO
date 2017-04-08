@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import ca.queensu.efbo.annotation.extractor.Annotation;
 import ca.queensu.efbo.annotation.extractor.AnnotationExtractor;
-import ca.queensu.efbo.annotation.extractor.KnowledgeBaseGenerator;
+import ca.queensu.efbo.annotation.extractor.EFBOKnowledgeBaseGenerator;
 
 
 public class Tester 
@@ -13,7 +13,7 @@ public class Tester
 	{
 		//new Console();
 		
-	 new KnowledgeBaseGenerator();
+	 new EFBOKnowledgeBaseGenerator();
 	
 
 		/*
