@@ -129,5 +129,9 @@ public class EFBOKnowledgeBaseGenerator
 	{
 		this.systemName = systemName;
 	}
+ public OntologyManager getEFBOManager()
+ { 
+	return efboManager; 
+ }
 
 }

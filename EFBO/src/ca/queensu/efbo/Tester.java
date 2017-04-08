@@ -17,7 +17,7 @@ public class Tester
 		
 		EFBOKnowledgeBaseGenerator efboKBGenerator1 = new EFBOKnowledgeBaseGenerator();
 		efboKBGenerator1.processExtractedAnnotations(annotations);
-		efboKBGenerator1.printOntologyInformation();
+		efboKBGenerator1.getEFBOManager().printOntologyMetrics();
 	
 	}
 }
