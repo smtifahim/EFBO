@@ -26,7 +26,7 @@ import org.semanticweb.owlapi.model.OWLDataPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLIndividualAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
-import org.semanticweb.owlapi.model.OWLLogicalAxiom;
+//import org.semanticweb.owlapi.model.OWLLogicalAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
@@ -46,8 +46,6 @@ public class OntologyManager
  private OWLDataFactory factory = null; 
  private OWLOntology ontology = null;
  private OWLOntologyManager manager = null; 
- private Set<String> synonymsProperties; 
- private Set<String> owlObjectProperties; 
   
  private Map<String, OWLClass> hashToRetrieveClass = new HashMap<String, OWLClass>();
  private  Set<OWLNamedIndividual> owlIndividuals = new HashSet<OWLNamedIndividual>(); 
@@ -321,23 +319,24 @@ public String extractOWLClassId(OWLEntity cls)
  
 public void printOntologyMetrics()
  {
-	System.out.println("-----------------------------------"); 
-	System.out.println("Loaded Ontology Metrics");
-	System.out.println("-----------------------------------"); 
-    System.out.println("Ontology Name: " + this.getOntologyName());
-    System.out.println("Ontology IRI: " + this.getOntologyIRI());
-    System.out.println("Ontology ID: " + ontology.getOntologyID());
-    System.out.println("Format: " + manager.getOntologyFormat(ontology));
+	System.out.println("--------------------------------------------------------"); 
+	System.out.println("Ontology Metrics");
+	System.out.println("--------------------------------------------------------"); 
+    System.out.println("Ontology Name     : " + this.getOntologyName());
+    System.out.println("Ontology IRI      : " + this.getOntologyIRI());
+    System.out.println("Ontology Format   : " + manager.getOntologyFormat(ontology));
     
-    System.out.println("Number of Named Classes: "
+    System.out.println("Named Classes     : "
     				   + ontology.getClassesInSignature().size());
-    System.out.println("Number of Object Properties: " 
+    System.out.println("Object Properties : " 
     				   + ontology.getObjectPropertiesInSignature().size());
-    System.out.println("Number of Named Individuals: " 
+    System.out.println("Individuals       : " 
     				   + ontology.getIndividualsInSignature().size());
-    System.out.println("Number of Axioms: " 
-    				   +  ontology.getLogicalAxioms().size());
-    System.out.println("-----------------------------------"); 
+    System.out.println("Logical Axioms    : " 
+    				   + ontology.getLogicalAxioms().size());
+    System.out.println("All Axioms        : " 
+			   		   + ontology.getAxioms().size());
+    System.out.println("--------------------------------------------------------"); 
  }
 
 public void printAllObjectProperties()

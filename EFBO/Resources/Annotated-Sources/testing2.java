@@ -1,2 +1,2 @@
-//@EFBO: "tap Login Button" hasNextEvent "welcomeUser".
-//EFBO: "welcomeUser" hasNextEvent "Select your Option".
+//@EFBO: "Tap Login Button" hasNextEvent "Welcome User".
+//EFBO: "Welcome User" hasNextEvent "exitTheSystem".

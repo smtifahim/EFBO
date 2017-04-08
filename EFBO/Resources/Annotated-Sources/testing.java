@@ -1,11 +1,11 @@
 This is a simple test.abstract
-
-//@EFBO: "tap Login Button" hasNextEvent "welcomeUser".
+// check if annotation already exists.
+//@EFBO: "Tap Login Button" hasNextEvent "Welcome User".
 This does not do anything.class
-//@EFBO: "welcomeUser"   hasNextEvent "gapingSelect your Option".
+//@EFBO: "Welcome User"   hasNextEvent "Select Your Option".
 
 /*
- * @EFBO: "welcomeUser" hasNextEvent "Select your Apps"
+ * @EFBO: "Select Your Option" hasNextEvent "Select Your Apps"
  */
 
-//@EFBO: "tap Login Button" hasNextEvent "welcomeUser"
+//@EFBO: "Tap Login Button" hasNextEvent "Welcome User"
