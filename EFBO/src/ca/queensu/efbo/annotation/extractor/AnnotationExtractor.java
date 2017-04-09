@@ -89,6 +89,7 @@ public class AnnotationExtractor
 					  	else
 					  	{
 					  		showParsingErrorMessage(lineNumber, fileLocation);
+					  		System.exit(1);
 					    }
 				   } //End of statement if (strLine.contains("@EFBO:")).
 			  				
@@ -167,7 +168,7 @@ public class AnnotationExtractor
 		return extractedAnnotationsFile;
 	}
 
-	public void saveExtractedAnnotations(ArrayList<Annotation> annotations)
+	public void saveExtractedAnnotations()
 	{
 		// parent component of the dialog
 		JFrame fileSaveFrame = new JFrame();
@@ -187,13 +188,16 @@ public class AnnotationExtractor
 			{
 				FileWriter fileWriter = new FileWriter(fileToSave.getAbsolutePath());
 				BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-							
+				String fileLocation = "", prevLocation = "";
+				
 				for (Annotation annotation : annotations)
 				 {	
-					bufferedWriter.write(annotation.getAnnotatedText());
-					bufferedWriter.write("\tLine:" + annotation.getLineNumber());
-					bufferedWriter.write("\tLocation:" + annotation.getFileLocation());
-					bufferedWriter.write("\n");
+					fileLocation = annotation.getFileLocation();
+					if (fileLocation != prevLocation)
+					bufferedWriter.write("\nLocation:" + fileLocation + "\n");
+					bufferedWriter.write("Line:" + annotation.getLineNumber() + "\t");
+					bufferedWriter.write(annotation.getAnnotatedText() + "\n");
+					prevLocation = fileLocation;
 				 }
 				
 				this.extractedAnnotationsFile=fileToSave;
@@ -241,7 +245,7 @@ public class AnnotationExtractor
 			  JOptionPane.showMessageDialog(null, messageExtractSuccess, "Success!",
 					  						JOptionPane.INFORMATION_MESSAGE);
 			  
-			  this.saveExtractedAnnotations(annotations);
+			  this.saveExtractedAnnotations();
 		  	}
 		  
 		  else

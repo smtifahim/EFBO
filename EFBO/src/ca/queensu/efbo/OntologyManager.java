@@ -408,38 +408,38 @@ public void printAllAxioms()
 		  System.out.println("List of All Axioms (" + axioms.size() + ")");
 		  System.out.println("-----------------------------------");   
 		  
-		  for (OWLAxiom ax : individualAxioms)
+		  for (OWLAxiom owlAxiom : individualAxioms)
 			  { 
 			   String line; 
-			   line = ax.toString() + " TYPE: Individual"; 
+			   line = owlAxiom.toString() + " TYPE: Individual"; 
 			   System.out.println(line); 
 			  } 
 		  
-		  for (OWLAxiom ax : dataPropertyAxioms)
+		  for (OWLAxiom owlAxiom : dataPropertyAxioms)
 			  { 
 			   String line; 
-			   line = ax.toString() + " TYPE: DataProperty"; 
+			   line = owlAxiom.toString() + " TYPE: DataProperty"; 
 			   System.out.println(line); 
 			  } 
 			  
-		  for (OWLAxiom ax : objectPropertyAxioms) 
+		  for (OWLAxiom owlAxiom : objectPropertyAxioms) 
 			  { 
 			   String line; 
-			   line = ax.toString() + " TYPE: ObjectProperty"; 
+			   line = owlAxiom.toString() + " TYPE: ObjectProperty"; 
 			   System.out.println(line); 
 			  } 
 		  
-		  for (OWLAxiom ax : owlClassAxioms)
+		  for (OWLAxiom owlAxiom : owlClassAxioms)
 			  { 
 			   String line; 
-			   line = ax.toString() + " TYPE: Class"; 
+			   line = owlAxiom.toString() + " TYPE: Class"; 
 			   System.out.println(line); 
 			  }
 		  
-		  for (OWLAxiom ax : otherAxioms)
+		  for (OWLAxiom owlAxiom : otherAxioms)
 			  { 
 			   String line; 
-			   line = ax.toString() + " TYPE: Other"; 
+			   line = owlAxiom.toString() + " TYPE: Other"; 
 			   System.out.println(line); 
 			  } 
 		  		

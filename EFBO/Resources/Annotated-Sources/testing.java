@@ -7,5 +7,3 @@ This does not do anything.class
 /*
  * @EFBO: "Select Your Option" hasNextEvent "Select Your Apps"
  */
-
-//@EFBO: "Tap Login Button" hasNextEvent "Welcome User"
