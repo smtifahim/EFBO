@@ -129,6 +129,13 @@ public OWLObjectProperty getOWLObjectProperty (String propertyURI, String proper
 	 IRI propertyIRI = IRI.create(propertyURI + "#" + propertyName);
 	 return factory.getOWLObjectProperty(propertyIRI);
  }
+
+//Returns an annotation property from an existing ontology.
+public OWLAnnotationProperty getOWLAnnotationProperty (String propertyURI, String propertyName)
+{
+	 IRI propertyIRI = IRI.create(propertyURI + "#" + propertyName);
+	 return factory.getOWLAnnotationProperty(propertyIRI);
+}
  
  //Assert object property axiom between two OWL named individuals.
 public void setOWLPropertyAxiom(OWLNamedIndividual subjectIndividual, 
