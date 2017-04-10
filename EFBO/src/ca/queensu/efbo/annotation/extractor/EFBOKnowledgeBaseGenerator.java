@@ -3,9 +3,11 @@
  */
 package ca.queensu.efbo.annotation.extractor;
 
+import java.io.File;
 //import java.io.File;
 import java.util.ArrayList;
 import org.semanticweb.owlapi.io.StreamDocumentTarget;
+import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -27,6 +29,10 @@ public class EFBOKnowledgeBaseGenerator
 	private static final String
 		EFBO_KB_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl";
 	
+	private static final String 
+		kBaseFileLocation = System.getProperty("user.dir") 
+			   			  + "/Resources/Extracted-Kbases";  
+	
 	private OWLOntology efboKBase = null;
 	//private File efboKbaseFile = null;
 	private OntologyManager efboManager = null;
@@ -36,8 +42,9 @@ public class EFBOKnowledgeBaseGenerator
 	public EFBOKnowledgeBaseGenerator()
 				   throws OWLOntologyCreationException, OWLOntologyStorageException 
 	{
+		this.systemName = "EFBO-KB-Test";
 		this.efboManager = new OntologyManager();
-        this.efboManager.loadOntology("EFBO-KB", EFBO_KB_URI);
+        this.efboManager.loadOntology(systemName, EFBO_KB_URI);
         this.efboKBase = efboManager.getLoadedOntology();
    	}
 	
@@ -47,6 +54,10 @@ public class EFBOKnowledgeBaseGenerator
 	{
         efboKBase.getOWLOntologyManager().saveOntology(efboKBase, 
         						  new StreamDocumentTarget(System.out));
+       
+        File defaultSaveLocation = new File(kBaseFileLocation + "/" + systemName + ".owl");
+        
+        efboKBase.getOWLOntologyManager().saveOntology(efboKBase, IRI.create(defaultSaveLocation.toURI()));
 	}
 	
 

@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#"
+     xml:base="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl"
+     xmlns:efbo="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:swrla="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#">
+    <owl:Ontology rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl">
+        <owl:imports rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#EVENT_END -->
+
+    <rdf:Description rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#EVENT_END">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVENT_END</rdfs:label>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#EVENT_START -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#EVENT_START">
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tapAppIcon"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVENT_START</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_appIcon -->
+
+    <rdf:Description rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_appIcon">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_appIcon</rdfs:label>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_appInterface -->
+
+    <rdf:Description rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_appInterface">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_appInterface</rdfs:label>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_clientAgent -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_clientAgent">
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_appInterface"/>
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_logininterfaceUI"/>
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tryAgainUI"/>
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_welcomeUserUI"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_clientAgent</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterPassword -->
+
+    <rdf:Description rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterPassword">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_enterPassword</rdfs:label>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterUserName -->
+
+    <rdf:Description rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterUserName">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_enterUserName</rdfs:label>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_function_1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_function_1">
+        <efbo:hasInitialEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tapAppIcon"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_function_1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_function_2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_function_2">
+        <efbo:hasInitialEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_verifyUserInfo"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_function_2</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_launchAppInterface -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_launchAppInterface">
+        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_appInterface"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_presentLoginUI"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_launchAppInterface</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_loginButton -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_loginButton">
+        <efbo:isInterfaceOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tapLoginButton"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_loginButton</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_loginInterfaceUI -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_loginInterfaceUI">
+        <efbo:hasElement rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_loginButton"/>
+        <efbo:hasElement rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_passwordField"/>
+        <efbo:hasElement rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_userNameField"/>
+        <efbo:isElementOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_appInterface"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_loginInterfaceUI</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_logininterfaceUI -->
+
+    <rdf:Description rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_logininterfaceUI">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_logininterfaceUI</rdfs:label>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_passwordField -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_passwordField">
+        <efbo:isInterfaceOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterPassword"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_passwordField</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_presentLoginUI -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_presentLoginUI">
+        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_loginInterfaceUI"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterPassword"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterUserName"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tapLoginButton"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_presentLoginUI</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_presentTryAgainUI -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_presentTryAgainUI">
+        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tryAgainUI"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_presentLoginUI"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_presentTryAgainUI</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_serverAgent -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_serverAgent">
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_serverInterface"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_serverAgent</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_serverInterface -->
+
+    <rdf:Description rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_serverInterface">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_serverInterface</rdfs:label>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tapAppIcon -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tapAppIcon">
+        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_appIcon"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_launchAppInterface"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_tapAppIcon</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tapLoginButton -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tapLoginButton">
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_verifyUserInfo"/>
+        <efbo:isFinalEventOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_function_1"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_tapLoginButton</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tryAgainUI -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tryAgainUI">
+        <efbo:hasElement rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_loginInterfaceUI"/>
+        <efbo:isElementOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_appInterface"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_tryAgainUI</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_userAgent -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_userAgent">
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_appIcon"/>
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_loginButton"/>
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_passwordField"/>
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_userNameField"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_userAgent</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_userNameField -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_userNameField">
+        <efbo:isInterfaceOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterUserName"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_userNameField</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_verifyUserInfo -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_verifyUserInfo">
+        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_serverInterface"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_presentTryAgainUI"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_welcomeTheUser"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_verifyUserInfo</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_welcomeLabel -->
+
+    <rdf:Description rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_welcomeLabel">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_welcomeLabel</rdfs:label>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_welcomeTheUser -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_welcomeTheUser">
+        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_welcomeUserUI"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#EVENT_END"/>
+        <efbo:isAlternateEventOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_presentTryAgainUI"/>
+        <efbo:isFinalEventOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_function_2"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_welcomeTheUser</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_welcomeUserUI -->
+
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_welcomeUserUI">
+        <efbo:hasElement rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_welcomeLabel"/>
+        <efbo:isElementOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_appInterface"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_welcomeUserUI</rdfs:label>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.3.20160319-0906) https://github.com/owlcs/owlapi -->
+
