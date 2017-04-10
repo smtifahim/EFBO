@@ -95,6 +95,7 @@ public class EFBOKnowledgeBaseGenerator
         
 	}
 	
+	
 	public void printOntologyInformation() 
 			throws OWLOntologyCreationException
 	{

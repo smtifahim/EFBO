@@ -1,3 +1,8 @@
 
-Location:/Users/fahimimam/git/EFBO/EFBO/Resources/Annotated-Sources/testing2.java
+Location:C:\Users\Fahim\git\EFBO-PROJECT\EFBO\Resources\Annotated-Sources\testing.java
+Line:3	"Tap Login Button" hasNextEvent "Welcome User"
+Line:5	"Welcome User"   hasNextEvent "Select Your Option"
+Line:8	"Select Your Option" hasNextEvent "Select Your Apps"
+
+Location:C:\Users\Fahim\git\EFBO-PROJECT\EFBO\Resources\Annotated-Sources\testing2.java
 Line:1	"Select a Menu" hasNextEvent "Display Menu Information"
