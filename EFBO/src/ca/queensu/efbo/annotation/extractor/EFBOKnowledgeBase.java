@@ -134,7 +134,13 @@ public class EFBOKnowledgeBase
 	{
 		String propertyName = "annotationText";
 		String exAnnotation = "Annotation: " + annotation.getAnnotatedText();
-		String fileLocation = "\nLocation: file://" + annotation.getFileLocation().replace("\\", "/");
+		String fileLocation = null;
+		
+		if (System.getProperty("os.name").toString().contains("Mac"))
+			 fileLocation = "\nLocation: file://" + annotation.getFileLocation();
+		else	
+			 fileLocation = "\nLocation: file://" + annotation.getFileLocation().replace("\\", "/");
+		
 		String lineNumber =   "\nLine Number: " + annotation.getLineNumber();
 		String annotationText = exAnnotation + fileLocation + lineNumber;
 		OWLLiteral owlLiteral = efboManager.getOWLDataFactory()
