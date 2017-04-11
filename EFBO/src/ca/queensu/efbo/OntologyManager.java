@@ -425,6 +425,20 @@ public void printAllClasses()
 			System.out.println(this.getLabel(i));		   	
 	}
  
+public Set<OWLAxiom> getOWLIndividualAxioms()
+{
+	Set<OWLAxiom> axioms = ontology.getAxioms();
+	Set<OWLAxiom> owlIndividualAxioms = new HashSet<OWLAxiom>();
+	for (OWLAxiom axiom : axioms)
+	{
+		if (axiom instanceof OWLIndividualAxiom)
+			owlIndividualAxioms.add(axiom);		
+	}
+	
+	return owlIndividualAxioms;
+}
+
+ 
 public void printAllAxioms() 
 	{ 
 		  Set<OWLAxiom> axioms = ontology.getAxioms();
@@ -463,7 +477,7 @@ public void printAllAxioms()
 			  { 
 			   String line; 
 			   line = owlAxiom.toString() + " TYPE: DataProperty"; 
-			   System.out.println(line); 
+			   System.out.println(line);
 			  } 
 			  
 		  for (OWLAxiom owlAxiom : objectPropertyAxioms) 

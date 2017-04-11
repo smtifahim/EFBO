@@ -10,7 +10,6 @@
 //@EFBO: 	_presentLoginUI hasNextEvent _enterUserName
 //@EFBO: 	_presentLoginUI hasNextEvent _enterPassword
 //@EFBO: _presentLoginUI hasNextEvent _tapLoginButton
-//@EFBO: _presentLoginUI hasTimePoint 2
 //@EFBO:   _tapLoginButton hasNextEvent _verifyUserInfo
 //@EFBO: _tapLoginButton isFinalEventOf _function_1
 //@EFBO: _function_2 hasInitialEvent _verifyUserInfo
@@ -18,6 +17,8 @@
 //@EFBO:  		_presentTryAgainUI hasNextEvent _presentLoginUI
 //@EFBO:       _verifyUserInfo hasNextEvent _welcomeTheUser
 //@EFBO: _welcomeTheUser isAlternateEventOf _presentTryAgainUI
+//@EFBO: _welcomeTheUser hasTimePoint 2
+//@EFBO: _presentTryAgainUI hasTimePoint 2
 //@EFBO: 		_welcomeTheUser hasNextEvent EVENT_END
 //@EFBO: _welcomeTheUser isFinalEventOf _function_2
 		

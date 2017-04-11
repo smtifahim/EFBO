@@ -76,17 +76,21 @@
 
     <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterPassword -->
 
-    <rdf:Description rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterPassword">
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterPassword">
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tapLoginButton"/>
+        <efbo:hasTimePoint rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</efbo:hasTimePoint>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_enterPassword</rdfs:label>
-    </rdf:Description>
+    </owl:NamedIndividual>
     
 
 
     <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterUserName -->
 
-    <rdf:Description rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterUserName">
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterUserName">
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterPassword"/>
+        <efbo:hasTimePoint rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</efbo:hasTimePoint>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_enterUserName</rdfs:label>
-    </rdf:Description>
+    </owl:NamedIndividual>
     
 
 
@@ -113,6 +117,7 @@
     <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_launchAppInterface">
         <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_appInterface"/>
         <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_presentLoginUI"/>
+        <efbo:hasTimePoint rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</efbo:hasTimePoint>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_launchAppInterface</rdfs:label>
     </owl:NamedIndividual>
     
@@ -160,10 +165,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_presentLoginUI">
         <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_loginInterfaceUI"/>
-        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterPassword"/>
         <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterUserName"/>
-        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tapLoginButton"/>
-        <efbo:hasTimePoint rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</efbo:hasTimePoint>
+        <efbo:hasTimePoint rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</efbo:hasTimePoint>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_presentLoginUI</rdfs:label>
     </owl:NamedIndividual>
     
@@ -174,6 +177,7 @@
     <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_presentTryAgainUI">
         <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tryAgainUI"/>
         <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_presentLoginUI"/>
+        <efbo:hasTimePoint rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9</efbo:hasTimePoint>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_presentTryAgainUI</rdfs:label>
     </owl:NamedIndividual>
     
@@ -201,6 +205,7 @@
     <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tapAppIcon">
         <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_appIcon"/>
         <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_launchAppInterface"/>
+        <efbo:hasTimePoint rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</efbo:hasTimePoint>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_tapAppIcon</rdfs:label>
     </owl:NamedIndividual>
     
@@ -211,6 +216,7 @@
     <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tapLoginButton">
         <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_verifyUserInfo"/>
         <efbo:isFinalEventOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_function_1"/>
+        <efbo:hasTimePoint rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</efbo:hasTimePoint>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_tapLoginButton</rdfs:label>
     </owl:NamedIndividual>
     
@@ -253,6 +259,7 @@
         <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_serverInterface"/>
         <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_presentTryAgainUI"/>
         <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_welcomeTheUser"/>
+        <efbo:hasTimePoint rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</efbo:hasTimePoint>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_verifyUserInfo</rdfs:label>
     </owl:NamedIndividual>
     
@@ -273,6 +280,7 @@
         <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#EVENT_END"/>
         <efbo:isAlternateEventOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_presentTryAgainUI"/>
         <efbo:isFinalEventOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_function_2"/>
+        <efbo:hasTimePoint rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9</efbo:hasTimePoint>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_welcomeTheUser</rdfs:label>
     </owl:NamedIndividual>
     

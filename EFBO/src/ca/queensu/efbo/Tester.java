@@ -19,6 +19,8 @@ public class Tester
 		efboKBGenerator1.processExtractedAnnotations(annotations);
 		efboKBGenerator1.getEFBOManager().printOntologyMetrics();
 		efboKBGenerator1.getEFBOManager().printAllIndividuals();
+		//efboKBGenerator1.getEFBOManager().printAllAxioms();
+		
 		System.exit(1);
 	
 	}

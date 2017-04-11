@@ -6,9 +6,16 @@ package ca.queensu.efbo.annotation.extractor;
 import java.io.File;
 //import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 import org.semanticweb.owlapi.io.StreamDocumentTarget;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAxiom;
+import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataProperty;
+import org.semanticweb.owlapi.model.OWLIndividualAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
@@ -75,6 +82,9 @@ public class EFBOKnowledgeBase
 			this.setEFBOKnowledgeBase(a);
 			//subID += 1; objID += 1;
 		}
+		
+		this.setEFBONextEventProperties(annotations);
+				
 		this.saveEFBOKnowledgeBase();	
 	}
 	
@@ -133,6 +143,47 @@ public class EFBOKnowledgeBase
 		
 	}
 	
+	private void setEFBONextEventProperties(ArrayList<Annotation> annotations)
+	{
+		OWLNamedIndividual event1 = null; OWLNamedIndividual event2 = null;
+		
+		OWLObjectProperty hasNextEvent = null;
+		hasNextEvent = efboManager.getOWLObjectProperty(EFBO_CORE_URI, "hasNextEvent");
+		
+		OWLDataFactory odf = efboManager.getOWLDataFactory();
+		
+		// to hold the mapping between a set of events and their corresponding time points.
+		Map<String, Integer> mapEventTime = new HashMap <String, Integer>();
+		
+		for (Annotation a: annotations)
+			if (a.getPredicate().equals("hasTimePoint"))
+				mapEventTime.put(a.getSubject(), Integer.parseInt(a.getObject()));	
+		
+		int timePoint=0;
+			
+		System.out.println("List of Events#####");
+		for (Map.Entry<String, Integer> e1 : mapEventTime.entrySet())
+		{
+		    timePoint = e1.getValue();
+		    	for (Map.Entry<String, Integer> e2 : mapEventTime.entrySet())
+		    		if (e2.getValue()==timePoint+1)
+		    		{
+		    			IRI event1IRI = IRI.create(EFBO_KB_URI + "#" + e1.getKey());
+		    			event1 = odf.getOWLNamedIndividual(event1IRI);
+		    			
+		    			IRI event2IRI = IRI.create(EFBO_KB_URI + "#" + e2.getKey());
+		    			event2 = odf.getOWLNamedIndividual(event2IRI);
+		    			
+		    			efboManager.addOWLObjectPropertyAxiom(event1, hasNextEvent, event2);
+		    			System.out.println(e1.getKey() + " hasNextEvent " + e2.getKey());
+		    		}
+		}
+		        
+   }
+	
+
+	
+
 	public void printOntologyInformation() 
 			throws OWLOntologyCreationException
 	{
