@@ -136,8 +136,9 @@ public void addOWLAnnotationPropertyAxiom(OWLNamedIndividual subjectIndividual,
 		    							  OWLAnnotationProperty property, 
 		    							  OWLAnnotationValue annotationValue)
 {
+	 OWLAnnotationSubject subject = subjectIndividual.getIRI();
 	 OWLAnnotationAssertionAxiom axiom = null;
-	 axiom = factory.getOWLAnnotationAssertionAxiom(property, (OWLAnnotationSubject) subjectIndividual, annotationValue);
+	 axiom = factory.getOWLAnnotationAssertionAxiom(property, subject, annotationValue);
 	 AddAxiom addAxiom = new AddAxiom(ontology, axiom);
 	 manager.applyChange(addAxiom);
 }
