@@ -40,6 +40,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#EVENT_START">
         <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tapAppIcon"/>
+        <efbo:hasTimePoint rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</efbo:hasTimePoint>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVENT_START</rdfs:label>
     </owl:NamedIndividual>
     
@@ -162,6 +163,7 @@
         <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterPassword"/>
         <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_enterUserName"/>
         <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl#_tapLoginButton"/>
+        <efbo:hasTimePoint rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</efbo:hasTimePoint>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">_presentLoginUI</rdfs:label>
     </owl:NamedIndividual>
     

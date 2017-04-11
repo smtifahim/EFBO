@@ -3,12 +3,14 @@
 
 //DECLARATIONS OF THE SEQUENCE OF EVENTS.
 //@EFBO: EVENT_START hasNextEvent _tapAppIcon
+//@EFBO: EVENT_START hasTimePoint 1
 //@EFBO: _function_1 hasInitialEvent _tapAppIcon
 //@EFBO: _tapAppIcon hasNextEvent _launchAppInterface
 //@EFBO:   _launchAppInterface hasNextEvent _presentLoginUI
 //@EFBO: 	_presentLoginUI hasNextEvent _enterUserName
 //@EFBO: 	_presentLoginUI hasNextEvent _enterPassword
 //@EFBO: _presentLoginUI hasNextEvent _tapLoginButton
+//@EFBO: _presentLoginUI hasTimePoint 2
 //@EFBO:   _tapLoginButton hasNextEvent _verifyUserInfo
 //@EFBO: _tapLoginButton isFinalEventOf _function_1
 //@EFBO: _function_2 hasInitialEvent _verifyUserInfo

@@ -8,6 +8,8 @@ import java.io.File;
 import java.util.ArrayList;
 import org.semanticweb.owlapi.io.StreamDocumentTarget;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLDataProperty;
+import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -21,7 +23,7 @@ import ca.queensu.efbo.OntologyManager;
  *
  */
 
-public class EFBOKnowledgeBaseGenerator
+public class EFBOKnowledgeBase
 {
 	private static final String 
 		EFBO_CORE_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo.owl";
@@ -39,7 +41,7 @@ public class EFBOKnowledgeBaseGenerator
 	private String systemID = null;
 	private String systemName = null;
 	
-	public EFBOKnowledgeBaseGenerator()
+	public EFBOKnowledgeBase()
 				   throws OWLOntologyCreationException, OWLOntologyStorageException 
 	{
 		this.systemName = "EFBO-KB-Test";
@@ -70,20 +72,23 @@ public class EFBOKnowledgeBaseGenerator
 		
 		for (Annotation a: annotations)
 		{
-			this.setEFBOAnnotation(a);
+			this.setEFBOKnowledgeBase(a);
 			//subID += 1; objID += 1;
 		}
 		this.saveEFBOKnowledgeBase();	
 	}
 	
-	//Set an annotation for the EFBO KBase.
-	private void setEFBOAnnotation(Annotation annotation)
+	//Set an annotation line of type Annotation into an EFBO instances and relations for the KBase.
+	private void setEFBOKnowledgeBase(Annotation annotation)
 	{
 		// System.out.println(a.getFileLocation());
 		// System.out.println(a.getLineNumber());
+		
+		if (!annotation.getPredicate().equals("hasTimePoint"))
+		{
 		String subject = annotation.getSubject();
 		//String subjectID = "IND_" + subID; //for now temp.
-		String subjectID = subject.replaceAll("\\s+", ""); 
+		String subjectID = subject.replaceAll("\\s+", ""); //remove all the spaces (if any) within the name of the entity.
 		
 		String object = annotation.getObject();
 		//String objectID = "IND_" + objID; //for now temp.
@@ -102,10 +107,31 @@ public class EFBOKnowledgeBaseGenerator
         OWLObjectProperty objectProperty = null;
         objectProperty = efboManager.getOWLObjectProperty(propertyURI, propertyName);
         
-        efboManager.setOWLPropertyAxiom(owlIndividualSubject, objectProperty, owlIndividualObject);
-        
+        efboManager.addOWLObjectPropertyAxiom(owlIndividualSubject, objectProperty, owlIndividualObject);
+		}
+		
+		if (annotation.getPredicate().equals("hasTimePoint"))
+			{this.setEFBOEventTimePoint(annotation);}
+	
 	}
 	
+	//Set an annotation that contains hasTimePoint data property into into the EFBO KBase.
+	private void setEFBOEventTimePoint(Annotation annotation)
+	{
+		OWLDataProperty dataProperty = null;
+		OWLNamedIndividual owlIndividualSubject = null;
+	
+		String subject = annotation.getSubject();
+		String subjectID = subject.replaceAll("\\s+", ""); //remove all the spaces (if any) within the name of the entity.
+		owlIndividualSubject = efboManager.addOWLNamedIndividual(EFBO_KB_URI, subjectID, subject);
+		
+		int timePoint = Integer.parseInt(annotation.getObject());
+		OWLLiteral owlLiteral = efboManager.getOWLDataFactory().getOWLLiteral(timePoint);		
+					
+		dataProperty = efboManager.getOWLDataProperty(EFBO_CORE_URI, "hasTimePoint");
+		efboManager.addOWLDataPropertyAxiom(owlIndividualSubject, dataProperty, owlLiteral);		
+		
+	}
 	
 	public void printOntologyInformation() 
 			throws OWLOntologyCreationException

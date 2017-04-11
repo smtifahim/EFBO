@@ -14,14 +14,17 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddAxiom; 
 import org.semanticweb.owlapi.model.IRI; 
 import org.semanticweb.owlapi.model.OWLAnnotation; 
-import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom; 
+import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
+import org.semanticweb.owlapi.model.OWLAnnotationSubject;
 import org.semanticweb.owlapi.model.OWLAnnotationValue;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassAxiom;
 import org.semanticweb.owlapi.model.OWLClassExpression; 
 import org.semanticweb.owlapi.model.OWLDataFactory;
+import org.semanticweb.owlapi.model.OWLDataProperty;
+import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLDataPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLIndividualAxiom;
@@ -122,25 +125,35 @@ public OWLNamedIndividual addOWLNamedIndividual(String individualURI,
 	return namedIndividual;
  }
 
- 
-//Returns an object property from an existing ontology.
-public OWLObjectProperty getOWLObjectProperty (String propertyURI, String propertyName)
- {
-	 IRI propertyIRI = IRI.create(propertyURI + "#" + propertyName);
-	 return factory.getOWLObjectProperty(propertyIRI);
- }
-
-//Returns an annotation property from an existing ontology.
+//Returns an OWL annotation property from an existing ontology.
 public OWLAnnotationProperty getOWLAnnotationProperty (String propertyURI, String propertyName)
 {
 	 IRI propertyIRI = IRI.create(propertyURI + "#" + propertyName);
 	 return factory.getOWLAnnotationProperty(propertyIRI);
 }
+
+public void addOWLAnnotationPropertyAxiom(OWLNamedIndividual subjectIndividual, 
+		    							  OWLAnnotationProperty property, 
+		    							  OWLAnnotationValue annotationValue)
+{
+	 OWLAnnotationAssertionAxiom axiom = null;
+	 axiom = factory.getOWLAnnotationAssertionAxiom(property, (OWLAnnotationSubject) subjectIndividual, annotationValue);
+	 AddAxiom addAxiom = new AddAxiom(ontology, axiom);
+	 manager.applyChange(addAxiom);
+}
+
  
- //Assert object property axiom between two OWL named individuals.
-public void setOWLPropertyAxiom(OWLNamedIndividual subjectIndividual, 
-		 						OWLObjectProperty objectProperty, 
-		 						OWLNamedIndividual objectIndividual)
+//Returns an OWL object property from an existing ontology.
+public OWLObjectProperty getOWLObjectProperty (String propertyURI, String propertyName)
+{
+	 IRI propertyIRI = IRI.create(propertyURI + "#" + propertyName);
+	 return factory.getOWLObjectProperty(propertyIRI);
+}
+
+//Assert an OWL object property axiom between two OWL named individuals.
+public void addOWLObjectPropertyAxiom(OWLNamedIndividual subjectIndividual, 
+		 							  OWLObjectProperty objectProperty, 
+		 						      OWLNamedIndividual objectIndividual)
  {
 	 OWLObjectPropertyAssertionAxiom axiom = null;
 	 axiom = factory.getOWLObjectPropertyAssertionAxiom
@@ -148,6 +161,25 @@ public void setOWLPropertyAxiom(OWLNamedIndividual subjectIndividual,
 	 AddAxiom addAxiom = new AddAxiom(ontology, axiom);
 	 manager.applyChange(addAxiom);
  }
+
+//Returns an OWL data property from an existing ontology.
+public OWLDataProperty getOWLDataProperty (String propertyURI, String propertyName)
+{
+	 IRI propertyIRI = IRI.create(propertyURI + "#" + propertyName);
+	 return factory.getOWLDataProperty(propertyIRI);
+}
+
+//Assert an OWL data property axiom between an OWL named individual and a data value.
+public void addOWLDataPropertyAxiom(OWLNamedIndividual subjectIndividual, 
+		 						    OWLDataProperty dataProperty, 
+		 						    OWLLiteral dataValue)
+{
+	 OWLDataPropertyAssertionAxiom axiom = null;
+	 axiom = factory.getOWLDataPropertyAssertionAxiom(dataProperty, subjectIndividual, dataValue);
+		 
+	 AddAxiom addAxiom = new AddAxiom(ontology, axiom);
+	 manager.applyChange(addAxiom);
+}
 
 public OWLOntology getLoadedOntology()
  {
@@ -287,6 +319,11 @@ public String extractOWLClassId(OWLEntity cls)
  { 
   return ontologyName; 
  } 
+ 
+ public OWLDataFactory getOWLDataFactory()
+ {
+	 return factory;
+ }
  
  public String getOntologyFilePath() 
  { 

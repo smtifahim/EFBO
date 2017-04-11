@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import ca.queensu.efbo.annotation.extractor.Annotation;
 import ca.queensu.efbo.annotation.extractor.AnnotationExtractor;
-import ca.queensu.efbo.annotation.extractor.EFBOKnowledgeBaseGenerator;
+import ca.queensu.efbo.annotation.extractor.EFBOKnowledgeBase;
 
 
 public class Tester 
@@ -15,7 +15,7 @@ public class Tester
 		AnnotationExtractor annot = new AnnotationExtractor();
 		ArrayList <Annotation> annotations = annot.getExtractedAnnotations();
 		
-		EFBOKnowledgeBaseGenerator efboKBGenerator1 = new EFBOKnowledgeBaseGenerator();
+		EFBOKnowledgeBase efboKBGenerator1 = new EFBOKnowledgeBase();
 		efboKBGenerator1.processExtractedAnnotations(annotations);
 		efboKBGenerator1.getEFBOManager().printOntologyMetrics();
 		efboKBGenerator1.getEFBOManager().printAllIndividuals();
