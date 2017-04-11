@@ -168,11 +168,10 @@ public class EFBOKnowledgeBase
 	private void setEFBONextEventProperties(ArrayList<Annotation> annotations)
 	{
 		OWLNamedIndividual event1 = null; OWLNamedIndividual event2 = null;
-		
 		OWLObjectProperty hasNextEvent = null;
 		hasNextEvent = efboManager.getOWLObjectProperty(EFBO_CORE_URI, "hasNextEvent");
-		
 		OWLDataFactory odf = efboManager.getOWLDataFactory();
+		int timePoint=0;
 		
 		// to hold the mapping between a set of events and their corresponding time points.
 		Map<String, Integer> mapEventTime = new HashMap <String, Integer>();
@@ -181,8 +180,6 @@ public class EFBOKnowledgeBase
 			if (a.getPredicate().equals("hasTimePoint"))
 				mapEventTime.put(a.getSubject(), Integer.parseInt(a.getObject()));	
 		
-		int timePoint=0;
-			
 		//System.out.println("List of Events#####");
 		for (Map.Entry<String, Integer> e1 : mapEventTime.entrySet())
 		{
