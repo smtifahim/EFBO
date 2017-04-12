@@ -50,7 +50,7 @@ public class OntologyManager
  private OWLOntology ontology = null;
  private OWLOntologyManager manager = null; 
   
- private Map<String, OWLClass> hashToRetrieveClass = new HashMap<String, OWLClass>();
+ private Map<String, OWLClass> owlClassIdMap = new HashMap<String, OWLClass>();
  private  Set<OWLNamedIndividual> owlIndividuals = new HashSet<OWLNamedIndividual>(); 
  
  public OntologyManager()
@@ -97,12 +97,12 @@ public class OntologyManager
  { 
   for (OWLClass cls : ontology.getClassesInSignature()) 
   { 
-   hashToRetrieveClass.put(getLabel(cls).trim().toLowerCase(), cls); 
+   owlClassIdMap.put(getLabel(cls).trim().toLowerCase(), cls); 
   } 
  } 
  
-//To add an OWL individual from an individual's id, label, and URI strings to the ontology.
-//The method also returns the individual as OWLNamedIndividual object to its caller.  
+//To add an OWL individual from an individual's id, label, and URI strings to the kbase ontology.
+//The method also returns the added individual as OWLNamedIndividual object to its caller.  
 public OWLNamedIndividual addOWLNamedIndividual(String individualURI, 
 								  String individualID,
 								  String individualLabel)
@@ -119,11 +119,18 @@ public OWLNamedIndividual addOWLNamedIndividual(String individualURI,
 	OWLAxiom axiom = factory.getOWLAnnotationAssertionAxiom(namedIndividual.getIRI(), label);
 	AddAxiom addAxiom = new AddAxiom(ontology, axiom);
 	manager.applyChange(addAxiom);
-	
 	owlIndividuals.add(namedIndividual);
 	
 	return namedIndividual;
  }
+
+//To add a named individual to a named class.
+public void addOWLNamedIndividual(OWLNamedIndividual namedIndividual, OWLClass namedClass)
+{
+	OWLAxiom axiom = factory.getOWLClassAssertionAxiom(namedClass, namedIndividual);
+	AddAxiom addAxiom = new AddAxiom(ontology, axiom);
+	manager.applyChange(addAxiom);	
+}
 
 //Returns an OWL annotation property from an existing ontology.
 public OWLAnnotationProperty getOWLAnnotationProperty (String propertyURI, String propertyName)
@@ -333,7 +340,7 @@ public String extractOWLClassId(OWLEntity cls)
  
  public Map<String, OWLClass> getHashToRetrieveClass() 
  { 
-  return hashToRetrieveClass; 
+  return owlClassIdMap; 
  } 
  
  public Set<OWLSubClassOfAxiom> getSubClassAxiomsForSuperClass(OWLClass cls) 

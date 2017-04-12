@@ -4,15 +4,13 @@
 package ca.queensu.efbo.annotation.extractor;
 
 import java.io.File;
-//import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.openrdf.model.URI;
 import org.semanticweb.owlapi.io.StreamDocumentTarget;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
+import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLLiteral;
@@ -47,16 +45,32 @@ public class EFBOKnowledgeBase
 	private String systemID = null;
 	private String systemName = null;
 
-	
-	
-	public EFBOKnowledgeBase()
+	//Default constructor.
+	public EFBOKnowledgeBase(String systemID, String systemName)
 				   throws OWLOntologyCreationException, OWLOntologyStorageException 
 	{
-		this.systemName = "EFBO-KB-Test";
+		this.systemID = systemID;
+		this.systemName = systemName;
 		this.efboManager = new OntologyManager();
-        this.efboManager.loadOntology(systemName, EFBO_KB_URI);
+        this.efboManager.loadOntology(systemID, EFBO_KB_URI);
         this.efboKBase = efboManager.getLoadedOntology();
+        this.setSystemEntity();
    	}
+	
+	
+	//set the source system information from which the annotations 
+	//are extracted.
+	public void setSystemEntity()
+	{
+		OWLNamedIndividual owlNamedIndividual = null;
+		owlNamedIndividual = efboManager.addOWLNamedIndividual(EFBO_KB_URI, systemID, systemName);
+		
+		IRI classIRI = IRI.create(EFBO_CORE_URI + "#" + "System");		
+		OWLClass systemClass = efboManager.getOWLDataFactory().getOWLClass(classIRI);
+		
+		efboManager.addOWLNamedIndividual(owlNamedIndividual, systemClass);
+		
+	}
 	
 	private void saveEFBOKnowledgeBase()
 			throws OWLOntologyCreationException,
@@ -65,22 +79,22 @@ public class EFBOKnowledgeBase
         efboKBase.getOWLOntologyManager()
         		 .saveOntology(efboKBase, new StreamDocumentTarget(System.out));
        
-        File defaultSaveLocation = new File(kBaseFileLocation + "/" + systemName + ".owl");
+        File defaultSaveLocation = new File(kBaseFileLocation + "/" + systemName
+        								   + "/" + systemID + ".owl");
         
         efboKBase.getOWLOntologyManager().saveOntology(efboKBase, IRI.create(defaultSaveLocation.toURI()));
 	}
 	
 
 	public void processExtractedAnnotations(ArrayList<Annotation> annotations)
-			throws OWLOntologyCreationException,
-			OWLOntologyStorageException 
+			throws OWLOntologyCreationException, OWLOntologyStorageException 
 	{
 		//int subID = 1001;
 		//int objID = 2001;
 		
-		for (Annotation a: annotations)
+		for (Annotation exAnnotation: annotations)
 		{
-			this.setEFBOKnowledgeBase(a);
+			this.setEFBOKnowledgeBase(exAnnotation);
 			//subID += 1; objID += 1;
 		}
 		
@@ -159,7 +173,8 @@ public class EFBOKnowledgeBase
 		OWLNamedIndividual owlIndividualSubject = null;
 	
 		String subject = annotation.getSubject();
-		String subjectID = subject.replaceAll("\\s+", ""); //remove all the spaces (if any) within the name of the entity.
+		//remove all the spaces (if any) within the name of the entity.
+		String subjectID = subject.replaceAll("\\s+", ""); 
 		owlIndividualSubject = efboManager.addOWLNamedIndividual(EFBO_KB_URI, subjectID, subject);
 		this.setEFBOAnnotationText(owlIndividualSubject, annotation);
 		
