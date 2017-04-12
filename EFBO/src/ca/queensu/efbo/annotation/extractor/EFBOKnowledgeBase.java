@@ -46,6 +46,8 @@ public class EFBOKnowledgeBase
 	private OntologyManager efboManager = null;
 	private String systemID = null;
 	private String systemName = null;
+
+	
 	
 	public EFBOKnowledgeBase()
 				   throws OWLOntologyCreationException, OWLOntologyStorageException 
@@ -91,14 +93,12 @@ public class EFBOKnowledgeBase
 	//Set an annotation line of type Annotation into an EFBO instances and relations for the KBase.
 	private void setEFBOKnowledgeBase(Annotation annotation)
 	{
-		// System.out.println(a.getFileLocation());
-		// System.out.println(a.getLineNumber());
-		
 		if (!annotation.getPredicate().equals("hasTimePoint"))
 		{
 			String subject = annotation.getSubject();
 			//String subjectID = "IND_" + subID; //for now temp.
-			String subjectID = subject.replaceAll("\\s+", ""); //remove all the spaces (if any) within the name of the entity.
+			//remove all the spaces (if any) within the name of the entity.
+			String subjectID = subject.replaceAll("\\s+", "");
 			
 			String object = annotation.getObject();
 			//String objectID = "IND_" + objID; //for now temp.
@@ -134,15 +134,15 @@ public class EFBOKnowledgeBase
 	{
 		String propertyName = "annotationText";
 		String exAnnotation = "Annotation: " + annotation.getAnnotatedText();
-		String fileLocation = null;
+		String filePath = annotation.getFileLocation();
 		
-		if (System.getProperty("os.name").toString().contains("Mac"))
-			 fileLocation = "\nLocation: file://" + annotation.getFileLocation();
-		else	
-			 fileLocation = "\nLocation: file://" + annotation.getFileLocation().replace("\\", "/");
+		if (isCurrentOS("Windows"))
+			filePath = "\nLocation: file://" + filePath.replace("\\", "/"); 
+		else
+			filePath = "\nLocation: file://" + filePath;
 		
 		String lineNumber =   "\nLine Number: " + annotation.getLineNumber();
-		String annotationText = exAnnotation + fileLocation + lineNumber;
+		String annotationText = exAnnotation + filePath + lineNumber;
 		OWLLiteral owlLiteral = efboManager.getOWLDataFactory()
 										   .getOWLLiteral(annotationText);
 		
@@ -206,6 +206,16 @@ public class EFBOKnowledgeBase
 		        
    } // End of setEFBONextEventProperties(ArrayList<Annotation> annotations).
 	
+
+
+// To fix the file path formats according to the OS.
+public boolean isCurrentOS (String osName)
+{
+	String runningOSName = System.getProperty("os.name").toString();
+	if (runningOSName.contains(osName))
+		return true;
+	return false;
+}
 	
  public OWLOntology getEFBOKnowledgebase()
 	{

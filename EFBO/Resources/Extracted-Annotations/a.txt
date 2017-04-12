@@ -1,5 +1,5 @@
 
-Location:/Users/fahimimam/git/EFBO-MAC/EFBO/Resources/Annotated-Sources/testing2.java
+Location:C:\Users\Fahim\git\EFBO-PC\EFBO\Resources\Annotated-Sources\testing2.java
 Line:5	EVENT_START hasTimePoint 1
 Line:6	_function_1 hasInitialEvent _tapAppIcon
 Line:7	_tapAppIcon hasTimePoint 2
