@@ -14,6 +14,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+
+import ca.queensu.efbo.OntologyManager;
+
 /**
  * @author Fahim Imam.
  *
@@ -24,8 +30,13 @@ public class AnnotationExtractor
 	private File[] selectedFiles;
 	private File extractedAnnotationsFile;
 	private ArrayList<Annotation> annotations;
+	private OntologyManager efboCoreManager = null;
+	private OWLOntology efboCore = null;
 	
-	public AnnotationExtractor()
+	private static final String 
+	EFBO_CORE_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo.owl";
+	
+	public AnnotationExtractor() throws Exception
 	{	  
 		  final String defaultFilePath = System.getProperty("user.dir") 
 				  					   + "/Resources/Annotated-Sources";
@@ -42,12 +53,24 @@ public class AnnotationExtractor
 					  
 		  else
 		  {
+			  this.loadEFBOCoreOntology();
 			  annotations = new ArrayList<Annotation>();
 			  this.processSelectedFiles(selectedFiles);
 		  } 
 		  
 	} //End of method public AnnotationExtractor().
    	
+	
+    // Load the core EFBO which will be used to check 
+    // the validity of the property names 
+    // of the source annotations.
+	private void loadEFBOCoreOntology() throws OWLOntologyCreationException
+	{
+		this.efboCoreManager = new OntologyManager();
+	    this.efboCoreManager.loadOntology("EFBO-CORE", EFBO_CORE_URI);
+	    this.efboCore = efboCoreManager.getLoadedOntology();
+	}
+	
 	public ArrayList<Annotation> getExtractedAnnotations()
 	{
 		return this.annotations;
@@ -84,7 +107,8 @@ public class AnnotationExtractor
 					  	 currentAnnotation.setSubject(parsedAnnotations[0]);
 					  	 currentAnnotation.setPredicate(parsedAnnotations[1]);
 					  	 currentAnnotation.setObject(parsedAnnotations[2]);
-					  	 annotations.add(currentAnnotation);					  	 
+					  	 if  (propertyNameDoesExist(currentAnnotation))
+					  		 annotations.add(currentAnnotation);				  	 
 					    }
 					  	else
 					  	{
@@ -150,6 +174,34 @@ public class AnnotationExtractor
 		  return null; // if double-quotes did not match properly.
 		}
 
+	
+	// To check if the property name in the annotation does correspond to the
+	// property name within the EFBO core ontology.
+	private boolean propertyNameDoesExist(Annotation annotation)
+	{
+		String propertyName = annotation.getPredicate();
+		
+		if (propertyName.equals("hasTimePoint"))
+			return true;
+		
+		IRI propertyIRI = IRI.create(EFBO_CORE_URI + "#" + propertyName);
+		
+		if (efboCore.containsObjectPropertyInSignature(propertyIRI))
+			return true;
+		
+		else
+		{
+			String message = "\nERROR: Non-existing property name: " + propertyName
+					       + "\nPlease check your annotation @Line: " + annotation.getLineNumber()
+					       + "\nLocation: " + annotation.getFileLocation();
+			
+			System.out.println(message);
+			JOptionPane.showMessageDialog(null, message, "ERROR", JOptionPane.ERROR_MESSAGE);
+			System.exit(1);		    
+		}
+		return false;
+	}
+	
 	private void showParsingErrorMessage(int lineNumber, String fileLocation)
 	{
 	  	 String messageParsingFailed = "\nERROR! Parsing Annotation Failed."
@@ -173,7 +225,7 @@ public class AnnotationExtractor
 		// parent component of the dialog
 		JFrame fileSaveFrame = new JFrame();
 		final String defaultFilePath = System.getProperty("user.dir") 
-  							  		+ "/Resources/Extracted-Annotations"; 
+  							  		 + "/Resources/Extracted-Annotations"; 
 		JFileChooser fileChooser = new JFileChooser(new File(defaultFilePath));
 		fileChooser.setDialogTitle("Specify the file name to save your annotations");   
 		 
@@ -220,7 +272,7 @@ public class AnnotationExtractor
 		} //End of if (userSelection == JFileChooser.APPROVE_OPTION) 
 	} //End of saveExtractedAnnotations method.
 	
-	private void processSelectedFiles(File[] selectedFiles)
+	private void processSelectedFiles(File[] selectedFiles) throws Exception
 	{
 		for (int i = 0; i <selectedFiles.length; i++)
 		  {
@@ -254,7 +306,7 @@ public class AnnotationExtractor
 		  	}
 	}
 	
-	private void showNoAnnotationFoundMessage()
+	private void showNoAnnotationFoundMessage() throws Exception
 	{
 		  String messageNoAnnotationFound = "No Annotation Found within Selected Source(s)."
 				  + "\nPlease Try Again.";
@@ -273,7 +325,7 @@ public class AnnotationExtractor
 	} //End of method showNoAnnotationFoundMessage().
 	
 	
-	private void showNoFileSelectedMessage()
+	private void showNoFileSelectedMessage() throws Exception
 	{
 		 String messageFileNotSelected = "No File(s) Were Selected."
 					+ "\nPlease Try Again.";

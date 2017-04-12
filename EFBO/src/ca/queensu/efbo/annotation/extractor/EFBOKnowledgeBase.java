@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.JOptionPane;
-
 import org.semanticweb.owlapi.io.StreamDocumentTarget;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
@@ -44,9 +42,7 @@ public class EFBOKnowledgeBase
 			   			  + "/Resources/Extracted-Kbases";  
 	
 	private OWLOntology efboKBase = null;
-	private OWLOntology efboCore = null;
 	private OntologyManager efboKBaseManager = null;
-	private OntologyManager efboCoreManager = null;
 	private String systemID = null;
 	private String systemName = null;
 
@@ -60,20 +56,8 @@ public class EFBOKnowledgeBase
         this.efboKBaseManager.loadOntology(systemID, EFBO_KB_URI);
         this.efboKBase = efboKBaseManager.getLoadedOntology();
         this.setSystemEntity();
-        this.loadEFBOCoreOntology();        
         
    	}
-	
-    // Load the core EFBO which will be used to check 
-    // the validity of the property names 
-    // of the source annotations.
-	private void loadEFBOCoreOntology() throws OWLOntologyCreationException
-	{
-		this.efboCoreManager = new OntologyManager();
-	    this.efboCoreManager.loadOntology("EFBO-CORE", EFBO_CORE_URI);
-	    this.efboCore = efboCoreManager.getLoadedOntology();
-	}
-	
 	
 	//set the source system information from which the annotations 
 	//are extracted.
@@ -125,9 +109,7 @@ public class EFBOKnowledgeBase
 		
 		if (!propertyName.equals("hasTimePoint"))
 		{
-	      if (propertyNameDoesExist(annotation))
-			{
-				String whereDeclared = Paths.get(annotation.getFileLocation())
+	      		String whereDeclared = Paths.get(annotation.getFileLocation())
 	  										.getFileName().toString();
 				
 				String subject = annotation.getSubject();
@@ -155,8 +137,8 @@ public class EFBOKnowledgeBase
 		        objectProperty = efboKBaseManager.getOWLObjectProperty(EFBO_CORE_URI, propertyName);
 		        
 		        efboKBaseManager.addOWLObjectPropertyAxiom(owlIndividualSubject, objectProperty, owlIndividualObject);
-			}
-		}//End of if (propertyNameDoesExist(propertyName)).
+			
+		} //End of if (!propertyName.equals("hasTimePoint")).
 		
 		if (propertyName.equals("hasTimePoint"))
 			{this.setEFBOEventTimePoint(annotation);}
@@ -184,28 +166,6 @@ public class EFBOKnowledgeBase
 		OWLAnnotationProperty efboAnnotation = null;		
 		efboAnnotation = efboKBaseManager.getOWLAnnotationProperty(EFBO_CORE_URI, propertyName);
 		efboKBaseManager.addOWLAnnotationPropertyAxiom(individual, efboAnnotation, owlLiteral);
-	}
-	
-	// To check if the property name in the annotation does correspond to the
-	// property name within the EFBO core ontology.
-	private boolean propertyNameDoesExist(Annotation annotation)
-	{
-		String propertyName = annotation.getPredicate();
-		IRI propertyIRI = IRI.create(EFBO_CORE_URI + "#" + propertyName);
-		
-		if (efboCore.containsObjectPropertyInSignature(propertyIRI))
-			return true;
-		else
-		{
-			String message = "\nNon-existing property name: " + propertyName + "."
-					       + "\nPlease check your annotation @Line: " + annotation.getLineNumber()
-					       + "\nLocation: " + annotation.getFileLocation();
-			
-			System.out.println(message);
-			JOptionPane.showMessageDialog(null, message, "ERROR", JOptionPane.ERROR_MESSAGE);
-			System.exit(1);		    
-		}
-		return false;
 	}
 	
 	//Set an annotation that contains hasTimePoint data property into into the EFBO KBase.
