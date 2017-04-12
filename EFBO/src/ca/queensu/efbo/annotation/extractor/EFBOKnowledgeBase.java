@@ -4,6 +4,7 @@
 package ca.queensu.efbo.annotation.extractor;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -89,13 +90,9 @@ public class EFBOKnowledgeBase
 	public void processExtractedAnnotations(ArrayList<Annotation> annotations)
 			throws OWLOntologyCreationException, OWLOntologyStorageException 
 	{
-		//int subID = 1001;
-		//int objID = 2001;
-		
 		for (Annotation exAnnotation: annotations)
 		{
 			this.setEFBOKnowledgeBase(exAnnotation);
-			//subID += 1; objID += 1;
 		}
 		
 		// For the events that have associated Time Point.
@@ -109,19 +106,22 @@ public class EFBOKnowledgeBase
 	{
 		if (!annotation.getPredicate().equals("hasTimePoint"))
 		{
+			String whereDeclared = Paths.get(annotation.getFileLocation())
+  										.getFileName().toString();
+			
 			String subject = annotation.getSubject();
-			//String subjectID = "IND_" + subID; //for now temp.
+			
 			//remove all the spaces (if any) within the name of the entity.
 			String subjectID = subject.replaceAll("\\s+", "");
+				   subjectID = systemID + "." + whereDeclared + "." + subjectID;
 			
 			String object = annotation.getObject();
-			//String objectID = "IND_" + objID; //for now temp.
 			String objectID = object.replaceAll("\\s+", "");
+				   objectID = systemID + "." + whereDeclared + "." + objectID;
 			
 			String predicate = annotation.getPredicate();
 			String propertyName = predicate;
-	        //String propertyURI = EFBO_CORE_URI;
-			
+	        
 			OWLNamedIndividual owlIndividualSubject = null;
 			owlIndividualSubject = efboManager.addOWLNamedIndividual(EFBO_KB_URI, subjectID, subject);
 			this.setEFBOAnnotationText(owlIndividualSubject, annotation);
@@ -172,9 +172,14 @@ public class EFBOKnowledgeBase
 		OWLDataProperty dataProperty = null;
 		OWLNamedIndividual owlIndividualSubject = null;
 	
+		String whereDeclared = Paths.get(annotation.getFileLocation())
+				  					.getFileName().toString();
+		
 		String subject = annotation.getSubject();
 		//remove all the spaces (if any) within the name of the entity.
-		String subjectID = subject.replaceAll("\\s+", ""); 
+		String subjectID = subject.replaceAll("\\s+", "");
+		       subjectID = systemID + "." + whereDeclared + "." + subjectID;
+		
 		owlIndividualSubject = efboManager.addOWLNamedIndividual(EFBO_KB_URI, subjectID, subject);
 		this.setEFBOAnnotationText(owlIndividualSubject, annotation);
 		
