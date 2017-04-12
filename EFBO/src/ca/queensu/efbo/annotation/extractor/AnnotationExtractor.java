@@ -336,12 +336,12 @@ public class AnnotationExtractor
 			if (OKOption == JOptionPane.OK_OPTION)
 			{
 				System.out.println("> Try Again Request Accepted.");
-				new AnnotationExtractor();
+				//new AnnotationExtractor();
 			}
 			else
 			{
 				System.out.println("> Try Again Request Rejected.");
-				System.exit(1);
+				//System.exit(1);
 			}
 	} //End of method showNoFileSelectedMessage().
 
