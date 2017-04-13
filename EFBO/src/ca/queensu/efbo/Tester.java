@@ -13,7 +13,7 @@ public class Tester
 		
 		if (annotations.size()!=0)
 		{
-			KnowledgBaseExtractor efboKBGenerator1 = new KnowledgBaseExtractor("SYS-01", "Login System");
+			EFBOKnowledgBase efboKBGenerator1 = new EFBOKnowledgBase("SYS-01", "Login System");
 			efboKBGenerator1.processExtractedAnnotations(annotations);
 			efboKBGenerator1.getEFBOManager().printOntologyMetrics();
 			efboKBGenerator1.getEFBOManager().printAllIndividuals();

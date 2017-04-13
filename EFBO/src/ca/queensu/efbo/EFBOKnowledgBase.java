@@ -28,7 +28,7 @@ import org.semanticweb.owlapi.model.OWLOntologyStorageException;
  *
  */
 
-public class KnowledgBaseExtractor
+public class EFBOKnowledgBase
 {
 	private static final String 
 		EFBO_CORE_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo.owl";
@@ -47,7 +47,7 @@ public class KnowledgBaseExtractor
 	private String systemName = null;
 
 	//Default constructor.
-	public KnowledgBaseExtractor(String systemID, String systemName)
+	public EFBOKnowledgBase(String systemID, String systemName)
 				   throws OWLOntologyCreationException, OWLOntologyStorageException 
 	{
 		this.systemID = systemID;
