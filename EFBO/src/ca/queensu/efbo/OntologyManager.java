@@ -11,7 +11,8 @@ import java.util.Map;
 import java.util.Set; 
  
 import org.semanticweb.owlapi.apibinding.OWLManager;
-import org.semanticweb.owlapi.model.AddAxiom; 
+import org.semanticweb.owlapi.model.AddAxiom;
+import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI; 
 import org.semanticweb.owlapi.model.OWLAnnotation; 
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
@@ -27,6 +28,7 @@ import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLDataPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLEntity;
+import org.semanticweb.owlapi.model.OWLImportsDeclaration;
 import org.semanticweb.owlapi.model.OWLIndividualAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
 //import org.semanticweb.owlapi.model.OWLLogicalAxiom;
@@ -39,6 +41,7 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 import org.semanticweb.owlapi.search.EntitySearcher;
+import org.semanticweb.owlapi.util.SimpleIRIMapper;
 import org.semanticweb.owlapi.vocab.OWLRDFVocabulary; 
  
 public class OntologyManager 
@@ -47,7 +50,8 @@ public class OntologyManager
  private String ontologyName = null; 
  private File ontologyFile = null; 
  private OWLDataFactory factory = null; 
- private OWLOntology ontology = null;
+ private OWLOntology loadedOntology = null;
+ private OWLOntology newOntology = null;
  private OWLOntologyManager manager = null; 
   
  private Map<String, OWLClass> owlClassIdMap = new HashMap<String, OWLClass>();
@@ -63,7 +67,7 @@ public class OntologyManager
  { 
   this.manager = manager; 
   this.factory = factory; 
- } 
+ }
  
  public OntologyManager(String ontologyName, File ontologyFile) throws OWLOntologyCreationException 
  { 
@@ -71,16 +75,16 @@ public class OntologyManager
   this.manager = OWLManager.createOWLOntologyManager(); 
   this.factory = manager.getOWLDataFactory(); 
   this.ontologyName = ontologyName; 
-  this.ontology = manager.loadOntologyFromOntologyDocument(ontologyFile); 
-  this.ontologyURI = ontology.getOntologyID().getOntologyIRI().toString(); 
+  this.loadedOntology = manager.loadOntologyFromOntologyDocument(ontologyFile); 
+  this.ontologyURI = loadedOntology.getOntologyID().getOntologyIRI().toString(); 
  } 
  
  public void loadOntology(String ontologyName, File ontologyFile) throws OWLOntologyCreationException 
  { 
   this.ontologyName = ontologyName; 
   this.ontologyFile = ontologyFile; 
-  this.ontology = manager.loadOntologyFromOntologyDocument(ontologyFile); 
-  this.ontologyURI = ontology.getOntologyID().getOntologyIRI().toString(); 
+  this.loadedOntology = manager.loadOntologyFromOntologyDocument(ontologyFile); 
+  this.ontologyURI = loadedOntology.getOntologyID().getOntologyIRI().toString(); 
  } 
  
  public void loadOntology(String ontologyName, 
@@ -90,19 +94,67 @@ public class OntologyManager
   this.ontologyName = ontologyName; 
   this.ontologyURI = ontologyURI;
   IRI documentIRI = IRI.create(ontologyURI);
-  this.ontology = manager.loadOntology(documentIRI); 
+  this.loadedOntology = manager.loadOntology(documentIRI); 
  } 
+ 
+ public void loadOntology(String ontologyName, 
+		  OWLOntology ontology) 
+	      throws OWLOntologyCreationException 
+	{ 
+		String ontologyURI = manager.getOntologyDocumentIRI(ontology).toString();
+	    this.ontologyName = ontologyName; 
+		this.ontologyURI = ontologyURI;
+		IRI documentIRI = IRI.create(ontologyURI);
+		this.loadedOntology = manager.loadOntology(documentIRI); 
+	} 
+ 
+ public void createNewOntology(String fileLocation) throws Exception
+ {
+	 IRI ontologyIRI = IRI.create(fileLocation);
+	 manager.createOntology(ontologyIRI);
+	 this.newOntology = manager.loadOntology(ontologyIRI);
+ }
+ 
+ public OWLOntology getNewOntology()
+ {
+	 return newOntology;
+ }
+ 
+ //Import a local ontology into this ontology.
+ public void importOWLOntology(OWLOntology owlOntology, String importLocation) throws Exception
+ {
+	// IRI importIRI = owlOntology.getOWLOntologyManager().getOntologyDocumentIRI(owlOntology);
+	 IRI localIRI = IRI.create("file:///" + importLocation.replace("\\", "/"));
+
+	 OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()
+			 								 .getOWLImportsDeclaration(localIRI);
+
+	// manager.getIRIMappers().add(new SimpleIRIMapper(importIRI, localIRI));
+	 AddImport addImport = new AddImport(loadedOntology, importDeclaration);
+	 manager.applyChange(addImport);
+ }
+ 
+ //Import ontology from an ontology URI.
+ public void importOWLOntology(String ontologyURI) throws Exception
+ {
+	 IRI importIRI = IRI.create(ontologyURI);
+	 OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()
+			 								 .getOWLImportsDeclaration(importIRI);
+
+	 AddImport addImport = new AddImport(loadedOntology, importDeclaration);
+	 manager.applyChange(addImport);
+ }
  
  public void preProcessing() 
  { 
-  for (OWLClass cls : ontology.getClassesInSignature()) 
+  for (OWLClass cls : loadedOntology.getClassesInSignature()) 
   { 
    owlClassIdMap.put(getLabel(cls).trim().toLowerCase(), cls); 
   } 
  } 
  
-//To add an OWL individual from an individual's id, label, and URI strings to the kbase ontology.
-//The method also returns the added individual as OWLNamedIndividual object to its caller.  
+// To add an OWL individual from an individual's id, label, and URI strings to the kbase ontology.
+// The method also returns the added individual as OWLNamedIndividual object to its caller.  
 public OWLNamedIndividual addOWLNamedIndividual(String individualURI, 
 								  String individualID,
 								  String individualLabel)
@@ -117,7 +169,7 @@ public OWLNamedIndividual addOWLNamedIndividual(String individualURI,
 	OWLAnnotation label = factory.getOWLAnnotation(rdfsLabelProperty, owlLiteral);
 	
 	OWLAxiom axiom = factory.getOWLAnnotationAssertionAxiom(namedIndividual.getIRI(), label);
-	AddAxiom addAxiom = new AddAxiom(ontology, axiom);
+	AddAxiom addAxiom = new AddAxiom(loadedOntology, axiom);
 	manager.applyChange(addAxiom);
 	owlIndividuals.add(namedIndividual);
 	
@@ -128,7 +180,7 @@ public OWLNamedIndividual addOWLNamedIndividual(String individualURI,
 public void addOWLNamedIndividual(OWLNamedIndividual namedIndividual, OWLClass namedClass)
 {
 	OWLAxiom axiom = factory.getOWLClassAssertionAxiom(namedClass, namedIndividual);
-	AddAxiom addAxiom = new AddAxiom(ontology, axiom);
+	AddAxiom addAxiom = new AddAxiom(loadedOntology, axiom);
 	manager.applyChange(addAxiom);	
 }
 
@@ -146,7 +198,7 @@ public void addOWLAnnotationPropertyAxiom(OWLNamedIndividual subjectIndividual,
 	 OWLAnnotationSubject subject = subjectIndividual.getIRI();
 	 OWLAnnotationAssertionAxiom axiom = null;
 	 axiom = factory.getOWLAnnotationAssertionAxiom(property, subject, annotationValue);
-	 AddAxiom addAxiom = new AddAxiom(ontology, axiom);
+	 AddAxiom addAxiom = new AddAxiom(loadedOntology, axiom);
 	 manager.applyChange(addAxiom);
 }
 
@@ -166,7 +218,7 @@ public void addOWLObjectPropertyAxiom(OWLNamedIndividual subjectIndividual,
 	 OWLObjectPropertyAssertionAxiom axiom = null;
 	 axiom = factory.getOWLObjectPropertyAssertionAxiom
 			(objectProperty, subjectIndividual, objectIndividual);
-	 AddAxiom addAxiom = new AddAxiom(ontology, axiom);
+	 AddAxiom addAxiom = new AddAxiom(loadedOntology, axiom);
 	 manager.applyChange(addAxiom);
  }
 
@@ -185,13 +237,13 @@ public void addOWLDataPropertyAxiom(OWLNamedIndividual subjectIndividual,
 	 OWLDataPropertyAssertionAxiom axiom = null;
 	 axiom = factory.getOWLDataPropertyAssertionAxiom(dataProperty, subjectIndividual, dataValue);
 		 
-	 AddAxiom addAxiom = new AddAxiom(ontology, axiom);
+	 AddAxiom addAxiom = new AddAxiom(loadedOntology, axiom);
 	 manager.applyChange(addAxiom);
 }
 
 public OWLOntology getLoadedOntology()
  {
-	 return ontology;
+	 return loadedOntology;
  }
  
 public Set<OWLAnnotationAssertionAxiom> getAllAnnotationAxiom(OWLClass cls) 
@@ -207,10 +259,10 @@ public Set<OWLAnnotationAssertionAxiom> getAllAnnotationAxiom(OWLClass cls)
  public Set<OWLClass> getRootClasses() 
  { 
   Set<OWLClass> listOfTopClasses = new HashSet<OWLClass>(); 
-  for (OWLClass cls : ontology.getClassesInSignature()) 
+  for (OWLClass cls : loadedOntology.getClassesInSignature()) 
   { 
-   if (ontology.getSubClassAxiomsForSubClass(cls).size() == 0 
-     && ontology.getEquivalentClassesAxioms(cls).size() == 0) listOfTopClasses.add(cls); 
+   if (loadedOntology.getSubClassAxiomsForSubClass(cls).size() == 0 
+     && loadedOntology.getEquivalentClassesAxioms(cls).size() == 0) listOfTopClasses.add(cls); 
   } 
   return listOfTopClasses; 
  } 
@@ -223,7 +275,7 @@ public Set<OWLAnnotationAssertionAxiom> getAllAnnotationAxiom(OWLClass cls)
 public Set<OWLClass> getChildClass(OWLClass cls) 
  { 
   Set<OWLClass> listOfClasses = new HashSet<OWLClass>(); 
-  for (OWLSubClassOfAxiom axiom : ontology.getSubClassAxiomsForSuperClass(cls)) 
+  for (OWLSubClassOfAxiom axiom : loadedOntology.getSubClassAxiomsForSuperClass(cls)) 
   { 
    OWLClassExpression expression = axiom.getSubClass(); 
    if (!expression.isAnonymous()) 
@@ -238,7 +290,7 @@ public Set<OWLClass> getChildClass(OWLClass cls)
  // TODO: what if the ontology terms have multiple IDs? 
  public String getId(OWLClass entity) 
  { 
-  for (OWLAnnotationProperty owlObjectProperty : ontology.getAnnotationPropertiesInSignature()) 
+  for (OWLAnnotationProperty owlObjectProperty : loadedOntology.getAnnotationPropertiesInSignature()) 
   { 
    if (ifExistsAnnotation(owlObjectProperty.toString(), "id")) 
    { 
@@ -283,7 +335,7 @@ public String getLabel(OWLEntity entity)
   { 
    OWLAnnotationProperty owlAnnotationProperty = factory.getOWLAnnotationProperty(IRI.create(property)); 
    
-   for(OWLAnnotation a : EntitySearcher.getAnnotations(entity, ontology, owlAnnotationProperty)) 
+   for(OWLAnnotation a : EntitySearcher.getAnnotations(entity, loadedOntology, owlAnnotationProperty)) 
    	{
 	    OWLAnnotationValue value = a.getValue();
 	    if(value instanceof OWLLiteral) 
@@ -345,12 +397,12 @@ public String extractOWLClassId(OWLEntity cls)
  
  public Set<OWLSubClassOfAxiom> getSubClassAxiomsForSuperClass(OWLClass cls) 
  { 
-  return ontology.getSubClassAxiomsForSuperClass(cls); 
+  return loadedOntology.getSubClassAxiomsForSuperClass(cls); 
  } 
  
  public Set<OWLSubClassOfAxiom> getSubClassAxiomsForSubClass(OWLClass cls) 
  { 
-  return ontology.getSubClassAxiomsForSubClass(cls); 
+  return loadedOntology.getSubClassAxiomsForSubClass(cls); 
  } 
  
  public OWLClass createClass(String iri, Set<OWLClass> rootClasses) 
@@ -366,7 +418,7 @@ public String extractOWLClassId(OWLEntity cls)
  public void addClass(OWLClass cls, OWLClass parentClass) 
  { 
   if (parentClass == null) parentClass = factory.getOWLThing(); 
-  manager.applyChange(new AddAxiom(ontology, factory.getOWLSubClassOfAxiom(cls, parentClass))); 
+  manager.applyChange(new AddAxiom(loadedOntology, factory.getOWLSubClassOfAxiom(cls, parentClass))); 
  } 
  
 public void printOntologyMetrics()
@@ -376,25 +428,25 @@ public void printOntologyMetrics()
 	System.out.println("--------------------------------------------------------"); 
     System.out.println("Ontology Name     : " + this.getOntologyName());
     System.out.println("Ontology IRI      : " + this.getOntologyIRI());
-    System.out.println("Ontology Format   : " + manager.getOntologyFormat(ontology));
+    System.out.println("Ontology Format   : " + manager.getOntologyFormat(loadedOntology));
     
     System.out.println("Named Classes     : "
-    				   + ontology.getClassesInSignature().size());
+    				   + loadedOntology.getClassesInSignature().size());
     System.out.println("Object Properties : " 
-    				   + ontology.getObjectPropertiesInSignature().size());
+    				   + loadedOntology.getObjectPropertiesInSignature().size());
     System.out.println("Individuals       : " 
-    				   + ontology.getIndividualsInSignature().size());
+    				   + loadedOntology.getIndividualsInSignature().size());
     System.out.println("Logical Axioms    : " 
-    				   + ontology.getLogicalAxioms().size());
+    				   + loadedOntology.getLogicalAxioms().size());
     System.out.println("All Axioms        : " 
-			   		   + ontology.getAxioms().size());
+			   		   + loadedOntology.getAxioms().size());
     System.out.println("--------------------------------------------------------"); 
  }
 
 public void printAllObjectProperties()
 	{
 	    Set<OWLObjectProperty> owlObjectProperties = null; 
-	    owlObjectProperties = ontology.getObjectPropertiesInSignature();
+	    owlObjectProperties = loadedOntology.getObjectPropertiesInSignature();
 	    
 	    System.out.println("-----------------------------------");   
 		System.out.println("List of All OWL Object Properites (" 
@@ -408,7 +460,7 @@ public void printAllObjectProperties()
 	
 public void printAllClasses() 
 	{ 
-		Set<OWLClass> owlClasses = ontology.getClassesInSignature();        	
+		Set<OWLClass> owlClasses = loadedOntology.getClassesInSignature();        	
 	    System.out.println("-----------------------------------");   
 		System.out.println("List of All OWL Classes (" 
 						   + owlClasses.size() + ")");
@@ -422,7 +474,7 @@ public void printAllClasses()
  public void printAllIndividuals()
 	{
 		Set<OWLNamedIndividual> individuals;
-		individuals = ontology.getIndividualsInSignature();
+		individuals = loadedOntology.getIndividualsInSignature();
 		
 		System.out.println("-----------------------------------");   
 		System.out.println("List of All OWL Individuals ("
@@ -435,7 +487,7 @@ public void printAllClasses()
  
 public Set<OWLAxiom> getOWLIndividualAxioms()
 {
-	Set<OWLAxiom> axioms = ontology.getAxioms();
+	Set<OWLAxiom> axioms = loadedOntology.getAxioms();
 	Set<OWLAxiom> owlIndividualAxioms = new HashSet<OWLAxiom>();
 	for (OWLAxiom axiom : axioms)
 	{
@@ -449,7 +501,7 @@ public Set<OWLAxiom> getOWLIndividualAxioms()
  
 public void printAllAxioms() 
 	{ 
-		  Set<OWLAxiom> axioms = ontology.getAxioms();
+		  Set<OWLAxiom> axioms = loadedOntology.getAxioms();
 	      Set<OWLAxiom> individualAxioms = new HashSet<OWLAxiom>(); 
 		  Set<OWLAxiom> dataPropertyAxioms = new HashSet<OWLAxiom>(); 
 		  Set<OWLAxiom> objectPropertyAxioms = new HashSet<OWLAxiom>(); 

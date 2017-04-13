@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import org.semanticweb.owlapi.io.StreamDocumentTarget;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
@@ -33,30 +35,49 @@ public class EFBOKnowledgeBase
 	private static final String 
 		EFBO_CORE_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo.owl";
 	
-	private static final String
+	private  String
 		EFBO_KB_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl";
 	
+	private String
+		EFBO_KBASE_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/";
+	
 	private static final String 
-		kBaseFileLocation = System.getProperty("user.dir") 
-			   			  + "/Resources/Extracted-Kbases";  
+		KBASE_File_Location = System.getProperty("user.dir") 
+			   			    + "/Resources/Extracted-Kbases";  
 	
 	private OWLOntology efboKBase = null;
 	private OntologyManager efboKBaseManager = null;
 	private String systemID = null;
 	private String systemName = null;
+	private String localKBLocation = null;
 
 	//Default constructor.
+//	public EFBOKnowledgeBase(String systemID, String systemName)
+//				   throws OWLOntologyCreationException, OWLOntologyStorageException 
+//	{
+//		this.systemID = systemID;
+//		this.systemName = systemName;
+//		this.efboKBaseManager = new OntologyManager();
+//        this.efboKBaseManager.loadOntology(systemID, EFBO_KB_URI);
+//        this.efboKBase = efboKBaseManager.getLoadedOntology();
+//        this.setSystemEntity();
+//        
+//   	}
+	
 	public EFBOKnowledgeBase(String systemID, String systemName)
-				   throws OWLOntologyCreationException, OWLOntologyStorageException 
+				   throws OWLOntologyCreationException, OWLOntologyStorageException, Exception 
 	{
 		this.systemID = systemID;
 		this.systemName = systemName;
 		this.efboKBaseManager = new OntologyManager();
-        this.efboKBaseManager.loadOntology(systemID, EFBO_KB_URI);
+        this.efboKBaseManager.createNewOntology(EFBO_KBASE_URI + systemID + ".owl");
+        this.efboKBaseManager.loadOntology(systemID,efboKBaseManager.getNewOntology());
         this.efboKBase = efboKBaseManager.getLoadedOntology();
+        this.efboKBaseManager.importOWLOntology(EFBO_CORE_URI);
         this.setSystemEntity();
         
    	}
+	
 	
 	//Set the source system information from which the annotations 
 	//are extracted.
@@ -76,25 +97,34 @@ public class EFBOKnowledgeBase
 			throws OWLOntologyCreationException,
 			OWLOntologyStorageException 
 	{
-        efboKBase.getOWLOntologyManager()
-        		 .saveOntology(efboKBase, 
-        		 new StreamDocumentTarget(System.out));
-       
-        String fileLocation = kBaseFileLocation + "/" + systemName
+//        efboKBase.getOWLOntologyManager()
+//        		 .saveOntology(efboKBase, 
+//        		 new StreamDocumentTarget(System.out));
+//       
+        String fileLocation = KBASE_File_Location + "/" + systemName
 				   		    + "/" + systemID + ".owl";
         File defaultSaveLocation = new File(fileLocation);
         IRI kBaseIRI = IRI.create(defaultSaveLocation.toURI());
         
+       // System.out.println("IRI#######################" + kBaseIRI);
+        
+        
+      //  efboKBase.getOWLOntologyManager().setOntologyDocumentIRI(efboKBase, kBaseIRI);
+      //  efboKBase.getOWLOntologyManager().applyChange(change);
+        
         efboKBase.getOWLOntologyManager().saveOntology(efboKBase, kBaseIRI);
         
-        System.out.println("An EFBO Knowledge Base is saved Successfully.");
-        System.out.println("\nLocation: " + fileLocation);
+        String savedSucessMessage = "An EFBO Knowledgebase is saved Successfully."
+        		      			  + "\nLocation: " + fileLocation;
+        
+        this.localKBLocation = fileLocation;
+        
+        System.out.println(savedSucessMessage);
+        JOptionPane.showMessageDialog(null, savedSucessMessage, "Success!",
+									  JOptionPane.INFORMATION_MESSAGE);
 	}
 	
-	public OWLOntology getEFBOKnowledgeBase()
-	{
-		return efboKBase;
-	}
+
 
 	public void processExtractedAnnotations(ArrayList<Annotation> annotations)
 			throws OWLOntologyCreationException, OWLOntologyStorageException 
@@ -131,9 +161,6 @@ public class EFBOKnowledgeBase
 				String objectID = object.replaceAll("\\s+", "");
 					   objectID = systemName + "." + whereDeclared + "." + objectID;
 				
-				// String predicate = annotation.getPredicate();
-				// String propertyName = predicate;
-		        
 				OWLNamedIndividual owlIndividualSubject = null;
 				owlIndividualSubject = efboKBaseManager.addOWLNamedIndividual(EFBO_KB_URI, subjectID, subject);
 				this.setEFBOAnnotationText(owlIndividualSubject, annotation);
@@ -198,8 +225,8 @@ public class EFBOKnowledgeBase
 		OWLLiteral owlLiteral = efboKBaseManager.getOWLDataFactory().getOWLLiteral(timePoint);		
 					
 		dataProperty = efboKBaseManager.getOWLDataProperty(EFBO_CORE_URI, "hasTimePoint");
-		efboKBaseManager.addOWLDataPropertyAxiom(owlIndividualSubject, dataProperty, owlLiteral);		
-		
+		efboKBaseManager.addOWLDataPropertyAxiom(owlIndividualSubject, dataProperty, owlLiteral);
+				
 	}
 	
 	private void setEFBONextEventProperties(ArrayList<Annotation> annotations)
@@ -247,8 +274,18 @@ public boolean isCurrentOS (String osName)
 		return true;
 	return false;
 }
-	
- public OWLOntology getEFBOKnowledgebase()
+
+public String getLocalKBLocation()
+{
+	return localKBLocation;
+}
+
+public OWLOntology getEFBOKnowledgeBase()
+{
+	return efboKBase;
+}
+
+public OWLOntology getEFBOKnowledgebase()
 	{
 		return efboKBase;
 	}
@@ -277,4 +314,4 @@ public boolean isCurrentOS (String osName)
 	return efboKBaseManager; 
  }
 
-}
+}//End of Class.
