@@ -28,7 +28,7 @@ import org.semanticweb.owlapi.model.OWLOntologyStorageException;
  *
  */
 
-public class EFBOKnowledgBase
+public class EFBOKnowledgeBase
 {
 	private static final String 
 		EFBO_CORE_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo.owl";
@@ -47,7 +47,7 @@ public class EFBOKnowledgBase
 	private String systemName = null;
 
 	//Default constructor.
-	public EFBOKnowledgBase(String systemID, String systemName)
+	public EFBOKnowledgeBase(String systemID, String systemName)
 				   throws OWLOntologyCreationException, OWLOntologyStorageException 
 	{
 		this.systemID = systemID;
@@ -86,6 +86,10 @@ public class EFBOKnowledgBase
         efboKBase.getOWLOntologyManager().saveOntology(efboKBase, IRI.create(defaultSaveLocation.toURI()));
 	}
 	
+	public OWLOntology getEFBOKnowledgeBase()
+	{
+		return efboKBase;
+	}
 
 	public void processExtractedAnnotations(ArrayList<Annotation> annotations)
 			throws OWLOntologyCreationException, OWLOntologyStorageException 
@@ -116,11 +120,11 @@ public class EFBOKnowledgBase
 				
 				//remove all the spaces (if any) within the name of the entity.
 				String subjectID = subject.replaceAll("\\s+", "");
-					   subjectID = systemID + "." + whereDeclared + "." + subjectID;
+					   subjectID = systemName + "." + whereDeclared + "." + subjectID;
 				
 				String object = annotation.getObject();
 				String objectID = object.replaceAll("\\s+", "");
-					   objectID = systemID + "." + whereDeclared + "." + objectID;
+					   objectID = systemName + "." + whereDeclared + "." + objectID;
 				
 				// String predicate = annotation.getPredicate();
 				// String propertyName = predicate;
@@ -180,7 +184,7 @@ public class EFBOKnowledgBase
 		String subject = annotation.getSubject();
 		//remove all the spaces (if any) within the name of the entity.
 		String subjectID = subject.replaceAll("\\s+", "");
-		       subjectID = systemID + "." + whereDeclared + "." + subjectID;
+		       subjectID = systemName + "." + whereDeclared + "." + subjectID;
 		
 		owlIndividualSubject = efboKBaseManager.addOWLNamedIndividual(EFBO_KB_URI, subjectID, subject);
 		this.setEFBOAnnotationText(owlIndividualSubject, annotation);
