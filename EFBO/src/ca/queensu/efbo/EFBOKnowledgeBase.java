@@ -40,7 +40,6 @@ public class EFBOKnowledgeBase
 		kBaseFileLocation = System.getProperty("user.dir") 
 			   			  + "/Resources/Extracted-Kbases";  
 	
-	
 	private OWLOntology efboKBase = null;
 	private OntologyManager efboKBaseManager = null;
 	private String systemID = null;
@@ -78,12 +77,18 @@ public class EFBOKnowledgeBase
 			OWLOntologyStorageException 
 	{
         efboKBase.getOWLOntologyManager()
-        		 .saveOntology(efboKBase, new StreamDocumentTarget(System.out));
+        		 .saveOntology(efboKBase, 
+        		 new StreamDocumentTarget(System.out));
        
-        File defaultSaveLocation = new File(kBaseFileLocation + "/" + systemName
-        								   + "/" + systemID + ".owl");
+        String fileLocation = kBaseFileLocation + "/" + systemName
+				   		    + "/" + systemID + ".owl";
+        File defaultSaveLocation = new File(fileLocation);
+        IRI kBaseIRI = IRI.create(defaultSaveLocation.toURI());
         
-        efboKBase.getOWLOntologyManager().saveOntology(efboKBase, IRI.create(defaultSaveLocation.toURI()));
+        efboKBase.getOWLOntologyManager().saveOntology(efboKBase, kBaseIRI);
+        
+        System.out.println("An EFBO Knowledge Base is saved Successfully.");
+        System.out.println("\nLocation: " + fileLocation);
 	}
 	
 	public OWLOntology getEFBOKnowledgeBase()

@@ -1,15 +1,14 @@
 package ca.queensu.efbo;
 
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
-
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 public class EFBOComparator 
 {
-	private OWLOntology firstSystemKBase = null;
-	private OWLOntology secondSystemKBase = null;
+	private OWLOntology firstSystemKBase;
+	private OWLOntology secondSystemKBase;
 	
 	private ArrayList<Annotation> firstSystemAnnotations;
 	private ArrayList<Annotation> secondSystemAnnotations;
@@ -20,22 +19,31 @@ public class EFBOComparator
 	private String firstSystemID = "SYSTEM-01";
 	private String secondSystemID = "SYSTEM-02";
 	
+	private OWLOntology efboValidator;
+	private OntologyManager efboValidatorManager;
+	
+	private static final String 
+	EFBO_Validator_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo.owl";
+	
 	//Default Constructor. 
 	public EFBOComparator() throws Exception
 	{
 		this.displayEFBOComparatorInterface();
+		this.setEfboValidatorOntology();
 		
 		this.firstSystemName = this.setFirstSystemName();
 		this.firstSystemAnnotations = this.getSystemAnnotations();
 		this.firstSystemKBase = this.getEFBOKnowledeBase(firstSystemID,
 								firstSystemName, firstSystemAnnotations);
+		this.addKnowledgeBase(this.firstSystemKBase);
 		
 		JOptionPane.showMessageDialog(null, "First System Loaded.");
 		
 		this.secondSystemName = this.setSecondSystemName();
 		this.secondSystemAnnotations = this.getSystemAnnotations();
 		this.secondSystemKBase = this.getEFBOKnowledeBase(secondSystemID, 
-								secondSystemName, secondSystemAnnotations);
+								 secondSystemName, secondSystemAnnotations);
+		this.addKnowledgeBase(this.secondSystemKBase);		
 		
 		JOptionPane.showMessageDialog(null, "Second System Loaded.");
 	
@@ -46,8 +54,8 @@ public class EFBOComparator
 		String firstDialog = "Please Click OK to Continue.";
 				
 		int OKOption = JOptionPane.showConfirmDialog(null, firstDialog, 
-				"Welcome to EFBO Comparator System", 
-				JOptionPane.OK_CANCEL_OPTION);
+													"Welcome to EFBO Comparator", 
+													JOptionPane.OK_CANCEL_OPTION);
 		if (OKOption == JOptionPane.OK_OPTION)
 		{
 			System.out.println("> Wecome to EFBO Comparator!");
@@ -59,7 +67,10 @@ public class EFBOComparator
 		}
 	}
 	
-
+    private void addKnowledgeBase(OWLOntology kBase)
+    {
+    	    
+    }
 	
 
 	/**
@@ -94,19 +105,19 @@ public class EFBOComparator
 	/**
 	 * @return the firstSystemName
 	 */
-	private String getFirstSystemName()
+	public String getFirstSystemName()
 	{
 		return firstSystemName;
 	}
 
 	/**
-	 * @param firstSystemName the firstSystemName to set
+	 *
 	 */
 	private String setFirstSystemName()
 	{
 		firstSystemName =  JOptionPane.showInputDialog(null, "Enter a name for System-01");
 		System.out.println("First System's Name: " +  firstSystemName);
-		System.out.println("First System's Assigned ID: " +  this.firstSystemID);
+		System.out.println("First System's Assigned ID: " +  firstSystemID);
 		return firstSystemName;
 	}
 
@@ -161,7 +172,23 @@ public class EFBOComparator
 	{
 		this.secondSystemID = secondSystemID;
 	}
+
+	/**
+	 * @return the efboValidatorOntology
+	 */
+	public OWLOntology getEfboValidatorOntology()
+	{
+		return efboValidator;
+	}
+
+	/**
+	 * load efbo validation ontology.
+	 */
+	public void setEfboValidatorOntology() throws Exception
+	{
+		this.efboValidatorManager = new OntologyManager();
+	    this.efboValidatorManager.loadOntology("EFBO-V", EFBO_Validator_URI);
+	    this.efboValidator = efboValidatorManager.getLoadedOntology();
+	}
 	
-
-
 }// End of public class EFBOComparator. 
