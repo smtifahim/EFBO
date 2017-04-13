@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ca.queensu.efbo.annotation.extractor;
+package ca.queensu.efbo;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -21,7 +21,6 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
-import ca.queensu.efbo.OntologyManager;
 
 
 /**
@@ -29,7 +28,7 @@ import ca.queensu.efbo.OntologyManager;
  *
  */
 
-public class EFBOKnowledgeBase
+public class KnowledgBaseExtractor
 {
 	private static final String 
 		EFBO_CORE_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo.owl";
@@ -41,13 +40,14 @@ public class EFBOKnowledgeBase
 		kBaseFileLocation = System.getProperty("user.dir") 
 			   			  + "/Resources/Extracted-Kbases";  
 	
+	
 	private OWLOntology efboKBase = null;
 	private OntologyManager efboKBaseManager = null;
 	private String systemID = null;
 	private String systemName = null;
 
 	//Default constructor.
-	public EFBOKnowledgeBase(String systemID, String systemName)
+	public KnowledgBaseExtractor(String systemID, String systemName)
 				   throws OWLOntologyCreationException, OWLOntologyStorageException 
 	{
 		this.systemID = systemID;
@@ -59,7 +59,7 @@ public class EFBOKnowledgeBase
         
    	}
 	
-	//set the source system information from which the annotations 
+	//Set the source system information from which the annotations 
 	//are extracted.
 	private void setSystemEntity()
 	{

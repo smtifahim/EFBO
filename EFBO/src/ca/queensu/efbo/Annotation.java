@@ -1,4 +1,4 @@
-package ca.queensu.efbo.annotation.extractor;
+package ca.queensu.efbo;
 
 
 /**

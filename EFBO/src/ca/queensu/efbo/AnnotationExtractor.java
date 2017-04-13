@@ -1,4 +1,4 @@
-package ca.queensu.efbo.annotation.extractor;
+package ca.queensu.efbo;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
@@ -17,8 +17,6 @@ import javax.swing.JOptionPane;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
-
-import ca.queensu.efbo.OntologyManager;
 
 /**
  * @author Fahim Imam.
