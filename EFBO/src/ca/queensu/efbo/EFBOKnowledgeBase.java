@@ -35,8 +35,8 @@ public class EFBOKnowledgeBase
 	private static final String 
 		EFBO_CORE_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo.owl";
 	
-	private  String
-		EFBO_KB_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl";
+	//private  String
+	//EFBO_KB_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-kb.owl";
 	
 	private String
 		EFBO_KBASE_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/";
@@ -62,7 +62,7 @@ public class EFBOKnowledgeBase
 //        this.efboKBase = efboKBaseManager.getLoadedOntology();
 //        this.setSystemEntity();
 //        
-//   	}
+//   }
 	
 	public EFBOKnowledgeBase(String systemID, String systemName)
 				   throws OWLOntologyCreationException, OWLOntologyStorageException, Exception 
@@ -70,7 +70,8 @@ public class EFBOKnowledgeBase
 		this.systemID = systemID;
 		this.systemName = systemName;
 		this.efboKBaseManager = new OntologyManager();
-        this.efboKBaseManager.createNewOntology(EFBO_KBASE_URI + systemID + ".owl");
+		this.EFBO_KBASE_URI = EFBO_KBASE_URI + systemID + ".owl";
+        this.efboKBaseManager.createNewOntology(EFBO_KBASE_URI);
         this.efboKBaseManager.loadOntology(systemID,efboKBaseManager.getNewOntology());
         this.efboKBase = efboKBaseManager.getLoadedOntology();
         this.efboKBaseManager.importOWLOntology(EFBO_CORE_URI);
@@ -84,7 +85,7 @@ public class EFBOKnowledgeBase
 	private void setSystemEntity()
 	{
 		OWLNamedIndividual owlNamedIndividual = null;
-		owlNamedIndividual = efboKBaseManager.addOWLNamedIndividual(EFBO_KB_URI, systemID, systemName);
+		owlNamedIndividual = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, systemID, systemName);
 		
 		IRI classIRI = IRI.create(EFBO_CORE_URI + "#" + "System");		
 		OWLClass systemClass = efboKBaseManager.getOWLDataFactory().getOWLClass(classIRI);
@@ -97,9 +98,7 @@ public class EFBOKnowledgeBase
 			throws OWLOntologyCreationException,
 			OWLOntologyStorageException 
 	{
-//        efboKBase.getOWLOntologyManager()
-//        		 .saveOntology(efboKBase, 
-//        		 new StreamDocumentTarget(System.out));
+//        efboKBase.getOWLOntologyManager().saveOntology(efboKBase, new StreamDocumentTarget(System.out));
 //       
         String fileLocation = KBASE_File_Location + "/" + systemName
 				   		    + "/" + systemID + ".owl";
@@ -109,12 +108,9 @@ public class EFBOKnowledgeBase
        // System.out.println("IRI#######################" + kBaseIRI);
         
         
-      //  efboKBase.getOWLOntologyManager().setOntologyDocumentIRI(efboKBase, kBaseIRI);
-      //  efboKBase.getOWLOntologyManager().applyChange(change);
-        
         efboKBase.getOWLOntologyManager().saveOntology(efboKBase, kBaseIRI);
         
-        String savedSucessMessage = "An EFBO Knowledgebase is saved Successfully."
+        String savedSucessMessage = "An EFBO Knowledgebase is saved at the following location."
         		      			  + "\nLocation: " + fileLocation;
         
         this.localKBLocation = fileLocation;
@@ -135,9 +131,9 @@ public class EFBOKnowledgeBase
 		}
 		
 		// For the events that have associated Time Point.
-		this.setEFBONextEventProperties(annotations);
-				
-		this.saveEFBOKnowledgeBase();	
+	 	this.setEFBONextEventProperties(annotations);	
+		
+	 	this.saveEFBOKnowledgeBase();
 	}
 	
 	//Set an annotation line of type Annotation into an EFBO instances and relations for the KBase.
@@ -148,8 +144,7 @@ public class EFBOKnowledgeBase
 		
 		if (!propertyName.equals("hasTimePoint"))
 		{
-	      		String whereDeclared = Paths.get(annotation.getFileLocation())
-	  										.getFileName().toString();
+	      		String whereDeclared = getWhereDeclared(annotation);
 				
 				String subject = annotation.getSubject();
 				
@@ -162,11 +157,11 @@ public class EFBOKnowledgeBase
 					   objectID = systemName + "." + whereDeclared + "." + objectID;
 				
 				OWLNamedIndividual owlIndividualSubject = null;
-				owlIndividualSubject = efboKBaseManager.addOWLNamedIndividual(EFBO_KB_URI, subjectID, subject);
+				owlIndividualSubject = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, subjectID, subject);
 				this.setEFBOAnnotationText(owlIndividualSubject, annotation);
 		        
 				OWLNamedIndividual owlIndividualObject = null;
-				owlIndividualObject = efboKBaseManager.addOWLNamedIndividual(EFBO_KB_URI, objectID, object);
+				owlIndividualObject = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, objectID, object);
 				this.setEFBOAnnotationText(owlIndividualObject, annotation);
 		        
 		        OWLObjectProperty objectProperty = null;
@@ -218,7 +213,7 @@ public class EFBOKnowledgeBase
 		String subjectID = subject.replaceAll("\\s+", "");
 		       subjectID = systemName + "." + whereDeclared + "." + subjectID;
 		
-		owlIndividualSubject = efboKBaseManager.addOWLNamedIndividual(EFBO_KB_URI, subjectID, subject);
+		owlIndividualSubject = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, subjectID, subject);
 		this.setEFBOAnnotationText(owlIndividualSubject, annotation);
 		
 		int timePoint = Integer.parseInt(annotation.getObject());
@@ -237,33 +232,44 @@ public class EFBOKnowledgeBase
 		OWLDataFactory odf = efboKBaseManager.getOWLDataFactory();
 		int timePoint=0;
 		
+		 
 		// to hold the mapping between a set of events and their corresponding time points.
 		Map<String, Integer> mapEventTime = new HashMap <String, Integer>();
 		
 		for (Annotation a: annotations)
+			{
 			if (a.getPredicate().equals("hasTimePoint"))
 				mapEventTime.put(a.getSubject(), Integer.parseInt(a.getObject()));	
-		
-		//System.out.println("List of Events#####");
-		for (Map.Entry<String, Integer> e1 : mapEventTime.entrySet())
-		{
-		    timePoint = e1.getValue();
-		    	for (Map.Entry<String, Integer> e2 : mapEventTime.entrySet())
-		    		if (e2.getValue() == timePoint+1)
-		    		{
-		    			IRI event1IRI = IRI.create(EFBO_KB_URI + "#" + e1.getKey());
-		    			event1 = odf.getOWLNamedIndividual(event1IRI);
-		    			
-		    			IRI event2IRI = IRI.create(EFBO_KB_URI + "#" + e2.getKey());
-		    			event2 = odf.getOWLNamedIndividual(event2IRI);
-		    			
-		    			efboKBaseManager.addOWLObjectPropertyAxiom(event1, hasNextEvent, event2);
-		    			//System.out.println(e1.getKey() + " hasNextEvent " + e2.getKey());
-		    		}
-		}// End of for (Map.Entry<String, Integer> e1 : mapEventTime.entrySet())
-		        
+			String individualURI = EFBO_KBASE_URI + "#" + systemName + ".";	
+			       individualURI = individualURI + getWhereDeclared(a) + "."; 
+			for (Map.Entry<String, Integer> e1 : mapEventTime.entrySet())
+				{
+				    timePoint = e1.getValue();
+				    	for (Map.Entry<String, Integer> e2 : mapEventTime.entrySet())
+				    		if (e2.getValue() == timePoint+1)
+				    		{
+				    			IRI event1IRI = IRI.create(individualURI + e1.getKey());
+				    			event1 = odf.getOWLNamedIndividual(event1IRI);
+				    			
+				    			IRI event2IRI = IRI.create(individualURI + e2.getKey());
+				    			event2 = odf.getOWLNamedIndividual(event2IRI);
+				    			
+				    			efboKBaseManager.addOWLObjectPropertyAxiom(event1, hasNextEvent, event2);
+				    			//System.out.println(e1.getKey() + " hasNextEvent " + e2.getKey());
+				    		}
+				}
+			}// End of for (Map.Entry<String, Integer> e1 : mapEventTime.entrySet())   
    } // End of setEFBONextEventProperties(ArrayList<Annotation> annotations).
 	
+
+// returns the file name from a directory where the annotation was declared.
+private	String getWhereDeclared (Annotation annotation)
+{
+	String whereDeclared = Paths.get(annotation.getFileLocation())
+				.getFileName().toString();
+	
+	return whereDeclared;
+}
 
 
 // To fix the file path formats according to the OS.
