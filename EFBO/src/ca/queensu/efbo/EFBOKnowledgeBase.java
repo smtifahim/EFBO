@@ -50,6 +50,7 @@ public class EFBOKnowledgeBase
 	private String systemID = null;
 	private String systemName = null;
 	private String localKBLocation = null;
+	private OWLNamedIndividual systemInstance = null;
 
 	//Default constructor.
 //	public EFBOKnowledgeBase(String systemID, String systemName)
@@ -90,7 +91,8 @@ public class EFBOKnowledgeBase
 		IRI classIRI = IRI.create(EFBO_CORE_URI + "#" + "System");		
 		OWLClass systemClass = efboKBaseManager.getOWLDataFactory().getOWLClass(classIRI);
 		
-		efboKBaseManager.addOWLNamedIndividual(owlNamedIndividual, systemClass);
+		efboKBaseManager.assertOWLNamedIndividual(owlNamedIndividual, systemClass);
+		this.systemInstance = owlNamedIndividual;
 		
 	}
 	
@@ -139,8 +141,7 @@ public class EFBOKnowledgeBase
 	//Set an annotation line of type Annotation into an EFBO instances and relations for the KBase.
 	private void setEFBOKnowledgeBase(Annotation annotation)
 	{
-		String predicate = annotation.getPredicate();
-		String propertyName = predicate;
+		String propertyName = annotation.getPredicate();
 		
 		if (!propertyName.equals("hasTimePoint"))
 		{
@@ -159,10 +160,12 @@ public class EFBOKnowledgeBase
 				OWLNamedIndividual owlIndividualSubject = null;
 				owlIndividualSubject = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, subjectID, subject);
 				this.setEFBOAnnotationText(owlIndividualSubject, annotation);
+				this.setIndividualSystemEntity(owlIndividualSubject);
 		        
 				OWLNamedIndividual owlIndividualObject = null;
 				owlIndividualObject = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, objectID, object);
 				this.setEFBOAnnotationText(owlIndividualObject, annotation);
+				this.setIndividualSystemEntity(owlIndividualObject);
 		        
 		        OWLObjectProperty objectProperty = null;
 		        objectProperty = efboKBaseManager.getOWLObjectProperty(EFBO_CORE_URI, propertyName);
@@ -199,6 +202,15 @@ public class EFBOKnowledgeBase
 		efboKBaseManager.addOWLAnnotationPropertyAxiom(individual, efboAnnotation, owlLiteral);
 	}
 	
+	//To associate each of the individuals to the system instance.
+	private void setIndividualSystemEntity(OWLNamedIndividual individual)
+	{
+		OWLObjectProperty objectProperty = null;
+        objectProperty = efboKBaseManager.getOWLObjectProperty(EFBO_CORE_URI, "isSystemEntityOf");
+        
+        efboKBaseManager.addOWLObjectPropertyAxiom(individual, objectProperty, this.systemInstance);
+	}
+	
 	//Set an annotation that contains hasTimePoint data property into into the EFBO KBase.
 	private void setEFBOEventTimePoint(Annotation annotation)
 	{
@@ -215,6 +227,7 @@ public class EFBOKnowledgeBase
 		
 		owlIndividualSubject = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, subjectID, subject);
 		this.setEFBOAnnotationText(owlIndividualSubject, annotation);
+		this.setIndividualSystemEntity(owlIndividualSubject);
 		
 		int timePoint = Integer.parseInt(annotation.getObject());
 		OWLLiteral owlLiteral = efboKBaseManager.getOWLDataFactory().getOWLLiteral(timePoint);		

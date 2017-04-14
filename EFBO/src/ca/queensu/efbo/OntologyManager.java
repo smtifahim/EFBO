@@ -177,11 +177,11 @@ public OWLNamedIndividual addOWLNamedIndividual(String individualURI,
  }
 
 //To add a named individual to a named class.
-public void addOWLNamedIndividual(OWLNamedIndividual namedIndividual, OWLClass namedClass)
+public void assertOWLNamedIndividual(OWLNamedIndividual namedIndividual, OWLClass namedClass)
 {
 	OWLAxiom axiom = factory.getOWLClassAssertionAxiom(namedClass, namedIndividual);
 	AddAxiom addAxiom = new AddAxiom(loadedOntology, axiom);
-	manager.applyChange(addAxiom);	
+	manager.applyChange(addAxiom);
 }
 
 //Returns an OWL annotation property from an existing ontology.
