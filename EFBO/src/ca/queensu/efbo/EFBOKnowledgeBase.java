@@ -107,19 +107,18 @@ public class EFBOKnowledgeBase
         File defaultSaveLocation = new File(fileLocation);
         IRI kBaseIRI = IRI.create(defaultSaveLocation.toURI());
         
-       // System.out.println("IRI#######################" + kBaseIRI);
-        
-        
         efboKBase.getOWLOntologyManager().saveOntology(efboKBase, kBaseIRI);
         
-        String savedSucessMessage = "An EFBO Knowledgebase is saved at the following location."
+        String savedSucessMessage = "\nAn EFBO Knowledgebase has been saved at the following location."
         		      			  + "\nLocation: " + fileLocation;
         
         this.localKBLocation = fileLocation;
         
         System.out.println(savedSucessMessage);
+        this.efboKBaseManager.printOntologyMetrics();
         JOptionPane.showMessageDialog(null, savedSucessMessage, "Success!",
 									  JOptionPane.INFORMATION_MESSAGE);
+        
 	}
 	
 
@@ -134,8 +133,7 @@ public class EFBOKnowledgeBase
 		
 		// For the events that have associated Time Point.
 	 	this.setEFBONextEventProperties(annotations);	
-		
-	 	this.saveEFBOKnowledgeBase();
+		this.saveEFBOKnowledgeBase();
 	}
 	
 	//Set an annotation line of type Annotation into an EFBO instances and relations for the KBase.

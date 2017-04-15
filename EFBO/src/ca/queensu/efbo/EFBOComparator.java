@@ -2,9 +2,9 @@ package ca.queensu.efbo;
 
 import java.io.File;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
-import org.semanticweb.owlapi.io.StreamDocumentTarget;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -169,25 +169,50 @@ public class EFBOComparator
 		this.efboValidatorManager = new OntologyManager();
 	    this.efboValidatorManager.loadOntology("EFBO-V", EFBO_Validator_URI);
 	    this.efboValidator = efboValidatorManager.getLoadedOntology();
-	    System.out.println("The EFBO-V Ontology Loaded Successfully.");
+	    System.out.println("\nThe EFBO-V Ontology has been Loaded Successfully.");
+	    efboValidatorManager.printOntologyMetrics();
 	}
 	
 	private void saveEFBOValidatorOntology()
 			throws OWLOntologyCreationException,
 			OWLOntologyStorageException 
 	{
-        efboValidator.getOWLOntologyManager()
-        		 	 .saveOntology(efboValidator, 
-        		      new StreamDocumentTarget(System.out));
+//        efboValidator.getOWLOntologyManager()
+//        		 	 .saveOntology(efboValidator, 
+//        		      new StreamDocumentTarget(System.out));
        
-        String fileLocation = EFBO_V_File_Location + "EFBO-V-Merged.owl";
-        File defaultSaveLocation = new File(fileLocation);
-        IRI efboVIRI = IRI.create(defaultSaveLocation.toURI());
-        
-        efboValidator.getOWLOntologyManager().saveOntology(efboValidator, efboVIRI);
-        
-        System.out.println("The EFBO-V Saved Successfully.");
-        System.out.println("\nLocation: " + fileLocation);
+		JFrame fileSaveFrame = new JFrame();
+		final String defaultFilePath = System.getProperty("user.dir") 
+  							  		 + "/Resources/Ontologies/"; 
+		JFileChooser fileChooser = new JFileChooser(new File(defaultFilePath));
+		fileChooser.setDialogTitle("Save the EFBO-V Merged Ontology");
+		
+		int userSelection = fileChooser.showSaveDialog(fileSaveFrame);
+		 
+		if (userSelection == JFileChooser.APPROVE_OPTION) 
+		{
+			 File fileToSave = fileChooser.getSelectedFile();
+	         IRI efboVIRI = IRI.create(fileToSave.toURI());
+	         efboValidator.getOWLOntologyManager().saveOntology(efboValidator, efboVIRI);
+	        
+	         String messageSavedSuccess = "Ontology Saved Successfully!\n"
+		    			 				   + "File Location> " 
+		    			 				   + fileToSave.getAbsolutePath();
+	         
+	         //efboValidatorManager.printOntologyMetrics();
+	         
+			 System.out.println(messageSavedSuccess);				
+			 JOptionPane.showMessageDialog(fileSaveFrame, messageSavedSuccess, "Success!", 
+						  					  JOptionPane.INFORMATION_MESSAGE);
+         }
+		
+		else
+		 {
+			String notSavedMessage = "You have chosen NOT to save the Ontology.";
+			System.out.println(notSavedMessage);
+			JOptionPane.showMessageDialog(fileSaveFrame, notSavedMessage, "Ontology NOT Saved", 
+					  					  JOptionPane.INFORMATION_MESSAGE);
+		 }
 	}
 	
 }// End of public class EFBOComparator. 
