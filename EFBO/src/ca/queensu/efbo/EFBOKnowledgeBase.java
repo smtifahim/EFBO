@@ -50,7 +50,7 @@ public class EFBOKnowledgeBase
 	private String systemID = null;
 	private String systemName = null;
 	private String localKBLocation = null;
-	private OWLNamedIndividual systemInstance = null;
+	private OWLNamedIndividual systemIDInstance = null;
 
 	//Default constructor.
 //	public EFBOKnowledgeBase(String systemID, String systemName)
@@ -92,7 +92,7 @@ public class EFBOKnowledgeBase
 		OWLClass systemClass = efboKBaseManager.getOWLDataFactory().getOWLClass(classIRI);
 		
 		efboKBaseManager.assertOWLNamedIndividual(owlNamedIndividual, systemClass);
-		this.systemInstance = owlNamedIndividual;
+		this.systemIDInstance = owlNamedIndividual;
 		
 	}
 	
@@ -208,7 +208,7 @@ public class EFBOKnowledgeBase
 		OWLObjectProperty objectProperty = null;
         objectProperty = efboKBaseManager.getOWLObjectProperty(EFBO_CORE_URI, "isSystemEntityOf");
         
-        efboKBaseManager.addOWLObjectPropertyAxiom(individual, objectProperty, this.systemInstance);
+        efboKBaseManager.addOWLObjectPropertyAxiom(individual, objectProperty, this.systemIDInstance);
 	}
 	
 	//Set an annotation that contains hasTimePoint data property into into the EFBO KBase.
@@ -331,6 +331,11 @@ public OWLOntology getEFBOKnowledgebase()
  public OntologyManager getEFBOManager()
  { 
 	return efboKBaseManager; 
+ }
+ 
+ public OWLNamedIndividual getSystemIDInstance()
+ {
+	 return systemIDInstance;
  }
 
 }//End of Class.

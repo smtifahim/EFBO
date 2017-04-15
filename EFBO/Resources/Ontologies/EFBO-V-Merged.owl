@@ -14,405 +14,413 @@
     <Prefix name="efbo" IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
     <Prefix name="efbo-v" IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-v#"/>
+    <Import>file:///C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Extracted-Kbases/AnddroidLogin/System-1.owl</Import>
     <Import>http://www.cs.queensu.ca/~imam/ontologies/efbo.owl</Import>
-    <Import>file:///C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Extracted-Kbases/AndroidLogin/SYSTEM-01.owl</Import>
-    <Import>file:///C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Extracted-Kbases/IOS_Login/SYSTEM-02.owl</Import>
-    <Declaration>
-        <Class IRI="#System-2_Entity"/>
-    </Declaration>
-    <Declaration>
-        <Class abbreviatedIRI="efbo-v:InconsistentEntity"/>
-    </Declaration>
-    <Declaration>
-        <Class abbreviatedIRI="efbo-v:System-2_Agent"/>
-    </Declaration>
+    <Import>file:///C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Extracted-Kbases/IOS_Login/System-2.owl</Import>
     <Declaration>
         <ObjectProperty abbreviatedIRI="efbo:hasInteractionWith"/>
     </Declaration>
     <Declaration>
-        <Class abbreviatedIRI="efbo-v:ConsistentEntity"/>
+        <ObjectProperty IRI="#hasConsistentAgent"/>
     </Declaration>
     <Declaration>
-        <Class abbreviatedIRI="efbo-v:ConsistentEvent"/>
+        <Class IRI="#ParticipantEntity"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#System-1_Entity"/>
+        <ObjectProperty IRI="#hasMappingEvent"/>
     </Declaration>
     <Declaration>
-        <Class abbreviatedIRI="efbo-v:System-1_Agent"/>
+        <Class IRI=".owl#System-2_Entity"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentEntity"/>
+        <Class IRI="#ConsistentInterface"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentPreviousEvent"/>
+        <Class IRI="#InconsistentEvent"/>
     </Declaration>
     <Declaration>
-        <Class abbreviatedIRI="efbo-v:System-1_Interface"/>
+        <Class IRI="#System-1"/>
     </Declaration>
     <Declaration>
-        <Class abbreviatedIRI="efbo-v:InconsistentAgent"/>
+        <Class IRI=".owl#System-1_Entity"/>
     </Declaration>
     <Declaration>
-        <Class abbreviatedIRI="efbo-v:ParticipantSystem"/>
+        <Class IRI="#System-2_Interface"/>
     </Declaration>
     <Declaration>
-        <Class abbreviatedIRI="efbo-v:ParticipantEntity"/>
+        <Class IRI="#ConsistentEntity"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingInterface"/>
+        <ObjectProperty IRI="#hasMappingInterface"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty abbreviatedIRI="efbo-v:systemValidationProperty"/>
+        <ObjectProperty IRI="#hasConsistentPreviousEvent"/>
     </Declaration>
     <Declaration>
-        <Class abbreviatedIRI="efbo-v:System-1"/>
+        <Class IRI="#System-1_Agent"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingAgent"/>
+        <Class IRI="#System-2_Agent"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasMappingEntity"/>
     </Declaration>
     <Declaration>
         <ObjectProperty abbreviatedIRI="efbo:isAlternateEventOf"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentAgent"/>
+        <ObjectProperty IRI="#systemValidationProperty"/>
     </Declaration>
     <Declaration>
         <ObjectProperty abbreviatedIRI="efbo:hasInterface"/>
     </Declaration>
     <Declaration>
-        <Class abbreviatedIRI="efbo-v:System-2_Event"/>
+        <Class IRI="#System-1_Event"/>
     </Declaration>
     <Declaration>
-        <Class abbreviatedIRI="efbo-v:System-1_Event"/>
+        <Class IRI="#ConsistentAgent"/>
     </Declaration>
     <Declaration>
-        <Class abbreviatedIRI="efbo-v:ConsistentAgent"/>
+        <Class IRI="#System-2_Event"/>
     </Declaration>
     <Declaration>
-        <Class abbreviatedIRI="efbo-v:System-2_Interface"/>
+        <ObjectProperty IRI="#hasMappingAgent"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingEntity"/>
+        <Class IRI="#System-2"/>
     </Declaration>
     <Declaration>
-        <Class abbreviatedIRI="efbo-v:ConsistentAltEvent"/>
+        <Class IRI="#ParticipantSystem"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#InconsistentAgent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#System-1_Interface"/>
     </Declaration>
     <Declaration>
         <ObjectProperty abbreviatedIRI="efbo:hasNextEvent"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty abbreviatedIRI="efbo:isInterfaceOf"/>
+        <ObjectProperty IRI="#hasConsistentAltEvent"/>
     </Declaration>
     <Declaration>
-        <Class abbreviatedIRI="efbo-v:ConsistentInterface"/>
+        <Class IRI="#InconsistentEntity"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ConsistentEvent"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="efbo:isInterfaceOf"/>
     </Declaration>
     <Declaration>
         <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
     </Declaration>
     <Declaration>
-        <Class abbreviatedIRI="efbo-v:InconsistentEvent"/>
-    </Declaration>
-    <Declaration>
-        <Class abbreviatedIRI="efbo-v:System-2"/>
+        <Class IRI="#ConsistentAltEvent"/>
     </Declaration>
     <Declaration>
         <ObjectProperty abbreviatedIRI="efbo:hasPreviousEvent"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentEventFlow"/>
+        <ObjectProperty IRI="#hasConsistentEventFlow"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingEvent"/>
+        <ObjectProperty IRI="#hasConsistentNextEvent"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentAltEvent"/>
+        <Class IRI="#SystemValidationEntity"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentNextEvent"/>
+        <Class IRI="#InconsistentInterface"/>
     </Declaration>
     <Declaration>
-        <Class abbreviatedIRI="efbo-v:InconsistentInterface"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/System-1.owl#System-1"/>
     </Declaration>
     <Declaration>
-        <Class abbreviatedIRI="efbo-v:SystemValidationEntity"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/System-2.owl#System-2"/>
     </Declaration>
     <EquivalentClasses>
-        <Class abbreviatedIRI="efbo-v:ParticipantEntity"/>
+        <Class IRI="#ParticipantSystem"/>
         <ObjectIntersectionOf>
-            <Class IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#Entity"/>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#isSystemEntityOf"/>
-                <Class abbreviatedIRI="efbo-v:ParticipantSystem"/>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-    </EquivalentClasses>
-    <EquivalentClasses>
-        <Class abbreviatedIRI="efbo-v:ParticipantSystem"/>
-        <ObjectIntersectionOf>
-            <Class abbreviatedIRI="efbo-v:SystemValidationEntity"/>
+            <Class IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#System"/>
             <ObjectSomeValuesFrom>
                 <ObjectProperty IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#hasSystemEntity"/>
-                <Class abbreviatedIRI="efbo-v:ParticipantEntity"/>
+                <Class IRI="#ParticipantEntity"/>
             </ObjectSomeValuesFrom>
         </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
-        <Class abbreviatedIRI="efbo-v:System-1"/>
+        <Class IRI="#System-1"/>
         <ObjectIntersectionOf>
-            <Class abbreviatedIRI="efbo-v:ParticipantSystem"/>
+            <Class IRI="#ParticipantSystem"/>
             <ObjectSomeValuesFrom>
                 <ObjectProperty IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#hasSystemEntity"/>
-                <Class IRI="#System-1_Entity"/>
+                <Class IRI=".owl#System-1_Entity"/>
             </ObjectSomeValuesFrom>
         </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
-        <Class abbreviatedIRI="efbo-v:System-1_Agent"/>
+        <Class IRI="#System-1_Agent"/>
         <ObjectIntersectionOf>
             <Class IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#Agent"/>
             <ObjectSomeValuesFrom>
                 <ObjectProperty IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#isSystemEntityOf"/>
-                <Class abbreviatedIRI="efbo-v:System-1"/>
+                <Class IRI="#System-1"/>
             </ObjectSomeValuesFrom>
         </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
-        <Class abbreviatedIRI="efbo-v:System-1_Event"/>
+        <Class IRI="#System-1_Event"/>
         <ObjectIntersectionOf>
             <Class IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#Event"/>
             <ObjectSomeValuesFrom>
                 <ObjectProperty IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#isSystemEntityOf"/>
-                <Class abbreviatedIRI="efbo-v:System-1"/>
+                <Class IRI="#System-1"/>
             </ObjectSomeValuesFrom>
         </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
-        <Class abbreviatedIRI="efbo-v:System-1_Interface"/>
+        <Class IRI="#System-1_Interface"/>
         <ObjectIntersectionOf>
             <Class IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#Interface"/>
             <ObjectSomeValuesFrom>
                 <ObjectProperty IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#isSystemEntityOf"/>
-                <Class abbreviatedIRI="efbo-v:System-1"/>
+                <Class IRI="#System-1"/>
             </ObjectSomeValuesFrom>
         </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
-        <Class abbreviatedIRI="efbo-v:System-2"/>
+        <Class IRI="#System-2"/>
         <ObjectIntersectionOf>
-            <Class abbreviatedIRI="efbo-v:ParticipantSystem"/>
+            <Class IRI="#ParticipantSystem"/>
             <ObjectSomeValuesFrom>
                 <ObjectProperty IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#hasSystemEntity"/>
-                <Class IRI="#System-2_Entity"/>
+                <Class IRI=".owl#System-2_Entity"/>
             </ObjectSomeValuesFrom>
         </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
-        <Class abbreviatedIRI="efbo-v:System-2_Agent"/>
+        <Class IRI="#System-2_Agent"/>
         <ObjectIntersectionOf>
             <Class IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#Agent"/>
             <ObjectSomeValuesFrom>
                 <ObjectProperty IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#isSystemEntityOf"/>
-                <Class abbreviatedIRI="efbo-v:System-2"/>
+                <Class IRI="#System-2"/>
             </ObjectSomeValuesFrom>
         </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
-        <Class abbreviatedIRI="efbo-v:System-2_Event"/>
+        <Class IRI="#System-2_Event"/>
         <ObjectIntersectionOf>
             <Class IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#Event"/>
             <ObjectSomeValuesFrom>
                 <ObjectProperty IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#isSystemEntityOf"/>
-                <Class abbreviatedIRI="efbo-v:System-2"/>
+                <Class IRI="#System-2"/>
             </ObjectSomeValuesFrom>
         </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
-        <Class abbreviatedIRI="efbo-v:System-2_Interface"/>
+        <Class IRI="#System-2_Interface"/>
         <ObjectIntersectionOf>
             <Class IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#Interface"/>
             <ObjectSomeValuesFrom>
                 <ObjectProperty IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#isSystemEntityOf"/>
-                <Class abbreviatedIRI="efbo-v:System-2"/>
+                <Class IRI="#System-2"/>
             </ObjectSomeValuesFrom>
         </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
-        <Class IRI="#System-1_Entity"/>
+        <Class IRI=".owl#System-1_Entity"/>
         <ObjectIntersectionOf>
-            <Class abbreviatedIRI="efbo-v:ParticipantEntity"/>
+            <Class IRI="#ParticipantEntity"/>
             <ObjectSomeValuesFrom>
                 <ObjectProperty IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#isSystemEntityOf"/>
-                <Class abbreviatedIRI="efbo-v:System-1"/>
+                <Class IRI="#System-1"/>
             </ObjectSomeValuesFrom>
         </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
-        <Class IRI="#System-2_Entity"/>
+        <Class IRI=".owl#System-2_Entity"/>
         <ObjectIntersectionOf>
-            <Class abbreviatedIRI="efbo-v:ParticipantEntity"/>
+            <Class IRI="#ParticipantEntity"/>
             <ObjectSomeValuesFrom>
                 <ObjectProperty IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#isSystemEntityOf"/>
-                <Class abbreviatedIRI="efbo-v:System-2"/>
+                <Class IRI="#System-2"/>
             </ObjectSomeValuesFrom>
         </ObjectIntersectionOf>
     </EquivalentClasses>
     <SubClassOf>
-        <Class abbreviatedIRI="efbo-v:ConsistentAgent"/>
-        <Class abbreviatedIRI="efbo-v:ConsistentEntity"/>
+        <Class IRI="#ConsistentAgent"/>
+        <Class IRI="#ConsistentEntity"/>
     </SubClassOf>
     <SubClassOf>
-        <Class abbreviatedIRI="efbo-v:ConsistentAltEvent"/>
-        <Class abbreviatedIRI="efbo-v:ConsistentEvent"/>
+        <Class IRI="#ConsistentAltEvent"/>
+        <Class IRI="#ConsistentEvent"/>
     </SubClassOf>
     <SubClassOf>
-        <Class abbreviatedIRI="efbo-v:ConsistentEntity"/>
-        <Class abbreviatedIRI="efbo-v:SystemValidationEntity"/>
+        <Class IRI="#ConsistentEntity"/>
+        <Class IRI="#SystemValidationEntity"/>
     </SubClassOf>
     <SubClassOf>
-        <Class abbreviatedIRI="efbo-v:ConsistentEvent"/>
-        <Class abbreviatedIRI="efbo-v:ConsistentEntity"/>
+        <Class IRI="#ConsistentEvent"/>
+        <Class IRI="#ConsistentEntity"/>
     </SubClassOf>
     <SubClassOf>
-        <Class abbreviatedIRI="efbo-v:ConsistentInterface"/>
-        <Class abbreviatedIRI="efbo-v:ConsistentEntity"/>
+        <Class IRI="#ConsistentInterface"/>
+        <Class IRI="#ConsistentEntity"/>
     </SubClassOf>
     <SubClassOf>
-        <Class abbreviatedIRI="efbo-v:InconsistentAgent"/>
-        <Class abbreviatedIRI="efbo-v:InconsistentEntity"/>
+        <Class IRI="#InconsistentAgent"/>
+        <Class IRI="#InconsistentEntity"/>
     </SubClassOf>
     <SubClassOf>
-        <Class abbreviatedIRI="efbo-v:InconsistentEntity"/>
-        <Class abbreviatedIRI="efbo-v:SystemValidationEntity"/>
+        <Class IRI="#InconsistentEntity"/>
+        <Class IRI="#SystemValidationEntity"/>
     </SubClassOf>
     <SubClassOf>
-        <Class abbreviatedIRI="efbo-v:InconsistentEvent"/>
-        <Class abbreviatedIRI="efbo-v:InconsistentEntity"/>
+        <Class IRI="#InconsistentEvent"/>
+        <Class IRI="#InconsistentEntity"/>
     </SubClassOf>
     <SubClassOf>
-        <Class abbreviatedIRI="efbo-v:InconsistentInterface"/>
-        <Class abbreviatedIRI="efbo-v:InconsistentEntity"/>
+        <Class IRI="#InconsistentInterface"/>
+        <Class IRI="#InconsistentEntity"/>
     </SubClassOf>
     <SubClassOf>
-        <Class abbreviatedIRI="efbo-v:ParticipantEntity"/>
-        <Class abbreviatedIRI="efbo-v:SystemValidationEntity"/>
+        <Class IRI="#ParticipantEntity"/>
+        <Class IRI="#SystemValidationEntity"/>
     </SubClassOf>
     <SubClassOf>
-        <Class abbreviatedIRI="efbo-v:System-1_Agent"/>
-        <Class IRI="#System-1_Entity"/>
+        <Class IRI="#System-1_Agent"/>
+        <Class IRI=".owl#System-1_Entity"/>
     </SubClassOf>
     <SubClassOf>
-        <Class abbreviatedIRI="efbo-v:System-1_Event"/>
-        <Class IRI="#System-1_Entity"/>
+        <Class IRI="#System-1_Event"/>
+        <Class IRI=".owl#System-1_Entity"/>
     </SubClassOf>
     <SubClassOf>
-        <Class abbreviatedIRI="efbo-v:System-1_Interface"/>
-        <Class IRI="#System-1_Entity"/>
+        <Class IRI="#System-1_Interface"/>
+        <Class IRI=".owl#System-1_Entity"/>
     </SubClassOf>
     <SubClassOf>
-        <Class abbreviatedIRI="efbo-v:System-2"/>
-        <Class abbreviatedIRI="efbo-v:ParticipantSystem"/>
+        <Class IRI="#System-2"/>
+        <Class IRI="#ParticipantSystem"/>
     </SubClassOf>
     <SubClassOf>
-        <Class abbreviatedIRI="efbo-v:System-2_Agent"/>
-        <Class IRI="#System-2_Entity"/>
+        <Class IRI="#System-2_Agent"/>
+        <Class IRI=".owl#System-2_Entity"/>
     </SubClassOf>
     <SubClassOf>
-        <Class abbreviatedIRI="efbo-v:System-2_Event"/>
-        <Class IRI="#System-2_Entity"/>
+        <Class IRI="#System-2_Event"/>
+        <Class IRI=".owl#System-2_Entity"/>
     </SubClassOf>
     <SubClassOf>
-        <Class abbreviatedIRI="efbo-v:System-2_Interface"/>
-        <Class IRI="#System-2_Entity"/>
+        <Class IRI="#System-2_Interface"/>
+        <Class IRI=".owl#System-2_Entity"/>
     </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SystemValidationEntity"/>
+        <Class IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#Entity"/>
+    </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="#System-1"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/System-1.owl#System-1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#System-2"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/System-2.owl#System-2"/>
+    </ClassAssertion>
     <SubObjectPropertyOf>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentAgent"/>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentEntity"/>
+        <ObjectProperty IRI="#hasConsistentAgent"/>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentAltEvent"/>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentEntity"/>
+        <ObjectProperty IRI="#hasConsistentAltEvent"/>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentEntity"/>
-        <ObjectProperty abbreviatedIRI="efbo-v:systemValidationProperty"/>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
+        <ObjectProperty IRI="#systemValidationProperty"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentEventFlow"/>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentEntity"/>
+        <ObjectProperty IRI="#hasConsistentEventFlow"/>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentNextEvent"/>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentEntity"/>
+        <ObjectProperty IRI="#hasConsistentNextEvent"/>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentPreviousEvent"/>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentEntity"/>
+        <ObjectProperty IRI="#hasConsistentPreviousEvent"/>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingAgent"/>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingEntity"/>
+        <ObjectProperty IRI="#hasMappingAgent"/>
+        <ObjectProperty IRI="#hasMappingEntity"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingEntity"/>
-        <ObjectProperty abbreviatedIRI="efbo-v:systemValidationProperty"/>
+        <ObjectProperty IRI="#hasMappingEntity"/>
+        <ObjectProperty IRI="#systemValidationProperty"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingEvent"/>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingEntity"/>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+        <ObjectProperty IRI="#hasMappingEntity"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingInterface"/>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingEntity"/>
+        <ObjectProperty IRI="#hasMappingInterface"/>
+        <ObjectProperty IRI="#hasMappingEntity"/>
     </SubObjectPropertyOf>
     <FunctionalObjectProperty>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingAgent"/>
+        <ObjectProperty IRI="#hasMappingAgent"/>
     </FunctionalObjectProperty>
     <FunctionalObjectProperty>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingEvent"/>
+        <ObjectProperty IRI="#hasMappingEvent"/>
     </FunctionalObjectProperty>
     <FunctionalObjectProperty>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingInterface"/>
+        <ObjectProperty IRI="#hasMappingInterface"/>
     </FunctionalObjectProperty>
     <SymmetricObjectProperty>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentAltEvent"/>
+        <ObjectProperty IRI="#hasConsistentAltEvent"/>
     </SymmetricObjectProperty>
     <SymmetricObjectProperty>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentEntity"/>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
     </SymmetricObjectProperty>
     <SymmetricObjectProperty>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentEventFlow"/>
+        <ObjectProperty IRI="#hasConsistentEventFlow"/>
     </SymmetricObjectProperty>
     <SymmetricObjectProperty>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentNextEvent"/>
+        <ObjectProperty IRI="#hasConsistentNextEvent"/>
     </SymmetricObjectProperty>
     <SymmetricObjectProperty>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentPreviousEvent"/>
+        <ObjectProperty IRI="#hasConsistentPreviousEvent"/>
     </SymmetricObjectProperty>
     <SymmetricObjectProperty>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingAgent"/>
+        <ObjectProperty IRI="#hasMappingAgent"/>
     </SymmetricObjectProperty>
     <SymmetricObjectProperty>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingEvent"/>
+        <ObjectProperty IRI="#hasMappingEvent"/>
     </SymmetricObjectProperty>
     <SymmetricObjectProperty>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingInterface"/>
+        <ObjectProperty IRI="#hasMappingInterface"/>
     </SymmetricObjectProperty>
     <ObjectPropertyDomain>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingAgent"/>
-        <Class abbreviatedIRI="efbo-v:System-1_Agent"/>
+        <ObjectProperty IRI="#hasMappingAgent"/>
+        <Class IRI="#System-1_Agent"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingEvent"/>
-        <Class abbreviatedIRI="efbo-v:System-1_Event"/>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+        <Class IRI="#System-1_Event"/>
     </ObjectPropertyDomain>
     <ObjectPropertyRange>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingAgent"/>
-        <Class abbreviatedIRI="efbo-v:System-2_Agent"/>
+        <ObjectProperty IRI="#hasMappingAgent"/>
+        <Class IRI="#System-2_Agent"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty abbreviatedIRI="efbo-v:hasMappingEvent"/>
-        <Class abbreviatedIRI="efbo-v:System-2_Event"/>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+        <Class IRI="#System-2_Event"/>
     </ObjectPropertyRange>
     <DLSafeRule>
         <Annotation>
@@ -429,13 +437,13 @@
         </Annotation>
         <Body>
             <ClassAtom>
-                <Class abbreviatedIRI="efbo-v:ConsistentEvent"/>
+                <Class IRI="#ConsistentEvent"/>
                 <Variable abbreviatedIRI="efbo-v:x"/>
             </ClassAtom>
         </Body>
         <Head>
             <ClassAtom>
-                <Class abbreviatedIRI="efbo-v:ConsistentEntity"/>
+                <Class IRI="#ConsistentEntity"/>
                 <Variable abbreviatedIRI="efbo-v:x"/>
             </ClassAtom>
         </Head>
@@ -455,24 +463,24 @@
         </Annotation>
         <Body>
             <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo-v:hasMappingInterface"/>
+                <ObjectProperty IRI="#hasMappingInterface"/>
                 <Variable abbreviatedIRI="efbo-v:xi"/>
                 <Variable abbreviatedIRI="efbo-v:xpi"/>
             </ObjectPropertyAtom>
             <ObjectPropertyAtom>
                 <ObjectProperty abbreviatedIRI="efbo:hasInteractionWith"/>
-                <Variable abbreviatedIRI="efbo-v:xpi"/>
+                <Variable abbreviatedIRI="efbo-v:xi"/>
                 <Variable abbreviatedIRI="efbo-v:xa"/>
             </ObjectPropertyAtom>
             <ObjectPropertyAtom>
                 <ObjectProperty abbreviatedIRI="efbo:hasInteractionWith"/>
-                <Variable abbreviatedIRI="efbo-v:xi"/>
+                <Variable abbreviatedIRI="efbo-v:xpi"/>
                 <Variable abbreviatedIRI="efbo-v:xa"/>
             </ObjectPropertyAtom>
         </Body>
         <Head>
             <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentAgent"/>
+                <ObjectProperty IRI="#hasConsistentAgent"/>
                 <Variable abbreviatedIRI="efbo-v:xi"/>
                 <Variable abbreviatedIRI="efbo-v:xpi"/>
             </ObjectPropertyAtom>
@@ -493,12 +501,7 @@
         </Annotation>
         <Body>
             <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo:hasInterface"/>
-                <Variable abbreviatedIRI="efbo-v:xp"/>
-                <Variable abbreviatedIRI="efbo-v:xpi"/>
-            </ObjectPropertyAtom>
-            <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentEventFlow"/>
+                <ObjectProperty IRI="#hasConsistentEventFlow"/>
                 <Variable abbreviatedIRI="efbo-v:x"/>
                 <Variable abbreviatedIRI="efbo-v:xp"/>
             </ObjectPropertyAtom>
@@ -507,10 +510,15 @@
                 <Variable abbreviatedIRI="efbo-v:x"/>
                 <Variable abbreviatedIRI="efbo-v:xi"/>
             </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty abbreviatedIRI="efbo:hasInterface"/>
+                <Variable abbreviatedIRI="efbo-v:xp"/>
+                <Variable abbreviatedIRI="efbo-v:xpi"/>
+            </ObjectPropertyAtom>
         </Body>
         <Head>
             <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo-v:hasMappingInterface"/>
+                <ObjectProperty IRI="#hasMappingInterface"/>
                 <Variable abbreviatedIRI="efbo-v:xi"/>
                 <Variable abbreviatedIRI="efbo-v:xpi"/>
             </ObjectPropertyAtom>
@@ -531,12 +539,7 @@
         </Annotation>
         <Body>
             <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo:hasPreviousEvent"/>
-                <Variable abbreviatedIRI="efbo-v:yp"/>
-                <Variable abbreviatedIRI="efbo-v:xp"/>
-            </ObjectPropertyAtom>
-            <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo-v:hasMappingEvent"/>
+                <ObjectProperty IRI="#hasMappingEvent"/>
                 <Variable abbreviatedIRI="efbo-v:y"/>
                 <Variable abbreviatedIRI="efbo-v:yp"/>
             </ObjectPropertyAtom>
@@ -545,10 +548,15 @@
                 <Variable abbreviatedIRI="efbo-v:x"/>
                 <Variable abbreviatedIRI="efbo-v:y"/>
             </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty abbreviatedIRI="efbo:hasPreviousEvent"/>
+                <Variable abbreviatedIRI="efbo-v:yp"/>
+                <Variable abbreviatedIRI="efbo-v:xp"/>
+            </ObjectPropertyAtom>
         </Body>
         <Head>
             <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentPreviousEvent"/>
+                <ObjectProperty IRI="#hasConsistentPreviousEvent"/>
                 <Variable abbreviatedIRI="efbo-v:y"/>
                 <Variable abbreviatedIRI="efbo-v:yp"/>
             </ObjectPropertyAtom>
@@ -569,17 +577,12 @@
         </Annotation>
         <Body>
             <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo:hasNextEvent"/>
-                <Variable abbreviatedIRI="efbo-v:yp"/>
-                <Variable abbreviatedIRI="efbo-v:zp"/>
-            </ObjectPropertyAtom>
-            <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo-v:hasMappingEvent"/>
+                <ObjectProperty IRI="#hasMappingEvent"/>
                 <Variable abbreviatedIRI="efbo-v:zp"/>
                 <Variable abbreviatedIRI="efbo-v:z"/>
             </ObjectPropertyAtom>
             <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo-v:hasMappingEvent"/>
+                <ObjectProperty IRI="#hasMappingEvent"/>
                 <Variable abbreviatedIRI="efbo-v:y"/>
                 <Variable abbreviatedIRI="efbo-v:yp"/>
             </ObjectPropertyAtom>
@@ -588,10 +591,15 @@
                 <Variable abbreviatedIRI="efbo-v:z"/>
                 <Variable abbreviatedIRI="efbo-v:y"/>
             </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty abbreviatedIRI="efbo:hasNextEvent"/>
+                <Variable abbreviatedIRI="efbo-v:yp"/>
+                <Variable abbreviatedIRI="efbo-v:zp"/>
+            </ObjectPropertyAtom>
         </Body>
         <Head>
             <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentNextEvent"/>
+                <ObjectProperty IRI="#hasConsistentNextEvent"/>
                 <Variable abbreviatedIRI="efbo-v:y"/>
                 <Variable abbreviatedIRI="efbo-v:yp"/>
             </ObjectPropertyAtom>
@@ -612,7 +620,7 @@
         </Annotation>
         <Body>
             <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo-v:hasMappingEvent"/>
+                <ObjectProperty IRI="#hasMappingEvent"/>
                 <Variable abbreviatedIRI="efbo-v:xa"/>
                 <Variable abbreviatedIRI="efbo-v:xpa"/>
             </ObjectPropertyAtom>
@@ -629,12 +637,12 @@
         </Body>
         <Head>
             <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentAltEvent"/>
+                <ObjectProperty IRI="#hasConsistentAltEvent"/>
                 <Variable abbreviatedIRI="efbo-v:xpa"/>
                 <Variable abbreviatedIRI="efbo-v:xa"/>
             </ObjectPropertyAtom>
             <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentAltEvent"/>
+                <ObjectProperty IRI="#hasConsistentAltEvent"/>
                 <Variable abbreviatedIRI="efbo-v:xa"/>
                 <Variable abbreviatedIRI="efbo-v:xpa"/>
             </ObjectPropertyAtom>
@@ -655,127 +663,127 @@
         </Annotation>
         <Body>
             <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentNextEvent"/>
+                <ObjectProperty IRI="#hasConsistentPreviousEvent"/>
                 <Variable abbreviatedIRI="efbo-v:x"/>
                 <Variable abbreviatedIRI="efbo-v:xp"/>
             </ObjectPropertyAtom>
             <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentPreviousEvent"/>
+                <ObjectProperty IRI="#hasConsistentNextEvent"/>
                 <Variable abbreviatedIRI="efbo-v:x"/>
                 <Variable abbreviatedIRI="efbo-v:xp"/>
             </ObjectPropertyAtom>
         </Body>
         <Head>
             <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentEventFlow"/>
-                <Variable abbreviatedIRI="efbo-v:xp"/>
+                <ObjectProperty IRI="#hasConsistentEventFlow"/>
                 <Variable abbreviatedIRI="efbo-v:x"/>
+                <Variable abbreviatedIRI="efbo-v:xp"/>
             </ObjectPropertyAtom>
             <ObjectPropertyAtom>
-                <ObjectProperty abbreviatedIRI="efbo-v:hasConsistentEventFlow"/>
-                <Variable abbreviatedIRI="efbo-v:x"/>
+                <ObjectProperty IRI="#hasConsistentEventFlow"/>
                 <Variable abbreviatedIRI="efbo-v:xp"/>
+                <Variable abbreviatedIRI="efbo-v:x"/>
             </ObjectPropertyAtom>
         </Head>
     </DLSafeRule>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:ConsistentAgent</AbbreviatedIRI>
+        <IRI>#ConsistentAgent</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Consistent Agent</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:ConsistentAltEvent</AbbreviatedIRI>
+        <IRI>#ConsistentAltEvent</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Consistent Alternate Event</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:ConsistentEntity</AbbreviatedIRI>
+        <IRI>#ConsistentEntity</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Consistent Entity</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:ConsistentEvent</AbbreviatedIRI>
+        <IRI>#ConsistentEvent</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Consistent Event</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:ConsistentInterface</AbbreviatedIRI>
+        <IRI>#ConsistentInterface</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Consistent Interface</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:InconsistentAgent</AbbreviatedIRI>
+        <IRI>#InconsistentAgent</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Inconsistent Agent</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:InconsistentEntity</AbbreviatedIRI>
+        <IRI>#InconsistentEntity</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Inconsistent Entity</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:InconsistentEvent</AbbreviatedIRI>
+        <IRI>#InconsistentEvent</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Inconsistent Event</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:InconsistentInterface</AbbreviatedIRI>
+        <IRI>#InconsistentInterface</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Inconsistent Interface</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:ParticipantEntity</AbbreviatedIRI>
+        <IRI>#ParticipantEntity</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Participant Entity</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:ParticipantSystem</AbbreviatedIRI>
+        <IRI>#ParticipantSystem</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Participant System</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:System-1_Agent</AbbreviatedIRI>
+        <IRI>#System-1_Agent</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System-1 Agent</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:System-1_Event</AbbreviatedIRI>
+        <IRI>#System-1_Event</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System-1 Event</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:System-1_Interface</AbbreviatedIRI>
+        <IRI>#System-1_Interface</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System-1 Interface</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:System-2_Agent</AbbreviatedIRI>
+        <IRI>#System-2_Agent</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System-2 Agent</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:System-2_Event</AbbreviatedIRI>
+        <IRI>#System-2_Event</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System-2 Event</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:System-2_Interface</AbbreviatedIRI>
+        <IRI>#System-2_Interface</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System-2 Interface</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>efbo-v:SystemValidationEntity</AbbreviatedIRI>
+        <IRI>#SystemValidationEntity</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System Validation Entity</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#System-1_Entity</IRI>
+        <IRI>.owl#System-1_Entity</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System-1 Entity</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#System-2_Entity</IRI>
+        <IRI>.owl#System-2_Entity</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System-2 Entity</Literal>
     </AnnotationAssertion>
 </Ontology>

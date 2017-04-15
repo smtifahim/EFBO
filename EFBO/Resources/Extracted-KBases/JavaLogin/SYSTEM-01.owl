@@ -129,9 +129,9 @@
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java.EVENT_END -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java.EVENT_END -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java.EVENT_END">
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java.EVENT_END">
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _welcomeTheUser hasNextEvent EVENT_END
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -141,10 +141,10 @@ Line Number: 19</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java.EVENT_START -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java.EVENT_START -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java.EVENT_START">
-        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._tapAppIcon"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java.EVENT_START">
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._tapAppIcon"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: EVENT_START hasNextEvent _tapAppIcon
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -154,9 +154,9 @@ Line Number: 5</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._appIcon -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._appIcon -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._appIcon">
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._appIcon">
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _tapAppIcon hasInterface _appIcon
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -169,9 +169,9 @@ Line Number: 45</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._appInterface -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._appInterface -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._appInterface">
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._appInterface">
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _clientAgent interactsWith _appInterface
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -193,13 +193,13 @@ Line Number: 38</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._clientAgent -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._clientAgent -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._clientAgent">
-        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._appInterface"/>
-        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._logininterfaceUI"/>
-        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._tryAgainUI"/>
-        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._welcomeUserUI"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._clientAgent">
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._appInterface"/>
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._logininterfaceUI"/>
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._tryAgainUI"/>
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._welcomeUserUI"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _clientAgent interactsWith _appInterface
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -218,9 +218,9 @@ Line Number: 52</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._enterPassword -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._enterPassword -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._enterPassword">
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._enterPassword">
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _passwordField isInterfaceOf _enterPassword
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -233,9 +233,9 @@ Line Number: 10</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._enterUserName -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._enterUserName -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._enterUserName">
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._enterUserName">
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _presentLoginUI hasNextEvent _enterUserName
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -248,10 +248,10 @@ Line Number: 28</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._function_1 -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._function_1 -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._function_1">
-        <efbo:hasInitialEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._tapAppIcon"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._function_1">
+        <efbo:hasInitialEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._tapAppIcon"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _function_1 hasInitialEvent _tapAppIcon
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -264,10 +264,10 @@ Line Number: 13</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._function_2 -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._function_2 -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._function_2">
-        <efbo:hasInitialEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._verifyUserInfo"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._function_2">
+        <efbo:hasInitialEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._verifyUserInfo"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _function_2 hasInitialEvent _verifyUserInfo
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -280,11 +280,11 @@ Line Number: 20</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._launchAppInterface -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._launchAppInterface -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._launchAppInterface">
-        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._appInterface"/>
-        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._presentLoginUI"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._launchAppInterface">
+        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._appInterface"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._presentLoginUI"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _launchAppInterface hasInterface _appInterface
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -300,10 +300,10 @@ Line Number: 7</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._loginButton -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._loginButton -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._loginButton">
-        <efbo:isInterfaceOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._tapLoginButton"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._loginButton">
+        <efbo:isInterfaceOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._tapLoginButton"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _loginButton isInterfaceOf _tapLoginButton
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -319,13 +319,13 @@ Line Number: 50</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._loginInterfaceUI -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._loginInterfaceUI -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._loginInterfaceUI">
-        <efbo:hasElement rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._loginButton"/>
-        <efbo:hasElement rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._passwordField"/>
-        <efbo:hasElement rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._userNameField"/>
-        <efbo:isElementOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._appInterface"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._loginInterfaceUI">
+        <efbo:hasElement rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._loginButton"/>
+        <efbo:hasElement rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._passwordField"/>
+        <efbo:hasElement rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._userNameField"/>
+        <efbo:isElementOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._appInterface"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _loginInterfaceUI hasElement _loginButton
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -350,9 +350,9 @@ Line Number: 42</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._logininterfaceUI -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._logininterfaceUI -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._logininterfaceUI">
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._logininterfaceUI">
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _clientAgent interactsWith _logininterfaceUI
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -362,10 +362,10 @@ Line Number: 47</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._passwordField -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._passwordField -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._passwordField">
-        <efbo:isInterfaceOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._enterPassword"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._passwordField">
+        <efbo:isInterfaceOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._enterPassword"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _loginInterfaceUI hasElement _passwordField
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -381,13 +381,13 @@ Line Number: 49</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._presentLoginUI -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._presentLoginUI -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._presentLoginUI">
-        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._loginInterfaceUI"/>
-        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._enterPassword"/>
-        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._enterUserName"/>
-        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._tapLoginButton"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._presentLoginUI">
+        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._loginInterfaceUI"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._enterPassword"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._enterUserName"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._tapLoginButton"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _launchAppInterface hasNextEvent _presentLoginUI
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -412,11 +412,11 @@ Line Number: 16</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._presentTryAgainUI -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._presentTryAgainUI -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._presentTryAgainUI">
-        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._tryAgainUI"/>
-        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._presentLoginUI"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._presentTryAgainUI">
+        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._tryAgainUI"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._presentLoginUI"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _presentTryAgainUI hasInterface _tryAgainUI
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -435,10 +435,10 @@ Line Number: 18</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._serverAgent -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._serverAgent -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._serverAgent">
-        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._serverInterface"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._serverAgent">
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._serverInterface"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _serverAgent interactsWith _serverInterface
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -448,9 +448,9 @@ Line Number: 51</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._serverInterface -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._serverInterface -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._serverInterface">
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._serverInterface">
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _serverAgent interactsWith _serverInterface
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -463,11 +463,11 @@ Line Number: 36</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._tapAppIcon -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._tapAppIcon -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._tapAppIcon">
-        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._appIcon"/>
-        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._launchAppInterface"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._tapAppIcon">
+        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._appIcon"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._launchAppInterface"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: EVENT_START hasNextEvent _tapAppIcon
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -486,11 +486,11 @@ Line Number: 7</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._tapLoginButton -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._tapLoginButton -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._tapLoginButton">
-        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._verifyUserInfo"/>
-        <efbo:isFinalEventOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._function_1"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._tapLoginButton">
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._verifyUserInfo"/>
+        <efbo:isFinalEventOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._function_1"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _loginButton isInterfaceOf _tapLoginButton
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -509,11 +509,11 @@ Line Number: 13</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._tryAgainUI -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._tryAgainUI -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._tryAgainUI">
-        <efbo:hasElement rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._loginInterfaceUI"/>
-        <efbo:isElementOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._appInterface"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._tryAgainUI">
+        <efbo:hasElement rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._loginInterfaceUI"/>
+        <efbo:isElementOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._appInterface"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _clientAgent interactsWith _tryAgainUI
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -532,13 +532,13 @@ Line Number: 41</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._userAgent -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._userAgent -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._userAgent">
-        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._appIcon"/>
-        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._loginButton"/>
-        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._passwordField"/>
-        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._userNameField"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._userAgent">
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._appIcon"/>
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._loginButton"/>
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._passwordField"/>
+        <efbo:interactsWith rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._userNameField"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _userAgent interactsWith _appIcon
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -557,10 +557,10 @@ Line Number: 48</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._userNameField -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._userNameField -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._userNameField">
-        <efbo:isInterfaceOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._enterUserName"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._userNameField">
+        <efbo:isInterfaceOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._enterUserName"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _loginInterfaceUI hasElement _userNameField
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -576,12 +576,12 @@ Line Number: 28</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._verifyUserInfo -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._verifyUserInfo -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._verifyUserInfo">
-        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._serverInterface"/>
-        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._presentTryAgainUI"/>
-        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._welcomeTheUser"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._verifyUserInfo">
+        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._serverInterface"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._presentTryAgainUI"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._welcomeTheUser"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _function_2 hasInitialEvent _verifyUserInfo
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -603,9 +603,9 @@ Line Number: 17</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._welcomeLabel -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._welcomeLabel -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._welcomeLabel">
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._welcomeLabel">
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _welcomeUserUI hasElement _welcomeLabel
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -615,13 +615,13 @@ Line Number: 39</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._welcomeTheUser -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._welcomeTheUser -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._welcomeTheUser">
-        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._welcomeUserUI"/>
-        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java.EVENT_END"/>
-        <efbo:isAlternateEventOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._presentTryAgainUI"/>
-        <efbo:isFinalEventOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._function_2"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._welcomeTheUser">
+        <efbo:hasInterface rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._welcomeUserUI"/>
+        <efbo:hasNextEvent rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java.EVENT_END"/>
+        <efbo:isAlternateEventOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._presentTryAgainUI"/>
+        <efbo:isFinalEventOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._function_2"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _verifyUserInfo hasNextEvent _welcomeTheUser
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -643,11 +643,11 @@ Line Number: 20</efbo:annotationText>
     
 
 
-    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._welcomeUserUI -->
+    <!-- http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._welcomeUserUI -->
 
-    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._welcomeUserUI">
-        <efbo:hasElement rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._welcomeLabel"/>
-        <efbo:isElementOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#IOS_Login.testing.java._appInterface"/>
+    <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._welcomeUserUI">
+        <efbo:hasElement rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._welcomeLabel"/>
+        <efbo:isElementOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#JavaLogin.testing.java._appInterface"/>
         <efbo:isSystemEntityOf rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01"/>
         <efbo:annotationText rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Annotation: _clientAgent interactsWith _welcomeUserUI
 Location: file://C:/Users/Fahim/git/EFBO-PC/EFBO/Resources/Annotated-Sources/testing.java
@@ -670,7 +670,7 @@ Line Number: 38</efbo:annotationText>
 
     <owl:NamedIndividual rdf:about="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/SYSTEM-01.owl#SYSTEM-01">
         <rdf:type rdf:resource="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#System"/>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IOS_Login</rdfs:label>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">JavaLogin</rdfs:label>
     </owl:NamedIndividual>
 </rdf:RDF>
 
