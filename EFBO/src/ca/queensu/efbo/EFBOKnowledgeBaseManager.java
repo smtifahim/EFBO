@@ -3,6 +3,8 @@
  */
 package ca.queensu.efbo;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -10,6 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 import org.semanticweb.owlapi.io.StreamDocumentTarget;
 import org.semanticweb.owlapi.model.IRI;
@@ -23,7 +29,6 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
-
 
 /**
  * @author Fahim
@@ -100,8 +105,8 @@ public class EFBOKnowledgeBaseManager
 			throws OWLOntologyCreationException,
 			OWLOntologyStorageException 
 	{
-//        efboKBase.getOWLOntologyManager().saveOntology(efboKBase, new StreamDocumentTarget(System.out));
-//       
+		// efboKBase.getOWLOntologyManager().saveOntology(efboKBase, new StreamDocumentTarget(System.out));
+     
         String fileLocation = KBASE_File_Location + "/" + systemName
 				   		    + "/" + systemID + ".owl";
         File defaultSaveLocation = new File(fileLocation);
@@ -109,14 +114,25 @@ public class EFBOKnowledgeBaseManager
         
         efboKBase.getOWLOntologyManager().saveOntology(efboKBase, kBaseIRI);
         
-        String savedSucessMessage = "\nAn EFBO Knowledgebase has been Saved."
-        		      			  + "\nLocation: " + fileLocation
-        		      			  + String.format(this.efboKBaseManager.printOntologyMetrics());
+        String savedSuccessMessage = "\nThe EFBO Knowledgebase for " + this.getSystemName() + " has been Saved."
+        		      			   + "\nLocation: " + fileLocation + "  ";
+        		      			  
             
         
         this.localKBLocation = fileLocation;        
-        System.out.println(savedSucessMessage);        
-        JOptionPane.showMessageDialog(null, savedSucessMessage, "Success!",
+        System.out.println(savedSuccessMessage);
+        this.efboKBaseManager.printOntologyMetrics();
+        
+        JTextArea textArea = new JTextArea(18, 70);
+        textArea.setText(savedSuccessMessage + "\n" + this.efboKBaseManager.getOntologyMetrics());
+        textArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+           
+        textArea.setEditable(false);
+        textArea.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), 
+        		           "EFBO Knowledge Base for " + this.getSystemName() , TitledBorder.CENTER,
+        		           TitledBorder.TOP, null, new Color(0, 0, 0)));
+        
+        JOptionPane.showMessageDialog(null, new JScrollPane(textArea), "Success!",
 									  JOptionPane.INFORMATION_MESSAGE);
         
 	}

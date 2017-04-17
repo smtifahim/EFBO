@@ -1,4 +1,6 @@
 package ca.queensu.efbo;
+import java.awt.Color;
+import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
@@ -13,6 +15,10 @@ import java.util.Arrays;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -100,7 +106,7 @@ public class EFBOAnnotationExtractionManager
 					  	
 						if (parsedAnnotations != null && parsedAnnotations.length==3)
 					  	{
-					  	 System.out.println("Annotation Found @Line#" + lineNumber + ">" + annotatedText);
+					  	 System.out.println("Annotation @Line#" + lineNumber + "> " + annotatedText);
 					  	 EFBOAnnotation  currentAnnotation= new EFBOAnnotation(fileLocation, lineNumber, annotatedText);	
 					  	 currentAnnotation.setSubject(parsedAnnotations[0]);
 					  	 currentAnnotation.setPredicate(parsedAnnotations[1]);
@@ -225,7 +231,7 @@ public class EFBOAnnotationExtractionManager
 		final String defaultFilePath = System.getProperty("user.dir") 
   							  		 + "/Resources/Extracted-Annotations"; 
 		JFileChooser fileChooser = new JFileChooser(new File(defaultFilePath));
-		fileChooser.setDialogTitle("Specify the file name to save your annotations");   
+		fileChooser.setDialogTitle("Specify the file to save your annotations");   
 		 
 		int userSelection = fileChooser.showSaveDialog(fileSaveFrame);
 		 
@@ -239,14 +245,23 @@ public class EFBOAnnotationExtractionManager
 				FileWriter fileWriter = new FileWriter(fileToSave.getAbsolutePath());
 				BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 				String fileLocation = "", prevLocation = "";
+				String messageText="\n\nFollowing is the list of annotations:";
 				
 				for (EFBOAnnotation annotation : annotations)
 				 {	
 					fileLocation = annotation.getFileLocation();
 					if (fileLocation != prevLocation)
-					bufferedWriter.write("\nLocation:" + fileLocation + "\n");
+					{
+						bufferedWriter.write("\nLocation:" + fileLocation + "\n");
+						messageText += "\nLocation:" + fileLocation + "\n";						
+					}
+					
 					bufferedWriter.write("Line:" + annotation.getLineNumber() + "\t");
 					bufferedWriter.write(annotation.getAnnotatedText() + "\n");
+					
+					messageText += "Annotation @Line#" + annotation.getLineNumber() + "> "
+							    + annotation.getAnnotatedText() + "\n";
+					
 					prevLocation = fileLocation;
 				 }
 				
@@ -254,11 +269,20 @@ public class EFBOAnnotationExtractionManager
 				bufferedWriter.close();
 				
 				String messageSavedSuccess = "Annotations Saved Successfully!\n"
-							    			 + "File Location> " 
+							    			 + "Save Location> " 
 							    			 + fileToSave.getAbsolutePath();
 				System.out.println(messageSavedSuccess);				
-				JOptionPane.showMessageDialog(fileSaveFrame, messageSavedSuccess, "Success!", 
-											  JOptionPane.INFORMATION_MESSAGE);
+							
+			    JTextArea textArea = new JTextArea(25, 90);
+			    textArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+			    textArea.append(messageSavedSuccess + messageText);
+			    textArea.setCaretPosition(0);
+			   	textArea.setEditable(false);
+		        textArea.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), 
+		        		           "Extracted Anotations", TitledBorder.CENTER,
+		        		           TitledBorder.TOP, null, new Color(0, 0, 0)));
+		        JOptionPane.showMessageDialog(fileSaveFrame, new JScrollPane(textArea), "Success!", 
+						  JOptionPane.INFORMATION_MESSAGE);
 				
 			}
 			
@@ -276,7 +300,7 @@ public class EFBOAnnotationExtractionManager
 		  {
 			 try 
 			  {
-				System.out.println( "\nSelected File#"+ (i+1));
+				System.out.println( "\nSelected File#" + (i+1));
 				System.out.println ("File Location> " + selectedFiles[i].getCanonicalPath());
 				this.annotations = extractAnnotations(selectedFiles[i]);
 			  } 

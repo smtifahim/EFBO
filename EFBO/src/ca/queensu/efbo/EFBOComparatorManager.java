@@ -1,10 +1,17 @@
 package ca.queensu.efbo;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -23,14 +30,13 @@ public class EFBOComparatorManager
 	private String firstSystemName;
 	private String secondSystemName;
 	
-	private static final String FIRST_SYSTEM_ID = "System-1";
-	private static final String SECOND_SYSTEM_ID = "System-2";
-	
-	private OWLOntology efboValidatorOntology;
+    private OWLOntology efboValidatorOntology;
 	private EFBOOntologyManager efboValidatorManager;
 	
 	private static final String 
-	EFBO_Validator_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-v.owl";
+	EFBO_V_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-v.owl";
+	private static final String FIRST_SYSTEM_ID = "System-1";
+	private static final String SECOND_SYSTEM_ID = "System-2";
 
 	
 	//Default Constructor. 
@@ -54,7 +60,6 @@ public class EFBOComparatorManager
 		this.setFirstSystemName();
 		this.setFirstSystemAnnotations();
 		this.setFirstSystemKBaseManager();
-		
 		
 	}
 	
@@ -93,31 +98,14 @@ public class EFBOComparatorManager
 		
 		OWLNamedIndividual kBaseSystemID = kBase.getSystemIDInstance();
 			
-		IRI classIRI = IRI.create(EFBO_Validator_URI + "#" + systemID);		
+		IRI classIRI = IRI.create(EFBO_V_URI + "#" + systemID);		
 		OWLClass systemClass = efboValidatorManager.getOWLDataFactory().getOWLClass(classIRI);
 		
 		efboValidatorManager.assertOWLNamedIndividual(kBaseSystemID, systemClass);
 				
 	}
 	
-	private void displayEFBOComparatorInterface()
-	{
-		String firstDialog = "Please Click OK to Continue.";
-		int OKOption = JOptionPane.showConfirmDialog(null, firstDialog, 
-													"Welcome to EFBO Comparator", 
-													JOptionPane.OK_CANCEL_OPTION);
-		if (OKOption == JOptionPane.OK_OPTION)
-		{
-			System.out.println("> Wecome to EFBO Comparator!");
-		}	
-		else
-		{
-			System.out.println("> EXIT: EFBO Comparator Terminated.");
-			System.exit(1);
-		}
-	}
-	
-	public void importFirstSystemKBase() throws Exception
+    public void importFirstSystemKBase() throws Exception
 	{
 		this.importEFBOKnowledgeBase(this.firstSystemKBaseManager);
 	}
@@ -234,15 +222,24 @@ public class EFBOComparatorManager
 	public void loadEFBOValidatorOntology() throws Exception
 	{
 		this.efboValidatorManager = new EFBOOntologyManager();
-	    this.efboValidatorManager.loadOntology("EFBO-V", EFBO_Validator_URI);
+	    this.efboValidatorManager.loadOntology("EFBO-V", EFBO_V_URI);
 	    this.efboValidatorOntology = efboValidatorManager.getLoadedOntology();
 	    
 	    String loadSuccessMessage = "\nThe EFBO-V Ontology has been Loaded Successfully.";	    						  
 	    System.out.println(loadSuccessMessage);
-	    JOptionPane.showMessageDialog(null, loadSuccessMessage 
-	    			+ String.format(efboValidatorManager.printOntologyMetrics()),
-	    			"Success!", JOptionPane.INFORMATION_MESSAGE);
 	    
+	    JTextArea textArea = new JTextArea(25, 65);
+	    textArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+	    textArea.append(loadSuccessMessage + "\n" + efboValidatorManager.getOntologyMetrics());
+	    textArea.setCaretPosition(0);
+	   	textArea.setEditable(false);
+        textArea.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), 
+        		           "About EFBO-V.owl", TitledBorder.CENTER,
+        		           TitledBorder.TOP, null, new Color(0, 0, 0)));
+        
+        JOptionPane.showMessageDialog(null, new JScrollPane(textArea), "Success!", 
+				  JOptionPane.INFORMATION_MESSAGE);
+	    	        
 	}
 	
 	private void saveEFBOValidatorOntology()

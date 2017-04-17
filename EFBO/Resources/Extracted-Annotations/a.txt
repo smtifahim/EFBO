@@ -1,4 +1,14 @@
 
+Location:C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Annotated-Sources\Testing3.java
+Line:2	EVENT_START hasTimePoint 1
+Line:3	_function_1 hasInitialEvent _tapAppIcon
+Line:4	_tapAppIcon hasTimePoint 2
+Line:5	_launchAppInterface hasTimePoint 3
+Line:6	_tapAppIcon hasInterface _appIcon
+Line:7	_launchAppInterface hasInterface _appInterface
+Line:8	_presentLoginUI hasInterface _loginInterfaceUI
+Line:9	_loginInterfaceUI isElementOf _appInterface
+
 Location:C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Annotated-Sources\testing.java
 Line:5	EVENT_START hasNextEvent _tapAppIcon
 Line:6	_function_1 hasInitialEvent _tapAppIcon
