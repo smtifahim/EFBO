@@ -421,26 +421,24 @@ public String extractOWLClassId(OWLEntity cls)
   manager.applyChange(new AddAxiom(loadedOntology, factory.getOWLSubClassOfAxiom(cls, parentClass))); 
  } 
  
-public void printOntologyMetrics()
+public String printOntologyMetrics()
  {
-	System.out.println("--------------------------------------------------------"); 
-	System.out.println("Ontology Metrics");
-	System.out.println("--------------------------------------------------------"); 
-    System.out.println("Ontology Name     : " + this.getOntologyName());
-    System.out.println("Ontology IRI      : " + this.getOntologyIRI());
-    System.out.println("Ontology Format   : " + manager.getOntologyFormat(loadedOntology));
-    
-    System.out.println("Named Classes     : "
-    				   + loadedOntology.getClassesInSignature().size());
-    System.out.println("Object Properties : " 
-    				   + loadedOntology.getObjectPropertiesInSignature().size());
-    System.out.println("Individuals       : " 
-    				   + loadedOntology.getIndividualsInSignature().size());
-    System.out.println("Logical Axioms    : " 
-    				   + loadedOntology.getLogicalAxioms().size());
-    System.out.println("All Axioms        : " 
-			   		   + loadedOntology.getAxioms().size());
-    System.out.println("--------------------------------------------------------"); 
+	String ontologyMetrics = "\n--------------------------------------------------------"
+						   + "\nOntology Metrics"
+						   + "\n--------------------------------------------------------"
+						   + "\nOntology Name     : " + this.getOntologyName()
+						   + "\nOntology IRI      : " + this.getOntologyIRI()
+						   + "\nOntology Format   : " + manager.getOntologyFormat(loadedOntology)
+						   + "\nNamed Classes     : " + loadedOntology.getClassesInSignature().size()
+						   + "\nObject Properties : " + loadedOntology.getObjectPropertiesInSignature().size()
+						   + "\nIndividuals       : " + loadedOntology.getIndividualsInSignature().size()
+						   + "\nLogical Axioms    : " + loadedOntology.getLogicalAxioms().size()
+						   + "\nAll Axioms        : "   + loadedOntology.getAxioms().size()
+						   + "\n--------------------------------------------------------";
+	
+	System.out.println(ontologyMetrics);
+	
+	return ontologyMetrics;	
  }
 
 public void printAllObjectProperties()

@@ -14,8 +14,8 @@ import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 
 public class EFBOComparatorManager 
 {
-	private EFBOKnowledgeBaseManager firstSystemKBase;
-	private EFBOKnowledgeBaseManager secondSystemKBase;
+	private EFBOKnowledgeBaseManager firstSystemKBaseManager;
+	private EFBOKnowledgeBaseManager secondSystemKBaseManager;
 	
 	private ArrayList<EFBOAnnotation> firstSystemAnnotations;
 	private ArrayList<EFBOAnnotation> secondSystemAnnotations;
@@ -26,42 +26,67 @@ public class EFBOComparatorManager
 	private static final String FIRST_SYSTEM_ID = "System-1";
 	private static final String SECOND_SYSTEM_ID = "System-2";
 	
-	private OWLOntology efboValidator;
+	private OWLOntology efboValidatorOntology;
 	private EFBOOntologyManager efboValidatorManager;
 	
 	private static final String 
 	EFBO_Validator_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-v.owl";
-	
-	private static final String 
-	EFBO_V_File_Location = System.getProperty("user.dir") 
-		   			     + "/Resources/Ontologies/";  
+
 	
 	//Default Constructor. 
 	public EFBOComparatorManager() throws Exception
 	{
-		this.displayEFBOComparatorInterface();
-		this.firstSystemName = this.getSystemName(FIRST_SYSTEM_ID);
-		this.firstSystemAnnotations = this.getSystemAnnotations();
-		this.firstSystemKBase = this.getEFBOKnowledeBase(FIRST_SYSTEM_ID,
-								firstSystemName, firstSystemAnnotations);
+		
+		firstSystemKBaseManager = null;
+		firstSystemAnnotations = null;
+		firstSystemName = null;
+		
+		secondSystemKBaseManager = null;
+		secondSystemAnnotations = null;
+		secondSystemName = null;
+		
+		efboValidatorOntology = null;
+		efboValidatorManager = null;
+	}
+	
+	public void loadFirstSystem() throws Exception
+	{
+		this.setFirstSystemName();
+		this.setFirstSystemAnnotations();
+		this.setFirstSystemKBaseManager();
 		
 		
-		this.secondSystemName = this.getSystemName(SECOND_SYSTEM_ID);
-		this.secondSystemAnnotations = this.getSystemAnnotations();
-		this.secondSystemKBase = this.getEFBOKnowledeBase(SECOND_SYSTEM_ID, 
-								 secondSystemName, secondSystemAnnotations);
-				
-		this.setEFBOValidatorOntology();
+	}
+	
+	public void loadSecondSystem() throws Exception
+	{
+		this.setSecondSystemName();
+		this.setSecondSystemAnnotations();
+		this.setSecondSystemKBaseManager();
 		
-		this.addKnowledgeBase(this.firstSystemKBase);
-		this.setSystemID(this.firstSystemKBase, FIRST_SYSTEM_ID);
+	}
+	
+	public void mergeLoadedKBases() throws Exception
+	{
+		this.importFirstSystemKBase();
+		this.assertFirstSystemID();
 		
-		this.addKnowledgeBase(this.secondSystemKBase);
-		this.setSystemID(this.secondSystemKBase, SECOND_SYSTEM_ID);
+		this.importSecondSystemKBase();
+		this.assertSecondSystemID();
 		
 		this.saveEFBOValidatorOntology();
-	
 	}
+	
+	public void assertFirstSystemID()
+	{
+		this.setSystemID(this.firstSystemKBaseManager, FIRST_SYSTEM_ID);
+	}
+	
+	public void assertSecondSystemID()
+	{
+		this.setSystemID(this.secondSystemKBaseManager, SECOND_SYSTEM_ID);
+	}
+	
 	
 	private void setSystemID(EFBOKnowledgeBaseManager kBase, String systemID)
 	{
@@ -92,19 +117,42 @@ public class EFBOComparatorManager
 		}
 	}
 	
-    private void addKnowledgeBase(EFBOKnowledgeBaseManager efboKBase) throws Exception
+	public void importFirstSystemKBase() throws Exception
+	{
+		this.importEFBOKnowledgeBase(this.firstSystemKBaseManager);
+	}
+	
+	public void importSecondSystemKBase() throws Exception
+	{
+		this.importEFBOKnowledgeBase(this.secondSystemKBaseManager);
+	}
+	
+    private void importEFBOKnowledgeBase(EFBOKnowledgeBaseManager efboKBaseManager) throws Exception
     {
-    	String fileLocation = efboKBase.getLocalKBLocation();    	
-    	efboValidatorManager.importOWLOntology(efboKBase.getEFBOKnowledgebase(), fileLocation);   
+    	String fileLocation = efboKBaseManager.getLocalKBLocation();    	
+    	efboValidatorManager.importOWLOntology(efboKBaseManager.getEFBOKnowledgeBase(), fileLocation);   
     }
 	
-
-	private EFBOKnowledgeBaseManager getEFBOKnowledeBase(String systemID, String systemName,
+    public void setFirstSystemKBaseManager() throws Exception
+	{
+    	this.firstSystemKBaseManager = this.getEFBOKnowledeBaseManager(FIRST_SYSTEM_ID,
+									   firstSystemName, firstSystemAnnotations);
+		
+	}
+    
+    public void setSecondSystemKBaseManager() throws Exception
+ 	{
+     	this.secondSystemKBaseManager = this.getEFBOKnowledeBaseManager(SECOND_SYSTEM_ID,
+ 									   secondSystemName, secondSystemAnnotations);
+ 		
+ 	}
+    
+	private EFBOKnowledgeBaseManager getEFBOKnowledeBaseManager(String systemID, String systemName,
 									ArrayList<EFBOAnnotation> annotations) throws Exception
 	{
-		EFBOKnowledgeBaseManager efboKBase = new EFBOKnowledgeBaseManager(systemID, systemName);
-		efboKBase.processExtractedAnnotations(annotations);
-		return efboKBase;
+		EFBOKnowledgeBaseManager efboKBaseManager = new EFBOKnowledgeBaseManager(systemID, systemName);
+		efboKBaseManager.processExtractedAnnotations(annotations);
+		return efboKBaseManager;
 	}
 
 	/**
@@ -114,14 +162,26 @@ public class EFBOComparatorManager
 	{
 		return firstSystemAnnotations;
 	}
+	
+	public ArrayList<EFBOAnnotation> getSecondSystemAnnotations()
+	{
+		return secondSystemAnnotations;
+	}
 
-	/**
-	 * @param firstSystemAnnotations the firstSystemAnnotations to set
-	 */
+
+	public void setFirstSystemAnnotations() throws Exception
+	{
+		this.firstSystemAnnotations = this.getSystemAnnotations();
+	}
+	
+	public void setSecondSystemAnnotations() throws Exception
+	{
+		this.secondSystemAnnotations = this.getSystemAnnotations();
+	}
+	
 	private ArrayList<EFBOAnnotation> getSystemAnnotations() throws Exception
 	{
-		EFBOAnnotationExtractionManager annotationExtractor = new EFBOAnnotationExtractionManager();
-		return annotationExtractor.getExtractedAnnotations();		
+		return (new EFBOAnnotationExtractionManager().getExtractedAnnotations());		
 	}
 
 	
@@ -132,7 +192,22 @@ public class EFBOComparatorManager
 	{
 		return firstSystemName;
 	}
+	
+	public String getSecondSystemName()
+	{
+		return secondSystemName;
+	}
 
+	public void setFirstSystemName()
+	{
+		this.firstSystemName = this.getSystemName(FIRST_SYSTEM_ID);
+	}
+	
+	public void setSecondSystemName()
+	{
+		this.secondSystemName = this.getSystemName(SECOND_SYSTEM_ID);
+	}
+	
 	private String getSystemName(String systemID)
 	{
 		String systemName;
@@ -146,41 +221,35 @@ public class EFBOComparatorManager
 	}
 	
 	/**
-	 * @return the secondSystemID
-	 */
-	public String getSecondSystemName()
-	{
-		return secondSystemName;
-	}
-
-	/**
 	 * @return the efboValidatorOntology
 	 */
-	public OWLOntology getEfboValidatorOntology()
+	public OWLOntology getEFBOValidatorOntology()
 	{
-		return efboValidator;
+		return efboValidatorOntology;
 	}
 
 	/**
 	 * load efbo validation ontology.
 	 */
-	public void setEFBOValidatorOntology() throws Exception
+	public void loadEFBOValidatorOntology() throws Exception
 	{
 		this.efboValidatorManager = new EFBOOntologyManager();
 	    this.efboValidatorManager.loadOntology("EFBO-V", EFBO_Validator_URI);
-	    this.efboValidator = efboValidatorManager.getLoadedOntology();
-	    System.out.println("\nThe EFBO-V Ontology has been Loaded Successfully.");
-	    efboValidatorManager.printOntologyMetrics();
+	    this.efboValidatorOntology = efboValidatorManager.getLoadedOntology();
+	    
+	    String loadSuccessMessage = "\nThe EFBO-V Ontology has been Loaded Successfully.";	    						  
+	    System.out.println(loadSuccessMessage);
+	    JOptionPane.showMessageDialog(null, loadSuccessMessage 
+	    			+ String.format(efboValidatorManager.printOntologyMetrics()),
+	    			"Success!", JOptionPane.INFORMATION_MESSAGE);
+	    
 	}
 	
 	private void saveEFBOValidatorOntology()
 			throws OWLOntologyCreationException,
 			OWLOntologyStorageException 
 	{
-//        efboValidator.getOWLOntologyManager()
-//        		 	 .saveOntology(efboValidator, 
-//        		      new StreamDocumentTarget(System.out));
-       
+  
 		JFrame fileSaveFrame = new JFrame();
 		final String defaultFilePath = System.getProperty("user.dir") 
   							  		 + "/Resources/Ontologies/"; 
@@ -193,7 +262,7 @@ public class EFBOComparatorManager
 		{
 			 File fileToSave = fileChooser.getSelectedFile();
 	         IRI efboVIRI = IRI.create(fileToSave.toURI());
-	         efboValidator.getOWLOntologyManager().saveOntology(efboValidator, efboVIRI);
+	         efboValidatorOntology.getOWLOntologyManager().saveOntology(efboValidatorOntology, efboVIRI);
 	        
 	         String messageSavedSuccess = "Ontology Saved Successfully!\n"
 		    			 				   + "File Location> " 

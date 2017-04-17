@@ -1,7 +1,5 @@
 package ca.queensu.efbo;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -15,95 +13,150 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.UIManager;
 
-public class EFBOInterfaceGUI {
+public class EFBOInterfaceGUI 
+{
 
-	private JFrame frmTheEfboSystem;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EFBOInterfaceGUI window = new EFBOInterfaceGUI();
-					window.frmTheEfboSystem.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	public JFrame efboSystemFrame;
+	private EFBOComparatorManager efboCompManager = new EFBOComparatorManager();
+	
+	private JButton btnStepI   = new JButton("STEP I.   LOAD the FIRST System's Knowledge.");
+	private JButton btnStepII  = new JButton("STEP II.  LOAD the SECOND System's Knowledge.");
+	private JButton btnStepIII = new JButton("STEP III. LOAD the EFBO-Validation Ontology.          ");
+	private JButton btnStepIV  = new JButton("STEP IV.  MERGE the 1st + 2nd System's Knowledge.");
+	private JButton btnStepV   = new JButton("STEP V.   IDENTIFY the MAPPING Events.");
+	private Font textFont = new Font("DialogInput", Font.BOLD, 16);
+	
 	/**
 	 * Create the application.
 	 */
-	public EFBOInterfaceGUI() {
-		initialize();
+	public EFBOInterfaceGUI() throws Exception
+	{
+		this.initializeGUIElements();
+		this.setActionListeners();
 	}
 
+	private void setActionListeners()
+	{
+		btnStepI.setFont(textFont);		
+		btnStepI.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				try 
+				{
+					System.out.println(btnStepI.getText());
+					efboCompManager.loadFirstSystem();
+					btnStepI.setEnabled(false);
+					btnStepII.setEnabled(true);
+				} 
+				catch (Exception e1) 
+				{
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		btnStepII.setFont(textFont);
+		btnStepII.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				try 
+				{
+					System.out.println(btnStepII.getText());
+					efboCompManager.loadSecondSystem();
+					btnStepII.setEnabled(false);
+					btnStepIII.setEnabled(true);
+				} 
+				
+				catch (Exception e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		btnStepIII.setFont(textFont);
+		btnStepIII.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				try 
+				{
+					System.out.println(btnStepIII.getText());
+					efboCompManager.loadEFBOValidatorOntology();
+					btnStepIII.setEnabled(false);
+					btnStepIV.setEnabled(true);
+				} 
+				catch (Exception e1) 
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		btnStepIV.setFont(textFont);
+		btnStepIV.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				try 
+				{
+					System.out.println(btnStepIV.getText());
+					efboCompManager.mergeLoadedKBases();
+					btnStepIV.setEnabled(false);
+					btnStepV.setEnabled(true);
+				} 
+				
+				catch (Exception e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		
+		btnStepV.setFont(textFont);
+		btnStepV.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				System.out.println(btnStepV.getText());
+			}
+		});
+	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		frmTheEfboSystem = new JFrame();
-		frmTheEfboSystem.setBackground(Color.BLACK);
-		frmTheEfboSystem.getContentPane().setBackground(UIManager.getColor("Button.highlight"));
-		frmTheEfboSystem.setTitle("The EFBO System Interface");
-		frmTheEfboSystem.setBounds(100, 100, 713, 383);
-		frmTheEfboSystem.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	private void initializeGUIElements() 
+	{
+		efboSystemFrame = new JFrame();
+		efboSystemFrame.setBackground(Color.BLACK);
+		efboSystemFrame.getContentPane().setBackground(UIManager.getColor("Button.highlight"));
+		efboSystemFrame.setTitle("The EFBO System Interface");
+		efboSystemFrame.setBounds(100, 100, 713, 383);
+		efboSystemFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JButton btnStepI = new JButton("STEP I.   LOAD the FIRST System's Knowledge.");
+		btnStepII.setEnabled(false); btnStepIII.setEnabled(false);
+		btnStepIV.setEnabled(false); btnStepV.setEnabled(false);
+		
 		btnStepI.setHorizontalAlignment(SwingConstants.LEFT);
-		btnStepI.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnStepI.setFont(new Font("DialogInput", Font.BOLD, 16));
-		
-		JButton btnStepII = new JButton("STEP II.  LOAD the SECOND System's Knowledge.");
-		btnStepII.setEnabled(false);
-		btnStepII.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnStepII.setHorizontalAlignment(SwingConstants.LEFT);
-		btnStepII.setFont(new Font("DialogInput", Font.BOLD, 16));
-		
-		JButton btnStepIV = new JButton("STEP IV.  MERGE the 1st + 2nd System's Knowledge.");
-		btnStepIV.setEnabled(false);
-		btnStepIV.setHorizontalAlignment(SwingConstants.LEFT);
-		btnStepIV.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		JButton btnStepIII = new JButton("STEP III. LOAD the EFBO-Validation Ontology.          ");
-		btnStepIII.setEnabled(false);
 		btnStepIII.setHorizontalAlignment(SwingConstants.LEFT);
-		btnStepIII.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnStepIII.setFont(new Font("DialogInput", Font.BOLD, 16));
-		btnStepIV.setFont(new Font("DialogInput", Font.BOLD, 16));
-		
-		JButton btnStepV = new JButton("STEP V.\t   IDENTIFY the MAPPING Events.");
-		btnStepV.setIcon(null);
-		btnStepV.setEnabled(false);
+		btnStepIV.setHorizontalAlignment(SwingConstants.LEFT);
 		btnStepV.setHorizontalAlignment(SwingConstants.LEFT);
-		btnStepV.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnStepV.setFont(new Font("DialogInput", Font.BOLD, 16));
 		
 		JLabel lblMmxviiFahim = new JLabel("MMXVII \u00A9 Fahim T. Imam. All Rights Reserved.");
 		lblMmxviiFahim.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMmxviiFahim.setForeground(UIManager.getColor("Button.darkShadow"));
 		lblMmxviiFahim.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		GroupLayout groupLayout = new GroupLayout(frmTheEfboSystem.getContentPane());
-		groupLayout.setHorizontalGroup(
+		GroupLayout groupLayout = new GroupLayout(efboSystemFrame.getContentPane());
+		groupLayout.setHorizontalGroup
+		(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(47)
@@ -131,7 +184,9 @@ public class EFBOInterfaceGUI {
 							.addGap(2)))
 					.addGap(46))
 		);
-		groupLayout.setVerticalGroup(
+		
+		groupLayout.setVerticalGroup
+		(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(39)
@@ -148,6 +203,7 @@ public class EFBOInterfaceGUI {
 					.addComponent(lblMmxviiFahim)
 					.addContainerGap(21, Short.MAX_VALUE))
 		);
-		frmTheEfboSystem.getContentPane().setLayout(groupLayout);
+		efboSystemFrame.getContentPane().setLayout(groupLayout);
 	}
+	
 }

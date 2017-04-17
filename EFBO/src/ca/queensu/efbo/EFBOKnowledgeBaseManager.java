@@ -109,21 +109,19 @@ public class EFBOKnowledgeBaseManager
         
         efboKBase.getOWLOntologyManager().saveOntology(efboKBase, kBaseIRI);
         
-        String savedSucessMessage = "\nAn EFBO Knowledgebase has been saved at the following location."
-        		      			  + "\nLocation: " + fileLocation;
+        String savedSucessMessage = "\nAn EFBO Knowledgebase has been Saved."
+        		      			  + "\nLocation: " + fileLocation
+        		      			  + String.format(this.efboKBaseManager.printOntologyMetrics());
+            
         
-        this.localKBLocation = fileLocation;
-        
-        System.out.println(savedSucessMessage);
-        this.efboKBaseManager.printOntologyMetrics();
+        this.localKBLocation = fileLocation;        
+        System.out.println(savedSucessMessage);        
         JOptionPane.showMessageDialog(null, savedSucessMessage, "Success!",
 									  JOptionPane.INFORMATION_MESSAGE);
         
 	}
 	
-
-
-	public void processExtractedAnnotations(ArrayList<EFBOAnnotation> annotations)
+ public void processExtractedAnnotations(ArrayList<EFBOAnnotation> annotations)
 			throws OWLOntologyCreationException, OWLOntologyStorageException 
 	{
 		for (EFBOAnnotation exAnnotation: annotations)
@@ -302,10 +300,6 @@ public OWLOntology getEFBOKnowledgeBase()
 	return efboKBase;
 }
 
-public OWLOntology getEFBOKnowledgebase()
-	{
-		return efboKBase;
-	}
 
  public String getSystemID()
 	{
