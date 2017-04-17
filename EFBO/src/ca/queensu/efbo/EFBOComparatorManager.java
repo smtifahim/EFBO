@@ -228,13 +228,13 @@ public class EFBOComparatorManager
 	    String loadSuccessMessage = "\nThe EFBO-V Ontology has been Loaded Successfully.";	    						  
 	    System.out.println(loadSuccessMessage);
 	    
-	    JTextArea textArea = new JTextArea(25, 65);
+	    JTextArea textArea = new JTextArea(20, 65);
 	    textArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
 	    textArea.append(loadSuccessMessage + "\n" + efboValidatorManager.getOntologyMetrics());
 	    textArea.setCaretPosition(0);
 	   	textArea.setEditable(false);
         textArea.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), 
-        		           "About EFBO-V.owl", TitledBorder.CENTER,
+        		           "The EFBO-V Loading Status", TitledBorder.CENTER,
         		           TitledBorder.TOP, null, new Color(0, 0, 0)));
         
         JOptionPane.showMessageDialog(null, new JScrollPane(textArea), "Success!", 
