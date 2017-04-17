@@ -8,12 +8,12 @@ public class Tester
 	public static void main(String[] args) throws Exception
 	{
 		//new Console();
-		AnnotationExtractor annot = new AnnotationExtractor();
-		ArrayList <Annotation> annotations = annot.getExtractedAnnotations();
+		EFBOAnnotationExtractionManager annot = new EFBOAnnotationExtractionManager();
+		ArrayList <EFBOAnnotation> annotations = annot.getExtractedAnnotations();
 		
 		if (annotations.size()!=0)
 		{
-			EFBOKnowledgeBase efboKBGenerator1 = new EFBOKnowledgeBase("SYSTEM-01", "LoginSystem");
+			EFBOKnowledgeBaseManager efboKBGenerator1 = new EFBOKnowledgeBaseManager("SYSTEM-01", "LoginSystem");
 			efboKBGenerator1.processExtractedAnnotations(annotations);
 			efboKBGenerator1.getEFBOManager().printOntologyMetrics();
 			efboKBGenerator1.getEFBOManager().printAllIndividuals();

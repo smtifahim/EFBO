@@ -6,11 +6,11 @@ package ca.queensu.efbo;
  * @author Fahim Imam
  */
 
-public class Annotation 
+public class EFBOAnnotation 
 {
 	private String annotatedText;
 	private String fileLocation;
-	private int lineNumber; // The line where the annotation is located.
+	private int lineNumber; // The line where the annotation is declared.
 	private String subject; // Corresponds to RDF subject.
 	private String predicate; // Corresponds to RDF predicate.
 	private String object; // Corresponds to RDF object.
@@ -18,7 +18,7 @@ public class Annotation
 	/**
 	 * Default Constructor 
 	 */
-	public Annotation()
+	public EFBOAnnotation()
 	{
 		annotatedText = "";
 		fileLocation = "";
@@ -33,7 +33,7 @@ public class Annotation
 	 * @param lineNumber
 	 * @param annotatedText
 	 */
-	public Annotation(String fileLocation, int lineNumber, String annotatedText) 
+	public EFBOAnnotation(String fileLocation, int lineNumber, String annotatedText) 
 	{
 		this.setFileLocation(fileLocation);
 		this.setLineNumber(lineNumber);

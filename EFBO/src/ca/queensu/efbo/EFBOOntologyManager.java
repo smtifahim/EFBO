@@ -44,7 +44,7 @@ import org.semanticweb.owlapi.search.EntitySearcher;
 import org.semanticweb.owlapi.util.SimpleIRIMapper;
 import org.semanticweb.owlapi.vocab.OWLRDFVocabulary; 
  
-public class OntologyManager 
+public class EFBOOntologyManager 
 { 
  private String ontologyURI = null; 
  private String ontologyName = null; 
@@ -57,19 +57,19 @@ public class OntologyManager
  private Map<String, OWLClass> owlClassIdMap = new HashMap<String, OWLClass>();
  private  Set<OWLNamedIndividual> owlIndividuals = new HashSet<OWLNamedIndividual>(); 
  
- public OntologyManager()
+ public EFBOOntologyManager()
  {
 	 this.manager = OWLManager.createOWLOntologyManager();
 	 this.factory = manager.getOWLDataFactory();
  }
  
- public OntologyManager(OWLOntologyManager manager, OWLDataFactory factory) 
+ public EFBOOntologyManager(OWLOntologyManager manager, OWLDataFactory factory) 
  { 
   this.manager = manager; 
   this.factory = factory; 
  }
  
- public OntologyManager(String ontologyName, File ontologyFile) throws OWLOntologyCreationException 
+ public EFBOOntologyManager(String ontologyName, File ontologyFile) throws OWLOntologyCreationException 
  { 
   this.ontologyFile = ontologyFile; 
   this.manager = OWLManager.createOWLOntologyManager(); 

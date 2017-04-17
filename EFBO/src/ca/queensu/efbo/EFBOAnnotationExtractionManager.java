@@ -22,19 +22,19 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
  * @author Fahim Imam.
  *
  */
-public class AnnotationExtractor 
+public class EFBOAnnotationExtractionManager 
 {
 	private JFileChooser fileChooser;
 	private File[] selectedFiles;
 	private File extractedAnnotationsFile;
-	private ArrayList<Annotation> annotations;
-	private OntologyManager efboCoreManager = null;
+	private ArrayList<EFBOAnnotation> annotations;
+	private EFBOOntologyManager efboCoreManager = null;
 	private OWLOntology efboCore = null;
 	
 	private static final String 
 	EFBO_CORE_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo.owl";
 	
-	public AnnotationExtractor() throws Exception
+	public EFBOAnnotationExtractionManager() throws Exception
 	{	  
 		  final String defaultFilePath = System.getProperty("user.dir") 
 				  					   + "/Resources/Annotated-Sources";
@@ -52,7 +52,7 @@ public class AnnotationExtractor
 		  else
 		  {
 			  this.loadEFBOCoreOntology();
-			  annotations = new ArrayList<Annotation>();
+			  annotations = new ArrayList<EFBOAnnotation>();
 			  this.processSelectedFiles(selectedFiles);
 		  } 
 		  
@@ -64,17 +64,17 @@ public class AnnotationExtractor
     // of the source annotations.
 	private void loadEFBOCoreOntology() throws OWLOntologyCreationException
 	{
-		this.efboCoreManager = new OntologyManager();
+		this.efboCoreManager = new EFBOOntologyManager();
 	    this.efboCoreManager.loadOntology("EFBO-CORE", EFBO_CORE_URI);
 	    this.efboCore = efboCoreManager.getLoadedOntology();
 	}
 	
-	public ArrayList<Annotation> getExtractedAnnotations()
+	public ArrayList<EFBOAnnotation> getExtractedAnnotations()
 	{
 		return this.annotations;
 	}
 	
-	private ArrayList<Annotation> extractAnnotations(File inputFile)
+	private ArrayList<EFBOAnnotation> extractAnnotations(File inputFile)
 	 {
 		try
 		 {
@@ -101,7 +101,7 @@ public class AnnotationExtractor
 						if (parsedAnnotations != null && parsedAnnotations.length==3)
 					  	{
 					  	 System.out.println("Annotation Found @Line#" + lineNumber + ">" + annotatedText);
-					  	 Annotation  currentAnnotation= new Annotation(fileLocation, lineNumber, annotatedText);	
+					  	 EFBOAnnotation  currentAnnotation= new EFBOAnnotation(fileLocation, lineNumber, annotatedText);	
 					  	 currentAnnotation.setSubject(parsedAnnotations[0]);
 					  	 currentAnnotation.setPredicate(parsedAnnotations[1]);
 					  	 currentAnnotation.setObject(parsedAnnotations[2]);
@@ -175,7 +175,7 @@ public class AnnotationExtractor
 	
 	// To check if the property name in the annotation does correspond to the
 	// property name within the EFBO core ontology.
-	private boolean propertyNameDoesExist(Annotation annotation)
+	private boolean propertyNameDoesExist(EFBOAnnotation annotation)
 	{
 		String propertyName = annotation.getPredicate();
 		
@@ -240,7 +240,7 @@ public class AnnotationExtractor
 				BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 				String fileLocation = "", prevLocation = "";
 				
-				for (Annotation annotation : annotations)
+				for (EFBOAnnotation annotation : annotations)
 				 {	
 					fileLocation = annotation.getFileLocation();
 					if (fileLocation != prevLocation)
@@ -316,7 +316,7 @@ public class AnnotationExtractor
 		  if (OKOption == JOptionPane.OK_OPTION)
 			{
 			  System.out.println("> Try Again Request Accepted.");
-			  new AnnotationExtractor();
+			  new EFBOAnnotationExtractionManager();
 			}
 		  else
 				System.out.println("> Try Again Request Rejected.");
