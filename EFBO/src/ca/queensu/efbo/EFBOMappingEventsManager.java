@@ -49,7 +49,7 @@ public class EFBOMappingEventsManager extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Mapping Selection", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[219px,grow][219px][]", "[254px][grow][]"));
+		contentPane.setLayout(new MigLayout("", "[219px,grow,center][219px,grow][]", "[254px][grow][]"));
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		contentPane.add(scrollPane_1, "cell 0 0,grow");
