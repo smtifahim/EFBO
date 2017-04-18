@@ -12,15 +12,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-//
-// A simple Java Console for your application (Swing version)
-// Requires Java 1.1.5 or higher
-//
-// Disclaimer the use of this source is at your own risk. 
-//
-// Permision to use and distribute into your own applications
-//
-// RJHM van den Bergh , rvdb@comweb.nl
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
@@ -46,7 +37,6 @@ public class EFBOSystemExecutionConsole extends WindowAdapter
 
 	public EFBOSystemExecutionConsole()
 	{
-		// create all components and add them
 		efboConsoleFrame = new JFrame("EFBO System Execution Console");
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frameSize = new Dimension((int)(screenSize.width/2),(int)(screenSize.height/2));
@@ -82,12 +72,12 @@ public class EFBOSystemExecutionConsole extends WindowAdapter
 		
 		catch (java.io.IOException io)
 		{
-			consoleTextArea.append("Couldn't redirect STDOUT to this console\n" + io.getMessage());
+			consoleTextArea.append("The STDERR could not be redirected to this console\n" + io.getMessage());
 		}
 		
 		catch (SecurityException se)
 		{
-			consoleTextArea.append("Couldn't redirect STDOUT to this console\n"+se.getMessage());
+			consoleTextArea.append("The STDERR could not be redirected to this console\n" + se.getMessage());
 	    } 
 		
 		try 
