@@ -5,6 +5,7 @@ package ca.queensu.efbo;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Insets;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -17,7 +18,6 @@ import javax.swing.JTextArea;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import org.semanticweb.owlapi.io.StreamDocumentTarget;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -124,7 +124,7 @@ public class EFBOKnowledgeBaseManager
         JTextArea textArea = new JTextArea(18, 70);
         textArea.setText(savedSuccessMessage + "\n" + this.efboKBaseManager.getOntologyMetrics());
         textArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
-           
+        textArea.setMargin(new Insets(10, 10, 10, 10));   
         textArea.setEditable(false);
         textArea.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), 
         		           "EFBO Knowledge Base for " + this.getSystemName() , TitledBorder.CENTER,

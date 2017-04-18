@@ -7,6 +7,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -47,7 +48,7 @@ public class EFBOUserInterfaceManager
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				progressBar.setValue(0);
+				progressBar.setValue(5);
 				try 
 				{
 					System.out.println(btnStepI.getText());
@@ -68,7 +69,7 @@ public class EFBOUserInterfaceManager
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				progressBar.setValue(0);
+				progressBar.setValue(5);
 				try 
 				{
 					System.out.println(btnStepII.getText());
@@ -247,7 +248,7 @@ public class EFBOUserInterfaceManager
 					.addComponent(lblMmxviiFahim)
 					.addContainerGap())
 		);
-		efboSystemFrame.getContentPane().setLayout(groupLayout);
+		efboSystemFrame.getContentPane().setLayout(groupLayout);		
 	}
 	
 	

@@ -1,6 +1,7 @@
 package ca.queensu.efbo;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Insets;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
@@ -280,6 +281,7 @@ public class EFBOAnnotationExtractionManager
 			    textArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
 			    textArea.append(messageSavedSuccess + messageText);
 			    textArea.setCaretPosition(0);
+			    textArea.setMargin(new Insets(10, 10, 10, 10));
 			   	textArea.setEditable(false);
 		        textArea.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), 
 		        		           "Extracted Anotations", TitledBorder.CENTER,

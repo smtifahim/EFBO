@@ -2,6 +2,7 @@ package ca.queensu.efbo;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Insets;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
@@ -244,6 +245,7 @@ public class EFBOComparatorManager
 	    textArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
 	    textArea.append(loadSuccessMessage + "\n" + efboValidationManager.getOntologyMetrics());
 	    textArea.setCaretPosition(0);
+	    textArea.setMargin(new Insets(10, 10, 10, 10));
 	   	textArea.setEditable(false);
         textArea.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), 
         		           "The EFBO-V Loading Status", TitledBorder.CENTER,
