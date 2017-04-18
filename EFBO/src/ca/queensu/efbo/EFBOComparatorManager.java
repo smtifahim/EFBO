@@ -213,6 +213,7 @@ public class EFBOComparatorManager
 		String message =  "Enter the name for " + systemID;
 		systemName = JOptionPane.showInputDialog (null, message);
 		
+		EFBOUserInterfaceManager.progressBar.setValue(10);
 		System.out.println("System ID: " +  systemID);
 		System.out.println("Name : " +  systemName);
 		

@@ -19,6 +19,7 @@ import java.io.PrintStream;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.text.DefaultCaret;
@@ -30,6 +31,8 @@ public class EFBOSystemExecutionConsole extends WindowAdapter
 	private JTextArea consoleTextArea;
 	private Thread firstThread;
 	private Thread secondThread;
+	private JProgressBar progressBar;
+	
 	private boolean exitThread;
 					
 	private final PipedInputStream firstPipedInputStream = new PipedInputStream(); 
@@ -53,12 +56,17 @@ public class EFBOSystemExecutionConsole extends WindowAdapter
 		consoleTextArea.setBackground(Color.BLACK);
 		consoleTextArea.setForeground(Color.WHITE);
 		
+		progressBar = new JProgressBar();
+		
+			
 		
 		JButton btnClearConsole = new JButton("Clear Console");
 		
 		efboConsoleFrame.getContentPane().setLayout(new BorderLayout());
 		efboConsoleFrame.getContentPane().add(new JScrollPane(consoleTextArea), BorderLayout.CENTER);
+		efboConsoleFrame.getContentPane().add(progressBar,BorderLayout.NORTH);
 		efboConsoleFrame.getContentPane().add(btnClearConsole,BorderLayout.SOUTH);
+		
 		efboConsoleFrame.setVisible(true);		
 		
 		efboConsoleFrame.addWindowListener(this);		
@@ -127,26 +135,30 @@ public class EFBOSystemExecutionConsole extends WindowAdapter
 	
 	public synchronized void actionPerformed(ActionEvent evt)
 	{
-		consoleTextArea.setText(" ");
+		consoleTextArea.setText("");
 	}
 
 	public synchronized void run()
 	{
+		 
 		try
 		{			
 			while (Thread.currentThread()==firstThread)
 			{
-				try { this.wait(100);}catch(InterruptedException ie) {}
+				
+				try { this.wait(100);} catch(InterruptedException ie) {}
 				if (firstPipedInputStream.available()!=0)
 				{
 					String input=this.readLine(firstPipedInputStream);
 					consoleTextArea.append(input);
-				}
+								
+				}				
 				if (exitThread) return;
 			}
 		
 			while (Thread.currentThread()==secondThread)
 			{
+				
 				try { this.wait(100);}catch(InterruptedException ie) {}
 				if (secondPipedInputStream .available()!=0)
 				{
@@ -154,7 +166,8 @@ public class EFBOSystemExecutionConsole extends WindowAdapter
 					consoleTextArea.append(input);
 				}
 				if (exitThread) return;
-			}			
+			}
+			
 		} catch (Exception e)
 		{
 			consoleTextArea.append("\nConsole reports an Internal error.");
@@ -165,16 +178,48 @@ public class EFBOSystemExecutionConsole extends WindowAdapter
 	public synchronized String readLine(PipedInputStream pipedInputStream) throws IOException
 	{
 		String input="";
+				
 		do
 		{
 			int available = pipedInputStream.available();
 			if (available==0) break;
 			byte streamByte[] = new byte[available];
 			pipedInputStream.read(streamByte);
-			input += new String(streamByte, 0, streamByte.length);														
+			input += new String(streamByte, 0, streamByte.length);
+			viewProgressBar(1);
 		}
 		while (!input.endsWith("\n") &&  !input.endsWith("\r\n") && !exitThread);
-		
+			
 		return input;
-	}	
+	}
+	
+	public void viewProgressBar(int value) 
+	{
+
+		  progressBar.setStringPainted(true);
+		  progressBar.setValue(value);
+
+		  int timerDelay = 5;
+		  new javax.swing.Timer(timerDelay, new ActionListener() 
+		  {
+		     private int index = 0;
+		     private int maxIndex = 100;
+		     public void actionPerformed(ActionEvent e) 
+		     {
+		        if (index < maxIndex)
+		        {
+		           progressBar.setValue(index);
+		           index++;
+		        } 
+		        
+		        else 
+		        {
+		           progressBar.setValue(maxIndex);
+		           ((javax.swing.Timer)e.getSource()).stop(); // stop the timer
+		        }
+		     }
+		  }).start();
+
+		 // progressBar.setValue(progressBar.getMinimum());
+	}
 }

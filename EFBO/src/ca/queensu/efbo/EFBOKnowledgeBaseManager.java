@@ -110,6 +110,8 @@ public class EFBOKnowledgeBaseManager
         
         efboKBase.getOWLOntologyManager().saveOntology(efboKBase, kBaseIRI);
         
+		EFBOUserInterfaceManager.progressBar.setValue(100);
+        
         String savedSuccessMessage = "\nThe EFBO Knowledgebase for " + this.getSystemName() + " has been Saved."
         		      			   + "\nLocation: " + fileLocation + "  ";
         		      			  

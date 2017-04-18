@@ -244,6 +244,7 @@ public class EFBOAnnotationExtractionManager
 			{
 				FileWriter fileWriter = new FileWriter(fileToSave.getAbsolutePath());
 				BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+				EFBOUserInterfaceManager.progressBar.setValue(50);
 				String fileLocation = "", prevLocation = "";
 				String messageText="\n\nFollowing is the list of annotations:";
 				
@@ -267,6 +268,8 @@ public class EFBOAnnotationExtractionManager
 				
 				this.extractedAnnotationsFile=fileToSave;
 				bufferedWriter.close();
+				
+				EFBOUserInterfaceManager.progressBar.setValue(75);
 				
 				String messageSavedSuccess = "Annotations Saved Successfully!\n"
 							    			 + "Save Location> " 
@@ -313,6 +316,8 @@ public class EFBOAnnotationExtractionManager
 		  
 		  if (!annotations.isEmpty())
 		  	{
+			  EFBOUserInterfaceManager.progressBar.setValue(25);
+
 			  String messageExtractSuccess = "Annotations Extracted Successfully!\n"
 										   + "Press OK to Save Your Annotations.";
 			  

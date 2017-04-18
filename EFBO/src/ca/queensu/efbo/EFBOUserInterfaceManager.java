@@ -12,10 +12,11 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.UIManager;
+import javax.swing.JProgressBar;
 
 public class EFBOUserInterfaceManager 
 {
-
+	public static int progress;
 	public JFrame efboSystemFrame;
 	private EFBOComparatorManager efboCompManager = new EFBOComparatorManager();
 	
@@ -25,29 +26,36 @@ public class EFBOUserInterfaceManager
 	private JButton btnStepIV  = new JButton("STEP IV.  MERGE the 1st + 2nd System's Knowledge.");
 	private JButton btnStepV   = new JButton("STEP V.   IDENTIFY the MAPPING Events.");
 	private Font textFont = new Font("DialogInput", Font.BOLD, 16);
+	public static JProgressBar progressBar; 
 	
 	/**
 	 * Create the application.
 	 */
 	public EFBOUserInterfaceManager() throws Exception
 	{
+		progressBar = new JProgressBar();
 		this.initializeGUIElements();
 		this.setActionListeners();
 	}
 
 	private void setActionListeners()
 	{
+		//EFBOUserInterfaceManager.progressBar.setValue(25);
+		viewBar();
+		
 		btnStepI.setFont(textFont);		
 		btnStepI.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				progressBar.setValue(0);
 				try 
 				{
 					System.out.println(btnStepI.getText());
 					efboCompManager.loadFirstSystem();
 					btnStepI.setEnabled(false);
 					btnStepII.setEnabled(true);
+					
 				} 
 				catch (Exception e1) 
 				{
@@ -55,12 +63,13 @@ public class EFBOUserInterfaceManager
 				}
 			}
 		});
-		
+				
 		btnStepII.setFont(textFont);
 		btnStepII.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				progressBar.setValue(0);
 				try 
 				{
 					System.out.println(btnStepII.getText());
@@ -76,7 +85,7 @@ public class EFBOUserInterfaceManager
 				}
 			}
 		});
-		
+				
 		btnStepIII.setFont(textFont);
 		btnStepIII.addActionListener(new ActionListener() 
 		{
@@ -129,6 +138,37 @@ public class EFBOUserInterfaceManager
 		});
 	}
 	
+	
+	public void viewBar() 
+	{
+
+		  progressBar.setStringPainted(true);
+		  progressBar.setValue(0);
+
+		  int timerDelay = 10;
+		  new javax.swing.Timer(timerDelay, new ActionListener() 
+		  {
+		     private int index = 0;
+		     private int maxIndex = 100;
+		     public void actionPerformed(ActionEvent e) 
+		     {
+		        if (index < maxIndex)
+		        {
+		           progressBar.setValue(index);
+		           index++;
+		        } 
+		        
+		        else 
+		        {
+		           progressBar.setValue(maxIndex);
+		           ((javax.swing.Timer)e.getSource()).stop(); // stop the timer
+		        }
+		     }
+		  }).start();
+
+		  progressBar.setValue(progressBar.getMinimum());
+	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -138,7 +178,7 @@ public class EFBOUserInterfaceManager
 		efboSystemFrame.setBackground(Color.BLACK);
 		efboSystemFrame.getContentPane().setBackground(UIManager.getColor("Button.highlight"));
 		efboSystemFrame.setTitle("The EFBO System Interface");
-		efboSystemFrame.setBounds(100, 100, 713, 383);
+		efboSystemFrame.setBounds(100, 100, 713, 426);
 		efboSystemFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		btnStepII.setEnabled(false); btnStepIII.setEnabled(false);
@@ -154,39 +194,42 @@ public class EFBOUserInterfaceManager
 		lblMmxviiFahim.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMmxviiFahim.setForeground(UIManager.getColor("Button.darkShadow"));
 		lblMmxviiFahim.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		
+		
 		GroupLayout groupLayout = new GroupLayout(efboSystemFrame.getContentPane());
-		groupLayout.setHorizontalGroup
-		(
+		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(47)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(1)
-							.addComponent(btnStepI, GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE))
+							.addComponent(btnStepI, GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(1)
-							.addComponent(btnStepII, 0, 522, Short.MAX_VALUE)
+							.addComponent(btnStepII, 0, 602, Short.MAX_VALUE)
 							.addGap(1))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(1)
 							.addComponent(btnStepIII, 0, 0, Short.MAX_VALUE)
 							.addGap(1))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, 136, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblMmxviiFahim)
-							.addGap(157))
-						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(2)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btnStepV, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+								.addComponent(btnStepV, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
 								.addComponent(btnStepIV, Alignment.LEADING, 0, 0, Short.MAX_VALUE))
 							.addGap(2)))
 					.addGap(46))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(237, Short.MAX_VALUE)
+					.addComponent(lblMmxviiFahim)
+					.addGap(236))
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGap(270)
+					.addComponent(progressBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(281, Short.MAX_VALUE))
 		);
-		
-		groupLayout.setVerticalGroup
-		(
+		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(39)
@@ -199,11 +242,14 @@ public class EFBOUserInterfaceManager
 					.addComponent(btnStepIV, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnStepV, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-					.addGap(12)
+					.addGap(18)
+					.addComponent(progressBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
 					.addComponent(lblMmxviiFahim)
-					.addContainerGap(21, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		efboSystemFrame.getContentPane().setLayout(groupLayout);
 	}
 	
-}
+	
+} // End of Class EFBOUserInterfaceManager.
