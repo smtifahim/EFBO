@@ -16,7 +16,6 @@ import javax.swing.JProgressBar;
 
 public class EFBOUserInterfaceManager 
 {
-	public static int progress;
 	public JFrame efboSystemFrame;
 	private EFBOComparatorManager efboCompManager = new EFBOComparatorManager();
 	
