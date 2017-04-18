@@ -37,9 +37,6 @@ public class EFBOComparatorManager
 	private static final String 
 	EFBO_V_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-v.owl";
 	
-	private static final String 
-	EFBO_INFERRED_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-inferred.owl";
-	
 	private static final String FIRST_SYSTEM_ID = "System-1";
 	private static final String SECOND_SYSTEM_ID = "System-2";
     

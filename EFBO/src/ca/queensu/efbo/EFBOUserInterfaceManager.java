@@ -13,7 +13,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.UIManager;
 
-public class EFBOInterfaceGUI 
+public class EFBOUserInterfaceManager 
 {
 
 	public JFrame efboSystemFrame;
@@ -29,7 +29,7 @@ public class EFBOInterfaceGUI
 	/**
 	 * Create the application.
 	 */
-	public EFBOInterfaceGUI() throws Exception
+	public EFBOUserInterfaceManager() throws Exception
 	{
 		this.initializeGUIElements();
 		this.setActionListeners();

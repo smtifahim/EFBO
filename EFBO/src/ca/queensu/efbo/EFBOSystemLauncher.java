@@ -14,8 +14,9 @@ public class EFBOSystemLauncher
 			public void run() 
 			{
 				try 
-				{
-					EFBOInterfaceGUI window = new EFBOInterfaceGUI();
+				{ 
+					new EFBOSystemExecutionConsole();
+					EFBOUserInterfaceManager window = new EFBOUserInterfaceManager();
 					window.efboSystemFrame.setVisible(true);
 				} 
 				
