@@ -30,14 +30,21 @@ public class EFBOComparatorManager
 	private String firstSystemName;
 	private String secondSystemName;
 	
-    private OWLOntology efboValidatorOntology;
-	private EFBOOntologyManager efboValidatorManager;
+    private OWLOntology efboValidationOntology;
+    private OWLOntology efboInferredOntology;
+	private EFBOOntologyManager efboValidationManager;
 	
 	private static final String 
 	EFBO_V_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-v.owl";
+	
+	private static final String 
+	EFBO_INFERRED_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-inferred.owl";
+	
 	private static final String FIRST_SYSTEM_ID = "System-1";
 	private static final String SECOND_SYSTEM_ID = "System-2";
-
+    
+	private File generatedOntologyFile;
+	private File inferredOntologyFile;
 	
 	//Default Constructor. 
 	public EFBOComparatorManager() throws Exception
@@ -51,8 +58,12 @@ public class EFBOComparatorManager
 		secondSystemAnnotations = null;
 		secondSystemName = null;
 		
-		efboValidatorOntology = null;
-		efboValidatorManager = null;
+		efboValidationOntology = null;
+		efboValidationManager = null;
+		
+		generatedOntologyFile = null;
+		inferredOntologyFile = null;		
+				
 	}
 	
 	public void loadFirstSystem() throws Exception
@@ -79,7 +90,8 @@ public class EFBOComparatorManager
 		this.importSecondSystemKBase();
 		this.assertSecondSystemID();
 		
-		this.saveEFBOValidatorOntology();
+		this.saveEFBOValidationOntology();
+		this.saveEFBOInferredOntology();
 	}
 	
 	public void assertFirstSystemID()
@@ -99,9 +111,9 @@ public class EFBOComparatorManager
 		OWLNamedIndividual kBaseSystemID = kBase.getSystemIDInstance();
 			
 		IRI classIRI = IRI.create(EFBO_V_URI + "#" + systemID);		
-		OWLClass systemClass = efboValidatorManager.getOWLDataFactory().getOWLClass(classIRI);
+		OWLClass systemClass = efboValidationManager.getOWLDataFactory().getOWLClass(classIRI);
 		
-		efboValidatorManager.assertOWLNamedIndividual(kBaseSystemID, systemClass);
+		efboValidationManager.assertOWLNamedIndividual(kBaseSystemID, systemClass);
 				
 	}
 	
@@ -118,7 +130,7 @@ public class EFBOComparatorManager
     private void importEFBOKnowledgeBase(EFBOKnowledgeBaseManager efboKBaseManager) throws Exception
     {
     	String fileLocation = efboKBaseManager.getLocalKBLocation();    	
-    	efboValidatorManager.importOWLOntology(efboKBaseManager.getEFBOKnowledgeBase(), fileLocation);   
+    	efboValidationManager.importOWLOntology(efboKBaseManager.getEFBOKnowledgeBase(), fileLocation);   
     }
 	
     public void setFirstSystemKBaseManager() throws Exception
@@ -213,7 +225,7 @@ public class EFBOComparatorManager
 	 */
 	public OWLOntology getEFBOValidatorOntology()
 	{
-		return efboValidatorOntology;
+		return efboValidationOntology;
 	}
 
 	/**
@@ -221,16 +233,16 @@ public class EFBOComparatorManager
 	 */
 	public void loadEFBOValidatorOntology() throws Exception
 	{
-		this.efboValidatorManager = new EFBOOntologyManager();
-	    this.efboValidatorManager.loadOntology("EFBO-V", EFBO_V_URI);
-	    this.efboValidatorOntology = efboValidatorManager.getLoadedOntology();
+		this.efboValidationManager = new EFBOOntologyManager();
+	    this.efboValidationManager.loadOntology("EFBO-V", EFBO_V_URI);
+	    this.efboValidationOntology = efboValidationManager.getLoadedOntology();
 	    
 	    String loadSuccessMessage = "\nThe EFBO-V Ontology has been Loaded Successfully.";	    						  
 	    System.out.println(loadSuccessMessage);
 	    
 	    JTextArea textArea = new JTextArea(20, 65);
 	    textArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
-	    textArea.append(loadSuccessMessage + "\n" + efboValidatorManager.getOntologyMetrics());
+	    textArea.append(loadSuccessMessage + "\n" + efboValidationManager.getOntologyMetrics());
 	    textArea.setCaretPosition(0);
 	   	textArea.setEditable(false);
         textArea.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), 
@@ -242,9 +254,9 @@ public class EFBOComparatorManager
 	    	        
 	}
 	
-	private void saveEFBOValidatorOntology()
+	private void saveEFBOValidationOntology()
 			throws OWLOntologyCreationException,
-			OWLOntologyStorageException 
+			OWLOntologyStorageException, Exception 
 	{
   
 		JFrame fileSaveFrame = new JFrame();
@@ -259,12 +271,15 @@ public class EFBOComparatorManager
 		{
 			 File fileToSave = fileChooser.getSelectedFile();
 	         IRI efboVIRI = IRI.create(fileToSave.toURI());
-	         efboValidatorOntology.getOWLOntologyManager().saveOntology(efboValidatorOntology, efboVIRI);
+	         
+	         efboValidationOntology.getOWLOntologyManager().saveOntology(efboValidationOntology, efboVIRI);
 	        
 	         String messageSavedSuccess = "Ontology Saved Successfully!\n"
 		    			 				   + "File Location> " 
 		    			 				   + fileToSave.getAbsolutePath();
 	         
+	         this.generatedOntologyFile = fileToSave.getAbsoluteFile();
+         	        		 
 	         //efboValidatorManager.printOntologyMetrics();
 	         
 			 System.out.println(messageSavedSuccess);				
@@ -276,9 +291,41 @@ public class EFBOComparatorManager
 		 {
 			String notSavedMessage = "You have chosen NOT to save the Ontology.";
 			System.out.println(notSavedMessage);
-			JOptionPane.showMessageDialog(fileSaveFrame, notSavedMessage, "Ontology NOT Saved", 
+			JOptionPane.showMessageDialog(fileSaveFrame, notSavedMessage,
+										  "Ontology NOT Saved", 
 					  					  JOptionPane.INFORMATION_MESSAGE);
 		 }
+	}
+	
+	private void saveEFBOInferredOntology() throws Exception
+	{
+		final String defaultFilePath = System.getProperty("user.dir") 
+			  		 				 + "/Resources/Ontologies/efbo-inferred.owl"; 
+        
+		inferredOntologyFile =  new File(defaultFilePath);
+		IRI efboInferredIRI = IRI.create(inferredOntologyFile.toURI());
+		
+		this.setInferredEFBOResults();
+        
+        efboInferredOntology.getOWLOntologyManager().saveOntology(efboInferredOntology, efboInferredIRI);
+		
+	}
+
+	/**
+	 * @return the inferredEFBOResults
+	 */
+	public OWLOntology getInferredEFBOResults()
+	{
+		return efboInferredOntology;
+	}
+
+	/**
+	 * @param efboInferredOntology the inferredEFBOResults to set
+	 */
+	public void setInferredEFBOResults() throws Exception
+	{
+	    this.efboValidationManager.setInferredOntology(this.generatedOntologyFile);		
+		this.efboInferredOntology = this.efboValidationManager.getInferredOntology();		
 	}
 	
 }// End of public class EFBOComparator. 

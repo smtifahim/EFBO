@@ -9,7 +9,12 @@ import java.util.HashMap;
 import java.util.HashSet; 
 import java.util.Map; 
 import java.util.Set; 
- 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.semanticweb.HermiT.Reasoner;
+import org.semanticweb.HermiT.ReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddAxiom;
 import org.semanticweb.owlapi.model.AddImport;
@@ -40,7 +45,14 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException; 
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
+import org.semanticweb.owlapi.reasoner.InferenceType;
+import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.search.EntitySearcher;
+import org.semanticweb.owlapi.util.InferredAxiomGenerator;
+import org.semanticweb.owlapi.util.InferredClassAssertionAxiomGenerator;
+import org.semanticweb.owlapi.util.InferredOntologyGenerator;
+import org.semanticweb.owlapi.util.InferredSubClassAxiomGenerator;
 import org.semanticweb.owlapi.util.SimpleIRIMapper;
 import org.semanticweb.owlapi.vocab.OWLRDFVocabulary; 
  
@@ -52,6 +64,8 @@ public class EFBOOntologyManager
  private OWLDataFactory factory = null; 
  private OWLOntology loadedOntology = null;
  private OWLOntology newOntology = null;
+ private OWLOntology inferredOntology = null;
+ 
  private OWLOntologyManager manager = null; 
   
  private Map<String, OWLClass> owlClassIdMap = new HashMap<String, OWLClass>();
@@ -129,7 +143,6 @@ public class EFBOOntologyManager
 	 OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()
 			 								 .getOWLImportsDeclaration(localIRI);
 
-	// manager.getIRIMappers().add(new SimpleIRIMapper(importIRI, localIRI));
 	 AddImport addImport = new AddImport(loadedOntology, importDeclaration);
 	 manager.applyChange(addImport);
  }
@@ -568,4 +581,45 @@ public void printAllAxioms()
 		  		
 	} // End of public void printAxioms(Set<OWLAxiom> axioms)
 
+/**
+ * @return the inferredOntology
+ */
+public OWLOntology getInferredOntology() 
+{
+	return inferredOntology;
 }
+
+/**
+ * @param inferredOntology the inferredOntology to set from an ontology file.
+ */
+	public void setInferredOntology(File ontologyFile) throws Exception
+	{
+		OWLOntologyManager inputOntologyManager = OWLManager.createOWLOntologyManager();
+		OWLOntologyManager inferredOntologyManager =  OWLManager.createOWLOntologyManager();
+		
+		OWLOntology inputOntology = inputOntologyManager.loadOntologyFromOntologyDocument(ontologyFile);
+		
+		// Instantiate HermiT reasoner for the inputOntology.
+		OWLReasonerFactory hermitReasonerFactory = new ReasonerFactory();
+		OWLReasoner hermitReasoner = hermitReasonerFactory.createReasoner(inputOntology);
+		
+		// Classify the input ontology.
+		//hermitReasoner.precomputeInferences(InferenceType.CLASS_ASSERTIONS);
+		//hermitReasoner.precomputeInferences(InferenceType.CLASS_HIERARCHY);
+		
+		
+		// To generate an inferred ontology we use implementations of 
+		// inferred axiom generators 
+			
+		//setup list of inferred axioms.
+		//List<InferredAxiomGenerator<? extends OWLAxiom>> inferredAxGenerator = new ArrayList<InferredAxiomGenerator<? extends OWLAxiom>>(); 
+		//inferredAxGenerator.add(new InferredClassAssertionAxiomGenerator()); 
+		//inferredAxGenerator.add(new InferredEquivalentClassAxiomGenerator()); 
+		
+		this.inferredOntology = inferredOntologyManager.createOntology();
+		InferredOntologyGenerator iOG = new InferredOntologyGenerator(hermitReasoner);
+		iOG.fillOntology(inferredOntologyManager.getOWLDataFactory(), this.inferredOntology);	
+		hermitReasoner.dispose();
+	}
+
+}// End of class EFBOOntologyManager

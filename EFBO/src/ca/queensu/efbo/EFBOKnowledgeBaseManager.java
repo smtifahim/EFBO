@@ -81,8 +81,7 @@ public class EFBOKnowledgeBaseManager
         this.efboKBaseManager.loadOntology(systemID,efboKBaseManager.getNewOntology());
         this.efboKBase = efboKBaseManager.getLoadedOntology();
         this.efboKBaseManager.importOWLOntology(EFBO_CORE_URI);
-        this.setSystemEntity();
-        
+        this.setSystemEntity();        
    	}
 	
 	

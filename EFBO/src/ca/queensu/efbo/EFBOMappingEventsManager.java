@@ -20,7 +20,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class EFBOMappingEventsManager extends JFrame {
+public class EFBOMappingEventsManager extends JFrame
+{
 
 	private JPanel contentPane;
 
