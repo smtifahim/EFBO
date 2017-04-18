@@ -14,8 +14,9 @@
     <Prefix name="efbo" IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
     <Prefix name="efbo-v" IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-v#"/>
+    <Import>file:///C:/Users/Fahim/git/EFBO-PCM/EFBO/Resources/Ontologies/efbo-inferred.owl</Import>
+    <Import>file:///C:/Users/Fahim/git/EFBO-PCM/EFBO/Resources/Extracted-Kbases/Android-Test/System-2.owl</Import>
     <Import>http://www.cs.queensu.ca/~imam/ontologies/efbo.owl</Import>
-    <Import>file:///C:/Users/Fahim/git/EFBO-PCM/EFBO/Resources/Extracted-Kbases/IOS-Login/System-2.owl</Import>
     <Import>file:///C:/Users/Fahim/git/EFBO-PCM/EFBO/Resources/Extracted-Kbases/IOS-Test/System-1.owl</Import>
     <Declaration>
         <ObjectProperty abbreviatedIRI="efbo:hasInteractionWith"/>

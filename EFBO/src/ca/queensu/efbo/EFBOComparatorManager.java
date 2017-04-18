@@ -43,7 +43,7 @@ public class EFBOComparatorManager
 	private static final String FIRST_SYSTEM_ID = "System-1";
 	private static final String SECOND_SYSTEM_ID = "System-2";
     
-	private File generatedOntologyFile;
+	private File efboValidationOntologyFile;
 	private File inferredOntologyFile;
 	
 	//Default Constructor. 
@@ -59,9 +59,10 @@ public class EFBOComparatorManager
 		secondSystemName = null;
 		
 		efboValidationOntology = null;
+		efboInferredOntology = null;
 		efboValidationManager = null;
 		
-		generatedOntologyFile = null;
+		efboValidationOntologyFile = null;
 		inferredOntologyFile = null;		
 				
 	}
@@ -92,6 +93,7 @@ public class EFBOComparatorManager
 		
 		this.saveEFBOValidationOntology();
 		this.saveEFBOInferredOntology();
+		this.importEFBOInferredOntology();
 	}
 	
 	public void assertFirstSystemID()
@@ -278,7 +280,7 @@ public class EFBOComparatorManager
 		    			 				   + "File Location> " 
 		    			 				   + fileToSave.getAbsolutePath();
 	         
-	         this.generatedOntologyFile = fileToSave.getAbsoluteFile();
+	         this.efboValidationOntologyFile = new File (fileToSave.getAbsolutePath());
          	        		 
 	         //efboValidatorManager.printOntologyMetrics();
 	         
@@ -299,32 +301,39 @@ public class EFBOComparatorManager
 	
 	private void saveEFBOInferredOntology() throws Exception
 	{
-		final String defaultFilePath = System.getProperty("user.dir") 
+		final String inferredEFBOFilePath = System.getProperty("user.dir") 
 			  		 				 + "/Resources/Ontologies/efbo-inferred.owl"; 
         
-		inferredOntologyFile =  new File(defaultFilePath);
+		inferredOntologyFile =  new File(inferredEFBOFilePath);
 		IRI efboInferredIRI = IRI.create(inferredOntologyFile.toURI());
 		
-		this.setInferredEFBOResults();
-        
-        efboInferredOntology.getOWLOntologyManager().saveOntology(efboInferredOntology, efboInferredIRI);
+	    this.setEFBOInferredOntology();
 		
+		efboInferredOntology.getOWLOntologyManager().saveOntology(efboInferredOntology, efboInferredIRI);
+        		
 	}
+	
+	private void importEFBOInferredOntology() throws Exception
+	{
+		File fileToSave = new File (this.efboValidationOntologyFile.getAbsolutePath());
+        IRI efboVIRI = IRI.create(fileToSave.toURI());
+		
+        efboValidationManager.importOWLOntology(efboInferredOntology, inferredOntologyFile.getAbsolutePath());
+		efboValidationOntology.getOWLOntologyManager().saveOntology(efboValidationOntology, efboVIRI);
+	}
+	
+	
 
-	/**
-	 * @return the inferredEFBOResults
-	 */
 	public OWLOntology getInferredEFBOResults()
 	{
 		return efboInferredOntology;
 	}
 
-	/**
-	 * @param efboInferredOntology the inferredEFBOResults to set
-	 */
-	public void setInferredEFBOResults() throws Exception
+	
+	public void setEFBOInferredOntology() throws Exception
 	{
-	    this.efboValidationManager.setInferredOntology(this.generatedOntologyFile);		
+	    this.efboValidationManager.setInferredOntology(this.efboValidationOntologyFile);
+	    
 		this.efboInferredOntology = this.efboValidationManager.getInferredOntology();		
 	}
 	
