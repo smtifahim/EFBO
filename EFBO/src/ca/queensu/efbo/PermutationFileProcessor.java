@@ -56,13 +56,13 @@ public class PermutationFileProcessor
 	        			String currentString = (String) st.nextElement();
 	        			
 	        			if (i==0)
-	        				event += "\n" + efbo + "seq-" + seq + " hasInitialEvent " + currentString;
+	        				event += "\n" + efbo + "seq-" + seq + " hasInitialEvent " + currentString + "-" + seq;
 	        			
-	        			 event += "\n"+ efbo + currentString + " hasTimePoint " + i;
+	        			 event += "\n"+ efbo + currentString + "-" + seq + " hasTimePoint " + i;
 	        			
 	        		    
 	        			 if (i==5)
-		        			event += "\n" + efbo + "seq-" + seq + " hasFinalEvent " + currentString;
+		        			event += "\n" + efbo + "seq-" + seq + " hasFinalEvent " + currentString + "-" + seq;
 	        			
 	        			 
 	        		    System.out.println( event);
