@@ -45,7 +45,7 @@ public class EFBOKnowledgeBaseManager
 	
 	private static final String 
 		KBASE_File_Location = System.getProperty("user.dir") 
-			   			    + "/Resources/Extracted-Kbases";  
+			   			    + "/Resources/Extracted-Kbases/" + EFBOSystemLauncher.PROJECT_NAME;  
 	
 	private OWLOntology efboKBase = null;
 	private EFBOOntologyManager efboKBaseManager = null;
@@ -54,26 +54,13 @@ public class EFBOKnowledgeBaseManager
 	private String localKBLocation = null;
 	private OWLNamedIndividual systemIDInstance = null;
 
-	//Default constructor.
-//	public EFBOKnowledgeBase(String systemID, String systemName)
-//				   throws OWLOntologyCreationException, OWLOntologyStorageException 
-//	{
-//		this.systemID = systemID;
-//		this.systemName = systemName;
-//		this.efboKBaseManager = new OntologyManager();
-//        this.efboKBaseManager.loadOntology(systemID, EFBO_KB_URI);
-//        this.efboKBase = efboKBaseManager.getLoadedOntology();
-//        this.setSystemEntity();
-//        
-//   }
-	
 	public EFBOKnowledgeBaseManager(String systemID, String systemName)
 				   throws OWLOntologyCreationException, OWLOntologyStorageException, Exception 
 	{
 		this.systemID = systemID;
 		this.systemName = systemName;
 		this.efboKBaseManager = new EFBOOntologyManager();
-		this.EFBO_KBASE_URI = EFBO_KBASE_URI + systemID + ".owl";
+		this.EFBO_KBASE_URI = EFBO_KBASE_URI + systemName + ".owl";
         this.efboKBaseManager.createNewOntology(EFBO_KBASE_URI);
         this.efboKBaseManager.loadOntology(systemID,efboKBaseManager.getNewOntology());
         this.efboKBase = efboKBaseManager.getLoadedOntology();
@@ -104,7 +91,7 @@ public class EFBOKnowledgeBaseManager
 		// efboKBase.getOWLOntologyManager().saveOntology(efboKBase, new StreamDocumentTarget(System.out));
      
         String fileLocation = KBASE_File_Location + "/" + systemName
-				   		    + "/" + systemID + ".owl";
+				   		    + "/" + systemName + ".owl";
         File defaultSaveLocation = new File(fileLocation);
         IRI kBaseIRI = IRI.create(defaultSaveLocation.toURI());
         

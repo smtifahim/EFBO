@@ -79,9 +79,11 @@ public class PermutationFileProcessor
 	            }
 	        catch(FileNotFoundException ex)
 	        {
-	            System.out.println(
+	            System.out.println
+	            (
 	                "Unable to open file '" + 
-	                fileName + "'");                
+	                fileName + "'"
+	            );                
 	        }
 	        
 	        catch(IOException ex)

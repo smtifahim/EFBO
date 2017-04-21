@@ -45,10 +45,7 @@ public class EFBOUserInterfaceManager
 	{
 		//EFBOUserInterfaceManager.progressBar.setValue(25);
 		viewBar();
-		btnStepI.setBounds(43, 54, 432, 39);
-		btnStepI.setBackground(SystemColor.menu);
 		
-		btnStepI.setFont(textFont);		
 		btnStepI.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -68,10 +65,7 @@ public class EFBOUserInterfaceManager
 				}
 			}
 		});
-		btnStepII.setBounds(43, 93, 432, 39);
-		btnStepII.setBackground(SystemColor.menu);
-				
-		btnStepII.setFont(textFont);
+
 		btnStepII.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -92,10 +86,7 @@ public class EFBOUserInterfaceManager
 				}
 			}
 		});
-		btnStepIII.setBounds(43, 132, 432, 39);
-		btnStepIII.setBackground(SystemColor.menu);
-				
-		btnStepIII.setFont(textFont);
+	
 		btnStepIII.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e)
@@ -114,10 +105,7 @@ public class EFBOUserInterfaceManager
 				}
 			}
 		});
-		btnStepIV.setBounds(43, 171, 432, 39);
-		btnStepIV.setBackground(SystemColor.menu);
-		
-		btnStepIV.setFont(textFont);
+	
 		btnStepIV.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -137,11 +125,7 @@ public class EFBOUserInterfaceManager
 				}
 			}
 		});
-		btnStepV.setBounds(43, 210, 432, 39);
-		btnStepV.setBackground(SystemColor.menu);
-		
-		
-		btnStepV.setFont(textFont);
+
 		btnStepV.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -195,6 +179,26 @@ public class EFBOUserInterfaceManager
 		btnStepIII.setEnabled(false);
 		btnStepIV.setEnabled(false);
 		btnStepV.setEnabled(false);
+		
+		btnStepI.setBounds(43, 54, 432, 39);
+		btnStepI.setBackground(SystemColor.menu);
+		btnStepI.setFont(textFont);		
+		
+		btnStepII.setBounds(43, 93, 432, 39);
+		btnStepII.setBackground(SystemColor.menu);
+		btnStepII.setFont(textFont);
+		
+		btnStepIII.setBounds(43, 132, 432, 39);
+		btnStepIII.setBackground(SystemColor.menu);
+		btnStepIII.setFont(textFont);
+		
+		btnStepIV.setBounds(43, 171, 432, 39);
+		btnStepIV.setBackground(SystemColor.menu);
+		btnStepIV.setFont(textFont);
+		
+		btnStepV.setBounds(43, 210, 432, 39);
+		btnStepV.setBackground(SystemColor.menu);
+		btnStepV.setFont(textFont);
 		
 		btnStepI.setHorizontalAlignment(SwingConstants.LEFT);
 		btnStepII.setHorizontalAlignment(SwingConstants.LEFT);

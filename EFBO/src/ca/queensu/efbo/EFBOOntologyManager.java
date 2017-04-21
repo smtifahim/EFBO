@@ -8,12 +8,10 @@ import java.io.File;
 import java.util.HashMap; 
 import java.util.HashSet; 
 import java.util.Map; 
-import java.util.Set; 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
-import org.semanticweb.HermiT.Reasoner;
+import org.mindswap.pellet.jena.PelletReasonerFactory;
+//import org.semanticweb.HermiT.Reasoner;
 import org.semanticweb.HermiT.ReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddAxiom;
@@ -45,15 +43,11 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException; 
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
-import org.semanticweb.owlapi.reasoner.InferenceType;
+import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.search.EntitySearcher;
-import org.semanticweb.owlapi.util.InferredAxiomGenerator;
-import org.semanticweb.owlapi.util.InferredClassAssertionAxiomGenerator;
 import org.semanticweb.owlapi.util.InferredOntologyGenerator;
-import org.semanticweb.owlapi.util.InferredSubClassAxiomGenerator;
-import org.semanticweb.owlapi.util.SimpleIRIMapper;
 import org.semanticweb.owlapi.vocab.OWLRDFVocabulary; 
  
 public class EFBOOntologyManager 
@@ -488,6 +482,40 @@ public void printAllClasses()
 			System.out.println(this.getLabel(c));		   	
 		  
 	}
+
+
+// return a set of OWLNamed Individuals of a particular class Type.
+public  Set<OWLNamedIndividual> getIndividualsByclass(OWLOntology ontology, OWLClass owlClassName)
+{
+   // OWLReasonerFactory reasonerFactory = new ReasonerFactory();
+   // OWLReasoner reasoner = reasonerFactory.createNonBufferingReasoner(ontology);
+   
+    Set<OWLNamedIndividual> individuals = null;
+    
+    for (OWLClass c : ontology.getClassesInSignature())
+    {
+        if (c == owlClassName)
+        {
+            Set<OWLNamedIndividual> instances = c.getIndividualsInSignature();
+            System.out.println("Class : " + c);
+            individuals = instances;
+            for (OWLNamedIndividual i: instances)
+            System.out.println("Individual" + i);
+        }
+    }
+    
+    return individuals;
+}
+
+public Set<OWLNamedIndividual> getOWLNamedIndividual(OWLClass className)
+{
+	Set<OWLNamedIndividual> individuals = className.getIndividualsInSignature();
+	
+	for (OWLNamedIndividual i : individuals) 
+		System.out.println(this.getLabel(i));
+	
+	return individuals;	
+}
 
  public void printAllIndividuals()
 	{

@@ -229,8 +229,8 @@ public class EFBOAnnotationExtractionManager
 	{
 		// parent component of the dialog
 		JFrame fileSaveFrame = new JFrame();
-		final String defaultFilePath = System.getProperty("user.dir") 
-  							  		 + "/Resources/Extracted-Annotations"; 
+		//String defaultFilePath = System.getProperty("user.dir") + "/Resources/Extracted-Annotations"; 
+		String defaultFilePath = EFBOSystemLauncher.EXTRACTED_ANNOTATIONS_LOCATION;
 		JFileChooser fileChooser = new JFileChooser(new File(defaultFilePath));
 		fileChooser.setDialogTitle("Specify the file to save your annotations");   
 		 

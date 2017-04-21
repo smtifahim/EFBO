@@ -14,10 +14,10 @@
     <Prefix name="efbo" IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
     <Prefix name="efbo-v" IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-v#"/>
-    <Import>file:///C:/Users/Fahim/git/EFBO-PCM/EFBO/Resources/Ontologies/efbo-inferred.owl</Import>
-    <Import>file:///C:/Users/Fahim/git/EFBO-PCM/EFBO/Resources/Extracted-Kbases/Android-Test/System-2.owl</Import>
     <Import>http://www.cs.queensu.ca/~imam/ontologies/efbo.owl</Import>
-    <Import>file:///C:/Users/Fahim/git/EFBO-PCM/EFBO/Resources/Extracted-Kbases/IOS-Test/System-1.owl</Import>
+    <Import>file:///C:/Users/Fahim/git/EFBO-PCM/EFBO/Resources/Ontologies/TEST-3/efbo-inferred.owl</Import>
+    <Import>file:///C:/Users/Fahim/git/EFBO-PCM/EFBO/Resources/Extracted-Kbases/TEST-3/IOS-Test/IOS-Test.owl</Import>
+    <Import>file:///C:/Users/Fahim/git/EFBO-PCM/EFBO/Resources/Extracted-Kbases/TEST-3/Android-Test/Android-Test.owl</Import>
     <Declaration>
         <ObjectProperty abbreviatedIRI="efbo:hasInteractionWith"/>
     </Declaration>
@@ -139,10 +139,10 @@
         <Class IRI="#InconsistentInterface"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/System-1.owl#System-1"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#System-1"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/System-2.owl#System-2"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#System-2"/>
     </Declaration>
     <EquivalentClasses>
         <Class IRI="#ParticipantSystem"/>
@@ -327,12 +327,12 @@
         <Class IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#Entity"/>
     </SubClassOf>
     <ClassAssertion>
-        <Class IRI="#System-1"/>
-        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/System-1.owl#System-1"/>
+        <Class IRI="#System-2"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#System-2"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#System-2"/>
-        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/System-2.owl#System-2"/>
+        <Class IRI="#System-1"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#System-1"/>
     </ClassAssertion>
     <SubObjectPropertyOf>
         <ObjectProperty IRI="#hasConsistentAgent"/>

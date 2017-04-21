@@ -5,6 +5,10 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -15,7 +19,9 @@ import javax.swing.border.TitledBorder;
 
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
+import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
@@ -91,9 +97,11 @@ public class EFBOComparatorManager
 		
 		this.saveEFBOValidationOntology();
 		this.saveEFBOInferredOntology();
-		this.importEFBOInferredOntology();
+		
+		this.importEFBOInferredOntology();		
 	}
 	
+		
 	public void assertFirstSystemID()
 	{
 		this.setSystemID(this.firstSystemKBaseManager, FIRST_SYSTEM_ID);
@@ -262,8 +270,9 @@ public class EFBOComparatorManager
 	{
   
 		JFrame fileSaveFrame = new JFrame();
-		final String defaultFilePath = System.getProperty("user.dir") 
-  							  		 + "/Resources/Ontologies/"; 
+		String defaultFilePath = EFBOSystemLauncher.EXTRACTED_ONTOLOGY_LOCATION;
+		
+		//String defaultFilePath = System.getProperty("user.dir") + "/Resources/Ontologies/"; 
 		JFileChooser fileChooser = new JFileChooser(new File(defaultFilePath));
 		fileChooser.setDialogTitle("Save the EFBO-V Merged Ontology");
 		
@@ -302,7 +311,7 @@ public class EFBOComparatorManager
 	private void saveEFBOInferredOntology() throws Exception
 	{
 		final String inferredEFBOFilePath = System.getProperty("user.dir") 
-			  		 				 + "/Resources/Ontologies/efbo-inferred.owl"; 
+			  		 				 + "/Resources/Ontologies/"+ EFBOSystemLauncher.PROJECT_NAME + "/efbo-inferred.owl"; 
         
 		inferredOntologyFile =  new File(inferredEFBOFilePath);
 		IRI efboInferredIRI = IRI.create(inferredOntologyFile.toURI());
