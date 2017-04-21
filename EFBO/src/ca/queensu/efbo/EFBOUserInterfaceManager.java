@@ -7,33 +7,36 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
+
 import javax.swing.UIManager;
 import javax.swing.JProgressBar;
+
+import javax.swing.JPanel;
+
+import java.awt.FlowLayout;
+import java.awt.SystemColor;
 
 public class EFBOUserInterfaceManager 
 {
 	public JFrame efboSystemFrame;
 	private EFBOComparatorManager efboCompManager = new EFBOComparatorManager();
 	
-	private JButton btnStepI   = new JButton("STEP I.   LOAD the FIRST System's Knowledge.");
-	private JButton btnStepII  = new JButton("STEP II.  LOAD the SECOND System's Knowledge.");
-	private JButton btnStepIII = new JButton("STEP III. LOAD the EFBO-Validation Ontology.          ");
-	private JButton btnStepIV  = new JButton("STEP IV.  MERGE the 1st + 2nd System's Knowledge.");
-	private JButton btnStepV   = new JButton("STEP V.   IDENTIFY the MAPPING Events.");
-	private Font textFont = new Font("DialogInput", Font.BOLD, 16);
+	private JButton btnStepI   = new JButton("STEP   I. LOAD the FIRST System's Knowledge.");
+	private JButton btnStepII  = new JButton("STEP  II. LOAD the SECOND System's Knowledge.");
+	private JButton btnStepIII = new JButton("STEP III. LOAD the EFBO-Validation Ontology.");
+	private JButton btnStepIV  = new JButton("STEP  IV. MERGE the 1st + 2nd System's Knowledge.");
+	private JButton btnStepV   = new JButton("STEP   V. IDENTIFY the MAPPING Events.");
+	private Font textFont = new Font(Font.MONOSPACED, Font.BOLD, 14);
 	public static JProgressBar progressBar; 
+	private final JPanel firstPanel = new JPanel();
+	private final JPanel secondPanel = new JPanel();
 	
 	/**
 	 * Create the application.
 	 */
 	public EFBOUserInterfaceManager() throws Exception
 	{
-		progressBar = new JProgressBar();
 		this.initializeGUIElements();
 		this.setActionListeners();
 	}
@@ -42,6 +45,8 @@ public class EFBOUserInterfaceManager
 	{
 		//EFBOUserInterfaceManager.progressBar.setValue(25);
 		viewBar();
+		btnStepI.setBounds(43, 54, 432, 39);
+		btnStepI.setBackground(SystemColor.menu);
 		
 		btnStepI.setFont(textFont);		
 		btnStepI.addActionListener(new ActionListener() 
@@ -63,6 +68,8 @@ public class EFBOUserInterfaceManager
 				}
 			}
 		});
+		btnStepII.setBounds(43, 93, 432, 39);
+		btnStepII.setBackground(SystemColor.menu);
 				
 		btnStepII.setFont(textFont);
 		btnStepII.addActionListener(new ActionListener() 
@@ -85,6 +92,8 @@ public class EFBOUserInterfaceManager
 				}
 			}
 		});
+		btnStepIII.setBounds(43, 132, 432, 39);
+		btnStepIII.setBackground(SystemColor.menu);
 				
 		btnStepIII.setFont(textFont);
 		btnStepIII.addActionListener(new ActionListener() 
@@ -105,6 +114,8 @@ public class EFBOUserInterfaceManager
 				}
 			}
 		});
+		btnStepIV.setBounds(43, 171, 432, 39);
+		btnStepIV.setBackground(SystemColor.menu);
 		
 		btnStepIV.setFont(textFont);
 		btnStepIV.addActionListener(new ActionListener() 
@@ -126,6 +137,8 @@ public class EFBOUserInterfaceManager
 				}
 			}
 		});
+		btnStepV.setBounds(43, 210, 432, 39);
+		btnStepV.setBackground(SystemColor.menu);
 		
 		
 		btnStepV.setFont(textFont);
@@ -141,8 +154,6 @@ public class EFBOUserInterfaceManager
 	
 	public void viewBar() 
 	{
-
-		  progressBar.setStringPainted(true);
 		  progressBar.setValue(0);
 
 		  int timerDelay = 10;
@@ -174,81 +185,52 @@ public class EFBOUserInterfaceManager
 	 */
 	private void initializeGUIElements() 
 	{
-		efboSystemFrame = new JFrame();
+		efboSystemFrame = new JFrame("The EFBO System Interface");
 		efboSystemFrame.setBackground(Color.BLACK);
 		efboSystemFrame.getContentPane().setBackground(UIManager.getColor("Button.highlight"));
-		efboSystemFrame.setTitle("The EFBO System Interface");
-		efboSystemFrame.setBounds(100, 100, 713, 426);
+		efboSystemFrame.setBounds(100, 100, 532, 404);
 		efboSystemFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		btnStepII.setEnabled(false); btnStepIII.setEnabled(false);
-		btnStepIV.setEnabled(false); btnStepV.setEnabled(false);
+		btnStepII.setEnabled(false); 
+		btnStepIII.setEnabled(false);
+		btnStepIV.setEnabled(false);
+		btnStepV.setEnabled(false);
 		
 		btnStepI.setHorizontalAlignment(SwingConstants.LEFT);
 		btnStepII.setHorizontalAlignment(SwingConstants.LEFT);
 		btnStepIII.setHorizontalAlignment(SwingConstants.LEFT);
 		btnStepIV.setHorizontalAlignment(SwingConstants.LEFT);
 		btnStepV.setHorizontalAlignment(SwingConstants.LEFT);
+		efboSystemFrame.getContentPane().setLayout(null);
+		efboSystemFrame.getContentPane().add(btnStepI);
+		efboSystemFrame.getContentPane().add(btnStepII);
+		efboSystemFrame.getContentPane().add(btnStepIII);
+		efboSystemFrame.getContentPane().add(btnStepIV);
+		efboSystemFrame.getContentPane().add(btnStepV);
+		FlowLayout flowLayout = (FlowLayout) secondPanel.getLayout();
+		flowLayout.setAlignOnBaseline(true);
+		secondPanel.setBounds(43, 262, 432, 39);
+		secondPanel.setBackground(Color.WHITE);
+		secondPanel.setBorder(null);
+		
+		efboSystemFrame.getContentPane().add(secondPanel);
+		firstPanel.setBorder(null);
+		secondPanel.add(firstPanel);
+		firstPanel.setBackground(Color.WHITE);
+		progressBar = new JProgressBar();
+		progressBar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		progressBar.setStringPainted(true);
+		firstPanel.add(progressBar);
+		progressBar.setForeground(Color.GREEN);
+		progressBar.setBackground(Color.BLACK);
 		
 		JLabel lblMmxviiFahim = new JLabel("MMXVII \u00A9 Fahim T. Imam. All Rights Reserved.");
+		lblMmxviiFahim.setBounds(43, 301, 432, 39);
+		lblMmxviiFahim.setBackground(SystemColor.menu);
 		lblMmxviiFahim.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMmxviiFahim.setForeground(UIManager.getColor("Button.darkShadow"));
+		lblMmxviiFahim.setForeground(Color.GRAY);
 		lblMmxviiFahim.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		
-		
-		GroupLayout groupLayout = new GroupLayout(efboSystemFrame.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(47)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(1)
-							.addComponent(btnStepI, GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(1)
-							.addComponent(btnStepII, 0, 602, Short.MAX_VALUE)
-							.addGap(1))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(1)
-							.addComponent(btnStepIII, 0, 0, Short.MAX_VALUE)
-							.addGap(1))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(2)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btnStepV, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
-								.addComponent(btnStepIV, Alignment.LEADING, 0, 0, Short.MAX_VALUE))
-							.addGap(2)))
-					.addGap(46))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(237, Short.MAX_VALUE)
-					.addComponent(lblMmxviiFahim)
-					.addGap(236))
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-					.addGap(270)
-					.addComponent(progressBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(281, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(39)
-					.addComponent(btnStepI, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnStepII, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnStepIII, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnStepIV, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnStepV, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(progressBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-					.addComponent(lblMmxviiFahim)
-					.addContainerGap())
-		);
-		efboSystemFrame.getContentPane().setLayout(groupLayout);		
+		efboSystemFrame.getContentPane().add(lblMmxviiFahim);
 	}
 	
 	
