@@ -10,7 +10,9 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -18,8 +20,11 @@ import javax.swing.JTextArea;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import org.semanticweb.HermiT.Reasoner;
+import org.semanticweb.HermiT.ReasonerFactory;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
+import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataProperty;
@@ -29,6 +34,11 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
+import org.semanticweb.owlapi.reasoner.InferenceType;
+import org.semanticweb.owlapi.reasoner.NodeSet;
+import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
+import org.semanticweb.owlapi.search.EntitySearcher;
 
 /**
  * @author Fahim
@@ -53,6 +63,7 @@ public class EFBOKnowledgeBaseManager
 	private String systemName = null;
 	private String localKBLocation = null;
 	private OWLNamedIndividual systemIDInstance = null;
+	private Set <OWLNamedIndividual> inferredEventIndividuals = null;
 
 	public EFBOKnowledgeBaseManager(String systemID, String systemName)
 				   throws OWLOntologyCreationException, OWLOntologyStorageException, Exception 
@@ -208,6 +219,20 @@ public class EFBOKnowledgeBaseManager
         efboKBaseManager.addOWLObjectPropertyAxiom(individual, objectProperty, this.systemIDInstance);
 	}
 	
+	
+	public Set <OWLNamedIndividual> getInferredEvents() throws Exception
+	{
+		EFBOOntologyManager m = new EFBOOntologyManager();
+		m.setInferredOntology(new File(this.getLocalKBLocation()));
+			
+		OWLClass eventClass = this.getEFBOManager().getOWLDataFactory()
+				                  .getOWLClass(IRI.create(EFBO_CORE_URI + "#Event"));
+		
+		this.inferredEventIndividuals = m.getOWLNamedIndividuals(eventClass);
+		
+		return this.inferredEventIndividuals;
+	}
+	
 	//Set an annotation that contains hasTimePoint data property into into the EFBO KBase.
 	private void setEFBOEventTimePoint(EFBOAnnotation annotation)
 	{
@@ -291,6 +316,7 @@ public boolean isCurrentOS (String osName)
 	return false;
 }
 
+
 public String getLocalKBLocation()
 {
 	return localKBLocation;
@@ -301,8 +327,7 @@ public OWLOntology getEFBOKnowledgeBase()
 	return efboKBase;
 }
 
-
- public String getSystemID()
+public String getSystemID()
 	{
 		return systemID;
 	}

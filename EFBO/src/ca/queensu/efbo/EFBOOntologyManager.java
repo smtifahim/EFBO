@@ -43,6 +43,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException; 
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
+import org.semanticweb.owlapi.reasoner.Node;
 import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
@@ -479,45 +480,59 @@ public void printAllClasses()
 		System.out.println("-----------------------------------"); 
 		
 		for (OWLClass c : owlClasses)
-			System.out.println(this.getLabel(c));		   	
+			//System.out.println(this.getLabel(c));
+			System.out.println(c.toString());
 		  
 	}
 
 
-// return a set of OWLNamed Individuals of a particular class Type.
-public  Set<OWLNamedIndividual> getIndividualsByclass(OWLOntology ontology, OWLClass owlClassName)
+//// return a set of OWLNamed Individuals of a particular class Type.
+//public  NodeSet<OWLNamedIndividual> getOWLNamedIndividuals(OWLOntology ontology, String owlClassLabel)
+//{
+//   OWLReasonerFactory reasonerFactory = new ReasonerFactory();
+//   OWLReasoner reasoner = reasonerFactory.createNonBufferingReasoner(ontology);
+//   
+//   
+//   //System.out.println(x);
+//   
+//    NodeSet<OWLNamedIndividual> individuals = null;
+//    
+//    for (OWLClass c : ontology.getClassesInSignature())
+//    {
+//        if (c.getIRI().getShortForm().equals(owlClassLabel))
+//        {
+//            NodeSet<OWLNamedIndividual> instances = reasoner.getInstances(c, false);
+//            System.out.println("Class : "+ c.getIRI().getShortForm());
+//            for (OWLNamedIndividual i : instances.getFlattened())
+//            {
+//                System.out.println(i.getIRI().getShortForm()); 
+//            }
+//        }
+//    }
+//    
+//    return individuals;
+//}
+
+//return a set of OWLNamed Individuals of a particular class Type after inference.
+public  Set<OWLNamedIndividual> getOWLNamedIndividuals(OWLClass owlClass)
 {
-   // OWLReasonerFactory reasonerFactory = new ReasonerFactory();
-   // OWLReasoner reasoner = reasonerFactory.createNonBufferingReasoner(ontology);
-   
-    Set<OWLNamedIndividual> individuals = null;
-    
-    for (OWLClass c : ontology.getClassesInSignature())
-    {
-        if (c == owlClassName)
-        {
-            Set<OWLNamedIndividual> instances = c.getIndividualsInSignature();
-            System.out.println("Class : " + c);
-            individuals = instances;
-            for (OWLNamedIndividual i: instances)
-            System.out.println("Individual" + i);
-        }
-    }
-    
-    return individuals;
+	Set <OWLNamedIndividual> allIndividuals = inferredOntology.getIndividualsInSignature();
+	Set <OWLNamedIndividual> individuals =  new HashSet<OWLNamedIndividual>();
+		
+	for (OWLNamedIndividual i: allIndividuals)
+	{
+		if (EntitySearcher.getTypes(i, inferredOntology).contains(owlClass))
+			{
+				individuals.add(i);
+				
+			}
+	}	
+  
+ return individuals;
 }
 
-public Set<OWLNamedIndividual> getOWLNamedIndividual(OWLClass className)
-{
-	Set<OWLNamedIndividual> individuals = className.getIndividualsInSignature();
-	
-	for (OWLNamedIndividual i : individuals) 
-		System.out.println(this.getLabel(i));
-	
-	return individuals;	
-}
 
- public void printAllIndividuals()
+public void printAllIndividuals()
 	{
 		Set<OWLNamedIndividual> individuals;
 		individuals = loadedOntology.getIndividualsInSignature();

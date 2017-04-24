@@ -5,8 +5,6 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JFileChooser;
@@ -17,14 +15,21 @@ import javax.swing.JTextArea;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import org.mindswap.pellet.jena.PelletReasonerFactory;
+import org.semanticweb.HermiT.Reasoner;
+import org.semanticweb.HermiT.ReasonerFactory;
+import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
-import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
+import org.semanticweb.owlapi.reasoner.NodeSet;
+import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
+import org.semanticweb.owlapi.search.EntitySearcher;
 
 public class EFBOComparatorManager 
 {
@@ -77,6 +82,7 @@ public class EFBOComparatorManager
 		this.setFirstSystemAnnotations();
 		this.setFirstSystemKBaseManager();
 		
+		
 	}
 	
 	public void loadSecondSystem() throws Exception
@@ -98,7 +104,8 @@ public class EFBOComparatorManager
 		this.saveEFBOValidationOntology();
 		this.saveEFBOInferredOntology();
 		
-		this.importEFBOInferredOntology();		
+		this.importEFBOInferredOntology();
+		
 	}
 	
 		
@@ -137,7 +144,7 @@ public class EFBOComparatorManager
 	
     private void importEFBOKnowledgeBase(EFBOKnowledgeBaseManager efboKBaseManager) throws Exception
     {
-    	String fileLocation = efboKBaseManager.getLocalKBLocation();    	
+    	String fileLocation = efboKBaseManager.getLocalKBLocation();
     	efboValidationManager.importOWLOntology(efboKBaseManager.getEFBOKnowledgeBase(), fileLocation);   
     }
 	
@@ -145,7 +152,8 @@ public class EFBOComparatorManager
 	{
     	this.firstSystemKBaseManager = this.getEFBOKnowledeBaseManager(FIRST_SYSTEM_ID,
 									   firstSystemName, firstSystemAnnotations);
-		
+    	
+    	
 	}
     
     public void setSecondSystemKBaseManager() throws Exception
@@ -160,6 +168,7 @@ public class EFBOComparatorManager
 	{
 		EFBOKnowledgeBaseManager efboKBaseManager = new EFBOKnowledgeBaseManager(systemID, systemName);
 		efboKBaseManager.processExtractedAnnotations(annotations);
+		System.out.println(efboKBaseManager.getInferredEvents());
 		return efboKBaseManager;
 	}
 
@@ -317,9 +326,9 @@ public class EFBOComparatorManager
 		IRI efboInferredIRI = IRI.create(inferredOntologyFile.toURI());
 		
 	    this.setEFBOInferredOntology();
-		
 		efboInferredOntology.getOWLOntologyManager().saveOntology(efboInferredOntology, efboInferredIRI);
-        		
+				      		
+		        		
 	}
 	
 	private void importEFBOInferredOntology() throws Exception
@@ -329,11 +338,10 @@ public class EFBOComparatorManager
 		
         efboValidationManager.importOWLOntology(efboInferredOntology, inferredOntologyFile.getAbsolutePath());
 		efboValidationOntology.getOWLOntologyManager().saveOntology(efboValidationOntology, efboVIRI);
+		
 	}
 	
-	
-
-	public OWLOntology getInferredEFBOResults()
+	public OWLOntology getEFBOInferredOntology()
 	{
 		return efboInferredOntology;
 	}

@@ -1,6 +1,5 @@
 package ca.queensu.efbo;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.io.File;
 

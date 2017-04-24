@@ -16,8 +16,9 @@ public class Tester
 			EFBOKnowledgeBaseManager efboKBGenerator1 = new EFBOKnowledgeBaseManager("SYSTEM-01", "LoginSystem");
 			efboKBGenerator1.processExtractedAnnotations(annotations);
 			efboKBGenerator1.getEFBOManager().printOntologyMetrics();
-			efboKBGenerator1.getEFBOManager().printAllIndividuals();
-			efboKBGenerator1.getEFBOManager().printAllObjectProperties();
+			efboKBGenerator1.getEFBOManager().printAllClasses();
+			//efboKBGenerator1.getEFBOManager().printAllIndividuals();
+			//efboKBGenerator1.getEFBOManager().printAllObjectProperties();
 		}
 		
 		System.exit(1);
