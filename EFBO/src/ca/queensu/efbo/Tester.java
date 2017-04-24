@@ -1,5 +1,6 @@
 package ca.queensu.efbo;
 import java.util.ArrayList;
+import java.util.Set;
 
 
 public class Tester 
@@ -9,7 +10,7 @@ public class Tester
 	{
 		//new Console();
 		EFBOAnnotationExtractionManager annot = new EFBOAnnotationExtractionManager();
-		ArrayList <EFBOAnnotation> annotations = annot.getExtractedAnnotations();
+		Set<EFBOAnnotation> annotations = annot.getExtractedAnnotations();
 		
 		if (annotations.size()!=0)
 		{

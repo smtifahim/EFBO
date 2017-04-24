@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -34,7 +36,7 @@ public class EFBOAnnotationExtractionManager
 	private JFileChooser fileChooser;
 	private File[] selectedFiles;
 	private File extractedAnnotationsFile;
-	private ArrayList<EFBOAnnotation> annotations;
+	private Set<EFBOAnnotation> annotations;
 	private EFBOOntologyManager efboCoreManager = null;
 	private OWLOntology efboCore = null;
 	
@@ -43,7 +45,7 @@ public class EFBOAnnotationExtractionManager
 	
 	public EFBOAnnotationExtractionManager() throws Exception
 	{	  
-		  final String defaultFilePath = System.getProperty("user.dir") 
+		  String defaultFilePath = System.getProperty("user.dir") 
 				  					   + "/Resources/Annotated-Sources";
 		  fileChooser = new JFileChooser(new File(defaultFilePath));
 		  fileChooser.setDialogTitle("Select Annotated Files");
@@ -59,7 +61,7 @@ public class EFBOAnnotationExtractionManager
 		  else
 		  {
 			  this.loadEFBOCoreOntology();
-			  annotations = new ArrayList<EFBOAnnotation>();
+			  annotations = new HashSet<EFBOAnnotation>();
 			  this.processSelectedFiles(selectedFiles);
 		  } 
 		  
@@ -76,13 +78,15 @@ public class EFBOAnnotationExtractionManager
 	    this.efboCore = efboCoreManager.getLoadedOntology();
 	}
 	
-	public ArrayList<EFBOAnnotation> getExtractedAnnotations()
+	public Set <EFBOAnnotation> getExtractedAnnotations()
 	{
 		return this.annotations;
 	}
 	
-	private ArrayList<EFBOAnnotation> extractAnnotations(File inputFile)
+	private Set<EFBOAnnotation> extractAnnotations(File inputFile)
 	 {
+		//annotations = new HashSet<EFBOAnnotation>();
+		
 		try
 		 {
 	   		 String fileLocation = inputFile.getCanonicalPath();

@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JFileChooser;
@@ -36,8 +38,12 @@ public class EFBOComparatorManager
 	private EFBOKnowledgeBaseManager firstSystemKBaseManager;
 	private EFBOKnowledgeBaseManager secondSystemKBaseManager;
 	
-	private ArrayList<EFBOAnnotation> firstSystemAnnotations;
-	private ArrayList<EFBOAnnotation> secondSystemAnnotations;
+	private Set<EFBOAnnotation> firstSystemAnnotations;
+	private Set<EFBOAnnotation> secondSystemAnnotations;
+	
+	private Map<OWLNamedIndividual, String> firstSystemEvents = new HashMap <OWLNamedIndividual, String>();
+	private Map<OWLNamedIndividual, String> secondSystemEvents = new HashMap <OWLNamedIndividual, String>();
+	private EFBOMappingEventsManager efboMappingEventsManager;
 	
 	private String firstSystemName;
 	private String secondSystemName;
@@ -72,7 +78,11 @@ public class EFBOComparatorManager
 		efboValidationManager = null;
 		
 		efboValidationOntologyFile = null;
-		inferredOntologyFile = null;		
+		inferredOntologyFile = null;
+		
+		firstSystemEvents = null;
+		secondSystemEvents = null;
+		efboMappingEventsManager = null;
 				
 	}
 	
@@ -81,8 +91,6 @@ public class EFBOComparatorManager
 		this.setFirstSystemName();
 		this.setFirstSystemAnnotations();
 		this.setFirstSystemKBaseManager();
-		
-		
 	}
 	
 	public void loadSecondSystem() throws Exception
@@ -103,6 +111,16 @@ public class EFBOComparatorManager
 		
 		this.saveEFBOValidationOntology();
 		this.saveEFBOInferredOntology();
+		
+		this.setFirstSystemEvents();
+		this.setSecondSystemEvents();
+		
+		this.efboMappingEventsManager = new EFBOMappingEventsManager();
+		this.efboMappingEventsManager.setFirstSystemEvents(this.firstSystemEvents);
+		this.efboMappingEventsManager.setSecondSystemEvents(this.secondSystemEvents);
+		this.efboMappingEventsManager.populateTreeElements();
+		this.efboMappingEventsManager.setVisible(true);
+	//	efboMappingEventsManager.main();
 		
 		this.importEFBOInferredOntology();
 		
@@ -159,28 +177,28 @@ public class EFBOComparatorManager
     public void setSecondSystemKBaseManager() throws Exception
  	{
      	this.secondSystemKBaseManager = this.getEFBOKnowledeBaseManager(SECOND_SYSTEM_ID,
- 									   secondSystemName, secondSystemAnnotations);
+ 									   	secondSystemName, secondSystemAnnotations);
  		
  	}
     
 	private EFBOKnowledgeBaseManager getEFBOKnowledeBaseManager(String systemID, String systemName,
-									ArrayList<EFBOAnnotation> annotations) throws Exception
+									Set<EFBOAnnotation> annotations) throws Exception
 	{
 		EFBOKnowledgeBaseManager efboKBaseManager = new EFBOKnowledgeBaseManager(systemID, systemName);
 		efboKBaseManager.processExtractedAnnotations(annotations);
-		System.out.println(efboKBaseManager.getInferredEvents());
+		//System.out.println(efboKBaseManager.getInferredEvents());
 		return efboKBaseManager;
 	}
 
 	/**
 	 * @return the firstSystemAnnotations
 	 */
-	public ArrayList<EFBOAnnotation> getFirstSystemAnnotations()
+	public Set<EFBOAnnotation> getFirstSystemAnnotations()
 	{
 		return firstSystemAnnotations;
 	}
 	
-	public ArrayList<EFBOAnnotation> getSecondSystemAnnotations()
+	public Set<EFBOAnnotation> getSecondSystemAnnotations()
 	{
 		return secondSystemAnnotations;
 	}
@@ -196,7 +214,7 @@ public class EFBOComparatorManager
 		this.secondSystemAnnotations = this.getSystemAnnotations();
 	}
 	
-	private ArrayList<EFBOAnnotation> getSystemAnnotations() throws Exception
+	private Set<EFBOAnnotation> getSystemAnnotations() throws Exception
 	{
 		return (new EFBOAnnotationExtractionManager().getExtractedAnnotations());		
 	}
@@ -287,6 +305,7 @@ public class EFBOComparatorManager
 		
 		int userSelection = fileChooser.showSaveDialog(fileSaveFrame);
 		 
+		
 		if (userSelection == JFileChooser.APPROVE_OPTION) 
 		{
 			 File fileToSave = fileChooser.getSelectedFile();
@@ -327,8 +346,7 @@ public class EFBOComparatorManager
 		
 	    this.setEFBOInferredOntology();
 		efboInferredOntology.getOWLOntologyManager().saveOntology(efboInferredOntology, efboInferredIRI);
-				      		
-		        		
+			        		
 	}
 	
 	private void importEFBOInferredOntology() throws Exception
@@ -353,5 +371,53 @@ public class EFBOComparatorManager
 	    
 		this.efboInferredOntology = this.efboValidationManager.getInferredOntology();		
 	}
+
+	/**
+	 * @return the firstSystemEvents
+	 */
+	public Map<OWLNamedIndividual, String> getFirstSystemEvents() 
+	{
+		return firstSystemEvents;
+	}
+
+	private void setFirstSystemEvents() 
+	{
+		OWLClass eventClass = efboInferredOntology.getOWLOntologyManager().getOWLDataFactory()
+                				.getOWLClass(IRI.create(EFBO_V_URI + "#System-1_Event"));
+
+		this.firstSystemEvents = this.getSystemEvents(eventClass);
+	}
+	
+	private void setSecondSystemEvents() 
+	{
+		OWLClass eventClass = efboInferredOntology.getOWLOntologyManager().getOWLDataFactory()
+                				.getOWLClass(IRI.create(EFBO_V_URI + "#System-2_Event"));
+
+	    this.secondSystemEvents = this.getSystemEvents(eventClass);
+	}
+	
+	private Map<OWLNamedIndividual, String> getSystemEvents(OWLClass eventClass)
+	{
+		
+		Map<OWLNamedIndividual, String> systemEvents = new HashMap <OWLNamedIndividual, String>();
+		
+		Set <OWLNamedIndividual> eventIndividuals = efboValidationManager.getOWLNamedIndividuals(eventClass);
+			for(OWLNamedIndividual i : eventIndividuals)
+			{
+			systemEvents.put(i, efboValidationManager.getLabel(i));
+			System.out.println(efboValidationManager.getLabel(i));
+			}
+		
+		return systemEvents;
+	}
+
+	/**
+	 * @return the secondSystemEvents
+	 */
+	public Map<OWLNamedIndividual, String> getSecondSystemEvents() 
+	{
+		return secondSystemEvents;
+	}
+
 	
 }// End of public class EFBOComparator. 

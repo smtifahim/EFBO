@@ -10,7 +10,6 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,11 +19,8 @@ import javax.swing.JTextArea;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import org.semanticweb.HermiT.Reasoner;
-import org.semanticweb.HermiT.ReasonerFactory;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
-import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataProperty;
@@ -34,11 +30,6 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
-import org.semanticweb.owlapi.reasoner.InferenceType;
-import org.semanticweb.owlapi.reasoner.NodeSet;
-import org.semanticweb.owlapi.reasoner.OWLReasoner;
-import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
-import org.semanticweb.owlapi.search.EntitySearcher;
 
 /**
  * @author Fahim
@@ -111,7 +102,7 @@ public class EFBOKnowledgeBaseManager
 		EFBOUserInterfaceManager.progressBar.setValue(100);
         
         String savedSuccessMessage = "\nThe EFBO Knowledgebase for " + this.getSystemName() + " has been Saved."
-        		      			   + "\nLocation: " + fileLocation + "  ";
+        		      			   + "\nLocation: " + fileLocation.replace("\\", "/") + "  ";
         		      			  
             
         
@@ -133,7 +124,7 @@ public class EFBOKnowledgeBaseManager
         
 	}
 	
- public void processExtractedAnnotations(ArrayList<EFBOAnnotation> annotations)
+ public void processExtractedAnnotations(Set<EFBOAnnotation> annotations)
 			throws OWLOntologyCreationException, OWLOntologyStorageException 
 	{
 		for (EFBOAnnotation exAnnotation: annotations)
@@ -259,7 +250,7 @@ public class EFBOKnowledgeBaseManager
 				
 	}
 	
-	private void setEFBONextEventProperties(ArrayList<EFBOAnnotation> annotations)
+	private void setEFBONextEventProperties(Set<EFBOAnnotation> annotations)
 	{
 		OWLNamedIndividual event1 = null; OWLNamedIndividual event2 = null;
 		OWLObjectProperty hasNextEvent = null;

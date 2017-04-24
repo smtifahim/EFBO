@@ -44,7 +44,7 @@ public class EFBOUserInterfaceManager
 	private void setActionListeners()
 	{
 		//EFBOUserInterfaceManager.progressBar.setValue(25);
-		viewBar();
+		viewProgressBar();
 		
 		btnStepI.addActionListener(new ActionListener() 
 		{
@@ -136,7 +136,7 @@ public class EFBOUserInterfaceManager
 	}
 	
 	
-	public void viewBar() 
+	public void viewProgressBar() 
 	{
 		  progressBar.setValue(0);
 
