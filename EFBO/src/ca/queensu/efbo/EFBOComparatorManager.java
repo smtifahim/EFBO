@@ -45,6 +45,7 @@ public class EFBOComparatorManager
 	private Set <OWLNamedIndividual> firstSystemEvents = new HashSet<OWLNamedIndividual>();
 	private Set <OWLNamedIndividual> secondSystemEvents = new HashSet<OWLNamedIndividual>();
 	private EFBOMappingEventsManager efboMappingEventsManager;
+	private ArrayList <EFBOMappingEvents> efboMappingEvents;
 	
 	private String firstSystemName;
 	private String secondSystemName;
@@ -117,13 +118,15 @@ public class EFBOComparatorManager
 		this.importLoadedSystemsKBases();		
 		this.saveEFBOValidationOntology();
 		
-		this.setEFBOInferredOntology(); 
-		this.saveEFBOInferredOntology();
-		this.importEFBOInferredOntology();		
+//		this.setEFBOInferredOntology(); 
+//		this.saveEFBOInferredOntology();
+//		this.importEFBOInferredOntology();		
 	}
 	
-	public void setEFBOMappingEvents()
+	public void setEFBOMappingEvents() throws Exception
 	{
+		this.setEFBOInferredOntology();
+		
 		this.setFirstSystemEvents();
 		this.setSecondSystemEvents();
 		
@@ -131,6 +134,11 @@ public class EFBOComparatorManager
 											(this.firstSystemEvents,
 											 this.secondSystemEvents, 
 											 this.efboValidationManager);
+		
+		//this.efboMappingEvents = new ArrayList<EFBOMappingEvents>();
+		//this.efboMappingEvents = this.efboMappingEventsManager.getMappingEvents();
+		
+		//this.saveEFBOValidationOntology();
 		
 	}
 		
@@ -301,7 +309,7 @@ public class EFBOComparatorManager
 	    	        
 	}
 	
-	private void saveEFBOValidationOntology()
+	public void saveEFBOValidationOntology()
 			throws OWLOntologyCreationException,
 			OWLOntologyStorageException, Exception 
 	{
@@ -348,7 +356,7 @@ public class EFBOComparatorManager
 		 }
 	}
 	
-	private void saveEFBOInferredOntology() throws Exception
+	public void saveEFBOInferredOntology() throws Exception
 	{
 		final String inferredEFBOFilePath = System.getProperty("user.dir") 
 			  		 				 + "/Resources/Ontologies/"+ EFBOSystemLauncher.PROJECT_NAME + "/efbo-inferred.owl"; 

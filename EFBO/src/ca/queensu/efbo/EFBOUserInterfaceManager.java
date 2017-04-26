@@ -27,6 +27,7 @@ public class EFBOUserInterfaceManager
 	private JButton btnStepIII = new JButton("STEP III. LOAD the EFBO-Validation Ontology.");
 	private JButton btnStepIV  = new JButton("STEP  IV. MERGE the 1st + 2nd System's Knowledge.");
 	private JButton btnStepV   = new JButton("STEP   V. IDENTIFY the MAPPING Events.");
+	private JButton btnStepVI  = new JButton("STEP  VI. Save the EFBO-V Ontology.");
 	private Font textFont = new Font(Font.MONOSPACED, Font.BOLD, 14);
 	public static JProgressBar progressBar; 
 	private final JPanel firstPanel = new JPanel();
@@ -131,7 +132,38 @@ public class EFBOUserInterfaceManager
 			public void actionPerformed(ActionEvent e)
 			{
 				System.out.println(btnStepV.getText());
-				efboCompManager.setEFBOMappingEvents();				
+				
+				try 
+				{
+					btnStepVI.setEnabled(true);
+					efboCompManager.setEFBOMappingEvents();
+					btnStepV.setEnabled(false);					
+				} 
+				
+				catch (Exception e1) 
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}				
+			}
+		});
+		
+		btnStepVI.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				System.out.println(btnStepV.getText());
+				
+				try 
+				{
+					efboCompManager.saveEFBOValidationOntology();					
+				} 
+				
+				catch (Exception e1) 
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}				
 			}
 		});
 	}
@@ -180,6 +212,7 @@ public class EFBOUserInterfaceManager
 		btnStepIII.setEnabled(false);
 		btnStepIV.setEnabled(false);
 		btnStepV.setEnabled(false);
+		btnStepVI.setEnabled(false);
 		
 		btnStepI.setBounds(43, 54, 432, 39);
 		btnStepI.setBackground(SystemColor.menu);
@@ -201,20 +234,27 @@ public class EFBOUserInterfaceManager
 		btnStepV.setBackground(SystemColor.menu);
 		btnStepV.setFont(textFont);
 		
+		btnStepVI.setBounds(43, 249, 432, 39);
+		btnStepVI.setBackground(SystemColor.menu);
+		btnStepVI.setFont(textFont);
+		
+		
 		btnStepI.setHorizontalAlignment(SwingConstants.LEFT);
 		btnStepII.setHorizontalAlignment(SwingConstants.LEFT);
 		btnStepIII.setHorizontalAlignment(SwingConstants.LEFT);
 		btnStepIV.setHorizontalAlignment(SwingConstants.LEFT);
 		btnStepV.setHorizontalAlignment(SwingConstants.LEFT);
+		btnStepVI.setHorizontalAlignment(SwingConstants.LEFT);
 		efboSystemFrame.getContentPane().setLayout(null);
 		efboSystemFrame.getContentPane().add(btnStepI);
 		efboSystemFrame.getContentPane().add(btnStepII);
 		efboSystemFrame.getContentPane().add(btnStepIII);
 		efboSystemFrame.getContentPane().add(btnStepIV);
 		efboSystemFrame.getContentPane().add(btnStepV);
+		efboSystemFrame.getContentPane().add(btnStepVI);
 		FlowLayout flowLayout = (FlowLayout) secondPanel.getLayout();
 		flowLayout.setAlignOnBaseline(true);
-		secondPanel.setBounds(43, 262, 432, 39);
+		secondPanel.setBounds(43, 287, 432, 39);
 		secondPanel.setBackground(Color.WHITE);
 		secondPanel.setBorder(null);
 		
@@ -230,7 +270,7 @@ public class EFBOUserInterfaceManager
 		progressBar.setBackground(Color.BLACK);
 		
 		JLabel lblMmxviiFahim = new JLabel("MMXVII \u00A9 Fahim T. Imam. All Rights Reserved.");
-		lblMmxviiFahim.setBounds(43, 301, 432, 39);
+		lblMmxviiFahim.setBounds(43, 326, 432, 39);
 		lblMmxviiFahim.setBackground(SystemColor.menu);
 		lblMmxviiFahim.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMmxviiFahim.setForeground(Color.GRAY);

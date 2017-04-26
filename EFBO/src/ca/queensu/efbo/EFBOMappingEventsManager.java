@@ -213,8 +213,13 @@ public class EFBOMappingEventsManager extends JFrame
 			for (EFBOMappingEvents events: mappingEvents)
 			{
 				events.setMappingEvents();
+				
 			}
 			
+			listModel.removeAllElements();
+			JOptionPane.showMessageDialog(null, "Mapping Events Added to the EFBO-V", "Mappins Asserted",
+                    JOptionPane.INFORMATION_MESSAGE);
+															
 		}
 	});
 	contentPane.add(btnAddMappings, "cell 0 2 2 1,growx");
