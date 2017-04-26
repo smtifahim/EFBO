@@ -6,6 +6,7 @@ import java.awt.Insets;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -41,8 +42,8 @@ public class EFBOComparatorManager
 	private Set<EFBOAnnotation> firstSystemAnnotations;
 	private Set<EFBOAnnotation> secondSystemAnnotations;
 	
-	private Map<OWLNamedIndividual, String> firstSystemEvents = new HashMap <OWLNamedIndividual, String>();
-	private Map<OWLNamedIndividual, String> secondSystemEvents = new HashMap <OWLNamedIndividual, String>();
+	private Set <OWLNamedIndividual> firstSystemEvents = new HashSet<OWLNamedIndividual>();
+	private Set <OWLNamedIndividual> secondSystemEvents = new HashSet<OWLNamedIndividual>();
 	private EFBOMappingEventsManager efboMappingEventsManager;
 	
 	private String firstSystemName;
@@ -52,7 +53,7 @@ public class EFBOComparatorManager
     private OWLOntology efboInferredOntology;
 	private EFBOOntologyManager efboValidationManager;
 	
-	private static final String 
+	public static final String 
 	EFBO_V_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-v.owl";
 	
 	private static final String FIRST_SYSTEM_ID = "System-1";
@@ -118,7 +119,8 @@ public class EFBOComparatorManager
 		this.efboMappingEventsManager = new EFBOMappingEventsManager();
 		this.efboMappingEventsManager.setFirstSystemEvents(this.firstSystemEvents);
 		this.efboMappingEventsManager.setSecondSystemEvents(this.secondSystemEvents);
-		this.efboMappingEventsManager.populateTreeElements();
+		this.efboMappingEventsManager.setEFBOOntologyManager(this.efboValidationManager);
+		this.efboMappingEventsManager.populateListElements();
 		this.efboMappingEventsManager.setVisible(true);
 	//	efboMappingEventsManager.main();
 		
@@ -375,7 +377,7 @@ public class EFBOComparatorManager
 	/**
 	 * @return the firstSystemEvents
 	 */
-	public Map<OWLNamedIndividual, String> getFirstSystemEvents() 
+	public Set<OWLNamedIndividual> getFirstSystemEvents() 
 	{
 		return firstSystemEvents;
 	}
@@ -396,15 +398,15 @@ public class EFBOComparatorManager
 	    this.secondSystemEvents = this.getSystemEvents(eventClass);
 	}
 	
-	private Map<OWLNamedIndividual, String> getSystemEvents(OWLClass eventClass)
+	private Set <OWLNamedIndividual> getSystemEvents(OWLClass eventClass)
 	{
 		
-		Map<OWLNamedIndividual, String> systemEvents = new HashMap <OWLNamedIndividual, String>();
+		Set <OWLNamedIndividual> systemEvents = new HashSet <OWLNamedIndividual>();
 		
 		Set <OWLNamedIndividual> eventIndividuals = efboValidationManager.getOWLNamedIndividuals(eventClass);
 			for(OWLNamedIndividual i : eventIndividuals)
 			{
-			systemEvents.put(i, efboValidationManager.getLabel(i));
+			systemEvents.add(i);
 			System.out.println(efboValidationManager.getLabel(i));
 			}
 		
@@ -414,7 +416,7 @@ public class EFBOComparatorManager
 	/**
 	 * @return the secondSystemEvents
 	 */
-	public Map<OWLNamedIndividual, String> getSecondSystemEvents() 
+	public Set<OWLNamedIndividual> getSecondSystemEvents() 
 	{
 		return secondSystemEvents;
 	}

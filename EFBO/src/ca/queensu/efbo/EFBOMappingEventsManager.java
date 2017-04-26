@@ -5,133 +5,147 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTree;
 import javax.swing.JList;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.border.TitledBorder;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
 
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import javax.swing.border.EtchedBorder;
+import javax.swing.event.ListSelectionListener;
+
 import java.awt.Color;
+import java.awt.Container;
+import javax.swing.border.*;
+
 import net.miginfocom.swing.MigLayout;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
+import javax.swing.UIManager;
+import javax.swing.JComboBox;
+import java.awt.List;
+import java.awt.Button;
 
 public class EFBOMappingEventsManager extends JFrame
 {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
+	DefaultListModel<String> listModel = new DefaultListModel<>();
+	private JList mappingList = new JList(listModel);
 	
-	private JTree firstTree;
-	DefaultMutableTreeNode firstTreeRoot = new DefaultMutableTreeNode("System-I Event");
+	DefaultListModel<String> firstSystemModel = new DefaultListModel<>();
+	JList firstSystemEventList = new JList(firstSystemModel);
 	
-	private JTree secondTree;
-	DefaultMutableTreeNode secondTreeRoot = new DefaultMutableTreeNode("System-II Event");
 	
-	private JList mappingList;
 	
-	private Map<OWLNamedIndividual, String> firstSystemEvents = new HashMap <OWLNamedIndividual, String>();
-	private Map<OWLNamedIndividual, String> secondSystemEvents = new HashMap <OWLNamedIndividual, String>();
+	DefaultListModel<String> secondSystemModel = new DefaultListModel<>();
+	JList secondSystemEventList = new JList(secondSystemModel);	
+	
+	
+	private Set<OWLNamedIndividual> firstSystemEvents;
+	private Set<OWLNamedIndividual> secondSystemEvents;
+	
+	private EFBOOntologyManager efboOntologyManager;
+	private ArrayList <EFBOMappingEvents> mappingEvents = new ArrayList <EFBOMappingEvents>();
 
-	
-//	public static void main(String [] args) 
-//	{
-//		EventQueue.invokeLater(new Runnable() 
-//		{
-//			public void run() 
-//			{
-//				try 
-//				{
-//					EFBOMappingEventsManager frame = new EFBOMappingEventsManager();
-//					frame.setVisible(true);
-//				} 
-//				
-//				catch (Exception e) 
-//				{
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
+	ArrayList <OWLNamedIndividual> events = new ArrayList <OWLNamedIndividual>();
+	ArrayList <OWLNamedIndividual> events2= new ArrayList <OWLNamedIndividual>();
+	int lm =0;
+	int me =0;
 	public EFBOMappingEventsManager() 
 	{
-	 //this.setTreeElements();	
-	 //this.setGUIElements();
 		firstSystemEvents = null;
-		secondSystemEvents=null;
-	 //this.setVisible(true);
+		secondSystemEvents = null;
+		efboOntologyManager = null;
+		//mappingEvents = new ArrayList <EFBOMappingEvents>();
+		
 	}
 	
-	
-	public void populateTreeElements ()
+	public EFBOMappingEventsManager(Set<OWLNamedIndividual> firstSystemEvents,  
+									Set<OWLNamedIndividual> secondSystemEvents, 
+									EFBOOntologyManager efboOntologyManager ) 
 	{
-		for (Entry<OWLNamedIndividual, String> e : firstSystemEvents.entrySet())
+		this.setFirstSystemEvents(firstSystemEvents);
+		this.setSecondSystemEvents(secondSystemEvents);
+		this.setEFBOOntologyManager(efboOntologyManager);
+		populateListElements();
+		this.setGUIElements();
+		this.setVisible(true);
+	}
+	
+	public void populateListElements()
+	{
+		int i =0;
+		for (OWLNamedIndividual e : firstSystemEvents)
 		{ 
-			DefaultMutableTreeNode childNode = new DefaultMutableTreeNode(e.getValue());
-			firstTreeRoot.add(childNode);
+			String eventLabel = this.efboOntologyManager.getLabel(e);
+			firstSystemModel.add(i, eventLabel);
+			events.add(i, e);
+			i++;			
 		}
 		
-		for (Entry<OWLNamedIndividual, String> e : secondSystemEvents.entrySet())
+		int j =0;
+		
+		for (OWLNamedIndividual e : secondSystemEvents)
 		{ 
-			DefaultMutableTreeNode childNode = new DefaultMutableTreeNode(e.getValue());
-			secondTreeRoot.add(childNode);
+			String eventLabel = this.efboOntologyManager.getLabel(e);
+			secondSystemModel.add(j, eventLabel);
+			events2.add(j, e);
+			j++;	
 		}
-				
-		firstTree = new JTree(firstTreeRoot);
-		secondTree = new JTree(secondTreeRoot);
-	
+			
 		this.setGUIElements();
 	}
 	
+	
+
 	private void setGUIElements()
 	{
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setBounds(100, 100, 450, 521);
 	contentPane = new JPanel();
-	contentPane.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Mapping Selection", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+	contentPane.setBorder(null);
 	setContentPane(contentPane);
-	contentPane.setLayout(new MigLayout("", "[219px,grow,center][219px,grow][]", "[254px][grow][]"));
+	contentPane.setLayout(new MigLayout("", "[219px,grow,center][219px,grow]", "[254px,grow][grow][]"));
+
+	
+	JPanel panel = new JPanel();
+	panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "System I Events", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+	contentPane.add(panel, "cell 0 0,grow");
+	panel.setLayout(new MigLayout("", "[219px,grow,center]", "[254px,grow]"));
 	
 	JScrollPane scrollPane_1 = new JScrollPane();
-	contentPane.add(scrollPane_1, "cell 0 0,grow");
+	panel.add(scrollPane_1, "cell 0 0,grow");
 	
 	
+	scrollPane_1.setViewportView(firstSystemEventList);
 	
-	
-	//firstTree.setBorder(new TitledBorder(null, "System-I Events", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-	scrollPane_1.setViewportView(firstTree);
-	firstTree.setShowsRootHandles(true);
+	JPanel panel_1 = new JPanel();
+	panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "System II Events", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+	contentPane.add(panel_1, "cell 1 0,grow");
+	panel_1.setLayout(new MigLayout("", "[219px,grow]", "[254px,grow]"));
 	
 	JScrollPane scrollPane_2 = new JScrollPane();
-	contentPane.add(scrollPane_2, "cell 1 0,grow");
+	panel_1.add(scrollPane_2, "cell 0 0,grow");
 	
-//	secondTree.setBorder(new TitledBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), 
-//			             "System-II Events", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), 
-//			             "System-II Events", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-	scrollPane_2.setViewportView(secondTree);
-	secondTree.setShowsRootHandles(true);
+	scrollPane_2.setViewportView(secondSystemEventList);
 	
 	JScrollPane scrollPane = new JScrollPane();
 	contentPane.add(scrollPane, "cell 0 1 2 1,grow");
 	
-	mappingList = new JList();
+	
 	mappingList.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), 
 			       "List of Mapping Evenets between System-I and System-II", 
 			       TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -139,22 +153,48 @@ public class EFBOMappingEventsManager extends JFrame
 	scrollPane.setViewportView(mappingList);
 	
 	JButton btnNewButton = new JButton("Map Selected Events");
+	
 	btnNewButton.addActionListener(new ActionListener() 
 	{
 		public void actionPerformed(ActionEvent e)
 		{
+			//String system1Value = firstSystemEventList.getSelectedValue().toString();
+			//String system2Value = secondSystemEventList.getSelectedValue().toString();
+			
+			int i =  firstSystemEventList.getSelectedIndex();
+			int j =  secondSystemEventList.getSelectedIndex();
+			
+			mappingEvents.add(new EFBOMappingEvents(events.get(i), events2.get(j), efboOntologyManager));
+					
+			listModel.add(lm, mappingEvents.get(me).getEFBOMappingEvents());
+			
+			//firstSystemModel.setElementAt("mapped", i);
+			//secondSystemModel.setElementAt("mapped", j);
+			
+			firstSystemModel.set(i, "mapped");
+			secondSystemModel.set(j, "mapped");
+			//secondSystemModel.removeElement(secondSystemEventList.getSelectedValue());
+			
+			lm++;
+			me++;
+						
 		}
 	});
 	scrollPane.setColumnHeaderView(btnNewButton);
 	
-	JList list_1 = new JList();
-	contentPane.add(list_1, "cell 2 1");
+//	JList list_1 = new JList();
+//	contentPane.add(list_1, "cell 2 1");
 	
 	JButton btnNewButton_1 = new JButton("Add the Mappings Above to the EFBO-V Ontology");
 	btnNewButton_1.addActionListener(new ActionListener() 
 	{
 		public void actionPerformed(ActionEvent e) 
 		{
+			for (EFBOMappingEvents events: mappingEvents)
+			{
+				events.setMappingEvents();
+			}
+			
 		}
 	});
 	contentPane.add(btnNewButton_1, "cell 0 2 2 1,growx");
@@ -163,7 +203,7 @@ public class EFBOMappingEventsManager extends JFrame
 	/**
 	 * @return the firstSystemEvents
 	 */
-	public Map<OWLNamedIndividual, String> getFirstSystemEvents() 
+	public Set<OWLNamedIndividual> getFirstSystemEvents() 
 	{
 		return firstSystemEvents;
 	}
@@ -171,15 +211,17 @@ public class EFBOMappingEventsManager extends JFrame
 	/**
 	 * @param firstSystemEvents2 the firstSystemEvents to set
 	 */
-	public void setFirstSystemEvents(Map<OWLNamedIndividual, String> firstSystemEvents2)
+	public void setFirstSystemEvents(Set<OWLNamedIndividual> firstSystemEvents)
 	{
-		this.firstSystemEvents = firstSystemEvents2;
+		this.firstSystemEvents = firstSystemEvents;
 	}
 
+	
+	
 	/**
 	 * @return the secondSystemEvents
 	 */
-	public Map<OWLNamedIndividual, String> getSecondSystemEvents() 
+	public Set<OWLNamedIndividual> getSecondSystemEvents() 
 	{
 		return secondSystemEvents;
 	}
@@ -187,9 +229,36 @@ public class EFBOMappingEventsManager extends JFrame
 	/**
 	 * @param secondSystemEvents2 the secondSystemEvents to set
 	 */
-	public void setSecondSystemEvents(Map<OWLNamedIndividual, String> secondSystemEvents2)
+	public void setSecondSystemEvents(Set<OWLNamedIndividual> secondSystemEvents2)
 	{
 		this.secondSystemEvents = secondSystemEvents2;
 	}
+
+	/**
+	 * @return the efboOntologyManager
+	 */
+	public EFBOOntologyManager getEFBOOntologyManager() 
+	{
+		return efboOntologyManager;
+	}
+
+	/**
+	 * @param efboOntologyManager the efboOntologyManager to set
+	 */
+	public void setEFBOOntologyManager(EFBOOntologyManager efboOntologyManager) 
+	{
+		this.efboOntologyManager = efboOntologyManager;
+	}
+
+	/**
+	 * @return the mappingEvents
+	 */
+	public ArrayList <EFBOMappingEvents> getMappingEvents() 
+	{
+		return mappingEvents;
+	}
+
 	
 }
+
+
