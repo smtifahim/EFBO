@@ -42,6 +42,11 @@ import java.awt.Button;
 public class EFBOMappingEventsManager extends JFrame
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5340300100609276700L;
+
 	private JPanel contentPane;
 
 	DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -49,8 +54,6 @@ public class EFBOMappingEventsManager extends JFrame
 	
 	DefaultListModel<String> firstSystemModel = new DefaultListModel<>();
 	JList firstSystemEventList = new JList(firstSystemModel);
-	
-	
 	
 	DefaultListModel<String> secondSystemModel = new DefaultListModel<>();
 	JList secondSystemEventList = new JList(secondSystemModel);	
@@ -124,27 +127,31 @@ public class EFBOMappingEventsManager extends JFrame
 	contentPane = new JPanel();
 	contentPane.setBorder(null);
 	setContentPane(contentPane);
+	setTitle("EFBO Mapping Events Interface");
+	
 	contentPane.setLayout(new MigLayout("", "[219px,grow,center][219px,grow]", "[254px,grow][grow][]"));
 
 	
-	JPanel panel = new JPanel();
-	panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "System I Events", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-	contentPane.add(panel, "cell 0 0,grow");
-	panel.setLayout(new MigLayout("", "[219px,grow,center]", "[254px,grow]"));
+	JPanel firstSystemEventsPanel = new JPanel();
+	firstSystemEventsPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), 
+						"System-I Events", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+	contentPane.add(firstSystemEventsPanel, "cell 0 0,grow");
+	firstSystemEventsPanel.setLayout(new MigLayout("", "[219px,grow,center]", "[254px,grow]"));
 	
 	JScrollPane scrollPane_1 = new JScrollPane();
-	panel.add(scrollPane_1, "cell 0 0,grow");
+	firstSystemEventsPanel.add(scrollPane_1, "cell 0 0,grow");
 	
 	
 	scrollPane_1.setViewportView(firstSystemEventList);
 	
-	JPanel panel_1 = new JPanel();
-	panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "System II Events", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-	contentPane.add(panel_1, "cell 1 0,grow");
-	panel_1.setLayout(new MigLayout("", "[219px,grow]", "[254px,grow]"));
+	JPanel secondSystemEventsPanel = new JPanel();
+	secondSystemEventsPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), 
+					  "System-II Events", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+	contentPane.add(secondSystemEventsPanel, "cell 1 0,grow");
+	secondSystemEventsPanel.setLayout(new MigLayout("", "[219px,grow]", "[254px,grow]"));
 	
 	JScrollPane scrollPane_2 = new JScrollPane();
-	panel_1.add(scrollPane_2, "cell 0 0,grow");
+	secondSystemEventsPanel.add(scrollPane_2, "cell 0 0,grow");
 	
 	scrollPane_2.setViewportView(secondSystemEventList);
 	
@@ -158,9 +165,9 @@ public class EFBOMappingEventsManager extends JFrame
 	
 	scrollPane.setViewportView(mappingList);
 	
-	JButton btnNewButton = new JButton("Map Selected Events");
+	JButton btnMappingButton = new JButton("Map Selected Events");
 	
-	btnNewButton.addActionListener(new ActionListener() 
+	btnMappingButton.addActionListener(new ActionListener() 
 	{
 		public void actionPerformed(ActionEvent e)
 		{
@@ -195,13 +202,11 @@ public class EFBOMappingEventsManager extends JFrame
 						
 		}
 	});
-	scrollPane.setColumnHeaderView(btnNewButton);
+	scrollPane.setColumnHeaderView(btnMappingButton);
 	
-//	JList list_1 = new JList();
-//	contentPane.add(list_1, "cell 2 1");
 	
-	JButton btnNewButton_1 = new JButton("Add the Mappings Above to the EFBO-V Ontology");
-	btnNewButton_1.addActionListener(new ActionListener() 
+	JButton btnAddMappings = new JButton("Add the Mappings Above to the EFBO-V Ontology");
+	btnAddMappings.addActionListener(new ActionListener() 
 	{
 		public void actionPerformed(ActionEvent e) 
 		{
@@ -212,7 +217,7 @@ public class EFBOMappingEventsManager extends JFrame
 			
 		}
 	});
-	contentPane.add(btnNewButton_1, "cell 0 2 2 1,growx");
+	contentPane.add(btnAddMappings, "cell 0 2 2 1,growx");
 }
 
 	/**

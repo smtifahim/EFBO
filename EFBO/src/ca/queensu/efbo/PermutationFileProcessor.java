@@ -17,8 +17,7 @@ public class PermutationFileProcessor
     static String output="";
 	public static void main(String[] args) 
 	{
-		// TODO Auto-generated method stub
-		 final String defaultFilePath = System.getProperty("user.dir") 
+		  final String defaultFilePath = System.getProperty("user.dir") 
 				   + "/Resources/Annotated-Sources/Permutation-Test";
 		  JFileChooser fileChooser = new JFileChooser(new File(defaultFilePath));
 		  fileChooser.setDialogTitle("Select a File");
@@ -111,13 +110,10 @@ public class PermutationFileProcessor
             FileWriter fileWriter =
                 new FileWriter(fileName);
 
-            // Always wrap FileWriter in BufferedWriter.
             BufferedWriter bufferedWriter =
                 new BufferedWriter(fileWriter);
 
-            // Note that write() does not automatically
-            // append a newline character.
-            bufferedWriter.write(outputText);
+           bufferedWriter.write(outputText);
 
             // Always close files.
             bufferedWriter.close();

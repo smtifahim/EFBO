@@ -114,17 +114,12 @@ public class EFBOComparatorManager
 	
 	public void mergeLoadedKBases() throws Exception
 	{
-		this.importLoadedSystemsKBases();	
-		
+		this.importLoadedSystemsKBases();		
 		this.saveEFBOValidationOntology();
 		
 		this.setEFBOInferredOntology(); 
 		this.saveEFBOInferredOntology();
-		
-//		this.setFirstSystemEvents();
-//		this.setSecondSystemEvents();
-		this.importEFBOInferredOntology();
-		
+		this.importEFBOInferredOntology();		
 	}
 	
 	public void setEFBOMappingEvents()
@@ -298,7 +293,7 @@ public class EFBOComparatorManager
 	    textArea.setMargin(new Insets(10, 10, 10, 10));
 	   	textArea.setEditable(false);
         textArea.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), 
-        		           "The EFBO-V Loading Status", TitledBorder.CENTER,
+        		           "The EFBO-V Loading Status", TitledBorder.LEFT,
         		           TitledBorder.TOP, null, new Color(0, 0, 0)));
         
         JOptionPane.showMessageDialog(null, new JScrollPane(textArea), "Success!", 
@@ -316,6 +311,8 @@ public class EFBOComparatorManager
 		
 		//String defaultFilePath = System.getProperty("user.dir") + "/Resources/Ontologies/"; 
 		JFileChooser fileChooser = new JFileChooser(new File(defaultFilePath));
+		fileChooser.setSelectedFile(new File("EFBO_" + EFBOSystemLauncher.PROJECT_NAME + "_Merged.owl"));
+
 		fileChooser.setDialogTitle("Save the EFBO-V Merged Ontology");
 		
 		int userSelection = fileChooser.showSaveDialog(fileSaveFrame);

@@ -37,7 +37,9 @@ public class EFBOSystemLauncher
 
 			private void setProjectName() 
 			{
-				PROJECT_NAME = JOptionPane.showInputDialog (null, "Enter a Name for the Project\n", "EFBO Project Name", JOptionPane.INFORMATION_MESSAGE);
+				PROJECT_NAME = JOptionPane.showInputDialog (null, "Enter a Name for the Project\n", 
+						                                    "EFBO Project Name", 
+						                                    JOptionPane.INFORMATION_MESSAGE);
 				
 				if (PROJECT_NAME==null || (PROJECT_NAME != null && ("".equals(PROJECT_NAME))))
 				{

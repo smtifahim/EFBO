@@ -92,7 +92,7 @@ public class EFBOKnowledgeBaseManager
 		// efboKBase.getOWLOntologyManager().saveOntology(efboKBase, new StreamDocumentTarget(System.out));
      
         String fileLocation = KBASE_File_Location + "/" + systemName
-				   		    + "/" + systemName + ".owl";
+				   		    + "/" + "EFBO-" + systemName + ".owl";
         File defaultSaveLocation = new File(fileLocation);
         IRI kBaseIRI = IRI.create(defaultSaveLocation.toURI());
         
