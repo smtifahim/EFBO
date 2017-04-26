@@ -102,7 +102,7 @@ public class EFBOComparatorManager
 		
 	}
 	
-	public void mergeLoadedKBases() throws Exception
+	private void importLoadedSystemsKBases() throws Exception
 	{
 		this.importFirstSystemKBase();
 		this.assertFirstSystemID();
@@ -110,24 +110,34 @@ public class EFBOComparatorManager
 		this.importSecondSystemKBase();
 		this.assertSecondSystemID();
 		
+	}
+	
+	public void mergeLoadedKBases() throws Exception
+	{
+		this.importLoadedSystemsKBases();	
+		
 		this.saveEFBOValidationOntology();
+		
+		this.setEFBOInferredOntology(); 
 		this.saveEFBOInferredOntology();
 		
-		this.setFirstSystemEvents();
-		this.setSecondSystemEvents();
-		
-		this.efboMappingEventsManager = new EFBOMappingEventsManager();
-		this.efboMappingEventsManager.setFirstSystemEvents(this.firstSystemEvents);
-		this.efboMappingEventsManager.setSecondSystemEvents(this.secondSystemEvents);
-		this.efboMappingEventsManager.setEFBOOntologyManager(this.efboValidationManager);
-		this.efboMappingEventsManager.populateListElements();
-		this.efboMappingEventsManager.setVisible(true);
-	//	efboMappingEventsManager.main();
-		
+//		this.setFirstSystemEvents();
+//		this.setSecondSystemEvents();
 		this.importEFBOInferredOntology();
 		
 	}
 	
+	public void setEFBOMappingEvents()
+	{
+		this.setFirstSystemEvents();
+		this.setSecondSystemEvents();
+		
+		this.efboMappingEventsManager = new EFBOMappingEventsManager
+											(this.firstSystemEvents,
+											 this.secondSystemEvents, 
+											 this.efboValidationManager);
+		
+	}
 		
 	public void assertFirstSystemID()
 	{
@@ -172,9 +182,7 @@ public class EFBOComparatorManager
 	{
     	this.firstSystemKBaseManager = this.getEFBOKnowledeBaseManager(FIRST_SYSTEM_ID,
 									   firstSystemName, firstSystemAnnotations);
-    	
-    	
-	}
+    }
     
     public void setSecondSystemKBaseManager() throws Exception
  	{
@@ -350,9 +358,8 @@ public class EFBOComparatorManager
         
 		inferredOntologyFile =  new File(inferredEFBOFilePath);
 		IRI efboInferredIRI = IRI.create(inferredOntologyFile.toURI());
-		
-	    this.setEFBOInferredOntology();
-		efboInferredOntology.getOWLOntologyManager().saveOntology(efboInferredOntology, efboInferredIRI);
+			    
+		efboInferredOntology.getOWLOntologyManager().saveOntology(this.efboInferredOntology, efboInferredIRI);
 			        		
 	}
 	

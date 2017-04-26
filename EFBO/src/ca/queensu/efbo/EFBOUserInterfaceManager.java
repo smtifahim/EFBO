@@ -131,6 +131,7 @@ public class EFBOUserInterfaceManager
 			public void actionPerformed(ActionEvent e)
 			{
 				System.out.println(btnStepV.getText());
+				efboCompManager.setEFBOMappingEvents();				
 			}
 		});
 	}

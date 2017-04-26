@@ -8,7 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTree;
+import javax.swing.ListSelectionModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
@@ -64,6 +66,7 @@ public class EFBOMappingEventsManager extends JFrame
 	ArrayList <OWLNamedIndividual> events2= new ArrayList <OWLNamedIndividual>();
 	int lm =0;
 	int me =0;
+	
 	public EFBOMappingEventsManager() 
 	{
 		firstSystemEvents = null;
@@ -80,6 +83,10 @@ public class EFBOMappingEventsManager extends JFrame
 		this.setFirstSystemEvents(firstSystemEvents);
 		this.setSecondSystemEvents(secondSystemEvents);
 		this.setEFBOOntologyManager(efboOntologyManager);
+		
+		firstSystemEventList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		secondSystemEventList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		populateListElements();
 		this.setGUIElements();
 		this.setVisible(true);
@@ -96,8 +103,7 @@ public class EFBOMappingEventsManager extends JFrame
 			i++;			
 		}
 		
-		int j =0;
-		
+		int j =0;		
 		for (OWLNamedIndividual e : secondSystemEvents)
 		{ 
 			String eventLabel = this.efboOntologyManager.getLabel(e);
@@ -158,25 +164,34 @@ public class EFBOMappingEventsManager extends JFrame
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			//String system1Value = firstSystemEventList.getSelectedValue().toString();
-			//String system2Value = secondSystemEventList.getSelectedValue().toString();
-			
-			int i =  firstSystemEventList.getSelectedIndex();
-			int j =  secondSystemEventList.getSelectedIndex();
-			
-			mappingEvents.add(new EFBOMappingEvents(events.get(i), events2.get(j), efboOntologyManager));
 					
-			listModel.add(lm, mappingEvents.get(me).getEFBOMappingEvents());
+			String system1Value = firstSystemEventList.getSelectedValue().toString();
+			String system2Value = secondSystemEventList.getSelectedValue().toString();
 			
-			//firstSystemModel.setElementAt("mapped", i);
-			//secondSystemModel.setElementAt("mapped", j);
-			
-			firstSystemModel.set(i, "mapped");
-			secondSystemModel.set(j, "mapped");
-			//secondSystemModel.removeElement(secondSystemEventList.getSelectedValue());
-			
-			lm++;
-			me++;
+			if (system1Value.contains("mapped") || system2Value.contains("mapped"))
+			{
+				JOptionPane.showMessageDialog(null, "Event Already Mapped", "Invalid Selection",
+						                     JOptionPane.INFORMATION_MESSAGE);
+			}
+			else
+			{	
+				int i =  firstSystemEventList.getSelectedIndex();
+				int j =  secondSystemEventList.getSelectedIndex();
+				
+				mappingEvents.add(new EFBOMappingEvents(events.get(i), events2.get(j), efboOntologyManager));
+						
+				listModel.add(lm, mappingEvents.get(me).getEFBOMappingEvents());
+				
+				//firstSystemModel.setElementAt("mapped", i);
+				//secondSystemModel.setElementAt("mapped", j);
+				
+				firstSystemModel.set(i, "mapped");
+				secondSystemModel.set(j, "mapped");
+				//secondSystemModel.removeElement(secondSystemEventList.getSelectedValue());
+				
+				lm++;
+				me++;
+			}
 						
 		}
 	});
