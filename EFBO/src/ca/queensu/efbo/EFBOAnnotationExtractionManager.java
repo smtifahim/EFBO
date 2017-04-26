@@ -32,20 +32,36 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
  */
 public class EFBOAnnotationExtractionManager 
 {
+	private String systemName;
 	private JFileChooser fileChooser;
 	private File[] selectedFiles;
 	private File extractedAnnotationsFile;
 	private Set<EFBOAnnotation> annotations;
-	private EFBOOntologyManager efboCoreManager = null;
-	private OWLOntology efboCore = null;
+	private EFBOOntologyManager efboCoreManager;
+	private OWLOntology efboCore;
+	private String extractedAnnotationFilePath;
+	
+	private static final String defaultFilePath = System.getProperty("user.dir") 
+								   				+ "/Resources/Annotated-Sources";
 	
 	private static final String 
 	EFBO_CORE_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo.owl";
 	
 	public EFBOAnnotationExtractionManager() throws Exception
-	{	  
-		  String defaultFilePath = System.getProperty("user.dir") 
-				  					   + "/Resources/Annotated-Sources";
+	{	
+		systemName = null;
+		fileChooser = null;
+		selectedFiles = null;
+	    extractedAnnotationsFile = null;
+		annotations = null;
+		efboCoreManager = null;
+		efboCore = null;
+		extractedAnnotationFilePath = null;
+		
+	} //End of method public AnnotationExtractor().
+   	
+	public void loadAnnotatedFiles() throws Exception
+	{
 		  fileChooser = new JFileChooser(new File(defaultFilePath));
 		  fileChooser.setDialogTitle("Select Annotated Files");
 		  fileChooser.setMultiSelectionEnabled(true);
@@ -63,9 +79,8 @@ public class EFBOAnnotationExtractionManager
 			  annotations = new HashSet<EFBOAnnotation>();
 			  this.processSelectedFiles(selectedFiles);
 		  } 
-		  
-	} //End of method public AnnotationExtractor().
-   	
+		  		
+	}
 	
     // Load the core EFBO which will be used to check 
     // the validity of the property names 
@@ -233,9 +248,10 @@ public class EFBOAnnotationExtractionManager
 		// parent component of the dialog
 		JFrame fileSaveFrame = new JFrame();
 		//String defaultFilePath = System.getProperty("user.dir") + "/Resources/Extracted-Annotations"; 
-		String defaultFilePath = EFBOSystemLauncher.EXTRACTED_ANNOTATIONS_LOCATION;
-		JFileChooser fileChooser = new JFileChooser(new File(defaultFilePath));
-		fileChooser.setDialogTitle("Specify the file to save your annotations");   
+		String fileSavePath = this.getExtractedAnnotationFilePath(); 
+		JFileChooser fileChooser = new JFileChooser(new File(fileSavePath));
+		fileChooser.setDialogTitle("Specify the file to save your annotations");
+		fileChooser.setSelectedFile(new File(this.getSystemName().trim() + "_annotations.txt"));
 		 
 		int userSelection = fileChooser.showSaveDialog(fileSaveFrame);
 		 
@@ -376,5 +392,41 @@ public class EFBOAnnotationExtractionManager
 				//System.exit(1);
 			}
 	} //End of method showNoFileSelectedMessage().
+
+	
+	/**
+	 * @return the systemName
+	 */
+	public String getSystemName() 
+	{
+		return systemName;
+	}
+
+
+	/**
+	 * @param systemName the systemName to set
+	 */
+	public void setSystemName(String systemName)
+	{
+		this.systemName = systemName;
+	}
+
+
+	/**
+	 * @return the extractedAnnotationFilePath
+	 */
+	public String getExtractedAnnotationFilePath()
+	{
+		return extractedAnnotationFilePath;
+	}
+
+
+	/**
+	 * @param extractedAnnotationFilePath the extractedAnnotationFilePath to set
+	 */
+	public void setExtractedAnnotationFilePath(String extractedAnnotationFilePath) 
+	{
+		this.extractedAnnotationFilePath = extractedAnnotationFilePath;
+	}
 
 }//End of class.

@@ -208,17 +208,22 @@ public class EFBOComparatorManager
 
 	public void setFirstSystemAnnotations() throws Exception
 	{
-		this.firstSystemAnnotations = this.getSystemAnnotations();
+		this.firstSystemAnnotations = this.getSystemAnnotations(this.getFirstSystemName());
 	}
 	
 	public void setSecondSystemAnnotations() throws Exception
 	{
-		this.secondSystemAnnotations = this.getSystemAnnotations();
+		this.secondSystemAnnotations = this.getSystemAnnotations(this.getSecondSystemName());
 	}
 	
-	private Set<EFBOAnnotation> getSystemAnnotations() throws Exception
+	private Set<EFBOAnnotation> getSystemAnnotations(String systemName) throws Exception
 	{
-		return (new EFBOAnnotationExtractionManager().getExtractedAnnotations());		
+		EFBOAnnotationExtractionManager annotExtManager = new EFBOAnnotationExtractionManager();
+		annotExtManager.setSystemName(systemName);
+		annotExtManager.setExtractedAnnotationFilePath(EFBOSystemLauncher.EXTRACTED_ANNOTATIONS_LOCATION);		
+		annotExtManager.loadAnnotatedFiles();
+		
+		return annotExtManager.getExtractedAnnotations();		
 	}
 
 	
@@ -247,7 +252,7 @@ public class EFBOComparatorManager
 	
 	private String getSystemName(String systemID)
 	{
-		String systemName;
+		String systemName = null;
 		String message =  "Enter the name for " + systemID;
 		systemName = JOptionPane.showInputDialog (null, message);
 		
@@ -406,8 +411,8 @@ public class EFBOComparatorManager
 		Set <OWLNamedIndividual> eventIndividuals = efboValidationManager.getOWLNamedIndividuals(eventClass);
 			for(OWLNamedIndividual i : eventIndividuals)
 			{
-			systemEvents.add(i);
-			System.out.println(efboValidationManager.getLabel(i));
+				systemEvents.add(i);
+				System.out.println(efboValidationManager.getLabel(i));
 			}
 		
 		return systemEvents;
