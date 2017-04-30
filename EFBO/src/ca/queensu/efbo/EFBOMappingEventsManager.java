@@ -45,7 +45,7 @@ public class EFBOMappingEventsManager extends JFrame
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5340300100609276700L;
+	//private static final long serialVersionUID = 5340300100609276700L;
 
 	private JPanel contentPane;
 

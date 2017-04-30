@@ -42,6 +42,7 @@
 //@EFBO: 	_tryAgainUI hasElement _loginInterfaceUI
 
 //DECLARATIONS OF THE AGENTS INTERACTIONS.
+
 //@EFBO: _userAgent interactsWith _appIcon
 //@EFBO: _clientAgent interactsWith _appInterface
 //@EFBO: _clientAgent interactsWith _logininterfaceUI
@@ -51,5 +52,6 @@
 //@EFBO: _serverAgent interactsWith _serverInterface
 //@EFBO: _clientAgent interactsWith _welcomeUserUI
 //@EFBO: _clientAgent interactsWith _tryAgainUI
+
 
 //END OF THE STORYBOARD.

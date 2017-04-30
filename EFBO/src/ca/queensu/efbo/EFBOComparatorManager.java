@@ -44,8 +44,7 @@ public class EFBOComparatorManager
 	
 	private Set <OWLNamedIndividual> firstSystemEvents = new HashSet<OWLNamedIndividual>();
 	private Set <OWLNamedIndividual> secondSystemEvents = new HashSet<OWLNamedIndividual>();
-	private EFBOMappingEventsManager efboMappingEventsManager;
-	private ArrayList <EFBOMappingEvents> efboMappingEvents;
+	private EFBOMappingEventsManager efboMappingEventsManager;	
 	
 	private String firstSystemName;
 	private String secondSystemName;
@@ -134,12 +133,7 @@ public class EFBOComparatorManager
 											(this.firstSystemEvents,
 											 this.secondSystemEvents, 
 											 this.efboValidationManager);
-		
-		//this.efboMappingEvents = new ArrayList<EFBOMappingEvents>();
-		//this.efboMappingEvents = this.efboMappingEventsManager.getMappingEvents();
-		
-		//this.saveEFBOValidationOntology();
-		
+
 	}
 		
 	public void assertFirstSystemID()

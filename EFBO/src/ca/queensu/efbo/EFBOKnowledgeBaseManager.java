@@ -103,8 +103,6 @@ public class EFBOKnowledgeBaseManager
         String savedSuccessMessage = "\nThe EFBO Knowledgebase for " + this.getSystemName() + " has been Saved."
         		      			   + "\nLocation: " + fileLocation.replace("\\", "/") + "  ";
         		      			  
-            
-        
         this.localKBLocation = fileLocation;        
         System.out.println(savedSuccessMessage);
         this.efboKBaseManager.printOntologyMetrics();
@@ -143,28 +141,40 @@ public class EFBOKnowledgeBaseManager
 		
 		if (!propertyName.equals("hasTimePoint"))
 		{
-	      		String whereDeclared = getWhereDeclared(annotation);
-				
+	      		
 				String subject = annotation.getSubject();
-				
-				//remove all the spaces (if any) within the name of the entity.
-				String subjectID = subject.replaceAll("\\s+", "");
-					   subjectID = systemName + "." + whereDeclared + "." + subjectID;
+				OWLNamedIndividual owlIndividualSubject = null;
 				
 				String object = annotation.getObject();
-				String objectID = object.replaceAll("\\s+", "");
-					   objectID = systemName + "." + whereDeclared + "." + objectID;
-				
-				OWLNamedIndividual owlIndividualSubject = null;
-				owlIndividualSubject = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, subjectID, subject);
-				this.setEFBOAnnotationText(owlIndividualSubject, annotation);
-				this.setIndividualSystemEntity(owlIndividualSubject);
-		        
 				OWLNamedIndividual owlIndividualObject = null;
-				owlIndividualObject = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, objectID, object);
+				
+				String whereDeclared = getWhereDeclared(annotation);
+				
+                //check key-word client, server, and user agents
+				if (isDefaultEFBOAgentType (subject))
+					owlIndividualSubject = this.getEFBOAgentIndividual(subject);
+				else 
+				{
+					//remove all the spaces (if any) within the name of the entity.
+					String subjectID = subject.replaceAll("\\s+", "");
+						   subjectID = systemName + "." + whereDeclared + "." + subjectID;
+					owlIndividualSubject = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, subjectID, subject);
+					this.setIndividualSystemEntity(owlIndividualSubject);
+				}				     
+				
+				if (isDefaultEFBOAgentType (object))
+					owlIndividualSubject = this.getEFBOAgentIndividual(object);
+				else
+				{
+					String objectID = object.replaceAll("\\s+", "");
+						   objectID = systemName + "." + whereDeclared + "." + objectID;
+				    owlIndividualObject = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, objectID, object);
+				    this.setIndividualSystemEntity(owlIndividualObject);
+				}
+				
+				this.setEFBOAnnotationText(owlIndividualSubject, annotation);
 				this.setEFBOAnnotationText(owlIndividualObject, annotation);
-				this.setIndividualSystemEntity(owlIndividualObject);
-		        
+				
 		        OWLObjectProperty objectProperty = null;
 		        objectProperty = efboKBaseManager.getOWLObjectProperty(EFBO_CORE_URI, propertyName);
 		        
@@ -175,6 +185,25 @@ public class EFBOKnowledgeBaseManager
 		if (propertyName.equals("hasTimePoint"))
 			{this.setEFBOEventTimePoint(annotation);}
 			
+	}
+	
+	private boolean isDefaultEFBOAgentType(String agentType)
+	{
+		if (agentType.equalsIgnoreCase("client-agent"))			
+			return true;
+			else if (agentType.equalsIgnoreCase("server-agent"))			
+				return true;
+		
+				else if (agentType.equalsIgnoreCase("user-agent"))
+					return true;
+		
+		return false;
+	}
+	
+	private OWLNamedIndividual getEFBOAgentIndividual(String agentType)
+	{
+		IRI iri = IRI.create(EFBO_CORE_URI + "#" + agentType);
+		return efboKBaseManager.getOWLDataFactory().getOWLNamedIndividual(iri);
 	}
 	
 	// Set the annotation from the source file that includes the source file name and the 
