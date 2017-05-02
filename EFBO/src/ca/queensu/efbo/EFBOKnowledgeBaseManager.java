@@ -136,6 +136,7 @@ public class EFBOKnowledgeBaseManager
 	}
 	
 	//Set an annotation line of type Annotation into an EFBO instances and relations for the KBase.
+ 
 	private void setEFBOKnowledgeBase(EFBOAnnotation annotation)
 	{
 		String propertyName = annotation.getPredicate();
