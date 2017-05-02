@@ -159,7 +159,7 @@ public class EFBOKnowledgeBaseManager
 					//remove all the spaces (if any) within the name of the entity.
 					String subjectID = subject.replaceAll("\\s+", "");
 						   subjectID = systemName + "." + whereDeclared + "." + subjectID;
-					owlIndividualSubject = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, subjectID, subject);
+					owlIndividualSubject = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, subjectID, systemID + ":" + subject);
 					this.setIndividualSystemEntity(owlIndividualSubject);
 				}				     
 				
@@ -169,7 +169,7 @@ public class EFBOKnowledgeBaseManager
 				{
 					String objectID = object.replaceAll("\\s+", "");
 						   objectID = systemName + "." + whereDeclared + "." + objectID;
-				    owlIndividualObject = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, objectID, object);
+				    owlIndividualObject = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, objectID, systemID + ":" + object);
 				    this.setIndividualSystemEntity(owlIndividualObject);
 				}
 				
@@ -192,6 +192,7 @@ public class EFBOKnowledgeBaseManager
 	{
 		if (agentType.equalsIgnoreCase("client-agent"))			
 			return true;
+			
 			else if (agentType.equalsIgnoreCase("server-agent"))			
 				return true;
 		
@@ -221,7 +222,7 @@ public class EFBOKnowledgeBaseManager
 			IRI classIRI = IRI.create(EFBO_CORE_URI + "#" + agentType);		
 			OWLClass agentClass = efboKBaseManager.getOWLDataFactory().getOWLClass(classIRI);
 			String agentLabel = agentTypes.get(agentType).replace("-", " ");
-			kBaseAgentType = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, agentTypes.get(agentType), agentLabel);
+			kBaseAgentType = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, agentTypes.get(agentType), systemID + ":" + agentLabel);
 			efboKBaseManager.assertOWLNamedIndividual(kBaseAgentType, agentClass);
 		}
 		
