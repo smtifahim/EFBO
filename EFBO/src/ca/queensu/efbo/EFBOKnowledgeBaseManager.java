@@ -66,7 +66,8 @@ public class EFBOKnowledgeBaseManager
         this.efboKBaseManager.loadOntology(systemID,efboKBaseManager.getNewOntology());
         this.efboKBase = efboKBaseManager.getLoadedOntology();
         this.efboKBaseManager.importOWLOntology(EFBO_CORE_URI);
-        this.setSystemEntity();        
+        this.setSystemEntity();
+        this.setEFBOKBaseAgents();
    	}
 	
 	
@@ -202,8 +203,28 @@ public class EFBOKnowledgeBaseManager
 	
 	private OWLNamedIndividual getEFBOAgentIndividual(String agentType)
 	{
-		IRI iri = IRI.create(EFBO_CORE_URI + "#" + agentType);
-		return efboKBaseManager.getOWLDataFactory().getOWLNamedIndividual(iri);
+		IRI iri = IRI.create(EFBO_KBASE_URI + "#" + agentType);		
+		return efboKBaseManager.getOWLDataFactory().getOWLNamedIndividual(iri);		
+	
+	}
+	
+	private void setEFBOKBaseAgents()
+	{
+		Map<String, String> agentTypes = new HashMap<String, String>();
+		agentTypes.put("ClientAgent", "client-agent");
+		agentTypes.put("ServerAgent", "server-agent");
+		agentTypes.put("UserAgent", "user-agent");
+		
+		for (String agentType : agentTypes.keySet())
+		{
+			OWLNamedIndividual kBaseAgentType = null;
+			IRI classIRI = IRI.create(EFBO_CORE_URI + "#" + agentType);		
+			OWLClass agentClass = efboKBaseManager.getOWLDataFactory().getOWLClass(classIRI);
+			String agentLabel = agentTypes.get(agentType).replace("-", " ");
+			kBaseAgentType = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, agentTypes.get(agentType), agentLabel);
+			efboKBaseManager.assertOWLNamedIndividual(kBaseAgentType, agentClass);
+		}
+		
 	}
 	
 	// Set the annotation from the source file that includes the source file name and the 
