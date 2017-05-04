@@ -450,7 +450,7 @@ public String getOntologyMetrics()
 					 + "\nObject Properties : " + loadedOntology.getObjectPropertiesInSignature().size()
 					 + "\nIndividuals       : " + loadedOntology.getIndividualsInSignature().size()
 					 + "\nLogical Axioms    : " + loadedOntology.getLogicalAxioms().size()
-					 + "\nAll Axioms        : "   + loadedOntology.getAxioms().size()
+					 + "\nAll Axioms        : " + loadedOntology.getAxioms().size()
 					 + "\n--------------------------------------------------------";
 	
 	return ontologyMetrics;
@@ -514,7 +514,7 @@ public void printAllClasses()
 //}
 
 //return a set of OWLNamed Individuals of a particular class Type after inference.
-public  Set<OWLNamedIndividual> getOWLNamedIndividuals(OWLClass owlClass)
+public  Set<OWLNamedIndividual> getInferredOWLNamedIndividuals(OWLClass owlClass)
 {
 	Set <OWLNamedIndividual> allIndividuals = inferredOntology.getIndividualsInSignature();
 	Set <OWLNamedIndividual> individuals =  new HashSet<OWLNamedIndividual>();
@@ -525,6 +525,22 @@ public  Set<OWLNamedIndividual> getOWLNamedIndividuals(OWLClass owlClass)
 			{
 				individuals.add(i);
 				
+			}
+	}	
+  
+ return individuals;
+}
+
+public  Set<OWLNamedIndividual> getOWLNamedIndividuals(OWLClass owlClass)
+{
+	Set <OWLNamedIndividual> allIndividuals = loadedOntology.getIndividualsInSignature();
+	Set <OWLNamedIndividual> individuals =  new HashSet<OWLNamedIndividual>();
+		
+	for (OWLNamedIndividual i: allIndividuals)
+	{
+		if (EntitySearcher.getTypes(i, loadedOntology).contains(owlClass))
+			{
+				individuals.add(i);				
 			}
 	}	
   

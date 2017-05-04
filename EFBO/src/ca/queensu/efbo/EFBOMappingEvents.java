@@ -19,7 +19,9 @@ public class EFBOMappingEvents
 	  efboOntologyManager = null;
   }
   
-  public EFBOMappingEvents(OWLNamedIndividual firstSystemEvent,OWLNamedIndividual secondSystemEvent,EFBOOntologyManager efboOntologyManager )
+  public EFBOMappingEvents(OWLNamedIndividual firstSystemEvent,
+		  				   OWLNamedIndividual secondSystemEvent,
+		  				   EFBOOntologyManager efboOntologyManager )
   {
 	  this.setFirstSystemEvent(firstSystemEvent);
 	  this.setSecondSystemEvent(secondSystemEvent);
@@ -86,7 +88,7 @@ public void setEFBOOntologyManager(EFBOOntologyManager efboOntologyManager)
 public String getEFBOMappingEvents()
 	{
       String s = efboOntologyManager.getLabel(this.firstSystemEvent)
-    		    + " <=> " + efboOntologyManager.getLabel(this.secondSystemEvent);
+    		    + " <--> " + efboOntologyManager.getLabel(this.secondSystemEvent);
       return s;
 	}
 }

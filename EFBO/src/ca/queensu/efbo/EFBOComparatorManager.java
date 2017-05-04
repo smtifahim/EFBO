@@ -362,7 +362,7 @@ public class EFBOComparatorManager
 			        		
 	}
 	
-	private void importEFBOInferredOntology() throws Exception
+	public void importEFBOInferredOntology() throws Exception
 	{
 		File fileToSave = new File (this.efboValidationOntologyFile.getAbsolutePath());
         IRI efboVIRI = IRI.create(fileToSave.toURI());
@@ -414,7 +414,7 @@ public class EFBOComparatorManager
 		
 		Set <OWLNamedIndividual> systemEvents = new HashSet <OWLNamedIndividual>();
 		
-		Set <OWLNamedIndividual> eventIndividuals = efboValidationManager.getOWLNamedIndividuals(eventClass);
+		Set <OWLNamedIndividual> eventIndividuals = efboValidationManager.getInferredOWLNamedIndividuals(eventClass);
 			for(OWLNamedIndividual i : eventIndividuals)
 			{
 				systemEvents.add(i);
@@ -430,6 +430,11 @@ public class EFBOComparatorManager
 	public Set<OWLNamedIndividual> getSecondSystemEvents() 
 	{
 		return secondSystemEvents;
+	}
+	
+	public EFBOOntologyManager getValidationManager()
+	{
+		return efboValidationManager;
 	}
 
 	

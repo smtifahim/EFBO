@@ -270,7 +270,7 @@ public class EFBOKnowledgeBaseManager
 		OWLClass eventClass = this.getEFBOManager().getOWLDataFactory()
 				                  .getOWLClass(IRI.create(EFBO_CORE_URI + "#Event"));
 		
-		this.inferredEventIndividuals = m.getOWLNamedIndividuals(eventClass);
+		this.inferredEventIndividuals = m.getInferredOWLNamedIndividuals(eventClass);
 		
 		return this.inferredEventIndividuals;
 	}

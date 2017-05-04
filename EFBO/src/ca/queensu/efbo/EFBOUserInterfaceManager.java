@@ -21,6 +21,7 @@ public class EFBOUserInterfaceManager
 {
 	public JFrame efboSystemFrame;
 	private EFBOComparatorManager efboCompManager = new EFBOComparatorManager();
+	private EFBOStatusReport efboStatusReport;
 	
 	private JButton btnStepI   = new JButton("STEP   I. LOAD the FIRST System's Knowledge.");
 	private JButton btnStepII  = new JButton("STEP  II. LOAD the SECOND System's Knowledge.");
@@ -156,7 +157,17 @@ public class EFBOUserInterfaceManager
 				
 				try 
 				{
-					efboCompManager.saveEFBOValidationOntology();					
+					efboCompManager.saveEFBOValidationOntology();
+					
+					efboCompManager.setEFBOInferredOntology();
+					efboCompManager.saveEFBOInferredOntology();					
+					efboCompManager.importEFBOInferredOntology();
+					
+					efboCompManager.saveEFBOValidationOntology();
+					
+				//	efboStatusReport = new EFBOStatusReport(efboCompManager);
+				//	efboStatusReport.printEntityBySystem();
+										
 				} 
 				
 				catch (Exception e1) 
