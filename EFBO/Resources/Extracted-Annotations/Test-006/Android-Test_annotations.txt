@@ -1,0 +1,13 @@
+
+Location:C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Annotated-Sources\Testing4.java
+Line:4	_tapAppIcon hasTimePoint 2
+Line:8	_launchAppInterface hasInterface _appInterface
+Line:13	user-agent interactsWith _appIcon
+Line:15	user-agent interactsWith _loginInterfaceUI
+Line:7	_tapAppIcon hasInterface _appIcon
+Line:14	client-agent interactsWith _appInterface
+Line:2	EVENT_START hasTimePoint 1
+Line:5	_launchAppInterface hasTimePoint 3
+Line:9	_presentLoginUI hasInterface _loginInterfaceUI
+Line:3	_function_1 hasInitialEvent _tapAppIcon
+Line:10	_loginInterfaceUI isElementOf _appInterface

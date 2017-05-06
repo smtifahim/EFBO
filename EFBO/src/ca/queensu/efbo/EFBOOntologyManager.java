@@ -548,6 +548,29 @@ public  Set<OWLNamedIndividual> getOWLNamedIndividuals(OWLClass owlClass)
 }
 
 
+public  Set<OWLExpressionAxiom> getOWLNamedIndividuals(OWLObjectProperty owlProperty)
+{
+	
+	Set <OWLExpressionAxiom> a = new HashSet <OWLExpressionAxiom>();
+	Set <OWLNamedIndividual> allIndividuals = loadedOntology.getIndividualsInSignature();
+	//Set <OWLNamedIndividual> individuals =  new HashSet<OWLNamedIndividual>();
+			
+	for (OWLNamedIndividual i: allIndividuals)
+	{
+		for (OWLNamedIndividual j: allIndividuals)
+		if (EntitySearcher.hasObjectPropertyValue(i, owlProperty, j, loadedOntology))
+			{
+			   OWLExpressionAxiom ax = new OWLExpressionAxiom(i, owlProperty, j);
+			   a.add(ax);
+			  // individuals.add(j);				
+			}
+	}	
+  
+ return a;
+}
+
+
+
 public void printAllIndividuals()
 	{
 		Set<OWLNamedIndividual> individuals;
@@ -568,7 +591,7 @@ public Set<OWLAxiom> getOWLIndividualAxioms()
 	Set<OWLAxiom> owlIndividualAxioms = new HashSet<OWLAxiom>();
 	for (OWLAxiom axiom : axioms)
 	{
-		if (axiom instanceof OWLIndividualAxiom)
+	  if (axiom instanceof OWLIndividualAxiom)
 			owlIndividualAxioms.add(axiom);		
 	}
 	
@@ -681,4 +704,18 @@ public OWLOntology getInferredOntology()
 		hermitReasoner.dispose();
 	}
 
+	public class OWLExpressionAxiom
+	{
+		public OWLNamedIndividual subject;
+		public OWLObjectProperty objectProperty;		
+		public OWLNamedIndividual object;
+		
+		OWLExpressionAxiom (OWLNamedIndividual subject, OWLObjectProperty objectProperty, OWLNamedIndividual object )
+		{
+			this.subject = subject;
+			this.objectProperty = objectProperty;
+			this.object = object;
+		}
+		
+	}
 }// End of class EFBOOntologyManager

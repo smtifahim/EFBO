@@ -1,0 +1,995 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.cs.queensu.ca/~imam/ontologies/efbo-v.owl"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-v.owl">
+    <Prefix name="" IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-v.owl"/>
+    <Prefix name="dc" IRI="http://purl.org/dc/elements/1.1/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="efbo" IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo.owl#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="skos" IRI="http://www.w3.org/2004/02/skos/core#"/>
+    <Prefix name="swrl" IRI="http://www.w3.org/2003/11/swrl#"/>
+    <Prefix name="swrla" IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#"/>
+    <Prefix name="swrlb" IRI="http://www.w3.org/2003/11/swrlb#"/>
+    <Prefix name="terms" IRI="http://purl.org/dc/terms/"/>
+    <Import>file:///C:/Users/Fahim/git/EFBO-PCM/EFBO/Resources/Extracted-Kbases/Test-007/Android-Test/EFBO-Android-Test.owl</Import>
+    <Import>http://www.cs.queensu.ca/~imam/ontologies/efbo.owl</Import>
+    <Import>http://www.cs.queensu.ca/~imam/ontologies/efbo-frc.owl</Import>
+    <Import>file:///C:/Users/Fahim/git/EFBO-PCM/EFBO/Resources/Extracted-Kbases/Test-007/IOS-Test/EFBO-IOS-Test.owl</Import>
+    <Import>file:///C:/Users/Fahim/git/EFBO-PCM/EFBO/Resources/Ontologies/Test-007/efbo-inferred.owl</Import>
+    <Declaration>
+        <Class IRI="#System-2_Entity"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasInconsistentEntity"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasConsistentAgent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ParticipantEntity"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="efbo:isAlternateEventOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="efbo:hasInteractionWith"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="efbo:hasInterface"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#System-1"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#System-2_Interface"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#System-1_Entity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ConsistentEntity"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasMappingInterface"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasConsistentPreviousEvent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#System-1_Agent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#System-2_Agent"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasMappingEntity"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#systemValidationProperty"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="efbo:isInterfaceOf"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#System-1_Event"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="efbo:hasPreviousEvent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#System-2_Event"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasMappingAgent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#System-2"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#EventWithConsistentInterface"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ParticipantSystem"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#System-1_Interface"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasConsistentAltEvent"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#InconsistentEntity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#EventWithConsistentAgent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#EventWithConsistentFlow"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="swrla:isRuleEnabled"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasConsistentEventFlow"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasConsistentInterface"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasConsistentNextEvent"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="efbo:hasNextEvent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SystemValidationEntity"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._launchAppInterface"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._tapLoginButton"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java.EVENT_START"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._presentTryAgainUI"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._enterPassword"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java.EVENT_START"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._enterUserName"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._welcomeTheUser"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._launchAppInterface"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._verifyUserInfo"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._presentLoginUI"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._enterPassword"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._welcomeTheUser"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#System-1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java.EVENT_END"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._presentTryAgainUI"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#System-2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._tapAppIcon"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java.EVENT_END"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._enterUserName"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._verifyUserInfo"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._presentLoginUI"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._tapAppIcon"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._tapLoginButton"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class IRI="#EventWithConsistentAgent"/>
+        <ObjectIntersectionOf>
+            <Class abbreviatedIRI="efbo:Event"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasConsistentAgent"/>
+                <Class abbreviatedIRI="efbo:Event"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#EventWithConsistentFlow"/>
+        <ObjectIntersectionOf>
+            <Class abbreviatedIRI="efbo:Event"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasConsistentEventFlow"/>
+                <Class abbreviatedIRI="efbo:Event"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#EventWithConsistentInterface"/>
+        <ObjectIntersectionOf>
+            <Class abbreviatedIRI="efbo:Event"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasConsistentInterface"/>
+                <Class abbreviatedIRI="efbo:Event"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#InconsistentEntity"/>
+        <ObjectIntersectionOf>
+            <Class abbreviatedIRI="efbo:Event"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasInconsistentEntity"/>
+                <Class abbreviatedIRI="efbo:Event"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#ParticipantSystem"/>
+        <ObjectIntersectionOf>
+            <Class abbreviatedIRI="efbo:System"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="efbo:hasSystemEntity"/>
+                <Class IRI="#ParticipantEntity"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#System-1"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#ParticipantSystem"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="efbo:hasSystemEntity"/>
+                <Class IRI="#System-1_Entity"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#System-1_Agent"/>
+        <ObjectIntersectionOf>
+            <Class abbreviatedIRI="efbo:Agent"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="efbo:isSystemEntityOf"/>
+                <Class IRI="#System-1"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#System-1_Entity"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#ParticipantEntity"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="efbo:isSystemEntityOf"/>
+                <Class IRI="#System-1"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#System-1_Event"/>
+        <ObjectIntersectionOf>
+            <Class abbreviatedIRI="efbo:Event"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="efbo:isSystemEntityOf"/>
+                <Class IRI="#System-1"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#System-1_Interface"/>
+        <ObjectIntersectionOf>
+            <Class abbreviatedIRI="efbo:Interface"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="efbo:isSystemEntityOf"/>
+                <Class IRI="#System-1"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#System-2"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#ParticipantSystem"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="efbo:hasSystemEntity"/>
+                <Class IRI="#System-2_Entity"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#System-2_Agent"/>
+        <ObjectIntersectionOf>
+            <Class abbreviatedIRI="efbo:Agent"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="efbo:isSystemEntityOf"/>
+                <Class IRI="#System-2"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#System-2_Entity"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#ParticipantEntity"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="efbo:isSystemEntityOf"/>
+                <Class IRI="#System-2"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#System-2_Event"/>
+        <ObjectIntersectionOf>
+            <Class abbreviatedIRI="efbo:Event"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="efbo:isSystemEntityOf"/>
+                <Class IRI="#System-2"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#System-2_Interface"/>
+        <ObjectIntersectionOf>
+            <Class abbreviatedIRI="efbo:Interface"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty abbreviatedIRI="efbo:isSystemEntityOf"/>
+                <Class IRI="#System-2"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class IRI="#ConsistentEntity"/>
+        <Class IRI="#SystemValidationEntity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EventWithConsistentAgent"/>
+        <Class IRI="#ConsistentEntity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EventWithConsistentFlow"/>
+        <Class IRI="#ConsistentEntity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EventWithConsistentInterface"/>
+        <Class IRI="#ConsistentEntity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#InconsistentEntity"/>
+        <Class IRI="#SystemValidationEntity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ParticipantEntity"/>
+        <Class IRI="#SystemValidationEntity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ParticipantSystem"/>
+        <Class abbreviatedIRI="efbo:EntityClassifier"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#System-1_Agent"/>
+        <Class IRI="#System-1_Entity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#System-1_Event"/>
+        <Class IRI="#System-1_Entity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#System-1_Interface"/>
+        <Class IRI="#System-1_Entity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#System-2"/>
+        <Class IRI="#ParticipantSystem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#System-2_Agent"/>
+        <Class IRI="#System-2_Entity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#System-2_Event"/>
+        <Class IRI="#System-2_Entity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#System-2_Interface"/>
+        <Class IRI="#System-2_Entity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SystemValidationEntity"/>
+        <Class abbreviatedIRI="efbo:EntityClassifier"/>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#System-1"/>
+        <Class IRI="#System-2"/>
+    </DisjointClasses>
+    <ClassAssertion>
+        <Class IRI="#System-2"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#System-2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#System-1"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#System-1"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java.EVENT_END"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java.EVENT_END"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java.EVENT_START"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java.EVENT_START"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._enterPassword"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._enterPassword"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._enterUserName"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._enterUserName"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._launchAppInterface"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._launchAppInterface"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._presentLoginUI"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._presentLoginUI"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._presentTryAgainUI"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._presentTryAgainUI"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._tapAppIcon"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._tapAppIcon"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._tapLoginButton"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._tapLoginButton"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._verifyUserInfo"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._verifyUserInfo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOS-Test.owl#IOS-Test.testing.java._welcomeTheUser"/>
+        <NamedIndividual IRI="http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/Android-Test.owl#Android-Test.testing.java._welcomeTheUser"/>
+    </ObjectPropertyAssertion>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasConsistentAgent"/>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasConsistentAltEvent"/>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
+        <ObjectProperty IRI="#systemValidationProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasConsistentEventFlow"/>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasConsistentInterface"/>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasConsistentNextEvent"/>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasConsistentPreviousEvent"/>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasInconsistentEntity"/>
+        <ObjectProperty IRI="#systemValidationProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasMappingAgent"/>
+        <ObjectProperty IRI="#hasMappingEntity"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasMappingEntity"/>
+        <ObjectProperty IRI="#systemValidationProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+        <ObjectProperty IRI="#hasMappingEntity"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasMappingInterface"/>
+        <ObjectProperty IRI="#hasMappingEntity"/>
+    </SubObjectPropertyOf>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#hasMappingAgent"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#hasMappingInterface"/>
+    </FunctionalObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
+        <Class IRI="#System-1_Event"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasInconsistentEntity"/>
+        <Class IRI="#System-1_Event"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasMappingAgent"/>
+        <Class IRI="#System-1_Agent"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+        <Class IRI="#System-1_Event"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasMappingInterface"/>
+        <Class IRI="#System-1_Interface"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
+        <Class IRI="#System-2_Event"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasInconsistentEntity"/>
+        <Class IRI="#System-2_Event"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasMappingAgent"/>
+        <Class IRI="#System-2_Agent"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasMappingEvent"/>
+        <Class IRI="#System-2_Event"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasMappingInterface"/>
+        <Class IRI="#System-2_Interface"/>
+    </ObjectPropertyRange>
+    <DisjointObjectProperties>
+        <ObjectProperty IRI="#hasConsistentEntity"/>
+        <ObjectProperty IRI="#hasInconsistentEntity"/>
+    </DisjointObjectProperties>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="swrla:isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Rule to define hasConsistentInterface between two interfaces.</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">R7: hasConsistentInterface</Literal>
+        </Annotation>
+        <Body>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasConsistentEventFlow"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#xp"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty abbreviatedIRI="efbo:hasInterface"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#xi"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty abbreviatedIRI="efbo:hasInterface"/>
+                <Variable IRI="#xp"/>
+                <Variable IRI="#xpi"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasMappingInterface"/>
+                <Variable IRI="#xi"/>
+                <Variable IRI="#xpi"/>
+            </ObjectPropertyAtom>
+        </Body>
+        <Head>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasConsistentInterface"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#xp"/>
+            </ObjectPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="swrla:isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Rule to define the hasConsistentEvent property.</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">R3: hasConsistentEventFlow</Literal>
+        </Annotation>
+        <Body>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasConsistentPreviousEvent"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#xp"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasConsistentNextEvent"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#xp"/>
+            </ObjectPropertyAtom>
+        </Body>
+        <Head>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasConsistentEventFlow"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#xp"/>
+            </ObjectPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="swrla:isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string"></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">R8: hasConsistentAgent</Literal>
+        </Annotation>
+        <Body>
+            <ObjectPropertyAtom>
+                <ObjectProperty abbreviatedIRI="efbo:isPerformedBy"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#xa"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty abbreviatedIRI="efbo:isPerformedBy"/>
+                <Variable IRI="#xp"/>
+                <Variable IRI="#xpa"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasMappingEvent"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#xp"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasMappingAgent"/>
+                <Variable IRI="#xa"/>
+                <Variable IRI="#xpa"/>
+            </ObjectPropertyAtom>
+        </Body>
+        <Head>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasConsistentAgent"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#xp"/>
+            </ObjectPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="swrla:isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string"></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">R5: hasMappingAgent</Literal>
+        </Annotation>
+        <Body>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasMappingEvent"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#xa"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty abbreviatedIRI="efbo:isInvokedBy"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#xa"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty abbreviatedIRI="efbo:isInvokedBy"/>
+                <Variable IRI="#xp"/>
+                <Variable IRI="#xpa"/>
+            </ObjectPropertyAtom>
+        </Body>
+        <Head>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasMappingAgent"/>
+                <Variable IRI="#xa"/>
+                <Variable IRI="#xpa"/>
+            </ObjectPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="swrla:isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string"></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">R2: hasConsistentPreviousEvent</Literal>
+        </Annotation>
+        <Body>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasMappingEvent"/>
+                <Variable IRI="#y"/>
+                <Variable IRI="#yp"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty abbreviatedIRI="efbo:hasPreviousEvent"/>
+                <Variable IRI="#yp"/>
+                <Variable IRI="#xp"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasMappingEvent"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#xp"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty abbreviatedIRI="efbo:hasNextEvent"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#y"/>
+            </ObjectPropertyAtom>
+        </Body>
+        <Head>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasConsistentPreviousEvent"/>
+                <Variable IRI="#y"/>
+                <Variable IRI="#yp"/>
+            </ObjectPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="swrla:isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Rule to define hasMappingInterface between two consistent events.</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">R6: hasMappingInterface</Literal>
+        </Annotation>
+        <Body>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasMappingEvent"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#xp"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty abbreviatedIRI="efbo:hasInterface"/>
+                <Variable IRI="#xp"/>
+                <Variable IRI="#xpi"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty abbreviatedIRI="efbo:hasInterface"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#xi"/>
+            </ObjectPropertyAtom>
+        </Body>
+        <Head>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasMappingInterface"/>
+                <Variable IRI="#xi"/>
+                <Variable IRI="#xpi"/>
+            </ObjectPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="swrla:isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Rule to define the hasConsistentAltEvent property.</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">R4: hasConsistentAltEvent</Literal>
+        </Annotation>
+        <Body>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasMappingEvent"/>
+                <Variable IRI="#xa"/>
+                <Variable IRI="#xpa"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty abbreviatedIRI="efbo:isAlternateEventOf"/>
+                <Variable IRI="#xp"/>
+                <Variable IRI="#xpa"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty abbreviatedIRI="efbo:isAlternateEventOf"/>
+                <Variable IRI="#x"/>
+                <Variable IRI="#xa"/>
+            </ObjectPropertyAtom>
+        </Body>
+        <Head>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasConsistentAltEvent"/>
+                <Variable IRI="#xa"/>
+                <Variable IRI="#xpa"/>
+            </ObjectPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="swrla:isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string"></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">R1: hasConsistentNextEvent</Literal>
+        </Annotation>
+        <Body>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasMappingEvent"/>
+                <Variable IRI="#y"/>
+                <Variable IRI="#yp"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty abbreviatedIRI="efbo:hasNextEvent"/>
+                <Variable IRI="#yp"/>
+                <Variable IRI="#zp"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasMappingEvent"/>
+                <Variable IRI="#z"/>
+                <Variable IRI="#zp"/>
+            </ObjectPropertyAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty abbreviatedIRI="efbo:hasPreviousEvent"/>
+                <Variable IRI="#z"/>
+                <Variable IRI="#y"/>
+            </ObjectPropertyAtom>
+        </Body>
+        <Head>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#hasConsistentNextEvent"/>
+                <Variable IRI="#y"/>
+                <Variable IRI="#yp"/>
+            </ObjectPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#ConsistentEntity</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Consistent Entity</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#EventWithConsistentAgent</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Event With Consistent Agent</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#EventWithConsistentFlow</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Event With Consistent Flow</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#EventWithConsistentInterface</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Event With Consistent Interface</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#InconsistentEntity</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Inconsistent Entity</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#ParticipantEntity</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Participant Entity</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#ParticipantSystem</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Participant System</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#System-1_Agent</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System-1 Agent</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#System-1_Entity</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System-1 Entity</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#System-1_Event</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System-1 Event</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#System-1_Interface</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System-1 Interface</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#System-2_Agent</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System-2 Agent</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#System-2_Entity</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System-2 Entity</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#System-2_Event</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System-2 Event</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#System-2_Interface</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System-2 Interface</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#SystemValidationEntity</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">System Validation Entity</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.2.3.20160319-0906) https://github.com/owlcs/owlapi -->
+
