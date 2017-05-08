@@ -551,9 +551,8 @@ public  Set<OWLNamedIndividual> getOWLNamedIndividuals(OWLClass owlClass)
 public  Set<OWLExpressionAxiom> getOWLNamedIndividuals(OWLObjectProperty owlProperty)
 {
 	
-	Set <OWLExpressionAxiom> a = new HashSet <OWLExpressionAxiom>();
+	Set <OWLExpressionAxiom> axioms = new HashSet <OWLExpressionAxiom>();
 	Set <OWLNamedIndividual> allIndividuals = loadedOntology.getIndividualsInSignature();
-	//Set <OWLNamedIndividual> individuals =  new HashSet<OWLNamedIndividual>();
 			
 	for (OWLNamedIndividual i: allIndividuals)
 	{
@@ -561,14 +560,33 @@ public  Set<OWLExpressionAxiom> getOWLNamedIndividuals(OWLObjectProperty owlProp
 		if (EntitySearcher.hasObjectPropertyValue(i, owlProperty, j, loadedOntology))
 			{
 			   OWLExpressionAxiom ax = new OWLExpressionAxiom(i, owlProperty, j);
-			   a.add(ax);
-			  // individuals.add(j);				
+			   axioms.add(ax);			  				
 			}
 	}	
   
- return a;
+ return axioms;
 }
 
+public  Set<OWLExpressionAxiom> getOWLNamedIndividuals(OWLClass subjectType, OWLObjectProperty owlProperty, OWLClass objectType)
+{
+	
+	Set <OWLExpressionAxiom> axioms = new HashSet <OWLExpressionAxiom>();
+	
+	Set<OWLNamedIndividual> subjectIndividuals = this.getOWLNamedIndividuals(subjectType);
+	Set<OWLNamedIndividual> objectIndividuals = this.getOWLNamedIndividuals(objectType);
+	
+	for (OWLNamedIndividual i: subjectIndividuals)
+	{
+		for (OWLNamedIndividual j: objectIndividuals)
+		if (EntitySearcher.hasObjectPropertyValue(i, owlProperty, j, loadedOntology))
+			{
+			   OWLExpressionAxiom ax = new OWLExpressionAxiom(i, owlProperty, j);
+			   axioms.add(ax);			  				
+			}
+	}	
+  
+ return axioms;
+}
 
 
 public void printAllIndividuals()
@@ -706,15 +724,30 @@ public OWLOntology getInferredOntology()
 
 	public class OWLExpressionAxiom
 	{
-		public OWLNamedIndividual subject;
-		public OWLObjectProperty objectProperty;		
-		public OWLNamedIndividual object;
+		private OWLNamedIndividual subject = null;
+		private OWLObjectProperty objectProperty = null;		
+		private OWLNamedIndividual object = null;
 		
 		OWLExpressionAxiom (OWLNamedIndividual subject, OWLObjectProperty objectProperty, OWLNamedIndividual object )
 		{
 			this.subject = subject;
 			this.objectProperty = objectProperty;
 			this.object = object;
+		}
+		
+		public OWLNamedIndividual getSubject()
+		{
+			return subject;
+		}
+		
+		public OWLObjectProperty getObjectProperty()
+		{
+			return objectProperty;
+		}
+		
+		public OWLNamedIndividual getObject()
+		{
+			return object;
 		}
 		
 	}

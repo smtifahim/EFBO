@@ -44,6 +44,7 @@ public class EFBOStatusReport
 	
 	private static final String EFBO_FRC_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-frc.owl";
 	private static final String EFBO_V_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-v.owl";
+	private static final String EFBO_CORE_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo.owl";
 	
 	
 	public static void main(String[] args) throws Exception
@@ -51,7 +52,9 @@ public class EFBOStatusReport
 		String location =  System.getProperty("user.dir") + "/Resources/Ontologies/Test-007/untitled-ontology-209.owl";
 		File f = new File(location);
 		EFBOStatusReport esr = new EFBOStatusReport(f);
-		esr.printEntityBySystem();
+		esr.printMappingEvents();
+		esr.printConsistentEvents();
+		esr.printActionByAgents();
 	}
 	
 
@@ -61,7 +64,6 @@ public class EFBOStatusReport
 		this.efboStatusReportManager.loadOntology("EFBO-V Inferred", ontologyFile);
 		this.efboMergedInferredOntology = efboStatusReportManager.getLoadedOntology();
 		
-		//dataset = new OWLOntologyDataSet(localOntology, new HashMap());
 		this.setEntityBySystem();
 	}
 	
@@ -78,38 +80,94 @@ public class EFBOStatusReport
 		secondSystemEntity = efboStatusReportManager.getOWLNamedIndividuals(secondSystemEvent);		
 	}
 	
-	public void printEntityBySystem() throws Exception
+	
+	public void printMappingEvents() throws Exception
 	{
-		TableBuilder tb = new TableBuilder();
-			
-		OWLObjectProperty hasMappingEvent = efboStatusReportManager.getOWLObjectProperty(EFBO_V_URI, "hasConsistentEventFlow");
+		OWLObjectProperty hasMappingEvent = efboStatusReportManager.getOWLObjectProperty(EFBO_V_URI, "hasMappingEvent");
+		OWLClass firstSystemEvent = this.getOWLClass(EFBO_V_URI, "System-1_Event");
+		OWLClass secondSystemEvent = this.getOWLClass(EFBO_V_URI, "System-2_Event");
 		
-		//Set <OWLNamedIndividual> events = new HashSet<OWLNamedIndividual>();
-		//events = efboStatusReportManager.getOWLNamedIndividuals(hasMappingEvent);	
-		Set <OWLExpressionAxiom> a = efboStatusReportManager.getOWLNamedIndividuals(hasMappingEvent);	
+		System.out.println("Asserted Mapping Events Between Systems.");
+		this.printEntityBySystem(firstSystemEvent, hasMappingEvent, secondSystemEvent);
+	}
+	
+	public void printConsistentEvents() throws Exception
+	{
+		OWLObjectProperty hasConsistentEventFlow = efboStatusReportManager.getOWLObjectProperty(EFBO_V_URI, "hasConsistentEventFlow");
+		OWLClass firstSystemEvent = this.getOWLClass(EFBO_V_URI, "System-1_Event");
+		OWLClass secondSystemEvent = this.getOWLClass(EFBO_V_URI, "System-2_Event");
 		
-		String bar = "|";
-		tb.addRow("---------------------------------", "+", "--------------------------", "+", "------------------------------");
-		tb.addRow("System-I Events", bar, "Object Property" , bar, "System-II Events");
-		tb.addRow("---------------------------------", "+", "--------------------------", "+", "------------------------------");
-		for (OWLExpressionAxiom i: a)// firstSystemEntity)
-		{
-			String subjectLabel = efboStatusReportManager.getLabel(i.subject);
-			String objectLabel = efboStatusReportManager.getLabel(i.object);
-			String propertyLabel = efboStatusReportManager.getLabel(i.objectProperty);
-				
-			
-			tb.addRow("|" + subjectLabel, bar, propertyLabel , bar, objectLabel);
-		}
-		tb.addRow("---------------------------------", "+", "--------------------------", "+", "------------------------------");
-		System.out.println(tb.toString());
+		System.out.println("\nEvents With Consistent Event Flow.");
+		this.printEntityBySystem(firstSystemEvent, hasConsistentEventFlow, secondSystemEvent);
+	}
+	
+	public void printActionByAgents() throws Exception
+	{
+		OWLObjectProperty triggers = efboStatusReportManager.getOWLObjectProperty(EFBO_CORE_URI, "triggers");
+		OWLObjectProperty performs = efboStatusReportManager.getOWLObjectProperty(EFBO_CORE_URI, "performs");
 		
-		efboStatusReportManager.printOntologyMetrics();
-		//System.out.println(efboStatusReportManager.getOWLIndividualAxioms());
-		printQueryResult();
+		OWLClass action = this.getOWLClass(EFBO_CORE_URI, "Action");
+		OWLClass event = this.getOWLClass(EFBO_CORE_URI, "Event");
+		OWLClass clientAgent = this.getOWLClass(EFBO_CORE_URI, "ClientAgent");
+		OWLClass userAgent = this.getOWLClass(EFBO_CORE_URI, "UserAgent");
+		OWLClass serverAgent = this.getOWLClass(EFBO_CORE_URI, "ServerAgent");
+		
+		System.out.println("\nEvents by Triggering Agents.");
+		this.printEntityBySystem(userAgent, triggers, event);
+		this.printEntityBySystem(clientAgent, triggers, event);
+		this.printEntityBySystem(serverAgent, triggers, event);
+		
+		System.out.println("\nActions Performed by Agents.");
+		this.printEntityBySystem(userAgent, performs, action);
+		this.printEntityBySystem(clientAgent, performs, action);
+		this.printEntityBySystem(serverAgent, performs, action);		
 		
 	}
 	
+	public void printActionByAgentProperty(String agentType, String propertyName) throws Exception
+	{
+		OWLObjectProperty agentProperty = efboStatusReportManager.getOWLObjectProperty(EFBO_CORE_URI, propertyName);
+		OWLClass agent = this.getOWLClass(EFBO_CORE_URI, agentType);
+		OWLClass action = this.getOWLClass(EFBO_CORE_URI, "Action");
+		
+		this.printEntityBySystem(agent, agentProperty, action);
+		
+	}
+	
+	
+	public void printEntityBySystem(OWLClass domainEntity, 
+									OWLObjectProperty objectProperty, 
+									OWLClass rangeEntity) throws Exception
+	{
+		TableBuilder tb = new TableBuilder();
+		Set <OWLExpressionAxiom> a = efboStatusReportManager.getOWLNamedIndividuals(domainEntity, 
+																   objectProperty, rangeEntity);	
+	    String firstColHeader =  efboStatusReportManager.getLabel(domainEntity);
+	    String secondColHeader = efboStatusReportManager.getLabel(rangeEntity);		
+		
+		tb.addRow("---------------------------------", "+", "--------------------", "+", "------------------------------");
+		tb.addRow(firstColHeader, "|", "Object Property" , "|", secondColHeader);
+		tb.addRow("---------------------------------", "+", "--------------------", "+", "------------------------------");
+		int rowCtr = 0;
+		for (OWLExpressionAxiom i: a)// firstSystemEntity)
+		{
+			//String subjectLabel = i.getSubject().getIRI().getShortForm();
+			String subjectLabel = efboStatusReportManager.getLabel(i.getSubject());
+			String objectLabel = efboStatusReportManager.getLabel(i.getObject());
+			String propertyLabel = efboStatusReportManager.getLabel(i.getObjectProperty());
+			
+			tb.addRow(subjectLabel, "|", propertyLabel , "|", objectLabel);
+			rowCtr++;
+		}
+		tb.addRow("---------------------------------", "+", "--------------------", "+", "------------------------------");
+		tb.addRow("Total Row Count: " + rowCtr);
+		System.out.println(tb.toString());
+		//System.out.println("Total Row Count: " + rowCtr);
+		
+		//efboStatusReportManager.printOntologyMetrics();		
+	}
+	
+	/*
 	public void printQueryResult() throws Exception
 	{
 	String location =  System.getProperty("user.dir") + "/Resources/Ontologies/Test-007/EFBO_Test-007_Merged.owl";
@@ -118,11 +176,7 @@ public class EFBOStatusReport
 	model.read(EFBO_V_URI, "RDF/XML");
 	FileManager.get().readModel( model, location );
 	
-	//OntModel model1 = ModelFactory.createOntologyModel( OntModelSpec.OWL_MEM_MICRO_RULE_INF, model );
-	
-	//OntClass paperClass = base.getOntClass( namespace + "Paper" );
-    //Individual paper = base.createIndividual( namespace + "paper1", paperClass );
-	//model.ge
+
 	
 		String fileLocation = System.getProperty("user.dir") + "/Resources/SPARQL-Queries/" + "ex.rq";
 		String sparqlQuery = loadSPARQLScript(fileLocation);
@@ -137,8 +191,9 @@ public class EFBOStatusReport
 		ResultSetFormatter.out(System.out, results, query);
 		qe.close();
 		
-	}
+	}*/
 	
+	/*
 	public String loadSPARQLScript(String fileLocation) throws Exception
 	{
 		File file= new File(fileLocation);
@@ -153,14 +208,14 @@ public class EFBOStatusReport
 		  str.append(s+"\n");	
 		br.close();
 		return str.toString();
-	}
+	}*/
 	
 		
 	private OWLClass getOWLClass(String classURI, String className)
 	{
 		IRI classIRI = IRI.create(classURI + "#" + className);		
 		OWLClass owlClass = efboMergedInferredOntology.getOWLOntologyManager().getOWLDataFactory().getOWLClass(classIRI);
-		System.out.println(owlClass);
+		//System.out.println(owlClass);
 		return owlClass;
 	}
 	
