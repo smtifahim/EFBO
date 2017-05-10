@@ -54,7 +54,7 @@ public class EFBOValidationManager
     private OWLOntology efboValidationOntology;
     private OWLOntology efboInferredOntology;
 	private EFBOOntologyManager efboValidationManager;
-	private OWLOntologyManager m ;
+	private OWLOntologyManager efboMergingManager ;
 	
 	public static final String 
 	EFBO_V_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-v.owl";
@@ -180,7 +180,7 @@ public class EFBOValidationManager
     {
     	String fileLocation = efboKBaseManager.getLocalKBLocation();
     	efboValidationManager.importOWLOntology(efboKBaseManager.getEFBOKnowledgeBase(), fileLocation);
-    	this.m.loadOntologyFromOntologyDocument(new File (fileLocation));
+    	this.efboMergingManager.loadOntologyFromOntologyDocument(new File (fileLocation));
     }
 	
     public void setFirstSystemKBaseManager() throws Exception
@@ -293,8 +293,8 @@ public class EFBOValidationManager
 	    this.efboValidationManager.loadOntology("EFBO-V", EFBO_V_URI);
 	    this.efboValidationOntology = efboValidationManager.getLoadedOntology();
 	    
-	    this.m = OWLManager.createOWLOntologyManager();
-	    this.m.loadOntologyFromOntologyDocument(IRI.create(EFBO_V_URI));
+	    this.efboMergingManager = OWLManager.createOWLOntologyManager();
+	    this.efboMergingManager.loadOntologyFromOntologyDocument(IRI.create(EFBO_V_URI));
 	    
 	    String loadSuccessMessage = "\nThe EFBO-V Ontology has been Loaded Successfully.";	    						  
 	    System.out.println(loadSuccessMessage);
@@ -372,7 +372,7 @@ public class EFBOValidationManager
 		    
 		efboInferredOntology.getOWLOntologyManager().saveOntology(this.efboInferredOntology, efboInferredIRI);
 		
-		this.m.loadOntologyFromOntologyDocument(inferredOntologyFile);		
+		this.efboMergingManager.loadOntologyFromOntologyDocument(inferredOntologyFile);		
 			        		
 	}
 	
@@ -382,7 +382,7 @@ public class EFBOValidationManager
 	 				 + "/Resources/Ontologies/"+ EFBOSystemLauncher.PROJECT_NAME 
 	 				 + "/EFBO_"+ EFBOSystemLauncher.PROJECT_NAME+ "_Merged.owl"; 
 		
-		efboValidationManager.setMergedOntology(this.m, MERGED_ONTOLOGY_URI);
+		efboValidationManager.setMergedOntology(this.efboMergingManager, MERGED_ONTOLOGY_URI);
 		this.efboMergedOntology = efboValidationManager.getMergedOntology(); 
 		
 		File mergedOntologyFile =  new File(mergedEFBOFilePath);

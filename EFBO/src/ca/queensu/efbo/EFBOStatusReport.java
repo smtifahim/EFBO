@@ -49,7 +49,7 @@ public class EFBOStatusReport
 	
 	public static void main(String[] args) throws Exception
 	{
-		String location =  System.getProperty("user.dir") + "/Resources/Ontologies/TEST-003/EFBO_TEST-003_Merged.owl";
+		String location =  System.getProperty("user.dir") + "/Resources/Ontologies/TEST-WED/EFBO_TEST-WED_Merged.owl";
 		File f = new File(location);
 		EFBOStatusReport esr = new EFBOStatusReport(f);
 		esr.printMappingEvents();
