@@ -37,7 +37,7 @@ import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 
 public class EFBOKnowledgeBaseManager
 {
-	private static final String 
+	public static final String 
 		EFBO_CORE_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo.owl";
 	
 	private String
@@ -225,6 +225,7 @@ public class EFBOKnowledgeBaseManager
 			String agentLabel = agentTypes.get(agentType).replace("-", " ");
 			kBaseAgentType = efboKBaseManager.addOWLNamedIndividual(EFBO_KBASE_URI, agentTypes.get(agentType), systemID + ":" + agentLabel);
 			efboKBaseManager.assertOWLNamedIndividual(kBaseAgentType, agentClass);
+			this.setIndividualSystemEntity(kBaseAgentType);
 		}
 		
 	}
@@ -343,7 +344,7 @@ public class EFBOKnowledgeBaseManager
 private	String getWhereDeclared (EFBOAnnotation annotation)
 {
 	String whereDeclared = Paths.get(annotation.getFileLocation())
-				.getFileName().toString();
+								.getFileName().toString();
 	
 	return whereDeclared;
 }

@@ -49,7 +49,7 @@ public class EFBOStatusReport
 	
 	public static void main(String[] args) throws Exception
 	{
-		String location =  System.getProperty("user.dir") + "/Resources/Ontologies/Test-007/untitled-ontology-209.owl";
+		String location =  System.getProperty("user.dir") + "/Resources/Ontologies/TEST-09/EFBO_TEST-09_Inferred.owl";
 		File f = new File(location);
 		EFBOStatusReport esr = new EFBOStatusReport(f);
 		esr.printMappingEvents();
@@ -65,6 +65,11 @@ public class EFBOStatusReport
 		this.efboMergedInferredOntology = efboStatusReportManager.getLoadedOntology();
 		
 		this.setEntityBySystem();
+	}
+	
+	public void printSystemsInfo()
+	{
+	
 	}
 	
 		

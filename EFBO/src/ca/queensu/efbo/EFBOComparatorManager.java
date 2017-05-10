@@ -24,6 +24,7 @@ import org.semanticweb.HermiT.ReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLImportsDeclaration;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
@@ -112,7 +113,7 @@ public class EFBOComparatorManager
 		
 	}
 	
-	public void mergeLoadedKBases() throws Exception
+	public void importLoadedKBases() throws Exception
 	{
 		this.importLoadedSystemsKBases();		
 		this.saveEFBOValidationOntology();
@@ -263,7 +264,7 @@ public class EFBOComparatorManager
 		
 		EFBOUserInterfaceManager.progressBar.setValue(10);
 		System.out.println("System ID: " +  systemID);
-		System.out.println("Name : " +  systemName);
+		System.out.println("Name     : " +  systemName);
 		
 		return systemName;		
 	}
@@ -353,11 +354,12 @@ public class EFBOComparatorManager
 	public void saveEFBOInferredOntology() throws Exception
 	{
 		final String inferredEFBOFilePath = System.getProperty("user.dir") 
-			  		 				 + "/Resources/Ontologies/"+ EFBOSystemLauncher.PROJECT_NAME + "/efbo-inferred.owl"; 
+			  		 				 + "/Resources/Ontologies/"+ EFBOSystemLauncher.PROJECT_NAME 
+			  		 				 + "/EFBO_"+ EFBOSystemLauncher.PROJECT_NAME+ "_Inferred.owl"; 
         
 		inferredOntologyFile =  new File(inferredEFBOFilePath);
 		IRI efboInferredIRI = IRI.create(inferredOntologyFile.toURI());
-			    
+				    
 		efboInferredOntology.getOWLOntologyManager().saveOntology(this.efboInferredOntology, efboInferredIRI);
 			        		
 	}
@@ -382,7 +384,8 @@ public class EFBOComparatorManager
 	{
 	    this.efboValidationManager.setInferredOntology(this.efboValidationOntologyFile);
 	    
-		this.efboInferredOntology = this.efboValidationManager.getInferredOntology();		
+		this.efboInferredOntology = this.efboValidationManager.getInferredOntology();
+		this.efboValidationManager.addImportDeclaration(this.efboInferredOntology, EFBO_V_URI);
 	}
 
 	/**

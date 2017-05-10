@@ -65,8 +65,8 @@ public class EFBOMappingEventsManager extends JFrame
 	private EFBOOntologyManager efboOntologyManager;
 	private ArrayList <EFBOMappingEvents> mappingEvents = new ArrayList <EFBOMappingEvents>();
 
-	ArrayList <OWLNamedIndividual> events = new ArrayList <OWLNamedIndividual>();
-	ArrayList <OWLNamedIndividual> events2= new ArrayList <OWLNamedIndividual>();
+	ArrayList <OWLNamedIndividual> systemIEvents = new ArrayList <OWLNamedIndividual>();
+	ArrayList <OWLNamedIndividual> systemIIEvents= new ArrayList <OWLNamedIndividual>();
 	int lm =0;
 	int me =0;
 	
@@ -102,7 +102,7 @@ public class EFBOMappingEventsManager extends JFrame
 		{ 
 			String eventLabel = this.efboOntologyManager.getLabel(e);
 			firstSystemModel.add(i, eventLabel);
-			events.add(i, e);
+			systemIEvents.add(i, e);
 			i++;			
 		}
 		
@@ -111,7 +111,7 @@ public class EFBOMappingEventsManager extends JFrame
 		{ 
 			String eventLabel = this.efboOntologyManager.getLabel(e);
 			secondSystemModel.add(j, eventLabel);
-			events2.add(j, e);
+			systemIIEvents.add(j, e);
 			j++;	
 		}
 			
@@ -185,7 +185,7 @@ public class EFBOMappingEventsManager extends JFrame
 				int i =  firstSystemEventList.getSelectedIndex();
 				int j =  secondSystemEventList.getSelectedIndex();
 				
-				mappingEvents.add(new EFBOMappingEvents(events.get(i), events2.get(j), efboOntologyManager));
+				mappingEvents.add(new EFBOMappingEvents(systemIEvents.get(i), systemIIEvents.get(j), efboOntologyManager));
 						
 				listModel.add(lm, mappingEvents.get(me).getEFBOMappingEvents());
 				

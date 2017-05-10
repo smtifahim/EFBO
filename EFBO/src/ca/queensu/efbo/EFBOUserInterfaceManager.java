@@ -26,9 +26,9 @@ public class EFBOUserInterfaceManager
 	private JButton btnStepI   = new JButton("STEP   I. LOAD the FIRST System's Knowledge.");
 	private JButton btnStepII  = new JButton("STEP  II. LOAD the SECOND System's Knowledge.");
 	private JButton btnStepIII = new JButton("STEP III. LOAD the EFBO-Validation Ontology.");
-	private JButton btnStepIV  = new JButton("STEP  IV. MERGE the 1st + 2nd System's Knowledge.");
+	private JButton btnStepIV  = new JButton("STEP  IV. IMPORT the 1st + 2nd System's Knowledge.");
 	private JButton btnStepV   = new JButton("STEP   V. IDENTIFY the MAPPING Events.");
-	private JButton btnStepVI  = new JButton("STEP  VI. Save the EFBO-V Ontology.");
+	private JButton btnStepVI  = new JButton("STEP  VI. SAVE the Resulting Ontology + Knowledge.");
 	private Font textFont = new Font(Font.MONOSPACED, Font.BOLD, 14);
 	public static JProgressBar progressBar; 
 	private final JPanel firstPanel = new JPanel();
@@ -115,7 +115,7 @@ public class EFBOUserInterfaceManager
 				try 
 				{
 					System.out.println(btnStepIV.getText());
-					efboCompManager.mergeLoadedKBases();
+					efboCompManager.importLoadedKBases();
 					btnStepIV.setEnabled(false);
 					btnStepV.setEnabled(true);
 				} 
@@ -158,12 +158,11 @@ public class EFBOUserInterfaceManager
 				try 
 				{
 					efboCompManager.saveEFBOValidationOntology();
-					
 					efboCompManager.setEFBOInferredOntology();
 					efboCompManager.saveEFBOInferredOntology();					
-					efboCompManager.importEFBOInferredOntology();
-					
-					efboCompManager.saveEFBOValidationOntology();
+//					efboCompManager.importEFBOInferredOntology();
+//					
+//					efboCompManager.saveEFBOValidationOntology();
 					
 				//	efboStatusReport = new EFBOStatusReport(efboCompManager);
 				//	efboStatusReport.printEntityBySystem();

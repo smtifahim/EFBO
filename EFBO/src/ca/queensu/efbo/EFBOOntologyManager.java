@@ -142,6 +142,15 @@ public class EFBOOntologyManager
 	 manager.applyChange(addImport);
  }
  
+ // to declare owl import statement for the owlOntology
+ public void addImportDeclaration(OWLOntology owlOntology, String importOntologyURI)
+ {
+	 OWLImportsDeclaration importDeclaration = owlOntology.getOWLOntologyManager().getOWLDataFactory()
+             								.getOWLImportsDeclaration(IRI.create(importOntologyURI));
+	 
+	 owlOntology.getOWLOntologyManager().applyChange(new AddImport (owlOntology, importDeclaration));
+ }
+ 
  //Import ontology from an ontology URI.
  public void importOWLOntology(String ontologyURI) throws Exception
  {
