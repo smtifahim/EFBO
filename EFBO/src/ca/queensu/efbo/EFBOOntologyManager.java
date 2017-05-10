@@ -49,6 +49,7 @@ import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.search.EntitySearcher;
 import org.semanticweb.owlapi.util.InferredOntologyGenerator;
+import org.semanticweb.owlapi.util.OWLOntologyMerger;
 import org.semanticweb.owlapi.vocab.OWLRDFVocabulary; 
  
 public class EFBOOntologyManager 
@@ -60,6 +61,7 @@ public class EFBOOntologyManager
  private OWLOntology loadedOntology = null;
  private OWLOntology newOntology = null;
  private OWLOntology inferredOntology = null;
+ private OWLOntology mergedOntology = null;
  
  private OWLOntologyManager manager = null; 
   
@@ -161,6 +163,21 @@ public class EFBOOntologyManager
 	 AddImport addImport = new AddImport(loadedOntology, importDeclaration);
 	 manager.applyChange(addImport);
  }
+ 
+ public void setMergedOntology (OWLOntologyManager owlOntologyManager, String URI) throws Exception
+ {
+	 OWLOntologyManager ontologyManager = owlOntologyManager;
+	 OWLOntologyMerger ontologyMerger = new OWLOntologyMerger(ontologyManager);
+	 IRI mergedOntologyIRI = IRI.create(URI);
+	 this.mergedOntology = ontologyMerger.createMergedOntology(ontologyManager, mergedOntologyIRI);
+	 
+ }
+ 
+ public OWLOntology getMergedOntology()
+ {
+	 return mergedOntology;
+ }
+ 
  
  public void preProcessing() 
  { 
@@ -726,6 +743,7 @@ public OWLOntology getInferredOntology()
 		//inferredAxGenerator.add(new InferredEquivalentClassAxiomGenerator()); 
 		
 		this.inferredOntology = inferredOntologyManager.createOntology();
+			
 		InferredOntologyGenerator iOG = new InferredOntologyGenerator(hermitReasoner);
 		iOG.fillOntology(inferredOntologyManager.getOWLDataFactory(), this.inferredOntology);	
 		hermitReasoner.dispose();

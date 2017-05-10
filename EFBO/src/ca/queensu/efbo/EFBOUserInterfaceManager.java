@@ -20,7 +20,7 @@ import java.awt.SystemColor;
 public class EFBOUserInterfaceManager 
 {
 	public JFrame efboSystemFrame;
-	private EFBOComparatorManager efboCompManager = new EFBOComparatorManager();
+	private EFBOValidationManager efboCompManager = new EFBOValidationManager();
 	private EFBOStatusReport efboStatusReport;
 	
 	private JButton btnStepI   = new JButton("STEP   I. LOAD the FIRST System's Knowledge.");
@@ -29,7 +29,9 @@ public class EFBOUserInterfaceManager
 	private JButton btnStepIV  = new JButton("STEP  IV. IMPORT the 1st + 2nd System's Knowledge.");
 	private JButton btnStepV   = new JButton("STEP   V. IDENTIFY the MAPPING Events.");
 	private JButton btnStepVI  = new JButton("STEP  VI. SAVE the Resulting Ontology + Knowledge.");
+	
 	private Font textFont = new Font(Font.MONOSPACED, Font.BOLD, 14);
+	
 	public static JProgressBar progressBar; 
 	private final JPanel firstPanel = new JPanel();
 	private final JPanel secondPanel = new JPanel();
@@ -160,7 +162,10 @@ public class EFBOUserInterfaceManager
 					efboCompManager.saveEFBOValidationOntology();
 					efboCompManager.setEFBOInferredOntology();
 					efboCompManager.saveEFBOInferredOntology();					
-//					efboCompManager.importEFBOInferredOntology();
+					//efboCompManager.importEFBOInferredOntology();
+					efboCompManager.saveMergedOntology();
+					
+				//efboCompManager.importEFBOInferredOntology();
 //					
 //					efboCompManager.saveEFBOValidationOntology();
 					

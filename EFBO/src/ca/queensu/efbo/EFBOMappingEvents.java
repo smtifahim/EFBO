@@ -32,7 +32,7 @@ public class EFBOMappingEvents
   public void setMappingEvents()
   {
 		OWLObjectProperty objectProperty = null;
-        objectProperty = efboOntologyManager.getOWLObjectProperty(EFBOComparatorManager.EFBO_V_URI, "hasMappingEvent");
+        objectProperty = efboOntologyManager.getOWLObjectProperty(EFBOValidationManager.EFBO_V_URI, "hasMappingEvent");
         efboOntologyManager.addOWLObjectPropertyAxiom(firstSystemEvent, objectProperty, secondSystemEvent);
 	  
   }

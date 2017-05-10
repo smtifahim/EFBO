@@ -49,10 +49,12 @@ public class EFBOSystemLauncher
 				
 				else
 					{
-					 		EXTRACTED_ANNOTATIONS_LOCATION = System.getProperty("user.dir") + "/Resources/Extracted-Annotations/" + PROJECT_NAME;
+					 		EXTRACTED_ANNOTATIONS_LOCATION = System.getProperty("user.dir") 
+					 									   + "/Resources/Extracted-Annotations/" + PROJECT_NAME;
 							new File(EXTRACTED_ANNOTATIONS_LOCATION).mkdir();
 						
-							EXTRACTED_ONTOLOGY_LOCATION =  System.getProperty("user.dir") + "/Resources/Ontologies/" + PROJECT_NAME + "/";
+							EXTRACTED_ONTOLOGY_LOCATION = System.getProperty("user.dir") 
+									                    + "/Resources/Ontologies/" + PROJECT_NAME + "/";
 							new File(EXTRACTED_ONTOLOGY_LOCATION).mkdir();					
 					}
 						

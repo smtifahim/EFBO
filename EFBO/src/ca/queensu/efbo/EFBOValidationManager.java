@@ -22,6 +22,7 @@ import org.mindswap.pellet.jena.PelletReasonerFactory;
 import org.semanticweb.HermiT.Reasoner;
 import org.semanticweb.HermiT.ReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLImportsDeclaration;
@@ -35,7 +36,7 @@ import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.search.EntitySearcher;
 
-public class EFBOComparatorManager 
+public class EFBOValidationManager 
 {
 	private EFBOKnowledgeBaseManager firstSystemKBaseManager;
 	private EFBOKnowledgeBaseManager secondSystemKBaseManager;
@@ -53,18 +54,23 @@ public class EFBOComparatorManager
     private OWLOntology efboValidationOntology;
     private OWLOntology efboInferredOntology;
 	private EFBOOntologyManager efboValidationManager;
+	private OWLOntologyManager m ;
 	
 	public static final String 
 	EFBO_V_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-v.owl";
+	
+	private static final String
+	MERGED_ONTOLOGY_URI = "http://www.cs.queensu.ca/~imam/ontologies/efbo-merged.owl";
 	
 	private static final String FIRST_SYSTEM_ID = "System-1";
 	private static final String SECOND_SYSTEM_ID = "System-2";
     
 	private File efboValidationOntologyFile;
 	private File inferredOntologyFile;
+	private OWLOntology efboMergedOntology = null;
 	
 	//Default Constructor. 
-	public EFBOComparatorManager() throws Exception
+	public EFBOValidationManager() throws Exception
 	{
 		
 		firstSystemKBaseManager = null;
@@ -173,7 +179,8 @@ public class EFBOComparatorManager
     private void importEFBOKnowledgeBase(EFBOKnowledgeBaseManager efboKBaseManager) throws Exception
     {
     	String fileLocation = efboKBaseManager.getLocalKBLocation();
-    	efboValidationManager.importOWLOntology(efboKBaseManager.getEFBOKnowledgeBase(), fileLocation);   
+    	efboValidationManager.importOWLOntology(efboKBaseManager.getEFBOKnowledgeBase(), fileLocation);
+    	this.m.loadOntologyFromOntologyDocument(new File (fileLocation));
     }
 	
     public void setFirstSystemKBaseManager() throws Exception
@@ -286,6 +293,9 @@ public class EFBOComparatorManager
 	    this.efboValidationManager.loadOntology("EFBO-V", EFBO_V_URI);
 	    this.efboValidationOntology = efboValidationManager.getLoadedOntology();
 	    
+	    this.m = OWLManager.createOWLOntologyManager();
+	    this.m.loadOntologyFromOntologyDocument(IRI.create(EFBO_V_URI));
+	    
 	    String loadSuccessMessage = "\nThe EFBO-V Ontology has been Loaded Successfully.";	    						  
 	    System.out.println(loadSuccessMessage);
 	    
@@ -314,7 +324,7 @@ public class EFBOComparatorManager
 		
 		//String defaultFilePath = System.getProperty("user.dir") + "/Resources/Ontologies/"; 
 		JFileChooser fileChooser = new JFileChooser(new File(defaultFilePath));
-		fileChooser.setSelectedFile(new File("EFBO_" + EFBOSystemLauncher.PROJECT_NAME + "_Merged.owl"));
+		fileChooser.setSelectedFile(new File("EFBO_" + EFBOSystemLauncher.PROJECT_NAME + "_Asserted.owl"));
 
 		fileChooser.setDialogTitle("Save the EFBO-V Merged Ontology");
 		
@@ -359,9 +369,26 @@ public class EFBOComparatorManager
         
 		inferredOntologyFile =  new File(inferredEFBOFilePath);
 		IRI efboInferredIRI = IRI.create(inferredOntologyFile.toURI());
-				    
+		    
 		efboInferredOntology.getOWLOntologyManager().saveOntology(this.efboInferredOntology, efboInferredIRI);
+		
+		this.m.loadOntologyFromOntologyDocument(inferredOntologyFile);		
 			        		
+	}
+	
+	public void saveMergedOntology() throws Exception
+	{
+		final String mergedEFBOFilePath = System.getProperty("user.dir") 
+	 				 + "/Resources/Ontologies/"+ EFBOSystemLauncher.PROJECT_NAME 
+	 				 + "/EFBO_"+ EFBOSystemLauncher.PROJECT_NAME+ "_Merged.owl"; 
+		
+		efboValidationManager.setMergedOntology(this.m, MERGED_ONTOLOGY_URI);
+		this.efboMergedOntology = efboValidationManager.getMergedOntology(); 
+		
+		File mergedOntologyFile =  new File(mergedEFBOFilePath);
+		IRI mergedFileIRI = IRI.create(mergedOntologyFile.toURI());
+		
+		efboMergedOntology.getOWLOntologyManager().saveOntology(this.efboMergedOntology, mergedFileIRI);		
 	}
 	
 	public void importEFBOInferredOntology() throws Exception
@@ -385,8 +412,9 @@ public class EFBOComparatorManager
 	    this.efboValidationManager.setInferredOntology(this.efboValidationOntologyFile);
 	    
 		this.efboInferredOntology = this.efboValidationManager.getInferredOntology();
-		this.efboValidationManager.addImportDeclaration(this.efboInferredOntology, EFBO_V_URI);
+		this.efboValidationManager.addImportDeclaration(this.efboInferredOntology, EFBO_V_URI);		
 	}
+		
 
 	/**
 	 * @return the firstSystemEvents
