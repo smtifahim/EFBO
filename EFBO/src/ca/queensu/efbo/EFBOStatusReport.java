@@ -49,7 +49,7 @@ public class EFBOStatusReport
 	
 	public static void main(String[] args) throws Exception
 	{
-		String location =  System.getProperty("user.dir") + "/Resources/Ontologies/TEST-WED/EFBO_TEST-WED_Merged.owl";
+		String location =  System.getProperty("user.dir") + "/Resources/Ontologies/TEST/EFBO_TEST_Merged.owl";
 		File f = new File(location);
 		EFBOStatusReport esr = new EFBOStatusReport(f);
 		esr.printMappingEvents();
@@ -99,11 +99,20 @@ public class EFBOStatusReport
 	public void printConsistentEvents() throws Exception
 	{
 		OWLObjectProperty hasConsistentEventFlow = efboStatusReportManager.getOWLObjectProperty(EFBO_V_URI, "hasConsistentEventFlow");
+		OWLObjectProperty hasConsistentNextEvent= efboStatusReportManager.getOWLObjectProperty(EFBO_V_URI, "hasConsistentNextEvent");
+		OWLObjectProperty hasConsistentPrevEvent= efboStatusReportManager.getOWLObjectProperty(EFBO_V_URI, "hasConsistentPreviousEvent");
+		
 		OWLClass firstSystemEvent = this.getOWLClass(EFBO_V_URI, "System-1_Event");
 		OWLClass secondSystemEvent = this.getOWLClass(EFBO_V_URI, "System-2_Event");
 		
 		System.out.println("\nEvents With Consistent Event Flow.");
 		this.printEntityBySystem(firstSystemEvent, hasConsistentEventFlow, secondSystemEvent);
+		
+		System.out.println("\nEvents With Consistent Next Events.");
+		this.printEntityBySystem(firstSystemEvent, hasConsistentNextEvent, secondSystemEvent);
+		
+		System.out.println("\nEvents With Consistent Previous Events.");
+		this.printEntityBySystem(firstSystemEvent, hasConsistentPrevEvent, secondSystemEvent);
 	}
 	
 	public void printActionByAgents() throws Exception
@@ -227,7 +236,7 @@ public class EFBOStatusReport
 	
 
 /*
- * Print formatting is based on the following Class. 
+ * Print formatting is based on the following Class. -Fahim
  * Source: https://www.ksmpartners.com/2013/08/nicely-formatted-tabular-output-in-java/
  * */
 public class TableBuilder
@@ -252,10 +261,10 @@ public class TableBuilder
         {
             for(int colNum = 0; colNum < row.length; colNum++) 
             {
-                widths[colNum] =
-                    Math.max(
-                        widths[colNum],
-                        StringUtils.length(row[colNum]));
+                widths[colNum] = Math.max(
+                						    widths[colNum], 
+                				 			StringUtils.length(row[colNum])
+                				 		 );
             }
         }
  
@@ -275,8 +284,9 @@ public class TableBuilder
             {
                 buf.append(
                     StringUtils.rightPad(
-                        StringUtils.defaultString(
-                            row[colNum]), colWidths[colNum]));
+                    						StringUtils.defaultString
+                    						(row[colNum]), colWidths[colNum])
+                						);
                 buf.append(' ');
             }
  

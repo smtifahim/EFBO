@@ -50,13 +50,13 @@ public class EFBOMappingEventsManager extends JFrame
 	private JPanel contentPane;
 
 	DefaultListModel<String> listModel = new DefaultListModel<>();
-	private JList mappingList = new JList(listModel);
+	private JList<String> mappingList = new JList<String>(listModel);
 	
 	DefaultListModel<String> firstSystemModel = new DefaultListModel<>();
-	JList firstSystemEventList = new JList(firstSystemModel);
+	JList<String> firstSystemEventList = new JList<String>(firstSystemModel);
 	
 	DefaultListModel<String> secondSystemModel = new DefaultListModel<>();
-	JList secondSystemEventList = new JList(secondSystemModel);	
+	JList<String> secondSystemEventList = new JList<String>(secondSystemModel);	
 	
 	
 	private Set<OWLNamedIndividual> firstSystemEvents;
@@ -105,6 +105,7 @@ public class EFBOMappingEventsManager extends JFrame
 			systemIEvents.add(i, e);
 			i++;			
 		}
+			
 		
 		int j =0;		
 		for (OWLNamedIndividual e : secondSystemEvents)
