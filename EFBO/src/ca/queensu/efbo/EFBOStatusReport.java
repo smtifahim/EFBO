@@ -35,8 +35,8 @@ import ca.queensu.efbo.EFBOOntologyManager.OWLExpressionAxiom;
 
 public class EFBOStatusReport 
 {
-	Set <OWLNamedIndividual> firstSystemEntity;
-	Set <OWLNamedIndividual> secondSystemEntity;
+	Set <OWLNamedIndividual> firstSystemEvent;
+	Set <OWLNamedIndividual> secondSystemEvent;
 	private OWLOntology efboMergedInferredOntology = null;
 	EFBOOntologyManager efboStatusReportManager = null;
 //	OWLOntologyDataSet dataset;
@@ -55,6 +55,7 @@ public class EFBOStatusReport
 		esr.printMappingEvents();
 		esr.printConsistentEvents();
 		esr.printActionByAgents();
+		esr.printDecisionPointEvents();
 	}
 	
 
@@ -64,7 +65,7 @@ public class EFBOStatusReport
 		this.efboStatusReportManager.loadOntology("EFBO-V Inferred", ontologyFile);
 		this.efboMergedInferredOntology = efboStatusReportManager.getLoadedOntology();
 		
-		this.setEntityBySystem();
+		//this.setEntityBySystem();
 	}
 	
 	public void printSystemsInfo()
@@ -73,18 +74,18 @@ public class EFBOStatusReport
 	}
 	
 		
-	private void setEntityBySystem()
-	{
-		firstSystemEntity = new HashSet<OWLNamedIndividual>();
-		secondSystemEntity = new HashSet<OWLNamedIndividual>();
-		
-		OWLClass firstSystemEvent = this.getOWLClass(EFBO_V_URI, "System-1_Event");
-		firstSystemEntity = efboStatusReportManager.getOWLNamedIndividuals(firstSystemEvent);
-		
-		OWLClass secondSystemEvent = this.getOWLClass(EFBO_V_URI, "System-2_Event");
-		secondSystemEntity = efboStatusReportManager.getOWLNamedIndividuals(secondSystemEvent);		
-	}
-	
+//	private void setEntityBySystem()
+//	{
+//		firstSystemEntity = new HashSet<OWLNamedIndividual>();
+//		secondSystemEntity = new HashSet<OWLNamedIndividual>();
+//		
+//		OWLClass firstSystemEvent = this.getOWLClass(EFBO_V_URI, "System-1_Event");
+//		firstSystemEntity = efboStatusReportManager.getOWLNamedIndividuals(firstSystemEvent);
+//		
+//		OWLClass secondSystemEvent = this.getOWLClass(EFBO_V_URI, "System-2_Event");
+//		secondSystemEntity = efboStatusReportManager.getOWLNamedIndividuals(secondSystemEvent);		
+//	}
+//	
 	
 	public void printMappingEvents() throws Exception
 	{
@@ -113,6 +114,24 @@ public class EFBOStatusReport
 		
 		System.out.println("\nEvents With Consistent Previous Events.");
 		this.printEntityBySystem(firstSystemEvent, hasConsistentPrevEvent, secondSystemEvent);
+	}
+	
+	public void printDecisionPointEvents() throws Exception
+	{
+		OWLClass firstSystemDPE = this.getOWLClass(EFBO_FRC_URI, "DPE");
+		OWLClass nextOfDPE = this.getOWLClass(EFBO_V_URI, "System-1_Event");
+		
+		OWLClass secondSystemDPE = this.getOWLClass(EFBO_FRC_URI, "DPE");
+		OWLClass nextOfDPE2 = this.getOWLClass(EFBO_V_URI, "System-2_Event");
+		
+		OWLObjectProperty hasNextEvent = efboStatusReportManager.getOWLObjectProperty(EFBO_CORE_URI, "hasNextEvent");
+		
+		System.out.println("\nDecesion Point Events");
+		this.printEntityBySystem(firstSystemDPE, hasNextEvent, nextOfDPE);
+		
+		System.out.println("\nDecesion Point Events");
+		this.printEntityBySystem(secondSystemDPE, hasNextEvent, nextOfDPE2);
+		
 	}
 	
 	public void printActionByAgents() throws Exception
