@@ -402,7 +402,15 @@ public class EFBOValidationManager
 	{
 		return efboInferredOntology;
 	}
-
+	
+//	public void setNotConsistentEvents()
+//	{
+//		OWLClass consistentEvent = efboValidationManager.getOWLClass(EFBO_V_URI, "EventWithConsistentFlow");
+//		OWLClass eventClass = efboValidationManager.getOWLClass(EFBOKnowledgeBaseManager.EFBO_CORE_URI, "Event");
+//		
+//		efboValidationManager.setEntityNegation(consistentEvent, eventClass);
+//	}
+	
 	
 	public void setEFBOInferredOntology() throws Exception
 	{

@@ -36,6 +36,7 @@ import org.semanticweb.owlapi.model.OWLIndividualAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
 //import org.semanticweb.owlapi.model.OWLLogicalAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
+import org.semanticweb.owlapi.model.OWLObjectComplementOf;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAxiom;
@@ -571,6 +572,50 @@ public  Set<OWLNamedIndividual> getOWLNamedIndividuals(OWLClass owlClass)
 	}	
   
  return individuals;
+}
+
+public Set<OWLNamedIndividual> getIntersectedIndividuals (OWLClass firstOWLClass, OWLClass secondOWLClass)
+{
+    Set <OWLNamedIndividual> firstIndividualsSet = this.getOWLNamedIndividuals(firstOWLClass);
+    Set <OWLNamedIndividual> secondIndividualsSet = this.getOWLNamedIndividuals(secondOWLClass);
+   	Set<OWLNamedIndividual> intersectedIndividualsSet  = new HashSet<OWLNamedIndividual>(firstIndividualsSet);
+   	intersectedIndividualsSet.retainAll(secondIndividualsSet);
+  
+  return intersectedIndividualsSet;
+}
+
+public Set<OWLNamedIndividual> getDifferentIndividuals (OWLClass firstOWLClass, OWLClass secondOWLClass)
+{
+    Set <OWLNamedIndividual> firstIndividualsSet = this.getOWLNamedIndividuals(firstOWLClass);
+    Set <OWLNamedIndividual> secondIndividualsSet = this.getOWLNamedIndividuals(secondOWLClass);
+   	Set<OWLNamedIndividual> differentIndividualsSet  = new HashSet<OWLNamedIndividual>(firstIndividualsSet);
+   	differentIndividualsSet.removeAll(secondIndividualsSet);
+  
+  return differentIndividualsSet;
+}
+
+public void setEntityNegation(OWLClass positiveClass, OWLClass owlClass)
+{
+	Set <OWLNamedIndividual> negativeEntity = new HashSet<OWLNamedIndividual>();
+	negativeEntity = this.getDifferentIndividuals(owlClass, positiveClass);
+	//OWLClass negativeClass = null;
+	
+	for (OWLNamedIndividual i: negativeEntity)
+	{
+		OWLAxiom axiom = factory.getOWLClassAssertionAxiom(positiveClass.getObjectComplementOf(), i);
+		AddAxiom addAxiom = new AddAxiom(loadedOntology, axiom);
+		manager.applyChange(addAxiom);
+		//System.out.println(axiom);
+	}
+}
+
+public  OWLClass getOWLClass(String classURI, String className)
+{
+	IRI classIRI = IRI.create(classURI + "#" + className);		
+	OWLClass owlClass = this.loadedOntology.getOWLOntologyManager()
+						    .getOWLDataFactory().getOWLClass(classIRI);
+	//System.out.println(owlClass);
+	return owlClass;
 }
 
 

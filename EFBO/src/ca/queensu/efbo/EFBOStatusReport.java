@@ -100,20 +100,38 @@ public class EFBOStatusReport
 	public void printConsistentEvents() throws Exception
 	{
 		OWLObjectProperty hasConsistentEventFlow = efboStatusReportManager.getOWLObjectProperty(EFBO_V_URI, "hasConsistentEventFlow");
-		OWLObjectProperty hasConsistentNextEvent= efboStatusReportManager.getOWLObjectProperty(EFBO_V_URI, "hasConsistentNextEvent");
-		OWLObjectProperty hasConsistentPrevEvent= efboStatusReportManager.getOWLObjectProperty(EFBO_V_URI, "hasConsistentPreviousEvent");
+		OWLObjectProperty hasConsistentNextEvent = efboStatusReportManager.getOWLObjectProperty(EFBO_V_URI, "hasConsistentNextEvent");
+		OWLObjectProperty hasConsistentPrevEvent = efboStatusReportManager.getOWLObjectProperty(EFBO_V_URI, "hasConsistentPreviousEvent");
 		
 		OWLClass firstSystemEvent = this.getOWLClass(EFBO_V_URI, "System-1_Event");
 		OWLClass secondSystemEvent = this.getOWLClass(EFBO_V_URI, "System-2_Event");
 		
 		System.out.println("\nEvents With Consistent Event Flow.");
 		this.printEntityBySystem(firstSystemEvent, hasConsistentEventFlow, secondSystemEvent);
+		printInconsistentEvents();
 		
 		System.out.println("\nEvents With Consistent Next Events.");
 		this.printEntityBySystem(firstSystemEvent, hasConsistentNextEvent, secondSystemEvent);
 		
 		System.out.println("\nEvents With Consistent Previous Events.");
 		this.printEntityBySystem(firstSystemEvent, hasConsistentPrevEvent, secondSystemEvent);
+		
+		
+	}
+	
+	public void printInconsistentEvents() throws Exception
+	{
+		OWLClass firstSystemEvent = this.getOWLClass(EFBO_V_URI, "System-1_Event");
+		OWLClass eventWithConsistentFlow = this.getOWLClass(EFBO_V_URI, "EventWithConsistentFlow");
+		
+		Set <OWLNamedIndividual> inconEvents = efboStatusReportManager.getDifferentIndividuals(firstSystemEvent, eventWithConsistentFlow);
+		
+		for (OWLNamedIndividual e: inconEvents)
+		{
+ 		    System.out.println(efboStatusReportManager.getLabel(e));
+ 		   
+		}
+		efboStatusReportManager.setEntityNegation(eventWithConsistentFlow, firstSystemEvent);
 	}
 	
 	public void printDecisionPointEvents() throws Exception
@@ -247,7 +265,8 @@ public class EFBOStatusReport
 	private OWLClass getOWLClass(String classURI, String className)
 	{
 		IRI classIRI = IRI.create(classURI + "#" + className);		
-		OWLClass owlClass = efboMergedInferredOntology.getOWLOntologyManager().getOWLDataFactory().getOWLClass(classIRI);
+		OWLClass owlClass = efboMergedInferredOntology.getOWLOntologyManager()
+													  .getOWLDataFactory().getOWLClass(classIRI);
 		//System.out.println(owlClass);
 		return owlClass;
 	}
