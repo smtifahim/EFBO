@@ -116,7 +116,6 @@ public class EFBOStatusReport
 		System.out.println("\nEvents With Consistent Previous Events.");
 		this.printEntityBySystem(firstSystemEvent, hasConsistentPrevEvent, secondSystemEvent);
 		
-		
 	}
 	
 	public void printInconsistentEvents() throws Exception
@@ -134,6 +133,10 @@ public class EFBOStatusReport
 		efboStatusReportManager.setEntityNegation(eventWithConsistentFlow, firstSystemEvent);
 	}
 	
+	
+/*
+ * Select all the dps and then display them for each of the systems.
+ * */
 	public void printDecisionPointEvents() throws Exception
 	{
 		OWLClass firstSystemDPE = this.getOWLClass(EFBO_FRC_URI, "DPE");
@@ -143,12 +146,21 @@ public class EFBOStatusReport
 		OWLClass nextOfDPE2 = this.getOWLClass(EFBO_V_URI, "System-2_Event");
 		
 		OWLObjectProperty hasNextEvent = efboStatusReportManager.getOWLObjectProperty(EFBO_CORE_URI, "hasNextEvent");
+		OWLObjectProperty hasPrevEvent = efboStatusReportManager.getOWLObjectProperty(EFBO_CORE_URI, "hasPreviousEvent");
+		OWLObjectProperty isAltEventOf = efboStatusReportManager.getOWLObjectProperty(EFBO_CORE_URI, "isAlternateEventOf");
+		
+		Set <OWLExpressionAxiom> a1 = efboStatusReportManager.getOWLNamedIndividuals(hasNextEvent);
+		Set <OWLExpressionAxiom> a2 = efboStatusReportManager.getOWLNamedIndividuals(hasPrevEvent);
+		Set <OWLExpressionAxiom> a3 = efboStatusReportManager.getOWLNamedIndividuals(isAltEventOf);
 		
 		System.out.println("\nDecesion Point Events");
 		this.printEntityBySystem(firstSystemDPE, hasNextEvent, nextOfDPE);
+		setGraphRep("System01", firstSystemDPE, hasNextEvent, nextOfDPE);
+		setGraphRep("System01", firstSystemDPE, hasPrevEvent, nextOfDPE);
 		
 		System.out.println("\nDecesion Point Events");
 		this.printEntityBySystem(secondSystemDPE, hasNextEvent, nextOfDPE2);
+		setGraphRep("System02",secondSystemDPE, hasNextEvent, nextOfDPE2);
 		
 	}
 	
@@ -218,50 +230,54 @@ public class EFBOStatusReport
 		//efboStatusReportManager.printOntologyMetrics();		
 	}
 	
-	/*
-	public void printQueryResult() throws Exception
+	public void setGraphRep(String systemID, OWLClass domainEntity, 
+							OWLObjectProperty objectProperty, 
+							OWLClass rangeEntity) throws Exception
 	{
-	String location =  System.getProperty("user.dir") + "/Resources/Ontologies/Test-007/EFBO_Test-007_Merged.owl";
-	
-	OntModel model = ModelFactory.createOntologyModel();//(OntModelSpec.OWL_MEM_MICRO_RULE_INF);
-	model.read(EFBO_V_URI, "RDF/XML");
-	FileManager.get().readModel( model, location );
-	
-
-	
-		String fileLocation = System.getProperty("user.dir") + "/Resources/SPARQL-Queries/" + "ex.rq";
-		String sparqlQuery = loadSPARQLScript(fileLocation);
-		System.out.println(sparqlQuery);
+		Set <OWLExpressionAxiom> a = efboStatusReportManager.getOWLNamedIndividuals(domainEntity, 
+				   					 objectProperty, rangeEntity);	
+		String g = "";
 		
-				
-		Query query = QueryFactory.create(sparqlQuery) ;
-	    QueryExecution qe = QueryExecutionFactory.create(query, model);
-	    ResultSet results = qe.execSelect();
-	    
+		String subject = efboStatusReportManager.getLabel(domainEntity);
+		String object = efboStatusReportManager.getLabel(rangeEntity);
+		
+		g += "object " + "\"" + subject + "\"" + " as " + systemID + "\n";
+		
+		int rowCtr = 0;
+		int inc = 1;
+		
+		String prevSubject = "";
+		
+		for (OWLExpressionAxiom i: a)// firstSystemEntity)
+		{
+			//String subjectLabel = i.getSubject().getIRI().getShortForm();
+			String subjectLabel = efboStatusReportManager.getLabel(i.getSubject());
 			
-		ResultSetFormatter.out(System.out, results, query);
-		qe.close();
+			if (!subjectLabel.equals(prevSubject))
+				g+= systemID + " : " + "\"" + subjectLabel + "\"" + "\n";
+			
+			String objectLabel = efboStatusReportManager.getLabel(i.getObject());
+			g+= "object " + "\"" + object + "\"" + " as " + systemID + inc + "\n";
+			g+= systemID + inc + " : " + "\"" + objectLabel + "\"" + "\n";
+			
+			String propertyLabel = efboStatusReportManager.getLabel(i.getObjectProperty());
+			
+			g += systemID + " --> " + systemID + inc +  " : " + propertyLabel + "\n";
+			
+			//g += subjectLabel +" -- " + propertyLabel + " --> " + objectLabel + "\n";
+			//g += subjectLabel + " as " + i.getSubject().getIRI().getShortForm() + "\n";
+			//g += objectLabel + " as " + i.getObject().getIRI().getShortForm() + "\n";
+			//g += i.getSubject().getIRI().getShortForm() + "-->" + i.getObject().getIRI().getShortForm() + ": "+ propertyLabel + "\n";
+			
+			inc++;
+			rowCtr++;
+			prevSubject = subjectLabel;
+		}
 		
-	}*/
-	
-	/*
-	public String loadSPARQLScript(String fileLocation) throws Exception
-	{
-		File file= new File(fileLocation);
-		FileReader fr = new FileReader(file);		 
-		BufferedReader br = new BufferedReader(fr);
-		 
-		String s;
-		 
-		StringBuffer str = new StringBuffer("");
-		 
-		while((s= br.readLine())!=null)
-		  str.append(s+"\n");	
-		br.close();
-		return str.toString();
-	}*/
-	
+		System.out.println(g);
 		
+	}
+	
 	private OWLClass getOWLClass(String classURI, String className)
 	{
 		IRI classIRI = IRI.create(classURI + "#" + className);		
@@ -281,6 +297,7 @@ public class TableBuilder
 {
     List<String[]> rows = new LinkedList<String[]>();
  
+    // String... for defining the method with a variable number of arguments.
     public void addRow(String... cols)
     {
         rows.add(cols);

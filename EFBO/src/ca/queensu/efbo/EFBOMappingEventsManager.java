@@ -97,7 +97,7 @@ public class EFBOMappingEventsManager extends JFrame
 	
 	public void populateListElements()
 	{
-		int i =0;
+		int i = 0;
 		for (OWLNamedIndividual e : firstSystemEvents)
 		{ 
 			String eventLabel = this.efboOntologyManager.getLabel(e);
@@ -107,7 +107,7 @@ public class EFBOMappingEventsManager extends JFrame
 		}
 			
 		
-		int j =0;		
+		int j = 0;		
 		for (OWLNamedIndividual e : secondSystemEvents)
 		{ 
 			String eventLabel = this.efboOntologyManager.getLabel(e);
@@ -176,7 +176,7 @@ public class EFBOMappingEventsManager extends JFrame
 			String system1Value = firstSystemEventList.getSelectedValue().toString();
 			String system2Value = secondSystemEventList.getSelectedValue().toString();
 			
-			if (system1Value.contains("mapped") || system2Value.contains("mapped"))
+			if (system1Value.contains("Event Mapped") || system2Value.contains("Event Mapped"))
 			{
 				JOptionPane.showMessageDialog(null, "Event Already Mapped", "Invalid Selection",
 						                     JOptionPane.INFORMATION_MESSAGE);
@@ -193,8 +193,8 @@ public class EFBOMappingEventsManager extends JFrame
 				//firstSystemModel.setElementAt("mapped", i);
 				//secondSystemModel.setElementAt("mapped", j);
 				
-				firstSystemModel.set(i, "mapped");
-				secondSystemModel.set(j, "mapped");
+				firstSystemModel.set(i, "Event Mapped");
+				secondSystemModel.set(j, "Event Mapped");
 				//secondSystemModel.removeElement(secondSystemEventList.getSelectedValue());
 				
 				lm++;

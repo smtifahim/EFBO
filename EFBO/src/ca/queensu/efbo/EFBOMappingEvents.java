@@ -88,7 +88,7 @@ public void setEFBOOntologyManager(EFBOOntologyManager efboOntologyManager)
 public String getEFBOMappingEvents()
 	{
       String s = efboOntologyManager.getLabel(this.firstSystemEvent)
-    		    + " <--> " + efboOntologyManager.getLabel(this.secondSystemEvent);
+    		    + "==MappedTo==" + efboOntologyManager.getLabel(this.secondSystemEvent);
       return s;
 	}
 }

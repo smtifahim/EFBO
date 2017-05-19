@@ -683,7 +683,7 @@ public Set<OWLAxiom> getOWLIndividualAxioms()
 	  if (axiom instanceof OWLIndividualAxiom)
 			owlIndividualAxioms.add(axiom);		
 	}
-	
+		
 	return owlIndividualAxioms;
 }
 
