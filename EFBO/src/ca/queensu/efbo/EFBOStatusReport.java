@@ -149,21 +149,63 @@ public class EFBOStatusReport
 		OWLObjectProperty hasPrevEvent = efboStatusReportManager.getOWLObjectProperty(EFBO_CORE_URI, "hasPreviousEvent");
 		OWLObjectProperty isAltEventOf = efboStatusReportManager.getOWLObjectProperty(EFBO_CORE_URI, "isAlternateEventOf");
 		
-		Set <OWLExpressionAxiom> a1 = efboStatusReportManager.getOWLNamedIndividuals(hasNextEvent);
-		Set <OWLExpressionAxiom> a2 = efboStatusReportManager.getOWLNamedIndividuals(hasPrevEvent);
-		Set <OWLExpressionAxiom> a3 = efboStatusReportManager.getOWLNamedIndividuals(isAltEventOf);
+		String g = "@startuml";
+		g += getRelatedGraph("DPE", "System-1_Event", "hasNextEvent", "hasPreviousEvent", "isAlternateEventOf");
+		g += getRelatedGraph("DPE", "System-2_Event", "hasNextEvent", "hasPreviousEvent", "isAlternateEventOf");
+		g += "\n@enduml";
+		System.out.println(g);
 		
 		System.out.println("\nDecesion Point Events");
 		this.printEntityBySystem(firstSystemDPE, hasNextEvent, nextOfDPE);
-		setGraphRep("System01", firstSystemDPE, hasNextEvent, nextOfDPE);
-		setGraphRep("System01", firstSystemDPE, hasPrevEvent, nextOfDPE);
-		
+				
 		System.out.println("\nDecesion Point Events");
 		this.printEntityBySystem(secondSystemDPE, hasNextEvent, nextOfDPE2);
-		setGraphRep("System02",secondSystemDPE, hasNextEvent, nextOfDPE2);
 		
 	}
 	
+	public String getGraph(Set<OWLExpressionAxiom> ax)
+	{
+		String g = "";
+		for (OWLExpressionAxiom a : ax)
+		{
+			String subject = efboStatusReportManager.getLabel(a.getSubject());
+			String object = efboStatusReportManager.getLabel(a.getObject());
+			String property = efboStatusReportManager.getLabel(a.getObjectProperty());
+            						
+			g += "\n" + "\"" + subject + "\"";
+			
+			if (property.equals("hasPreviousEvent"))
+			    g+= "-up->[ " + property +" ]"; 
+			else if (property.equals("isAlternateEventOf"))
+				g+= "-right->[ " + property +" ]";
+			else
+				g+= "-->[ " + property +" ]";
+			
+            g += "\"" + object+ "\"";
+		}
+		return g;
+	}
+	
+	public String getRelatedGraph (String targetClassName, String filterClassName, String... propertyList)
+	{
+		OWLClass targetClass = this.getOWLClass(EFBO_FRC_URI, targetClassName);
+		OWLClass filterClass = this.getOWLClass(EFBO_V_URI, filterClassName);
+	    String g = ""; 
+				
+		for (String property: propertyList)
+		{
+			OWLObjectProperty owlProperty = efboStatusReportManager.getOWLObjectProperty(EFBO_CORE_URI, property);
+			Set <OWLExpressionAxiom> a = efboStatusReportManager.getOWLNamedIndividuals(targetClass, owlProperty, filterClass);
+		    g += getGraph(a);
+		    if(property.equals("isAlternateEventOf"))
+		    {
+		    	Set <OWLExpressionAxiom> b = efboStatusReportManager.getOWLNamedIndividuals(filterClass, owlProperty, filterClass);
+		        g += getGraph(b);
+		    }    
+		}
+		return g;
+	}
+		
 	public void printActionByAgents() throws Exception
 	{
 		OWLObjectProperty triggers = efboStatusReportManager.getOWLObjectProperty(EFBO_CORE_URI, "triggers");
@@ -229,6 +271,9 @@ public class EFBOStatusReport
 		
 		//efboStatusReportManager.printOntologyMetrics();		
 	}
+	
+	
+	
 	
 	public void setGraphRep(String systemID, OWLClass domainEntity, 
 							OWLObjectProperty objectProperty, 

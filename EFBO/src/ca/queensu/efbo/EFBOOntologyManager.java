@@ -659,6 +659,27 @@ public  Set<OWLExpressionAxiom> getOWLNamedIndividuals(OWLClass subjectType, OWL
  return axioms;
 }
 
+public  Set<OWLExpressionAxiom> getOWLNamedIndividuals(OWLClass subjectType, OWLObjectProperty owlProperty)
+{
+	
+	Set <OWLExpressionAxiom> axioms = new HashSet <OWLExpressionAxiom>();
+	
+	Set<OWLNamedIndividual> subjectIndividuals = this.getOWLNamedIndividuals(subjectType);
+	Set <OWLNamedIndividual> allIndividuals = loadedOntology.getIndividualsInSignature();
+	
+	for (OWLNamedIndividual i: subjectIndividuals)
+	{
+		for (OWLNamedIndividual j: allIndividuals)
+		if (EntitySearcher.hasObjectPropertyValue(i, owlProperty, j, loadedOntology))
+			{
+			   OWLExpressionAxiom ax = new OWLExpressionAxiom(i, owlProperty, j);
+			   axioms.add(ax);			  				
+			}
+	}	
+  
+ return axioms;
+}
+
 
 public void printAllIndividuals()
 	{

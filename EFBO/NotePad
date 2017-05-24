@@ -1,13 +1,49 @@
-<!-- https://mvnrepository.com/artifact/com.github.ansell.pellet/pellet-owlapiv3 -->
-<dependency>
-    <groupId>com.github.ansell.pellet</groupId>
-    <artifactId>pellet-owlapiv3</artifactId>
-    <version>2.3.6-ansell</version>
-</dependency>
+@startuml
+package "Sys1"{
+object ">>Decesion Point Event" as System01
+System01 : "System-1:_verifyUserInfo"
+object "System-1 Event" as System011
+System011 : "System-1:_presentTryAgainUI"
+System01 --> System011 : hasNextEvent
+object "System-1 Event" as System012
+System012 : "System-1:_welcomeTheUser"
+System01 --> System012 : hasNextEvent
+System011 <-right-> System012: isAltEventOf
 
-<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
-<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-simple</artifactId>
-    <version>1.7.25</version>
-</dependency>
+object "System-1 Event" as System0111
+System0111 : "System-1:_tapLoginButton"
+System01 -up-> System0111 : hasPreviousEvent
+}
+
+package "Sys 2"{
+object ">>Decesion Point Event" as System02
+System02 : "System-2:_verifyUserInfo"
+object "System-2 Event" as System021
+System021 : "System-2:_welcomeTheUser"
+System02 --> System021 : hasNextEvent
+}
+note "- Inconsistent Next Event\n- Inconsistent Previous Event" as note1
+System02 .. note1
+@enduml
+
+ @startuml
+ title 
+ What is Going on?
+ end title
+ 
+ Alice -> Bob : Hello
+ Bob -> Alice : Hello Too
+ @enduml
+ 
+@startuml
+"System-1:_verifyUserInfo"-->[hasNextEvent]"System-1:_presentTryAgainUI"
+"System-1:_verifyUserInfo"-->[hasNextEvent]"System-1:_welcomeTheUser"
+"System-1:_verifyUserInfo"-up->[hasPreviousEvent]"System-1:_tapLoginButton"
+"System-1:_welcomeTheUser"-right->[isAlternateEventOf]"System-1:_presentTryAgainUI"
+"System-1:_presentTryAgainUI"-right->[isAlternateEventOf]"System-1:_welcomeTheUser"
+"System-2:_verifyUserInfo"-->[ hasNextEvent]"System-2:_welcomeTheUser"
+"System-2:_verifyUserInfo"-up->[ hasPreviousEvent]"System-2:_tapLoginButton"
+"System-2:_presentTryAgainUI"-right->[isAlternateEventOf]"System-2:_welcomeTheUser"
+"System-2:_welcomeTheUser"-right->[isAlternateEventOf]"System-2:_presentTryAgainUI"
+@enduml
+
