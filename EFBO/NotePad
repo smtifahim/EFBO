@@ -36,14 +36,19 @@ System02 .. note1
  @enduml
  
 @startuml
-"System-1:_verifyUserInfo"-->[hasNextEvent]"System-1:_presentTryAgainUI"
-"System-1:_verifyUserInfo"-->[hasNextEvent]"System-1:_welcomeTheUser"
-"System-1:_verifyUserInfo"-up->[hasPreviousEvent]"System-1:_tapLoginButton"
-"System-1:_welcomeTheUser"-right->[isAlternateEventOf]"System-1:_presentTryAgainUI"
-"System-1:_presentTryAgainUI"-right->[isAlternateEventOf]"System-1:_welcomeTheUser"
-"System-2:_verifyUserInfo"-->[ hasNextEvent]"System-2:_welcomeTheUser"
-"System-2:_verifyUserInfo"-up->[ hasPreviousEvent]"System-2:_tapLoginButton"
-"System-2:_presentTryAgainUI"-right->[isAlternateEventOf]"System-2:_welcomeTheUser"
-"System-2:_welcomeTheUser"-right->[isAlternateEventOf]"System-2:_presentTryAgainUI"
+title
+Decesion Point Event
+System-2:_verifyUserInfo; System-1:_verifyUserInfo; 
+end title
+
+"System-1:_verifyUserInfo"-->[ hasNextEvent ]"System-1:_presentTryAgainUI"
+"System-1:_verifyUserInfo"-->[ hasNextEvent ]"System-1:_welcomeTheUser"
+"System-1:_verifyUserInfo"-up->[ hasPreviousEvent ]"System-1:_tapLoginButton"
+"System-1:_welcomeTheUser"-right->[ isAlternateEventOf ]"System-1:_presentTryAgainUI"
+"System-1:_presentTryAgainUI"-right->[ isAlternateEventOf ]"System-1:_welcomeTheUser"
+"System-2:_verifyUserInfo"-->[ hasNextEvent ]"System-2:_welcomeTheUser"
+"System-2:_verifyUserInfo"-up->[ hasPreviousEvent ]"System-2:_tapLoginButton"
+"System-2:_presentTryAgainUI"-right->[ isAlternateEventOf ]"System-2:_welcomeTheUser"
+"System-2:_welcomeTheUser"-right->[ isAlternateEventOf ]"System-2:_presentTryAgainUI"
 @enduml
 

@@ -149,7 +149,18 @@ public class EFBOStatusReport
 		OWLObjectProperty hasPrevEvent = efboStatusReportManager.getOWLObjectProperty(EFBO_CORE_URI, "hasPreviousEvent");
 		OWLObjectProperty isAltEventOf = efboStatusReportManager.getOWLObjectProperty(EFBO_CORE_URI, "isAlternateEventOf");
 		
+		Set<OWLNamedIndividual> inds = efboStatusReportManager.getOWLNamedIndividuals(firstSystemDPE);
+		
+		String dpeName = "";
+		for (OWLNamedIndividual i: inds)
+		{
+			dpeName += efboStatusReportManager.getLabel(i) + "; "; 
+		}
+		
 		String g = "@startuml";
+	    g += "\ntitle\n" + efboStatusReportManager.getLabel(firstSystemDPE)
+          + "\n" + dpeName
+          + "\nend title\n";
 		g += getRelatedGraph("DPE", "System-1_Event", "hasNextEvent", "hasPreviousEvent", "isAlternateEventOf");
 		g += getRelatedGraph("DPE", "System-2_Event", "hasNextEvent", "hasPreviousEvent", "isAlternateEventOf");
 		g += "\n@enduml";
@@ -190,7 +201,8 @@ public class EFBOStatusReport
 	{
 		OWLClass targetClass = this.getOWLClass(EFBO_FRC_URI, targetClassName);
 		OWLClass filterClass = this.getOWLClass(EFBO_V_URI, filterClassName);
-	    String g = ""; 
+	    String g = "";
+	    
 				
 		for (String property: propertyList)
 		{
