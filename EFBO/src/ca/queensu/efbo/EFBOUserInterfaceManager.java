@@ -161,7 +161,10 @@ public class EFBOUserInterfaceManager
 				{
 					efboCompManager.saveEFBOValidationOntology();
 					efboCompManager.setEFBOInferredOntology();
-					efboCompManager.saveEFBOInferredOntology();					
+					efboCompManager.saveEFBOInferredOntology();
+					efboCompManager.setInconsistentEvents();
+					efboCompManager.setEFBOInferredOntology();
+					efboCompManager.saveEFBOInferredOntology();
 					//efboCompManager.importEFBOInferredOntology();
 					efboCompManager.saveMergedOntology();
 					

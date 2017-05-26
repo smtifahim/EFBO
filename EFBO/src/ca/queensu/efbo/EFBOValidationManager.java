@@ -23,8 +23,11 @@ import org.semanticweb.HermiT.Reasoner;
 import org.semanticweb.HermiT.ReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
+import org.semanticweb.owlapi.model.AddAxiom;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLImportsDeclaration;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -473,5 +476,26 @@ public class EFBOValidationManager
 		return efboValidationManager;
 	}
 
+	public void setInconsistentEvents() throws Exception
+	{
+		OWLClass firstSystemEvent = efboValidationManager.getOWLClass(EFBO_V_URI, "System-1_Event");
+		OWLClass eventWithConsistentFlow = efboValidationManager.getOWLClass(EFBO_V_URI, "EventWithConsistentFlow");
+		OWLClass consistentEvent = efboValidationManager.getOWLClass(EFBO_V_URI, "ConsistentEvent"); 	
+		
+		EFBOOntologyManager m = new EFBOOntologyManager();
+		m.loadOntology("inferred", this.inferredOntologyFile);
+		
+		Set <OWLClass> consistentEvents = new HashSet<OWLClass>();
+		consistentEvents = m.getChildClasses(consistentEvent);
+
+		for (OWLClass c: consistentEvents)
+		{			
+			System.out.println(c);
+			Set <OWLNamedIndividual> inconEvents = m.getDifferentIndividuals(firstSystemEvent, c);
+			efboValidationManager.setEntityNegation(inconEvents, c);
+		}
+
+		this.saveEFBOValidationOntology();		
+	}
 	
 }// End of public class EFBOComparator. 

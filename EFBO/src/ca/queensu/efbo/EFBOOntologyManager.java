@@ -81,6 +81,10 @@ public class EFBOOntologyManager
   this.factory = factory; 
  }
  
+ public OWLOntologyManager getOWLManager()
+ {
+	 return manager;
+ }
  public EFBOOntologyManager(String ontologyName, File ontologyFile) throws OWLOntologyCreationException 
  { 
   this.ontologyFile = ontologyFile; 
@@ -307,7 +311,7 @@ public Set<OWLAnnotationAssertionAxiom> getAllAnnotationAxiom(OWLClass cls)
   return factory.getOWLThing(); 
  } 
  
-public Set<OWLClass> getChildClass(OWLClass cls) 
+public Set<OWLClass> getChildClasses(OWLClass cls) 
  { 
   Set<OWLClass> listOfClasses = new HashSet<OWLClass>(); 
   for (OWLSubClassOfAxiom axiom : loadedOntology.getSubClassAxiomsForSuperClass(cls)) 
@@ -594,19 +598,15 @@ public Set<OWLNamedIndividual> getDifferentIndividuals (OWLClass firstOWLClass, 
   return differentIndividualsSet;
 }
 
-public void setEntityNegation(OWLClass positiveClass, OWLClass owlClass)
+public void setEntityNegation(Set <OWLNamedIndividual> individuals, OWLClass positiveClass)
 {
-	Set <OWLNamedIndividual> negativeEntity = new HashSet<OWLNamedIndividual>();
-	negativeEntity = this.getDifferentIndividuals(owlClass, positiveClass);
-	//OWLClass negativeClass = null;
-	
-	for (OWLNamedIndividual i: negativeEntity)
+	OWLClassExpression negativeClassExpression = factory.getOWLObjectComplementOf(positiveClass);
+	for (OWLNamedIndividual i: individuals)
 	{
-		OWLAxiom axiom = factory.getOWLClassAssertionAxiom(positiveClass.getObjectComplementOf(), i);
+		OWLAxiom axiom = factory.getOWLClassAssertionAxiom(negativeClassExpression, i);
 		AddAxiom addAxiom = new AddAxiom(loadedOntology, axiom);
-		manager.applyChange(addAxiom);
-		//System.out.println(axiom);
-	}
+		manager.applyChange(addAxiom);		
+	}	
 }
 
 public  OWLClass getOWLClass(String classURI, String className)

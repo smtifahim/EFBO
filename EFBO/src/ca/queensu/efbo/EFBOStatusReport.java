@@ -49,7 +49,7 @@ public class EFBOStatusReport
 	
 	public static void main(String[] args) throws Exception
 	{
-		String location =  System.getProperty("user.dir") + "/Resources/Ontologies/TEST/EFBO_TEST_Merged.owl";
+		String location =  System.getProperty("user.dir") + "/Resources/Ontologies/TEST/EFBO_TEST_Inferred.owl";
 		File f = new File(location);
 		EFBOStatusReport esr = new EFBOStatusReport(f);
 		esr.printMappingEvents();
@@ -120,7 +120,7 @@ public class EFBOStatusReport
 	
 	public void printInconsistentEvents() throws Exception
 	{
-		OWLClass firstSystemEvent = this.getOWLClass(EFBO_V_URI, "System-1_Event");
+		OWLClass firstSystemEvent = efboStatusReportManager.getOWLClass(EFBO_V_URI, "System-1_Event");
 		OWLClass eventWithConsistentFlow = this.getOWLClass(EFBO_V_URI, "EventWithConsistentFlow");
 		
 		Set <OWLNamedIndividual> inconEvents = efboStatusReportManager.getDifferentIndividuals(firstSystemEvent, eventWithConsistentFlow);
@@ -130,7 +130,7 @@ public class EFBOStatusReport
  		    System.out.println(efboStatusReportManager.getLabel(e));
  		   
 		}
-		efboStatusReportManager.setEntityNegation(eventWithConsistentFlow, firstSystemEvent);
+		//efboStatusReportManager.setEntityNegation(eventWithConsistentFlow, firstSystemEvent);		
 	}
 	
 	
