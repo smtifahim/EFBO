@@ -26,9 +26,9 @@ public class EFBOUserInterfaceManager
 	private JButton btnStepI   = new JButton("STEP   I. LOAD the FIRST System's Knowledge.");
 	private JButton btnStepII  = new JButton("STEP  II. LOAD the SECOND System's Knowledge.");
 	private JButton btnStepIII = new JButton("STEP III. LOAD the EFBO-Validation Ontology.");
-	private JButton btnStepIV  = new JButton("STEP  IV. IMPORT the 1st + 2nd System's Knowledge.");
-	private JButton btnStepV   = new JButton("STEP   V. IDENTIFY the MAPPING Events.");
-	private JButton btnStepVI  = new JButton("STEP  VI. SAVE the Resulting Ontology + Knowledge.");
+	private JButton btnStepIV  = new JButton("STEP  IV. IDENTIFY the MAPPING Events.");
+	private JButton btnStepV   = new JButton("STEP   V. SAVE the Resulting Ontology + Knowledge.");
+	private JButton btnStepVI  = new JButton("STEP  VI. Generate Status Report.");
 	
 	private Font textFont = new Font(Font.MONOSPACED, Font.BOLD, 14);
 	
@@ -99,6 +99,7 @@ public class EFBOUserInterfaceManager
 				{
 					System.out.println(btnStepIII.getText());
 					efboCompManager.loadEFBOValidatorOntology();
+					efboCompManager.importLoadedKBases();
 					btnStepIII.setEnabled(false);
 					btnStepIV.setEnabled(true);
 				} 
@@ -117,7 +118,7 @@ public class EFBOUserInterfaceManager
 				try 
 				{
 					System.out.println(btnStepIV.getText());
-					efboCompManager.importLoadedKBases();
+					efboCompManager.setEFBOMappingEvents();
 					btnStepIV.setEnabled(false);
 					btnStepV.setEnabled(true);
 				} 
@@ -138,9 +139,16 @@ public class EFBOUserInterfaceManager
 				
 				try 
 				{
+					efboCompManager.saveEFBOValidationOntology();
+					efboCompManager.setEFBOInferredOntology();
+					efboCompManager.saveEFBOInferredOntology();
+					
+					efboCompManager.setInconsistentEvents();
+					efboCompManager.setEFBOInferredOntology();
+					efboCompManager.saveEFBOInferredOntology();
+					
+					btnStepV.setEnabled(false);
 					btnStepVI.setEnabled(true);
-					efboCompManager.setEFBOMappingEvents();
-					btnStepV.setEnabled(false);					
 				} 
 				
 				catch (Exception e1) 
@@ -155,25 +163,14 @@ public class EFBOUserInterfaceManager
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println(btnStepV.getText());
+				System.out.println(btnStepVI.getText());
 				
 				try 
 				{
-					efboCompManager.saveEFBOValidationOntology();
-					efboCompManager.setEFBOInferredOntology();
-					efboCompManager.saveEFBOInferredOntology();
-					efboCompManager.setInconsistentEvents();
-					efboCompManager.setEFBOInferredOntology();
-					efboCompManager.saveEFBOInferredOntology();
-					//efboCompManager.importEFBOInferredOntology();
-					efboCompManager.saveMergedOntology();
+				    efboCompManager.saveMergedOntology();
 					
-				//efboCompManager.importEFBOInferredOntology();
-//					
-//					efboCompManager.saveEFBOValidationOntology();
-					
-				//	efboStatusReport = new EFBOStatusReport(efboCompManager);
-				//	efboStatusReport.printEntityBySystem();
+					EFBOStatusReport.main(null);
+					btnStepV.setEnabled(false);
 										
 				} 
 				

@@ -49,7 +49,7 @@ public class EFBOStatusReport
 	
 	public static void main(String[] args) throws Exception
 	{
-		String location =  System.getProperty("user.dir") + "/Resources/Ontologies/TEST/EFBO_TEST_Inferred.owl";
+		String location =  System.getProperty("user.dir") + "/Resources/Ontologies/TEST/EFBO_TEST_Merged.owl";
 		File f = new File(location);
 		EFBOStatusReport esr = new EFBOStatusReport(f);
 		esr.printMappingEvents();
@@ -57,9 +57,12 @@ public class EFBOStatusReport
 		esr.printActionByAgents();
 		esr.printDecisionPointEvents();
 	}
-	
+	public EFBOStatusReport() throws Exception
+	{
+		EFBOStatusReport.main(null);
+	}
 
-	EFBOStatusReport(File ontologyFile) throws Exception
+	public EFBOStatusReport(File ontologyFile) throws Exception
 	{
 		this.efboStatusReportManager = new EFBOOntologyManager();
 		this.efboStatusReportManager.loadOntology("EFBO-V Inferred", ontologyFile);
