@@ -165,7 +165,7 @@ public class EFBOKnowledgeBaseManager
 				}				     
 				
 				if (isDefaultEFBOAgentType (object))
-					owlIndividualSubject = this.getEFBOAgentIndividual(object);
+					owlIndividualObject = this.getEFBOAgentIndividual(object);
 				else
 				{
 					String objectID = object.replaceAll("\\s+", "");
