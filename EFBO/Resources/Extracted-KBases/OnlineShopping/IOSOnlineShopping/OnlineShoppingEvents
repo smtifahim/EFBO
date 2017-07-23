@@ -1,0 +1,43 @@
+Event_Start hasNextEvent "Display Product List"
+      "Display Product List Screen" hasInterface ShoppingActivityClass
+          ShoppingActivityClass hasInteractionWith client-agent
+
+"Display Product List" hasNextEvent "Select a Product"
+            "Select a Product" hasInterface "Product Item Image"
+                "Product Item Image" hasInteractionWith user-agent
+                
+"Select a Product" hasNextEvent "Display Product Details"
+            "Display Product Details" hasInterface ProductActivityClass
+               ProductActivityClass hasInteractionWith client-agent
+               
+"Display Product Details" hasNextEvent "Click ADD TO CART Button"
+                  "Click ADD TO CART Button" hasInterface addToCartButton
+                      addToCartButton hasInteractionWith user-agent
+
+"Click ADD TO CART Button" hasNextEvent "Display Cart Icon"
+"Display Cart Icon" hasNextEvent "Click CART Icon"
+
+"Display Product Details" hasNextEvent "Click CART Icon"
+                     "Click CART Icon" hasInterface cartIcon
+                            cartIcon hasInteractionWith user-agent
+                            
+"Click CART Button" hasNextEvent "Display Price Summary"
+
+
+"Display Price Summary" hasNextEvent "Click CONTINUE SHOPPING Button"
+"Click CONTINUE SHOPPING Button" hasNextEvent "Display Product List"
+
+"Display Price Summary" hasNextEvent "Click CHECKOUT Button"
+"Click CHECKOUT Button" hasNextEvent "Display Pay with PayPal Screen"
+      "Display Pay with PayPal Screen" hasInterface PayPalCheckoutActivityClass
+          PayPalCheckoutActivityClass hasElement "PAY WITH PAYPAL Button"
+            "PAY WITH PAYPAL Button" hasInteractionWith user-agent
+
+"Pay with PayPal Screen" hasNextEvent "Click PAY WITH PAYPAL Button"
+          "Click PAY WITH PAYPAL Button" hasInterface "PAY WITH PAYPAL Button"
+
+"Click PAY WITH PAYPAL Button" hasNextEvent "Log in with PayPal Screen"
+
+
+"Click CHECKOUT Button" isAlternateEventOf "Click CONTINUE SHOPPING Button"
+

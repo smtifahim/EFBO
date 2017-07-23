@@ -49,7 +49,7 @@ public class EFBOStatusReport
 	
 	public static void main(String[] args) throws Exception
 	{
-		String location =  System.getProperty("user.dir") + "/Resources/Ontologies/TEST/EFBO_TEST_Merged.owl";
+		String location =  System.getProperty("user.dir") + "/Resources/Ontologies/BlackJackProject/BlackJackMerged.owl";
 		File f = new File(location);
 		EFBOStatusReport esr = new EFBOStatusReport(f);
 		esr.printMappingEvents();
@@ -105,19 +105,23 @@ public class EFBOStatusReport
 		OWLObjectProperty hasConsistentEventFlow = efboStatusReportManager.getOWLObjectProperty(EFBO_V_URI, "hasConsistentEventFlow");
 		OWLObjectProperty hasConsistentNextEvent = efboStatusReportManager.getOWLObjectProperty(EFBO_V_URI, "hasConsistentNextEvent");
 		OWLObjectProperty hasConsistentPrevEvent = efboStatusReportManager.getOWLObjectProperty(EFBO_V_URI, "hasConsistentPreviousEvent");
+		OWLObjectProperty hasConsistentAltEvent = efboStatusReportManager.getOWLObjectProperty(EFBO_V_URI, "hasConsistentAltEvent");
 		
 		OWLClass firstSystemEvent = this.getOWLClass(EFBO_V_URI, "System-1_Event");
 		OWLClass secondSystemEvent = this.getOWLClass(EFBO_V_URI, "System-2_Event");
 		
 		System.out.println("\nEvents With Consistent Event Flow.");
 		this.printEntityBySystem(firstSystemEvent, hasConsistentEventFlow, secondSystemEvent);
-		printInconsistentEvents();
+	//	printInconsistentEvents();
 		
 		System.out.println("\nEvents With Consistent Next Events.");
 		this.printEntityBySystem(firstSystemEvent, hasConsistentNextEvent, secondSystemEvent);
 		
 		System.out.println("\nEvents With Consistent Previous Events.");
 		this.printEntityBySystem(firstSystemEvent, hasConsistentPrevEvent, secondSystemEvent);
+		
+		System.out.println("\nEvents With Consistent Alternative Events.");
+		this.printEntityBySystem(firstSystemEvent, hasConsistentAltEvent, secondSystemEvent);
 		
 	}
 	
@@ -209,7 +213,8 @@ public class EFBOStatusReport
 				
 		for (String property: propertyList)
 		{
-			OWLObjectProperty owlProperty = efboStatusReportManager.getOWLObjectProperty(EFBO_CORE_URI, property);
+			OWLObjectProperty owlProperty = efboStatusReportManager.getOWLObjectProperty(EFBO_CORE_URI, property);			
+				
 			Set <OWLExpressionAxiom> a = efboStatusReportManager.getOWLNamedIndividuals(targetClass, owlProperty, filterClass);
 		    g += getGraph(a);
 		    if(property.equals("isAlternateEventOf"))
@@ -265,9 +270,9 @@ public class EFBOStatusReport
 	    String firstColHeader =  efboStatusReportManager.getLabel(domainEntity);
 	    String secondColHeader = efboStatusReportManager.getLabel(rangeEntity);		
 		
-		tb.addRow("---------------------------------", "+", "--------------------", "+", "------------------------------");
+		tb.addRow("-----------------------------------------", "+", "---------------------------", "+", "-----------------------------------------");
 		tb.addRow(firstColHeader, "|", "Object Property" , "|", secondColHeader);
-		tb.addRow("---------------------------------", "+", "--------------------", "+", "------------------------------");
+		tb.addRow("-----------------------------------------", "+", "---------------------------", "+", "-----------------------------------------");
 		int rowCtr = 0;
 		for (OWLExpressionAxiom i: a)// firstSystemEntity)
 		{
@@ -279,7 +284,7 @@ public class EFBOStatusReport
 			tb.addRow(subjectLabel, "|", propertyLabel , "|", objectLabel);
 			rowCtr++;
 		}
-		tb.addRow("---------------------------------", "+", "--------------------", "+", "------------------------------");
+		tb.addRow("-----------------------------------------", "+", "---------------------------", "+", "-----------------------------------------");
 		tb.addRow("Total Row Count: " + rowCtr);
 		System.out.println(tb.toString());
 		//System.out.println("Total Row Count: " + rowCtr);

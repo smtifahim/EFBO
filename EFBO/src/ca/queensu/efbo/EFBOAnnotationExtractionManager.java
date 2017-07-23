@@ -64,6 +64,7 @@ public class EFBOAnnotationExtractionManager
 	{
 		  fileChooser = new JFileChooser(new File(defaultFilePath));
 		  fileChooser.setDialogTitle("Select Annotated Files");
+		  fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		  fileChooser.setMultiSelectionEnabled(true);
 		  fileChooser.showOpenDialog(null);
 		  selectedFiles = fileChooser.getSelectedFiles();

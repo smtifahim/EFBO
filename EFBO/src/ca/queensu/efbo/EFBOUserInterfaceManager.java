@@ -23,12 +23,12 @@ public class EFBOUserInterfaceManager
 	private EFBOValidationManager efboCompManager = new EFBOValidationManager();
 	private EFBOStatusReport efboStatusReport;
 	
-	private JButton btnStepI   = new JButton("STEP   I. LOAD the FIRST System's Knowledge.");
-	private JButton btnStepII  = new JButton("STEP  II. LOAD the SECOND System's Knowledge.");
-	private JButton btnStepIII = new JButton("STEP III. LOAD the EFBO-Validation Ontology.");
-	private JButton btnStepIV  = new JButton("STEP  IV. IDENTIFY the MAPPING Events.");
-	private JButton btnStepV   = new JButton("STEP   V. SAVE the Resulting Ontology + Knowledge.");
-	private JButton btnStepVI  = new JButton("STEP  VI. Generate Status Report.");
+	private JButton btnStepI   = new JButton("STEP   I. LOAD FIRST System's Knowledge");
+	private JButton btnStepII  = new JButton("STEP  II. LOAD SECOND System's Knowledge");
+	private JButton btnStepIII = new JButton("STEP III. LOAD EFBO-V & Import SYS-1 and SYS-2");
+	private JButton btnStepIV  = new JButton("STEP  IV. IDENTIFY the Mapping Events");
+	private JButton btnStepV   = new JButton("STEP   V. SAVE Resulting Ontology + Knowledge");
+	private JButton btnStepVI  = new JButton("STEP  VI. GENERATE Status Report.");
 	
 	private Font textFont = new Font(Font.MONOSPACED, Font.BOLD, 14);
 	
