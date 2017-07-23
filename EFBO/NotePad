@@ -157,5 +157,37 @@ end title
  
 
 
+@startuml
+title
+DPE
+
+end title
+
+"System-1:Receive Successful Payment Message from Server"-right->[ isAlternateEventOf ]"System-1:Receive Failed Payment Message from Server"
+"System-1:Click CONTINUE SHOPPING Button"-right->[ isAlternateEventOf ]"System-1:Click CHECKOUT Button"
+"System-1:Receive Failed Payment Message from Server"-right->[ isAlternateEventOf ]"System-1:Receive Successful Payment Message from Server"
+"System-1:Click CHECKOUT Button"-right->[ isAlternateEventOf ]"System-1:Click CONTINUE SHOPPING Button"
+"System-2:Receive Successful Payment Message from Server"-right->[ isAlternateEventOf ]"System-2:Receive Failed Payment Message from Server"
+"System-2:Receive Failed Payment Message from Server"-right->[ isAlternateEventOf ]"System-2:Receive Successful Payment Message from Server"
+@enduml
 
 
+@startuml
+title
+Decision Point Event
+System-2:Verify Payment; System-1:Verify Payment; 
+end title
+
+"System-1:Verify Payment"-->[ hasNextEvent ]"System-1:Receive Successful Payment Message from Server"
+"System-1:Verify Payment"-->[ hasNextEvent ]"System-1:Receive Failed Payment Message from Server"
+"System-1:Verify Payment"-up->[ hasPreviousEvent ]"System-1:Send Payment Verification to Server"
+"System-1:Click CONTINUE SHOPPING Button"-right->[ isAlternateEventOf ]"System-1:Click CHECKOUT Button"
+"System-1:Receive Failed Payment Message from Server"-right->[ isAlternateEventOf ]"System-1:Receive Successful Payment Message from Server"
+"System-1:Click CHECKOUT Button"-right->[ isAlternateEventOf ]"System-1:Click CONTINUE SHOPPING Button"
+"System-1:Receive Successful Payment Message from Server"-right->[ isAlternateEventOf ]"System-1:Receive Failed Payment Message from Server"
+"System-2:Verify Payment"-->[ hasNextEvent ]"System-2:Receive Failed Payment Message from Server"
+"System-2:Verify Payment"-->[ hasNextEvent ]"System-2:Receive Successful Payment Message from Server"
+"System-2:Verify Payment"-up->[ hasPreviousEvent ]"System-2:Send Payment Verification to Server"
+"System-2:Receive Failed Payment Message from Server"-right->[ isAlternateEventOf ]"System-2:Receive Successful Payment Message from Server"
+"System-2:Receive Successful Payment Message from Server"-right->[ isAlternateEventOf ]"System-2:Receive Failed Payment Message from Server"
+@enduml

@@ -88,7 +88,7 @@ public class CheckoutActivity extends AppCompatActivity {
         checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //@EFBO: checkButton hasNextEvent "Display Pay with PayPal Screen"
+                //@EFBO: "Click CHECKOUT Button" hasNextEvent "Display Pay with PayPal Screen"
                 Intent paymentIntent = new Intent(CheckoutActivity.this, PayPalCheckoutActivity.class);
                 paymentIntent.putExtra("TOTAL_PRICE", mSubTotal);
                 startActivity(paymentIntent);

@@ -1,0 +1,178 @@
+STEP   I. LOAD FIRST System's Knowledge
+System ID: System-1
+Name     : AndroidShoppingExample
+
+Selected File#1
+File Location> C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Annotated-Sources\OnlineShopping\AndroidOnlineShopping\CheckoutActivity.java
+Annotation @Line#24> "Click CART icon" hasNextEvent "Display Price Summary"
+Annotation @Line#26> CheckoutActivity hasInteractionWith client-agent
+Annotation @Line#40> CheckoutActivity isInterfaceOf "Display Price Summary"
+Annotation @Line#69> shoppingButton isInterfaceOf "Click CONTINUE SHOPPING Button"
+Annotation @Line#73> shoppingButton hasInteractionWith user-agent
+Annotation @Line#77> "Click CONTINUE SHOPPING Button" hasNextEvent "Display Product List"
+Annotation @Line#83> "Click CONTINUE SHOPPING Button" isAlternateEventOf "Click CHECKOUT Button"
+Annotation @Line#84> checkButton isInterfaceOf "Click CHECKOUT Button"
+Annotation @Line#87> checkButton hasInteractionWith user-agent
+Annotation @Line#91> "Click CHECKOUT Button" hasNextEvent "Display Pay with PayPal Screen"
+
+Selected File#2
+File Location> C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Annotated-Sources\OnlineShopping\AndroidOnlineShopping\PayPalCheckoutActivity.java
+Annotation @Line#36> PayPalCheckoutActivityClass hasInteractionWith client-agent
+Annotation @Line#54> "Display Pay with PayPal Screen" hasInterface PayPalCheckoutActivityClass
+Annotation @Line#68> PayPalCheckoutActivityClass hasElement payPalButton
+Annotation @Line#69> payPalButton isInterfaceOf "Click PAY WITH PAYPAL Button"
+Annotation @Line#72> payPalButton hasInteractionWith user-agent
+Annotation @Line#125> "Click PAY WITH PAYPAL Button" hasNextEvent "Send Payment Verification to Server"
+Annotation @Line#126> PayPalCheckoutActivityClass isInterfaceOf "Send Payment Verification to Server"
+Annotation @Line#132> "Send Payment Verification to Server" hasNextEvent "Verify Payment"
+Annotation @Line#136> PayPalServerInterface isInterfaceOf "Verify Payment"
+Annotation @Line#137> PayPalServerInterface hasInteractionWith server-agent
+Annotation @Line#160> PayPalCheckoutActivityClass isInterfaceOf "Receive Successful Payment Message from Server"
+Annotation @Line#161> "Verify Payment" hasNextEvent "Receive Successful Payment Message from Server"
+Annotation @Line#165> "Receive Failed Payment Message from Server" isAlternateEventOf "Receive Successful Payment Message from Server"
+Annotation @Line#167> PayPalCheckoutActivityClass isInterfaceOf "Receive Failed Payment Message from Server"
+Annotation @Line#168> "Verify Payment" hasNextEvent "Receive Failed Payment Message from Server"
+
+Selected File#3
+File Location> C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Annotated-Sources\OnlineShopping\AndroidOnlineShopping\PaymentsActivity.java
+No Annotation Found.
+
+Selected File#4
+File Location> C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Annotated-Sources\OnlineShopping\AndroidOnlineShopping\ProductActivity.java
+Annotation @Line#29> ProductActivityClass hasInteractionWith client-agent
+Annotation @Line#48> ProductActivityClass isInterfaceOf "Display Selected Product Details"
+Annotation @Line#56> ItemDisplayInterface isInterfaceOf "Select a Product Item"
+Annotation @Line#71> ItemDisplayInterface hasInteractionWith user-agent
+Annotation @Line#79> addToCartButton isInterfaceOf "Click ADD TO CART Button"
+Annotation @Line#82> "Click ADD TO CART Button" hasNextEvent "Display Cart Icon"
+Annotation @Line#83> "Click ADD TO CART Button" hasNextEvent "Add Selected Item to the Cart"
+Annotation @Line#84> ProductActivityClass isInterfaceOf "Add Selected Item to the Cart"
+Annotation @Line#86> "Display Cart Icon" hasNextEvent "Click CART Icon"
+Annotation @Line#87> "Click CART Icon" hasInterface cartIcon
+Annotation @Line#88> user-agent interactsWith cartIcon
+Annotation @Line#90> addToCartButton hasInteractionWith user-agent
+
+Selected File#5
+File Location> C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Annotated-Sources\OnlineShopping\AndroidOnlineShopping\ShoppingActivity.java
+Annotation @Line#16> Event_Start hasNextEvent "Display Product List"
+Annotation @Line#17> ShoppingActivityClass hasInteractionWith client-agent
+Annotation @Line#27> ShoppingActivityClass isInterfaceOf "Display Product List"
+Annotation @Line#39> "Display Product List" hasNextEvent "Select a Product"
+
+Selected File#6
+File Location> C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Annotated-Sources\OnlineShopping\AndroidOnlineShopping\SplashActivity.java
+No Annotation Found.
+
+Save Annotations Location> C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Extracted-Annotations\OnlineShoppingExample\AndroidShoppingExample_annotations.txt
+Annotations Saved Successfully!
+Save Location> C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Extracted-Annotations\OnlineShoppingExample\AndroidShoppingExample_annotations.txt
+
+The EFBO Knowledgebase for AndroidShoppingExample has been Saved.
+Location: C:/Users/Fahim/git/EFBO-PCM/EFBO/Resources/Extracted-Kbases/OnlineShoppingExample/AndroidShoppingExample/EFBO-AndroidShoppingExample.owl  
+
+--------------------------------------------------------
+Ontology Metrics
+--------------------------------------------------------
+Ontology Name     : System-1
+Ontology IRI      : http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/AndroidShoppingExample.owl
+Ontology Format   : RDF/XML Syntax
+Named Classes     : 4
+Object Properties : 8
+Individuals       : 36
+Logical Axioms    : 80
+All Axioms        : 198
+--------------------------------------------------------
+STEP  II. LOAD SECOND System's Knowledge
+System ID: System-2
+Name     : IOSShoppingExample
+
+Selected File#1
+File Location> C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Annotated-Sources\OnlineShopping\IOSOnlineShopping\CartViewController.m
+Annotation @Line#22> "Click Add to Cart Button" hasNextEvent "Add Selected Item to the Cart"
+Annotation @Line#26> "Add Selected Item to the Cart" hasInterface CartViewController
+Annotation @Line#33> client-agent interactsWith CartViewController
+Annotation @Line#38> "Add Selected Item to the Cart" hasNextEvent "Display Item Details"
+Annotation @Line#43> "Display Item Details" hasInterface ItemDisplayInterface
+Annotation @Line#45> client-agent interactsWith ItemDisplayInterface
+Annotation @Line#49> ItemDisplayInterface isElementOf CartViewController
+Annotation @Line#52> ItemDisplayInterface hasElement deleteButton
+Annotation @Line#56> "Display Item Details" hasNextEvent "Click Checkout Button"
+Annotation @Line#59> "Click Checkout Button" hasInterface checkoutButton
+Annotation @Line#62> CartViewController hasElement checkoutButton
+Annotation @Line#69> user-agent interactsWith checkoutButton
+Annotation @Line#81> "Click Add to Cart Button" hasNextEvent "Click Products Icon"
+Annotation @Line#85> "Click Products Icon" hasNextEvent "Display Product List"
+Annotation @Line#91> "Click Add to Cart Button" hasNextEvent "Click Cart Icon"
+Annotation @Line#95> "Click Add to Cart Button" hasNextEvent "Display Price Summary"
+Annotation @Line#100> CartViewController hasElement productsIcon
+Annotation @Line#103> user-agent interactsWith productsIcon
+Annotation @Line#107> CartViewController hasElement cartIcon
+Annotation @Line#111> user-agent interactsWith cartIcon
+
+Selected File#2
+File Location> C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Annotated-Sources\OnlineShopping\IOSOnlineShopping\PayPalPaymentViewController.m
+Annotation @Line#22> "Click Checkout Button" hasNextEvent "Display Price Summary"
+Annotation @Line#26> "Display Price Summary" hasInterface PayPalPaymentViewController
+Annotation @Line#31> client-agent interactsWith PayPalPaymentViewController
+Annotation @Line#37> "Display Price Summary" hasNextEvent "Click Send Payment Button"
+Annotation @Line#42> "Click Send Payment Button" hasInterface sendPaymentButton
+Annotation @Line#48> user-agent interactsWith sendPaymentButton
+Annotation @Line#52> PayPalPaymentViewController hasElement sendPaymentButton
+Annotation @Line#57> "Click Send Payment Button" hasNextEvent "Send Payment Verification to Server"
+Annotation @Line#63> PayPalPaymentViewController isInterfaceOf "Send Payment Verification to Server"
+Annotation @Line#68> "Send Payment Verification to Server" hasNextEvent "Verify Payment"
+Annotation @Line#71> "Verify Payment" hasInterface PayPalServerInterface
+Annotation @Line#76> server-agent interactsWith PayPalServerInterface
+Annotation @Line#81> "Verify Payment" hasNextEvent "Receive Successful Payment Message from Server"
+Annotation @Line#87> "Verify Payment" hasNextEvent "Receive Failed Payment Message from Server"
+Annotation @Line#89> PayPalPaymentViewController isInterfaceOf "Receive Successful Payment Message from Server"
+Annotation @Line#93> "Receive Failed Payment Message from Server" isAlternateEventOf "Receive Successful Payment Message from Server"
+Annotation @Line#102> PayPalPaymentViewController isInterfaceOf "Receive Failed Payment Message from Server"
+
+Selected File#3
+File Location> C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Annotated-Sources\OnlineShopping\IOSOnlineShopping\ProductsViewController.m
+Annotation @Line#17> Event_Start hasNextEvent "Display Product List"
+Annotation @Line#23> "Display Product List" hasInterface ProductsViewController
+Annotation @Line#27> ProductsViewController hasInteractionWith client-agent
+Annotation @Line#30> "Display Product List" hasNextEvent "Select a Product"
+Annotation @Line#35> "Select a Product"	hasNextEvent "Click Add to Cart Button"
+Annotation @Line#40> "Click Add to Cart Button" hasInterface "addToCartButton"
+Annotation @Line#46> user-agent interactsWith "addToCartButton"
+
+Save Annotations Location> C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Extracted-Annotations\OnlineShoppingExample\IOSShoppingExample_annotations.txt
+Annotations Saved Successfully!
+Save Location> C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Extracted-Annotations\OnlineShoppingExample\IOSShoppingExample_annotations.txt
+
+The EFBO Knowledgebase for IOSShoppingExample has been Saved.
+Location: C:/Users/Fahim/git/EFBO-PCM/EFBO/Resources/Extracted-Kbases/OnlineShoppingExample/IOSShoppingExample/EFBO-IOSShoppingExample.owl  
+
+--------------------------------------------------------
+Ontology Metrics
+--------------------------------------------------------
+Ontology Name     : System-2
+Ontology IRI      : http://www.cs.queensu.ca/~imam/ontologies/efbo-kb/IOSShoppingExample.owl
+Ontology Format   : RDF/XML Syntax
+Named Classes     : 4
+Object Properties : 9
+Individuals       : 34
+Logical Axioms    : 81
+All Axioms        : 203
+--------------------------------------------------------
+STEP III. LOAD EFBO-V & Import SYS-1 and SYS-2
+
+The EFBO-V Ontology has been Loaded Successfully.
+Ontology Saved Successfully!
+File Location> C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Ontologies\OnlineShoppingExample\EFBO_OnlineShoppingExample_Asserted.owl
+STEP  IV. IDENTIFY the Mapping Events
+
+STEP   V. SAVE Resulting Ontology + Knowledge
+Ontology Saved Successfully!
+File Location> C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Ontologies\OnlineShoppingExample\EFBO_OnlineShoppingExample_Asserted_1.owl
+<http://www.cs.queensu.ca/~imam/ontologies/efbo-v.owl#EventWithConsistentPreviousEvent>
+<http://www.cs.queensu.ca/~imam/ontologies/efbo-v.owl#EventWithConsistentNextEvent>
+<http://www.cs.queensu.ca/~imam/ontologies/efbo-v.owl#EventWithConsistentAltEvent>
+<http://www.cs.queensu.ca/~imam/ontologies/efbo-v.owl#EventWithConsistentFlow>
+Ontology Saved Successfully!
+File Location> C:\Users\Fahim\git\EFBO-PCM\EFBO\Resources\Ontologies\OnlineShoppingExample\EFBO_OnlineShoppingExample_Asserted_2.owl
+
+STEP  VI. GENERATE Status Report.

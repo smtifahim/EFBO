@@ -146,10 +146,10 @@ public class EFBOStatusReport
  * */
 	public void printDecisionPointEvents() throws Exception
 	{
-		OWLClass firstSystemDPE = this.getOWLClass(EFBO_FRC_URI, "DPE");
+		OWLClass firstSystemDPE = this.getOWLClass(EFBO_FRC_URI, "DecisionPointEvent");
 		OWLClass nextOfDPE = this.getOWLClass(EFBO_V_URI, "System-1_Event");
 		
-		OWLClass secondSystemDPE = this.getOWLClass(EFBO_FRC_URI, "DPE");
+		OWLClass secondSystemDPE = this.getOWLClass(EFBO_FRC_URI, "DecisionPointEvent");
 		OWLClass nextOfDPE2 = this.getOWLClass(EFBO_V_URI, "System-2_Event");
 		
 		OWLObjectProperty hasNextEvent = efboStatusReportManager.getOWLObjectProperty(EFBO_CORE_URI, "hasNextEvent");
@@ -168,8 +168,8 @@ public class EFBOStatusReport
 	    g += "\ntitle\n" + efboStatusReportManager.getLabel(firstSystemDPE)
           + "\n" + dpeName
           + "\nend title\n";
-		g += getRelatedGraph("DPE", "System-1_Event", "hasNextEvent", "hasPreviousEvent", "isAlternateEventOf");
-		g += getRelatedGraph("DPE", "System-2_Event", "hasNextEvent", "hasPreviousEvent", "isAlternateEventOf");
+		g += getRelatedGraph("DecisionPointEvent", "System-1_Event", "hasNextEvent", "hasPreviousEvent", "isAlternateEventOf");
+		g += getRelatedGraph("DecisionPointEvent", "System-2_Event", "hasNextEvent", "hasPreviousEvent", "isAlternateEventOf");
 		g += "\n@enduml";
 		System.out.println(g);
 		
