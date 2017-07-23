@@ -133,8 +133,8 @@ public class PayPalCheckoutActivity extends AppCompatActivity {
         GsonRequest<ServerObject> serverRequest = new GsonRequest<ServerObject>(
                 Request.Method.POST,
                 SERVER_PATH,
-                //@EFBO: ServerObjectClass isInterfaceOf "Verify Payment"
-                //@EFBO: ServerObjectClass hasInteractionWith server-agent
+                //@EFBO: PayPalServerInterface isInterfaceOf "Verify Payment"
+                //@EFBO: PayPalServerInterface hasInteractionWith server-agent
                 ServerObject.class,
                 params,
                 createRequestSuccessListener(),

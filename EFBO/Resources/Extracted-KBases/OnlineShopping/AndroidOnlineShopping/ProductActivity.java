@@ -45,14 +45,15 @@ public class ProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //@EFBO: ProductActivityClass isInterfaceOf "Display Product Details"
+        //@EFBO: ProductActivityClass isInterfaceOf "Display Selected Product Details"
+     
         setContentView(R.layout.activity_product);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         sharedPreference = new MySharedPreference(ProductActivity.this);
 
-        //@EFBO: productImage isInterfaceOf "Select a Product"
+        //@EFBO: ItemDisplayInterface isInterfaceOf "Select a Product Item"
         productImage = (ImageView)findViewById(R.id.full_product_image);
         productSize = (TextView)findViewById(R.id.product_size);
         productColor = (TextView)findViewById(R.id.product_color);
@@ -67,7 +68,7 @@ public class ProductActivity extends AppCompatActivity {
         if(singleProduct != null){
             setTitle(singleProduct.getProductName());
 
-            //@EFBO: productImage hasInteractionWith user-agent
+            //@EFBO: ItemDisplayInterface hasInteractionWith user-agent
             productImage.setImageResource(singleProduct.getProductImage());
             productSize.setText("Size: " + String.valueOf(singleProduct.getProductSize()));
             productColor.setText("Color: " + singleProduct.getProductColor());
@@ -79,6 +80,8 @@ public class ProductActivity extends AppCompatActivity {
         Button addToCartButton = (Button)findViewById(R.id.add_to_cart);
         assert addToCartButton != null;
         //@EFBO: "Click ADD TO CART Button" hasNextEvent "Display Cart Icon"
+      //@EFBO: "Click ADD TO CART Button" hasNextEvent "Add Selected Item to the Cart"
+        //@EFBO: ProductActivityClass isInterfaceOf "Add Selected Item to the Cart"
 
         //@EFBO: "Display Cart Icon" hasNextEvent "Click CART Icon"
         //@EFBO: "Click CART Icon" hasInterface cartIcon
