@@ -1,2 +1,2 @@
 # What is EFBO?
-EFBO Stands for Event-based functional behavior ontology.
+EFBO Stands for Event-based Functional behavior ontology.
